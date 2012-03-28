@@ -175,7 +175,7 @@ static NSMutableSet *allContentViews = nil;
 -(void) orientationDidChange{
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     if (orientation != _orientation) {
-        if (CGRectIsNull([self.content frameForOrientation:orientation])) {
+        if (CGRectIsNull([self.content totalFrameForOrientation:orientation])) {
             [self dismissWithError:PHCreateError(PHOrientationErrorType)];
             return;
         }
@@ -184,7 +184,7 @@ static NSMutableSet *allContentViews = nil;
         
         if (self.content.transition == PHContentTransitionDialog) {
             CGFloat barHeight = ([[UIApplication sharedApplication] isStatusBarHidden])? 0 : 20;
-            CGRect contentFrame = CGRectOffset([self.content frameForOrientation:orientation], 0, barHeight);
+            CGRect contentFrame = CGRectOffset([self.content contentFrameForOrientation:orientation], 0, barHeight);
             _webView.frame = contentFrame;
             
         }
@@ -255,13 +255,13 @@ static NSMutableSet *allContentViews = nil;
     
     [self loadTemplate];
     
-    if (CGRectIsNull([self.content frameForOrientation:_orientation])) {
+    if (CGRectIsNull([self.content totalFrameForOrientation:_orientation])) {
         //this is an invalid frame and we should dismiss immediately!
         [self dismissWithError:PHCreateError(PHOrientationErrorType)];
         return;
     }
     
-    CGFloat barHeight = ([[UIApplication sharedApplication] isStatusBarHidden])? 0 : 20;
+    CGFloat barHeight = ([[UIApplication sharedApplication] isStatusBarHidden]) ? 0 : 20;
     
     if (self.content.transition == PHContentTransitionModal) {
         self.backgroundColor = [UIColor clearColor];
@@ -298,7 +298,7 @@ static NSMutableSet *allContentViews = nil;
         self.opaque = NO;
         
         UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-        CGRect contentFrame = CGRectOffset([self.content frameForOrientation:orientation], 0, barHeight);
+        CGRect contentFrame = CGRectOffset([self.content contentFrameForOrientation:orientation], 0, barHeight);
         
         _webView.frame = contentFrame;
         _webView.layer.borderColor = [[UIColor blackColor] CGColor];

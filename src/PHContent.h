@@ -16,7 +16,10 @@ typedef enum{
 } PHContentTransitionType;
 
 @interface PHContent : NSObject {
-    NSDictionary *_frameDict;
+    NSDictionary *_contentFrameDict;
+    NSDictionary *_totalFrameDict;
+    NSDictionary *_closeButtonOffsetDict;
+    NSDictionary *_chromeDict;
     NSURL *_URL;
     PHContentTransitionType _transition;
     NSDictionary *_context;
@@ -31,9 +34,19 @@ typedef enum{
 @property (nonatomic, retain) NSDictionary *context;
 @property (nonatomic, assign) NSTimeInterval closeButtonDelay;
 @property (nonatomic, copy) NSString *closeButtonURLPath;
+@property (nonatomic, retain) NSDictionary *chromeDict;
+@property (nonatomic, retain) NSDictionary *closeStatesURLs;
+@property (nonatomic, copy) NSString *borderFrameURL;
 
--(CGRect)frameForOrientation:(UIInterfaceOrientation)orientation;
--(void)setFramesWithDictionary:(NSDictionary *)frameDict;
+-(CGRect)contentFrameForOrientation:(UIInterfaceOrientation)orientation;
+-(void)setContentFrameWithDictionary:(NSDictionary *)contentFrameDict;
 
+-(CGRect)totalFrameForOrientation:(UIInterfaceOrientation)orientation;
+-(void)setTotalFrameWithDictionary:(NSDictionary *)totalFrameDict;
+
+-(CGPoint)closeOffsetForOrientation:(UIInterfaceOrientation)orientation;
+-(void)setCloseOffsetWithDictionary:(NSDictionary *)closeOffsetDict;
+
+-(NSDictionary*)closeButtonStateURLs;
 
 @end
