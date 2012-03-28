@@ -34,7 +34,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
 #endif
 #pragma cland diagnostic pop
 
-@implementation NSCachedURLResponse(NSCoder)
+@implementation NSCachedURLResponse(NSCoding)
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {

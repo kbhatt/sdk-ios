@@ -212,7 +212,8 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
     //find the topmost contentView
     PHContentView *topContentView = [self.contentViews lastObject];
     if (!!topContentView){
-        CGRect contentFrame = [topContentView.content frameForOrientation:orientation];
+#warning We need to use the close button offset here..
+        CGRect contentFrame = [topContentView.content totalFrameForOrientation:orientation];
         switch (orientation) {
             case UIInterfaceOrientationPortrait:
                 X = MIN(X, CGRectGetMaxX(contentFrame));
