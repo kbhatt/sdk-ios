@@ -1,6 +1,8 @@
 #OS X
 .DS_Store
 
+Cache/sdurl_cache
+
 # Xcode
 build/*
 *.pbxuser
