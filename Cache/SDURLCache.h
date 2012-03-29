@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+// wrapper pattern
+@interface SDCachedURLResponse : NSObject <NSCoding, NSCopying>
++ (id)cachedURLResponseWithNSCachedURLResponse:(NSCachedURLResponse*)url_response;
+
+@property (nonatomic, retain) NSCachedURLResponse *cached_response;
+@end
+
 @interface SDURLCachePH : NSURLCache
 {
     @private
