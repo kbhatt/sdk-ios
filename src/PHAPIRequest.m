@@ -296,7 +296,10 @@ static void cfHostClientCallBack(CFHostRef host, CFHostInfoType typeInfo, const 
         [self.delegate performSelector:@selector(requestDidFinishLoading:) withObject:self withObject:nil];
     }
     
-    NSString *responseString = [[NSString alloc] initWithData:_connectionData encoding:NSUTF8StringEncoding];    
+    NSString *responseString = [[NSString alloc] initWithData:_connectionData encoding:NSUTF8StringEncoding]; 
+#warning Debug!!!
+    PH_LOG(@"Response: %@", responseString);
+    
     PH_SBJSONPARSER_CLASS *parser = [[PH_SBJSONPARSER_CLASS alloc] init];
     NSDictionary* resultDictionary = [parser objectWithString:responseString];
     [parser release];

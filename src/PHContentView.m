@@ -116,6 +116,12 @@ static NSMutableSet *allContentViews = nil;
                       launchRedirect,@"ph://launch",
                       loadContextRedirect,@"ph://loadContext",
                       nil];
+        
+        // Note: must be behind the webview....
+        if ([self.content hasCustomBorder]) {
+            _customBorderView = [[UIImageView alloc] initWithFrame:CGRectZero];
+            [self addSubview:_customBorderView];
+        }
 #ifndef PH_UNIT_TESTING         
         _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
         [self addSubview:_webView];
@@ -167,8 +173,9 @@ static NSMutableSet *allContentViews = nil;
     [PHURLLoader invalidateAllLoadersWithDelegate:self];    
     [_content release], _content = nil;
     [_webView release], _webView = nil;
+    [_customBorderView release], _customBorderView = nil;
     [_redirects release], _redirects = nil;
-    [_activityView release] , _activityView = nil;
+    [_activityView release], _activityView = nil;
     [super dealloc];
 }
 
@@ -187,6 +194,8 @@ static NSMutableSet *allContentViews = nil;
             CGRect contentFrame = CGRectOffset([self.content contentFrameForOrientation:orientation], 0, barHeight);
             _webView.frame = contentFrame;
             
+            contentFrame = CGRectOffset([self.content totalFrameForOrientation:orientation], 0, barHeight);
+            _customBorderView.frame = contentFrame;
         }
         
         
@@ -198,9 +207,8 @@ static NSMutableSet *allContentViews = nil;
 }
 
 - (void)sizeToFitOrientation:(BOOL)transform {
-    if (transform) {
+    if (transform)
         self.transform = CGAffineTransformIdentity;
-    }
     
     CGRect frame = [UIScreen mainScreen].bounds;
     CGPoint center = CGPointMake(
@@ -213,17 +221,16 @@ static NSMutableSet *allContentViews = nil;
     CGFloat height = floor(scale_factor * frame.size.height);
     
     _orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (UIInterfaceOrientationIsLandscape(_orientation)) {
+    
+    if (UIInterfaceOrientationIsLandscape(_orientation))
         self.frame = CGRectMake(0, 0, height, width);
-    } else {
+    else
         self.frame = CGRectMake(0, 0, width, height);
-    }
     
     self.center = center;
     
-    if (transform) {
+    if (transform)
         self.transform = [self transformForOrientation:_orientation];
-    }
 }
 
 -(CGAffineTransform)transformForOrientation:(UIInterfaceOrientation)orientation{
@@ -261,10 +268,16 @@ static NSMutableSet *allContentViews = nil;
         return;
     }
     
+    if ([self.content hasCustomBorder]) {
+        _customBorderView.frame = [self.content totalFrameForOrientation:_orientation];
+        //TODO: load image asynchronously...
+    }
+    
     CGFloat barHeight = ([[UIApplication sharedApplication] isStatusBarHidden]) ? 0 : 20;
+    self.backgroundColor = [UIColor clearColor];
     
     if (self.content.transition == PHContentTransitionModal) {
-        self.backgroundColor = [UIColor clearColor];
+
         self.opaque = NO;
         
         CGFloat width, height;

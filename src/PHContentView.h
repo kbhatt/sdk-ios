@@ -33,6 +33,7 @@
     NSMutableDictionary *_redirects;
     UIActivityIndicatorView *_activityView;
     UIView *_targetView;
+    UIImageView *_customBorderView;
 }
 
 +(PHContentView *)dequeueContentViewInstance;

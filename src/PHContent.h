@@ -49,4 +49,5 @@ typedef enum{
 
 -(NSDictionary*)closeButtonStateURLs;
 
+-(BOOL)hasCustomBorder;
 @end

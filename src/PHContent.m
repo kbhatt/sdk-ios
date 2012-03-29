@@ -185,4 +185,7 @@
     }
 }
 
+-(BOOL)hasCustomBorder {
+    return (self.borderFrameURL != nil);
+}
 @end

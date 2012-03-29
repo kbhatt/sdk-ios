@@ -185,6 +185,8 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
         
     }
     
+    //TODO: place according to offset from server...
+    
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     CGFloat barHeight = ([[UIApplication sharedApplication] isStatusBarHidden])? 0 : 20;
     
