@@ -451,7 +451,6 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"SDURLCache"];
-    NSLog(@"cache path: %@", path);
     return path;
 }
 
