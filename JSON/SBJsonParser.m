@@ -200,7 +200,7 @@ static char ctrl[0x22];
     
     *o = [NSMutableArray arrayWithCapacity:8];
     
-    for (; *c ;) {
+    for ( ; *c; ) {
         id v;
         
         skipWhitespace(c);
@@ -239,7 +239,7 @@ static char ctrl[0x22];
     
     *o = [NSMutableDictionary dictionaryWithCapacity:7];
     
-    for (; *c ;) {
+    for (; *c;) {
         id k, v;
         
         skipWhitespace(c);

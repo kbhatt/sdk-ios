@@ -7,6 +7,7 @@
 //
 
 #import "ExampleViewController.h"
+#import "PHARCLogic.h"
 
 #define LOG_FONT [UIFont systemFontOfSize:13]
 
@@ -23,16 +24,19 @@
     return self;
 }
 
+
+NO_ARC(
 - (void)dealloc {
-    [_messages release], _messages = nil;
-    [_tableView release], _tableView = nil;
-    [_token release], _token = nil;
-    [_secret release], _secret = nil;
-    [_startRequestDate release], _startRequestDate = nil;
-    [_deltaRequestDate release], _deltaRequestDate = nil;
+    ([_messages release], _messages = nil);
+    ([_tableView release], _tableView = nil);
+    ([_token release], _token = nil);
+    ([_secret release], _secret = nil);
+    ([_startRequestDate release], _startRequestDate = nil);
+    ([_deltaRequestDate release], _deltaRequestDate = nil);
     
     [super dealloc];
 }
+)
 
 #pragma mark -
 -(void)addMessage:(NSString *)message{
@@ -76,7 +80,7 @@
                                                                    target:self 
                                                                    action:@selector(startRequest)];
     self.navigationItem.rightBarButtonItem = startButton;
-    [startButton release];
+    IF_ARC(startButton = nil;, [startButton release];)
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

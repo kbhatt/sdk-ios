@@ -8,6 +8,7 @@
 
 #import "PHPublisherSubContentRequest.h"
 #import "PHConstants.h"
+#import "PHARCLogic.h"
 
 @implementation PHPublisherSubContentRequest
 
@@ -23,9 +24,11 @@
     return _URL;
 }
 
+NO_ARC(
 -(void)dealloc{
-    [_callback release], _callback = nil;
+    ([_callback release], _callback = nil);
     [super dealloc];
 }
+)
 
 @end

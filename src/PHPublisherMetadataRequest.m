@@ -8,6 +8,7 @@
 
 #import "PHPublisherMetadataRequest.h"
 #import "PHConstants.h"
+#import "PHARCLogic.h"
 
 @interface PHAPIRequest(Private)
 -(id)initWithApp:(NSString *)token secret:(NSString *)secret;
@@ -34,10 +35,12 @@
 
 @synthesize placement = _placement;
 
+NO_ARC(
 -(void)dealloc{
-    [_placement release], _placement = nil;
+    ([_placement release], _placement = nil);
     [super dealloc];
 }
+)
 
 #pragma mark - PHAPIRequest
 

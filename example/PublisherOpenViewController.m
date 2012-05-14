@@ -7,6 +7,7 @@
 //
 
 #import "PublisherOpenViewController.h"
+#import "PHARCLogic.h"
 
 @interface PHAPIRequest(Private)
 +(void)setSession:(NSString *)session;
@@ -29,11 +30,13 @@
     [request send];
 }
 
+NO_ARC(
 -(void)dealloc{
     [PHAPIRequest cancelAllRequestsWithDelegate:self];
     [customUDIDField release];
     [super dealloc];
 }
+)
 
 #pragma mark - PHAPIRequestDelegate
 -(void)request:(PHAPIRequest *)request didSucceedWithResponse:(NSDictionary *)responseData{

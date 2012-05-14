@@ -9,6 +9,7 @@
 #import "IAPHelper.h"
 #import "PlayHavenSDK.h"
 #import "PHPurchase.h"
+#import "PHARCLogic.h"
 
 @interface NSObject(hash)
 -(NSString *)hashString;
@@ -31,7 +32,7 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setLocale:self.priceLocale];
     NSString *formattedString = [numberFormatter stringFromNumber:self.price];
-    [numberFormatter release];
+    IF_ARC(numberFormatter = nil;, [numberFormatter release];)
     return formattedString;
 }
 @end
@@ -73,12 +74,15 @@ static IAPHelper *sharedIAPHelper;
 - (id)autorelease {
     return self;
 }
+
+NO_ARC(
 - (void)dealloc {
     // Should never be called, but just here for clarity really.
-    [_pendingPurchases release], _pendingPurchases = nil;
-    [_pendingRequests release], _pendingRequests = nil;
-    [super dealloc];
+   ([_pendingPurchases release], _pendingPurchases = nil);
+   ([_pendingRequests release], _pendingRequests = nil);
+   [super dealloc];
 }
+)
 
 #pragma mark -
 -(NSMutableDictionary *)pendingPurchases{
@@ -106,7 +110,7 @@ static IAPHelper *sharedIAPHelper;
         //storing the purchase and the product request to retrieve later
         [self.pendingPurchases setValue:purchase forKey:[request hashString]];
         [self.pendingRequests setValue:request forKey:[request hashString]];
-        [request release];
+        IF_ARC(request = nil;, [request release];)
     }
 }
 
@@ -123,7 +127,7 @@ static IAPHelper *sharedIAPHelper;
         [purchaseAlert show];        
         [self.pendingPurchases setObject:purchase forKey:[purchaseAlert hashString]];
         
-        [purchaseAlert release];
+        IF_ARC(purchaseAlert = nil;, [purchaseAlert release];)
     } else {
         //either the purchase or the product request is invalid, report as an error
         [self reportPurchase:purchase withResolution:PHPurchaseResolutionError];
@@ -170,7 +174,7 @@ static IAPHelper *sharedIAPHelper;
             purchase = [PHPurchase new];
             purchase.productIdentifier = transaction.payment.productIdentifier;
             purchase.quantity = transaction.payment.quantity;
-            [purchase autorelease];
+            NO_ARC([purchase autorelease];)
         }
         
         switch (transaction.transactionState) {

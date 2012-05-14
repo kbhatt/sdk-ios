@@ -9,6 +9,7 @@
 #import "PHURLPrefetchOperation.h"
 #import "PHConstants.h"
 #import "SDURLCache.h"
+#import "PHARCLogic.h"
 
 @implementation PHURLPrefetchOperation
 
@@ -40,11 +41,13 @@
     return  self;
 }
 
+NO_ARC(
 - (void)dealloc {
 
-    [prefetchURL release], prefetchURL = nil;
+    ([prefetchURL release], prefetchURL = nil);
     [super dealloc];
 }
+)
 
 - (void)main {
 

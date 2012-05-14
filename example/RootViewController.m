@@ -12,6 +12,7 @@
 #import "PublisherIAPTrackingViewController.h"
 #import "PublisherCancelContentViewController.h"
 #import "PHAPIRequest.h"
+#import "PHARCLogic.h"
 
 @interface RootViewController(Private)
 -(BOOL)isTokenAndSecretFilledIn;
@@ -32,12 +33,14 @@
 @synthesize secretField;
 @synthesize optOutStatusSlider;
 
+NO_ARC(
 - (void)dealloc {
     [tokenField release];
     [secretField release];
     [optOutStatusSlider release];
     [super dealloc];
 }
+)
 
 #pragma mark -
 #pragma mark Private

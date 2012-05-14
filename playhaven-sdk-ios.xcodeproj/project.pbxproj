@@ -15,6 +15,10 @@
 		D1BD481D14C0EDD100EE8A5A /* PHPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BD481914C0CC6300EE8A5A /* PHPurchase.m */; };
 		D1E15B7C14981C39001241EE /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E15B7B14981C39001241EE /* SDURLCache.m */; };
 		D1E15B7D14981E90001241EE /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E15B7B14981C39001241EE /* SDURLCache.m */; };
+		E4988EDB15619F2400681955 /* PHARCLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4988EDA15619F2400681955 /* PHARCLogic.h */; };
+		E4988EDC15619F2400681955 /* PHARCLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4988EDA15619F2400681955 /* PHARCLogic.h */; };
+		E4988EDD15619F2400681955 /* PHARCLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4988EDA15619F2400681955 /* PHARCLogic.h */; };
+		E4988EDE15619F2400681955 /* PHARCLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = E4988EDA15619F2400681955 /* PHARCLogic.h */; };
 		EA019C8114C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = EA019C7F14C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h */; };
 		EA019C8214C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA019C8014C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m */; };
 		EA019C8314C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA019C8014C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m */; };
@@ -413,6 +417,7 @@
 		D1BD481814C0CC6300EE8A5A /* PHPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPurchase.h; sourceTree = "<group>"; };
 		D1BD481914C0CC6300EE8A5A /* PHPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPurchase.m; sourceTree = "<group>"; };
 		D1E15B7B14981C39001241EE /* SDURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDURLCache.m; sourceTree = "<group>"; };
+		E4988EDA15619F2400681955 /* PHARCLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHARCLogic.h; sourceTree = "<group>"; };
 		EA019C7F14C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPublisherIAPTrackingRequest.h; sourceTree = "<group>"; };
 		EA019C8014C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPublisherIAPTrackingRequest.m; sourceTree = "<group>"; };
 		EA019C8514C102D4008FBCB1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -804,6 +809,7 @@
 		EA523D931343EE8E0057DEA5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E4988EDA15619F2400681955 /* PHARCLogic.h */,
 				EA4C190F134E84D300755983 /* PHURLLoader.h */,
 				EA4C1910134E84D300755983 /* PHURLLoader.m */,
 				EA523DB11343F7BA0057DEA5 /* PHAPIRequest.h */,
@@ -937,6 +943,7 @@
 				EA019C8114C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EA06AA66151A812B00C11220 /* OpenUDID.h in Headers */,
 				EA24FCAB1554510D0074FC13 /* PHNetworkUtil.h in Headers */,
+				E4988EDB15619F2400681955 /* PHARCLogic.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,6 +976,7 @@
 				EAB6A3AA14EED62D00EAC692 /* PHUrlPrefetchOperation.h in Headers */,
 				EAB6A3AB14EED62D00EAC692 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EA06AA67151A812B00C11220 /* OpenUDID.h in Headers */,
+				E4988EDC15619F2400681955 /* PHARCLogic.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -997,6 +1005,7 @@
 				EAF168611534E2DE006B6993 /* PHUrlPrefetchOperation.h in Headers */,
 				EAF168621534E2DE006B6993 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EAF168631534E2DE006B6993 /* OpenUDID.h in Headers */,
+				E4988EDD15619F2400681955 /* PHARCLogic.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1029,6 +1038,7 @@
 				EAF1689C1534E34F006B6993 /* PHUrlPrefetchOperation.h in Headers */,
 				EAF1689D1534E34F006B6993 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EAF1689E1534E34F006B6993 /* OpenUDID.h in Headers */,
+				E4988EDE15619F2400681955 /* PHARCLogic.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

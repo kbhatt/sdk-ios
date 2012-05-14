@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "IAPHelper.h"
+#import "PHConstants.h"
+#import "PHARCLogic.h"
+
 @implementation AppDelegate
 
 
@@ -71,11 +74,13 @@
      */
 }
 
+NO_ARC(
 - (void)dealloc
 {
     [_window release];
     [_navigationController release];
     [super dealloc];
 }
+)
 
 @end

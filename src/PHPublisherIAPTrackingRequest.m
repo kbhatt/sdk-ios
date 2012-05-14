@@ -12,6 +12,7 @@
 
 #if PH_USE_STOREKIT!=0
 #import "PHPublisherIAPTrackingRequest.h"
+#import "PHARCLogic.h"
 
 @interface PHPublisherIAPTrackingRequest(Private)
 +(NSMutableDictionary *)allConversionCookies;
@@ -64,12 +65,14 @@
 @synthesize resolution = _resolution;
 @synthesize error = _error;
 
+NO_ARC(
 -(void)dealloc{
-    [_product release], _product = nil;
-    [_request release], _request = nil;
-    [_error release], _error = nil;
+    ([_product release], _product = nil);
+    ([_request release], _request = nil);
+    ([_error release], _error = nil);
     [super dealloc];
 }
+)
 
 #pragma mark -
 #pragma mark PHAPIRequest

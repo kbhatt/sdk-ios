@@ -28,6 +28,8 @@
  */
 
 #import "SBJsonBase.h"
+#import "PHARCLogic.h"
+
 NSString * PH_SBJSONERRORDOMAIN_CONST = @"org.brautaset.JSON.ErrorDomain";
 
 
@@ -43,10 +45,12 @@ NSString * PH_SBJSONERRORDOMAIN_CONST = @"org.brautaset.JSON.ErrorDomain";
     return self;
 }
 
+NO_ARC(
 - (void)dealloc {
     [errorTrace release];
     [super dealloc];
 }
+)
 
 - (void)addErrorWithCode:(NSUInteger)code description:(NSString*)str {
     NSDictionary *userInfo;

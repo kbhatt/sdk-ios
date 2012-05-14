@@ -12,6 +12,7 @@
 #import "OpenUDID.h"
 #import "PHConstants.h"
 #import "PHStringUtil.h"
+#import "PHARCLogic.h"
 
 #define PUBLISHER_TOKEN @"PUBLISHER_TOKEN"
 #define PUBLISHER_SECRET @"PUBLISHER_SECRET"
@@ -132,10 +133,12 @@
     STAssertTrue(_didProcess, @"Did not actually process request!");
 }
 
+NO_ARC(
 -(void)dealloc{
-    [_request release], _request = nil;
+    ([_request release], _request = nil);
     [super dealloc];
 }
+)
 
 @end
 

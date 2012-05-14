@@ -14,6 +14,7 @@
 #import "SDURLCache.h"
 #import "PHUrlPrefetchOperation.h"
 #import "PHPurchase.h"
+#import "PHARCLogic.h"
 
 #define MAX_MARGIN 20
 
@@ -62,7 +63,7 @@ static NSMutableSet *allContentViews = nil;
 
 +(void)clearContentViews{
     @synchronized(allContentViews){
-        [allContentViews release], allContentViews = nil;
+        IF_ARC(([allContentViews release], allContentViews = nil);, allContentViews = nil;)
     }
 }
 
@@ -162,16 +163,18 @@ static NSMutableSet *allContentViews = nil;
     return _activityView;
 }
 
+NO_ARC(
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [PHURLLoader invalidateAllLoadersWithDelegate:self];    
-    [_content release], _content = nil;
-    [_webView release], _webView = nil;
-    [_redirects release], _redirects = nil;
-    [_activityView release] , _activityView = nil;
+    ([_content release], _content = nil);
+    ([_webView release], _webView = nil);
+    ([_redirects release], _redirects = nil);
+    ([_activityView release] , _activityView = nil);
     [super dealloc];
 }
-
+)
+    
 -(void) orientationDidChange{
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     if (orientation != _orientation) {

@@ -15,6 +15,7 @@
 #import "PHConstants.h"
 #import "OpenUDID.h"
 #import "PHNetworkUtil.h"
+#import "PHARCLogic.h"
 
 #ifdef PH_USE_NETWORK_FIXTURES
 #import "WWURLConnection.h"
@@ -96,7 +97,7 @@ static NSString *sPlayHavenSession;
         if (![session isEqualToString:sPlayHavenSession]) {
             UIPasteboard *pasteboard = [UIPasteboard pasteboardWithName:@"com.playhaven.session" create:YES];
             [pasteboard setString:session];
-            [sPlayHavenSession release];
+            IF_ARC(sPlayHavenSession = nil;, [sPlayHavenSession release];)
             sPlayHavenSession = (!!session)?[[NSString alloc] initWithString:session]: nil;
         }
     }
@@ -111,7 +112,8 @@ static NSString *sPlayHavenSession;
 }
 
 +(id) requestForApp:(NSString *)token secret:(NSString *)secret{
-    return [[[[self class] alloc] initWithApp:token secret:secret] autorelease];
+    return IF_ARC([[[self class] alloc] initWithApp:token secret:secret];, 
+                  [[[[self class] alloc] initWithApp:token secret:secret] autorelease];)
 }
 
 +(id)requestWithHashCode:(int)hashCode{
@@ -224,17 +226,19 @@ static NSString *sPlayHavenSession;
     return [[self signedParameters] stringFromQueryComponents];
 }
 
+NO_ARC(
 -(void) dealloc{
-    [_token release], _token = nil;
-    [_secret release], _secret = nil;
-    [_URL release], _URL = nil;
-    [_connection release], _connection = nil;
-    [_signedParameters release], _signedParameters = nil;
-    [_connectionData release], _connectionData = nil;
-    [_urlPath release], _urlPath = nil;
-    [_additionalParameters release], _additionalParameters = nil;
+    ([_token release], _token = nil);
+    ([_secret release], _secret = nil);
+    ([_URL release], _URL = nil);
+    ([_connection release], _connection = nil);
+    ([_signedParameters release], _signedParameters = nil);
+    ([_connectionData release], _connectionData = nil);
+    ([_urlPath release], _urlPath = nil);
+    ([_additionalParameters release], _additionalParameters = nil);
     [super dealloc];
 }
+)
 
 #pragma mark -
 #pragma mark PHPublisherOpenRequest
@@ -281,7 +285,8 @@ static NSString *sPlayHavenSession;
     
     /* We want to get response objects for everything */
     [_connectionData release], _connectionData = [[NSMutableData alloc] init];
-    [_response release], _response = nil;
+    
+    NO_ARC(([_response release], _response = nil);)
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{

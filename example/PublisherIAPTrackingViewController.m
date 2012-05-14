@@ -7,6 +7,7 @@
 //
 
 #import "PublisherIAPTrackingViewController.h"
+#import "PHARCLogic.h"
 
 @implementation PublisherIAPTrackingViewController
 @synthesize productField;
@@ -29,6 +30,7 @@
     [request send];
 }
 
+NO_ARC(
 -(void)dealloc{
     [PHAPIRequest cancelAllRequestsWithDelegate:self];
     [productField release];
@@ -36,6 +38,7 @@
     [resolutionSegment release];
     [super dealloc];
 }
+)
 
 #pragma mark - PHAPIRequestDelegate
 -(void)request:(PHAPIRequest *)request didSucceedWithResponse:(NSDictionary *)responseData{

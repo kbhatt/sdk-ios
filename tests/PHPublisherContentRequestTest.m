@@ -18,6 +18,7 @@
 #import "PHPublisherContentRequest.h"
 #import "PHStringUtil.h"
 #import "OpenUDID.h"
+#import "PHARCLogic.h"
 
 #define PUBLISHER_TOKEN @"PUBLISHER_TOKEN"
 #define PUBLISHER_SECRET @"PUBLISHER_SECRET"
@@ -184,12 +185,13 @@
     
 }
 
--(void)dealloc{
-    [_content release], _content = nil;
-    [_contentView release], _contentView = nil;
+NO_ARC(
+-(void)dealloc {
+    ([_content release], _content = nil);
+    ([_contentView release], _contentView = nil);
     [super dealloc];
 }
-
+)
 @end
 
 @implementation PHContentViewRedirectRecyclingTest
@@ -371,7 +373,7 @@
     STAssertTrue(_didPreload, @"Preloading didn't happen!");
     STAssertTrue([_request state] == PHPublisherContentRequestPreloaded,@"Request wasn't preloaded!");
     
-    [_request release], _request = nil;
+    IF_ARC(_request = nil;, ([_request release], _request = nil);)
 }
 
 @end

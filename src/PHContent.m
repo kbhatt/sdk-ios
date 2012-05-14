@@ -7,6 +7,7 @@
 //
 
 #import "PHContent.h"
+#import "PHARCLogic.h"
 
 @implementation PHContent
 
@@ -70,14 +71,15 @@
 
 @synthesize URL = _URL, transition = _transition, context = _context, closeButtonDelay = _closeButtonDelay, closeButtonURLPath = _closeButtonURLPath;
 
+NO_ARC(
 -(void) dealloc{
-    [_URL release], _URL = nil;
-    [_context release], _context = nil;
-    [_closeButtonURLPath release], _closeButtonURLPath = nil;
-    [_frameDict release], _frameDict = nil;
+    ([_URL release], _URL = nil);
+    ([_context release], _context = nil);
+    ([_closeButtonURLPath release], _closeButtonURLPath = nil);
+    ([_frameDict release], _frameDict = nil);
     [super dealloc];
 }
-
+)
 
 -(CGRect)frameForOrientation:(UIInterfaceOrientation)orientation{
     NSString *orientationKey = (UIInterfaceOrientationIsLandscape(orientation))? @"PH_LANDSCAPE" : @"PH_PORTRAIT";

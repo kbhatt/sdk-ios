@@ -9,6 +9,7 @@
 #import "SDURLCache.h"
 #import "PHConstants.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "PHARCLogic.h"
 
 static NSTimeInterval const kSDURLCacheInfoDefaultMinCacheInterval = 5 * 60; // 5 minute
 static NSString *const kSDURLCacheInfoFileName = @"cacheInfo.plist";
@@ -583,7 +584,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
     [fileManager removeItemAtPath:diskCachePath error:NULL];
     @synchronized(self)
     {
-        [diskCacheInfo release], diskCacheInfo = nil;
+        IF_ARC(([diskCacheInfo release], diskCacheInfo = nil);, diskCacheInfo = nil;)
     }
 }
 
@@ -607,16 +608,17 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
 
 #pragma mark NSObject
 
+NO_ARC(
 - (void)dealloc
 {
     [periodicMaintenanceTimer invalidate];
-    [periodicMaintenanceTimer release], periodicMaintenanceTimer = nil;
-    [periodicMaintenanceOperation release], periodicMaintenanceOperation = nil;
-    [diskCachePath release], diskCachePath = nil;
-    [diskCacheInfo release], diskCacheInfo = nil;
-    [ioQueue release], ioQueue = nil;
+    ([periodicMaintenanceTimer release], periodicMaintenanceTimer = nil);
+    ([periodicMaintenanceOperation release], periodicMaintenanceOperation = nil);
+    ([diskCachePath release], diskCachePath = nil);
+    ([diskCacheInfo release], diskCacheInfo = nil);
+    ([ioQueue release], ioQueue = nil);
     [super dealloc];
 }
-
+)
 
 @end

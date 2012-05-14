@@ -10,6 +10,7 @@
 #import "PHConstants.h"
 #import "SDURLCache.h"
 #import "PHURLPrefetchOperation.h"
+#import "PHARCLogic.h"
 
 #if PH_USE_OPENUDID == 1
 #import "OpenUDID.h"
@@ -217,13 +218,15 @@ NSString *getMACAddress(){
 
 #pragma mark - NSObject
 
+NO_ARC(
 - (void)dealloc{
     [self.prefetchOperations removeObserver:self forKeyPath:@"operations"];
     
-    [_prefetchOperations release], _prefetchOperations = nil;
-    [_customUDID release], _customUDID = nil;
+    ([_prefetchOperations release], _prefetchOperations = nil);
+    ([_customUDID release], _customUDID = nil);
     [super dealloc];
 }
+)
 
 #pragma mark - NSOperationQueue observer
 

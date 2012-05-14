@@ -7,6 +7,7 @@
 //
 
 #import "PHReward.h"
+#import "PHARCLogic.h"
 
 @implementation PHReward
 
@@ -14,11 +15,12 @@
 @synthesize quantity = _quanity;
 @synthesize receipt = _receipt;
 
+NO_ARC(
 -(void)dealloc{
-    [_reward release], _reward = nil;
-    [_receipt release], _receipt = nil;
+    ([_reward release], _reward = nil);
+    ([_receipt release], _receipt = nil);
     
     [super dealloc];
-}
+})
 
 @end

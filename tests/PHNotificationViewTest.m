@@ -9,6 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import <UIKit/UIKit.h>
 #import "PHNotificationView.h"
+#import "PHARCLogic.h"
 
 @interface PHNotificationViewTest : SenTestCase
 @end
@@ -37,7 +38,7 @@
 }
 
 -(void)testRelease{
-    [_notificationView release];
+    IF_ARC(_notificationView = nil;, [_notificationView release];) 
 }
 
 @end

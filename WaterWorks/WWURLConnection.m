@@ -8,6 +8,8 @@
 #import "WWURLConnection.h"
 #import "WWURLMatching.h"
 #include <stdio.h>
+#import "PHARCLogic.h"
+
 NSString *readLineAsNSString(FILE *file);
 
 NSString *readLineAsNSString(FILE *file)
@@ -47,10 +49,13 @@ NSString *readLineAsNSString(FILE *file)
 @implementation WWURLMemoryResponse
 
 @synthesize data = _data;
+
+NO_ARC(
 -(void)dealloc{
-    [_data release], _data = nil;
+    ([_data release], _data = nil);
     [super dealloc];
 }
+)
 
 @end
 
@@ -67,10 +72,13 @@ NSString *readLineAsNSString(FILE *file)
     return [NSData dataWithContentsOfFile:self.filePath];
 }
 
+NO_ARC(
 -(void)dealloc{
-    [_filePath release], _filePath = nil;
+    ([_filePath release], _filePath = nil);
     [super dealloc];
 }
+)
+
 @end
 
 
@@ -179,13 +187,15 @@ NSString *readLineAsNSString(FILE *file)
 @synthesize delegate = _delegate;
 @synthesize request = _request;
 
+NO_ARC(
 -(void)dealloc{
     [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(startInBackground) object:nil];
     _delegate = nil;
-    [_request release], _request = nil;
+    ([_request release], _request = nil);
     
     //[super dealloc];
 }
+)
 
 -(void)start{
     [self performSelector:@selector(startInBackground) withObject:nil afterDelay:0.0];

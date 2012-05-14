@@ -8,6 +8,7 @@
 
 #import "PublisherContentViewController.h"
 #import "IAPHelper.h"
+#import "PHARCLogic.h"
 
 @implementation PublisherContentViewController
 @synthesize placementField = _placementField;
@@ -16,14 +17,16 @@
 @synthesize animateSwitch;
 
 
+NO_ARC(
 -(void)dealloc{
     [PHAPIRequest cancelAllRequestsWithDelegate:self];
     
-    [_notificationView release], _notificationView = nil;
-    [_placementField release], _placementField = nil;
-    [_request release], _request = nil;
+    ([_notificationView release], _notificationView = nil);
+    ([_placementField release], _placementField = nil);
+    ([_request release], _request = nil);
     [super dealloc];
 }
+)
 
 -(void)startRequest{
     if (self.request == nil) {
@@ -134,7 +137,7 @@
     [self setPlacementField:nil];
     [super viewDidUnload];
     [_notificationView removeFromSuperview];
-    [_notificationView release], _notificationView = nil;
+    ([_notificationView release], _notificationView = nil);
 }
 
 -(void)viewDidAppear:(BOOL)animated{

@@ -8,6 +8,8 @@
 #import <UIKit/UIKit.h>
 #import "PHURLLoader.h"
 #import "PHConstants.h"
+#import "PHARCLogic.h"
+
 #define MAXIMUM_REDIRECTS 10
 
 @interface PHURLLoader(Private)
@@ -70,13 +72,15 @@
     return self;
 }
 
+NO_ARC(
 -(void) dealloc{
-    [_targetURL release], _targetURL = nil;
-    [_connection release], _connection = nil;
-    [_context release], _context = nil;
+    ([_targetURL release], _targetURL = nil);
+    ([_connection release], _connection = nil);
+    ([_context release], _context = nil);
     
     [super dealloc];
 }
+)
 
 #pragma mark -
 #pragma mark PHURLLoader

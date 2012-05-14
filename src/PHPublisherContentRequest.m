@@ -16,6 +16,7 @@
 #import "PHPublisherIAPTrackingRequest.h"
 #import "JSON.h"
 #import "OpenUDID.h"
+#import "PHARCLogic.h"
 
 NSString *const PHPublisherContentRequestRewardIDKey = @"reward";
 NSString *const PHPublisherContentRequestRewardQuantityKey = @"quantity";
@@ -167,16 +168,18 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
     return _closeButton;
 }
 
+NO_ARC(
 -(void)dealloc{
     [PHPublisherContentRequest cancelPreviousPerformRequestsWithTarget:self selector:@selector(showCloseButtonBecauseOfTimeout) object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_content release], _content = nil;
-    [_placement release], _placement = nil;
-    [_contentViews release], _contentViews = nil;
-    [_closeButton release], _closeButton = nil;
-    [_overlayWindow release], _overlayWindow = nil;
+    ([_content release], _content = nil);
+    ([_placement release], _placement = nil);
+    ([_contentViews release], _contentViews = nil);
+    ([_closeButton release], _closeButton = nil);
+    ([_overlayWindow release], _overlayWindow = nil);
     [super dealloc];
 }
+)
 
 #pragma mark - Internal UI management
 -(void)placeCloseButton{

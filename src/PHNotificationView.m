@@ -10,6 +10,7 @@
 #import "PHPublisherMetadataRequest.h"
 #import "PHNotificationRenderer.h"
 #import "PHNotificationBadgeRenderer.h"
+#import "PHARCLogic.h"
 
 static NSMutableDictionary *RendererMap;
 
@@ -82,17 +83,19 @@ static NSMutableDictionary *RendererMap;
     }
 }
 
+NO_ARC(
 -(void)dealloc{
     [_request setDelegate:nil];
     [self removeObserver:self forKeyPath:@"notificationData"];
     
-    [_app release],_app = nil;
-    [_secret release], _secret = nil;
-    [_placement release], _placement = nil;
-    [_notificationData release], _notificationData = nil;
-    [_notificationRenderer release], _notificationRenderer = nil;
+    ([_app release],_app = nil);
+    ([_secret release], _secret = nil);
+    ([_placement release], _placement = nil);
+    ([_notificationData release], _notificationData = nil);
+    ([_notificationRenderer release], _notificationRenderer = nil);
     [super dealloc];
 }
+)
 
 -(void)refresh{
     if (!_request) {

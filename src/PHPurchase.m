@@ -8,6 +8,7 @@
 
 #import "PHPurchase.h"
 #import "PHConstants.h"
+#import "PHARCLogic.h"
 
 @implementation PHPurchase
 
@@ -40,14 +41,16 @@
 @synthesize receipt = _receipt;
 @synthesize callback = _callback;
 
+NO_ARC(
 -(void)dealloc{
-    [_productIdentifier release], _productIdentifier = nil;
-    [_item release], _item = nil;
-    [_receipt release], _receipt = nil;
-    [_callback release], _callback = nil;
+    ([_productIdentifier release], _productIdentifier = nil);
+    ([_item release], _item = nil);
+    ([_receipt release], _receipt = nil);
+    ([_callback release], _callback = nil);
     
     [super dealloc];
 }
+)
 
 -(void) reportResolution:(PHPurchaseResolutionType)resolution{
     
