@@ -284,9 +284,9 @@ NO_ARC(
     }
     
     /* We want to get response objects for everything */
-    [_connectionData release], _connectionData = [[NSMutableData alloc] init];
+    NO_ARC([_connectionData release];) _connectionData = [[NSMutableData alloc] init];
     
-    NO_ARC(([_response release], _response = nil);)
+    IF_ARC(_response = nil;, ([_response release], _response = nil);)
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
@@ -303,8 +303,9 @@ NO_ARC(
     NSString *responseString = [[NSString alloc] initWithData:_connectionData encoding:NSUTF8StringEncoding];    
     PH_SBJSONPARSER_CLASS *parser = [[PH_SBJSONPARSER_CLASS alloc] init];
     NSDictionary* resultDictionary = [parser objectWithString:responseString];
-    [parser release];
-    [responseString release];
+    
+    NO_ARC([parser release];
+    [responseString release];)
     
     [self processRequestResponse:resultDictionary];
 }

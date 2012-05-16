@@ -80,7 +80,7 @@ NO_ARC(
                                                                    target:self 
                                                                    action:@selector(startRequest)];
     self.navigationItem.rightBarButtonItem = startButton;
-    IF_ARC(startButton = nil;, [startButton release];)
+    NO_ARC([startButton release];)
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -109,7 +109,8 @@ NO_ARC(
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NO_ARC([cell autorelease];)
         cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = LOG_FONT;

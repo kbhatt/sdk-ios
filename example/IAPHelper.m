@@ -32,7 +32,7 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setLocale:self.priceLocale];
     NSString *formattedString = [numberFormatter stringFromNumber:self.price];
-    IF_ARC(numberFormatter = nil;, [numberFormatter release];)
+    NO_ARC([numberFormatter release];)
     return formattedString;
 }
 @end
@@ -110,7 +110,7 @@ NO_ARC(
         //storing the purchase and the product request to retrieve later
         [self.pendingPurchases setValue:purchase forKey:[request hashString]];
         [self.pendingRequests setValue:request forKey:[request hashString]];
-        IF_ARC(request = nil;, [request release];)
+        NO_ARC([request release];)
     }
 }
 
@@ -127,7 +127,7 @@ NO_ARC(
         [purchaseAlert show];        
         [self.pendingPurchases setObject:purchase forKey:[purchaseAlert hashString]];
         
-        IF_ARC(purchaseAlert = nil;, [purchaseAlert release];)
+        NO_ARC([purchaseAlert release];)
     } else {
         //either the purchase or the product request is invalid, report as an error
         [self reportPurchase:purchase withResolution:PHPurchaseResolutionError];

@@ -63,7 +63,7 @@ static NSMutableSet *allContentViews = nil;
 
 +(void)clearContentViews{
     @synchronized(allContentViews){
-        IF_ARC(([allContentViews release], allContentViews = nil);, allContentViews = nil;)
+        IF_ARC(allContentViews = nil;, ([allContentViews release], allContentViews = nil);)
     }
 }
 
@@ -80,7 +80,7 @@ static NSMutableSet *allContentViews = nil;
     if (!!instance) {
         [instance retain];
         [[PHContentView allContentViews] removeObject:instance];
-        [instance autorelease];
+        NO_ARC([instance autorelease];)
     }
     
     return instance;
@@ -449,7 +449,7 @@ NO_ARC(
         id parserObject = [parser objectWithString:contextString];
         NSDictionary *context = ([parserObject isKindOfClass:[NSDictionary class]])?(NSDictionary*) parserObject: nil;
         
-        [parser release];
+        IF_ARC(parser = nil;, [parser release];)
         
         PH_LOG(@"Redirecting request with callback: %@ to dispatch %@", callback, urlPath);
         switch ([[redirect methodSignature] numberOfArguments]) {

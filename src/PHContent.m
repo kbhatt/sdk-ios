@@ -18,8 +18,8 @@
     shouldCreateInstance = shouldCreateInstance && !![dictionaryRepresentation valueForKey:@"transition"];
     
     if (shouldCreateInstance) {
-        PHContent *result = [[[PHContent alloc] init] autorelease];
-        
+        PHContent *result = [[PHContent alloc] init];
+        NO_ARC([result autorelease];)
         id frameValue = [dictionaryRepresentation valueForKey:@"frame"];
         if ([frameValue isKindOfClass:[NSString class]]) {
             [result setFramesWithDictionary:
@@ -114,7 +114,7 @@ NO_ARC(
 
 -(void)setFramesWithDictionary:(NSDictionary *)frameDict{
     if (_frameDict != frameDict) {
-        [_frameDict release], _frameDict = [frameDict retain];
+        IF_ARC(_frameDict = frameDict;, ([_frameDict release], _frameDict = [frameDict retain]);)
     }
 }
 

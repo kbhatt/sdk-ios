@@ -11,6 +11,7 @@
 
 #import "PHConstants.h"
 #import "PHStringUtil.h"
+#import "PHARCLogic.h"
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -49,7 +50,7 @@ NSString *PHGID(){
 
 void PHClearGID(){
     [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"PlayHavenGID"];
-    [cachedGID release], cachedGID = nil;
+    IF_ARC(cachedGID = nil;, ([cachedGID release], cachedGID = nil);)
 }
 
 NSError *PHCreateError(PHErrorType errorType){
