@@ -286,7 +286,8 @@ NO_ARC(
     }
     
     /* We want to get response objects for everything */
-    NO_ARC([_connectionData release];) _connectionData = [[NSMutableData alloc] init];
+    NO_ARC([_connectionData release];) 
+    _connectionData = [[NSMutableData alloc] init];
     
     IF_ARC(_response = nil;, ([_response release], _response = nil);)
 }

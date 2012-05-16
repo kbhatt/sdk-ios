@@ -438,7 +438,7 @@ NO_ARC(
     else
         urlPath = [NSString stringWithFormat:@"%@://%@%@", [url scheme], [url host], [url path]];
     
-    NSInvocation *redirect = [_redirects valueForKey:urlPath];
+    HAS_ARC(__strong) NSInvocation *redirect = [_redirects valueForKey:urlPath];
     
     if (redirect) {
         NSDictionary *queryComponents = [url queryComponents];
@@ -466,7 +466,7 @@ NO_ARC(
                 break;
         }
         
-        //NOTE: It's important to keep the invocation object around while we're invoking. This will prevent occasional EXC_BAD_ACCESS errors.
+        //NOTE: It's important to keep the invocation object around while we're invoking. This will prevent occasional EXC_BAD_ACCESS errors. (see __strong in declaration for ARC)
         NO_ARC([redirect retain];)
         [redirect invoke];
         NO_ARC([redirect release];)

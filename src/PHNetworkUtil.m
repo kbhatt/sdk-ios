@@ -8,6 +8,7 @@
 
 #import "PHNetworkUtil.h"
 #import "PHConstants.h"
+#import "PHARCLogic.h"
 #import <netinet/in.h>
 #include <arpa/inet.h>
 
@@ -32,22 +33,22 @@
 }
 
 -(void)_backgroundCheckDNSResolutionForURLPath:(NSString *)urlPath{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    IF_ARC(@autoreleasepool {, NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];)
     
     Boolean result;
     CFHostRef hostRef;
     NSArray *addresses;
     NSString *hostname = [urlPath substringFromIndex:7];
-    hostRef = CFHostCreateWithName(kCFAllocatorDefault, (CFStringRef)hostname);
+    hostRef = CFHostCreateWithName(kCFAllocatorDefault, (HAS_ARC(__bridge) CFStringRef)hostname);
     if (hostRef) {
         result = CFHostStartInfoResolution(hostRef, kCFHostAddresses, NULL); // pass an error instead of NULL here to find out why it failed
         if (result == TRUE) {
-            addresses = (NSArray*)CFHostGetAddressing(hostRef, &result);
+            addresses = (HAS_ARC(__bridge) NSArray*)CFHostGetAddressing(hostRef, &result);
         }
     }
     if (result == TRUE) {
         [addresses enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSString *strDNS = [NSString stringWithUTF8String:inet_ntoa(*((struct in_addr *)obj))];
+            NSString *strDNS = [NSString stringWithUTF8String:inet_ntoa(*(( HAS_ARC(__bridge) struct in_addr *)obj))];
             NSLog(@"Resolved %@ -> %@", hostname, strDNS);
         }];
         
@@ -57,7 +58,7 @@
     
     CFRelease(hostRef);
     
-    [pool release];
+    IF_ARC(}, [pool release];)
 }
 
 @end

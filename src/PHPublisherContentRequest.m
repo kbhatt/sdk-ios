@@ -303,7 +303,7 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
             
             [self removeContentView:contentView];
         }
-        [contentViews release];
+        NO_ARC([contentViews release];)
     }
     
     [super cancel];
