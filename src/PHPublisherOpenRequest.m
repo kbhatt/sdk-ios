@@ -181,7 +181,7 @@ NSString *getMACAddress(){
     
     NSString *cachePlist = [PHURLPrefetchOperation getCachePlistFile];
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NO_ARC([fileManager autorelease])
+    NO_ARC([fileManager autorelease];)
     
     if ([fileManager fileExistsAtPath:cachePlist]){
         
@@ -207,10 +207,10 @@ NSString *getMACAddress(){
     
     NSString *cachePlist = [PHURLPrefetchOperation getCachePlistFile];
     NSMutableDictionary *prefetchUrlDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:cachePlist];
-    NO_ARC([prefetchUrlDictionary autorelease])
+    NO_ARC([prefetchUrlDictionary autorelease];)
     NSArray *urlArray = (NSArray *)[prefetchUrlDictionary objectForKey:@"precache"];
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NO_ARC([fileManager autorelease])
+    NO_ARC([fileManager autorelease];)
     
     for (NSString *urlString in urlArray){
         
@@ -226,10 +226,11 @@ NSString *getMACAddress(){
 
 #pragma mark - NSObject
 
-NO_ARC(
+
 - (void)dealloc{
     [self.prefetchOperations removeObserver:self forKeyPath:@"operations"];
-    
+
+NO_ARC(
     ([_prefetchOperations release], _prefetchOperations = nil);
     ([_customUDID release], _customUDID = nil);
     [super dealloc];

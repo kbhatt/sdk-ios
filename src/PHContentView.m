@@ -163,10 +163,11 @@ static NSMutableSet *allContentViews = nil;
     return _activityView;
 }
 
-NO_ARC(
+
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [PHURLLoader invalidateAllLoadersWithDelegate:self];    
+NO_ARC(
     ([_content release], _content = nil);
     ([_webView release], _webView = nil);
     ([_redirects release], _redirects = nil);
