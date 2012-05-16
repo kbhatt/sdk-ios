@@ -144,8 +144,10 @@ static NSString *sPlayHavenSession;
 @synthesize token = _token, secret = _secret;
 @synthesize delegate = _delegate;
 @synthesize urlPath = _urlPath;
+@synthesize signedParameters = _signedParameters;
 @synthesize additionalParameters = _additionalParameters;
 @synthesize hashCode = _hashCode;
+@synthesize URL = _URL;
 
 -(NSURL *) URL{
     if (_URL == nil) {

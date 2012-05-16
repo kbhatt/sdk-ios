@@ -10,10 +10,7 @@
 #import "PHAPIRequest.h"
 @class PHContentView;
 
-@interface PHPublisherSubContentRequest : PHAPIRequest {
-    PHContentView *_source;
-    NSString *_callback;
-}
+@interface PHPublisherSubContentRequest : PHAPIRequest 
 
 @property (nonatomic, assign) PHContentView *source;
 @property (nonatomic, copy) NSString *callback;

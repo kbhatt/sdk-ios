@@ -11,9 +11,9 @@
 
 int main(int argc, char *argv[])
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    IF_ARC(@autoreleasepool {, NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];)
     int retVal = UIApplicationMain(argc, argv, nil, nil);
-    // should we be doing this in the main method?
     NO_ARC([pool release];)
     return retVal;
+    HAS_ARC(})
 }

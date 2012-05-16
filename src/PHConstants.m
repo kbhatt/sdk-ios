@@ -156,7 +156,7 @@ UIImage *convertByteDataToUIImage(playHavenImage *phImage){
     UInt32 length = phImage->length;
     NSData *data = [NSData dataWithBytes:phImage->data length:length];
     
-    CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)data);
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((HAS_ARC(__bridge) CFDataRef)data);
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
     CGImageRef cgImage = CGImageCreate(width, height, 8, 32, 4 * width, colorSpace, bitmapInfo, provider, NULL, NO, kCGRenderingIntentDefault);

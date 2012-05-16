@@ -14,7 +14,6 @@
 #import "SDURLCache.h"
 #import "PHUrlPrefetchOperation.h"
 #import "PHPurchase.h"
-#import "PHARCLogic.h"
 
 #define MAX_MARGIN 20
 
@@ -78,7 +77,7 @@ static NSMutableSet *allContentViews = nil;
 #ifdef PH_USE_CONTENT_VIEW_RECYCLING
     PHContentView *instance = [[PHContentView allContentViews] anyObject];
     if (!!instance) {
-        [instance retain];
+        NO_ARC([instance retain];)
         [[PHContentView allContentViews] removeObject:instance];
         NO_ARC([instance autorelease];)
     }
@@ -173,8 +172,9 @@ NO_ARC(
     ([_redirects release], _redirects = nil);
     ([_activityView release] , _activityView = nil);
     [super dealloc];
-}
 )
+}
+
     
 -(void) orientationDidChange{
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
@@ -453,9 +453,11 @@ NO_ARC(
         IF_ARC(parser = nil;, [parser release];)
         
         PH_LOG(@"Redirecting request with callback: %@ to dispatch %@", callback, urlPath);
+        IF_ARC(__unsafe_unretained PHContentView *selfCast = self;, PHContentView *selfCast = self;)
+        
         switch ([[redirect methodSignature] numberOfArguments]) {
             case 5:
-                [redirect setArgument:&self atIndex:4]; 
+                [redirect setArgument:&selfCast atIndex:4]; 
             case 4:
                 [redirect setArgument:&callback atIndex:3]; 
             case 3:

@@ -74,7 +74,7 @@ NO_ARC(
 
 - (void)clearErrorTrace {
     [self willChangeValueForKey:@"errorTrace"];
-    IF_ARC(_errorTrace = nil;, [errorTrace release];)
+    IF_ARC(errorTrace = nil;, [errorTrace release];)
     errorTrace = nil;
     [self didChangeValueForKey:@"errorTrace"];
 }

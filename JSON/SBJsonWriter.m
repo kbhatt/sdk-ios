@@ -28,6 +28,7 @@
  */
 
 #import "SBJsonWriter.h"
+#import "PHARCLogic.h"
 
 @interface PH_SBJSONWRITER_CLASS ()
 
@@ -48,7 +49,8 @@
 static NSMutableCharacterSet *kEscapeChars;
 
 + (void)initialize {
-	kEscapeChars = [[NSMutableCharacterSet characterSetWithRange: NSMakeRange(0,32)] retain];
+	kEscapeChars = [NSMutableCharacterSet characterSetWithRange: NSMakeRange(0,32)];
+    NO_ARC([kEscapeChars retain];)
 	[kEscapeChars addCharactersInString: @"\"\\"];
 }
 
@@ -223,7 +225,7 @@ static NSMutableCharacterSet *kEscapeChars;
                     if (uc < 0x20) {
                         [json appendFormat:@"\\u%04x", uc];
                     } else {
-                        CFStringAppendCharacters((CFMutableStringRef)json, &uc, 1);
+                        CFStringAppendCharacters((HAS_ARC(__bridge) CFMutableStringRef)json, &uc, 1);
                     }
                     break;
                     

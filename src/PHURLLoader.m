@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "PHURLLoader.h"
 #import "PHConstants.h"
-#import "PHARCLogic.h"
+
 
 #define MAXIMUM_REDIRECTS 10
 
@@ -30,7 +30,7 @@
 
 +(PHURLLoader *) openDeviceURL:(NSString *)url{
     PHURLLoader *result = [[PHURLLoader alloc] init];
-    NO_ARC([result autorelease])
+    NO_ARC([result autorelease];)
     result.targetURL = [NSURL URLWithString:url];
     [result open];
     
@@ -93,7 +93,8 @@ NO_ARC(
         
         @synchronized(self){
             [_connection cancel];
-            [_connection release], _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+            NO_ARC([_connection release];)
+            _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
             
             
             //PHURLLOADER_RETAIN see PHURLLOADER_RELEASE

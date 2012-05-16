@@ -8,10 +8,11 @@
 
 #import "PHStringUtil.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "PHARCLogic.h"
 
 typedef struct {
 	unichar character;
-	NSString *entity;
+	HAS_ARC(__unsafe_unretained) NSString *entity;
 } HTMLEntityPair;
 
 static HTMLEntityPair gEntityTable[] = {
@@ -149,7 +150,7 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
     
 	NSMutableString *result = [NSMutableString string];
 	NSMutableData *outputData = [NSMutableData dataWithCapacity:sizeof(unichar) * inputLength];
-	const unichar *inputBuffer = CFStringGetCharactersPtr((CFStringRef) input);
+	const unichar *inputBuffer = CFStringGetCharactersPtr((HAS_ARC(__bridge) CFStringRef) input);
     
 	if (!inputBuffer) {
 		NSMutableData *inputData = [NSMutableData dataWithLength:inputLength * sizeof(UniChar)];
@@ -174,7 +175,7 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
         
 		if (pair || inputBuffer[i] > 127) {
 			if (outputBufferLength) {
-				CFStringAppendCharacters((CFMutableStringRef) result,
+				CFStringAppendCharacters((HAS_ARC(__bridge) CFMutableStringRef) result,
 										 outputBuffer, 
 										 outputBufferLength);
 				outputBufferLength = 0;
@@ -193,7 +194,7 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 	}
     
 	if (outputBufferLength) {
-		CFStringAppendCharacters((CFMutableStringRef) result,
+		CFStringAppendCharacters((HAS_ARC(__bridge) CFMutableStringRef) result,
 								 outputBuffer, 
 								 outputBufferLength);
 	}
@@ -204,12 +205,12 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 +(NSString *) stringByUrlEncodingString:(NSString *)input {
 	CFStringRef value = CFURLCreateStringByAddingPercentEscapes(
 																kCFAllocatorDefault, 
-																(CFStringRef) input,
+																(HAS_ARC(__bridge) CFStringRef) input,
 																NULL,
 																(CFStringRef) @"!*'();:@&=+$,/?%#[]",
 																kCFStringEncodingUTF8);
 	
-	NSString *result = [NSString stringWithString:(NSString *)value];
+	NSString *result = [NSString stringWithString:(HAS_ARC(__bridge) NSString *)value];
 	CFRelease(value);
 	
 	return result;
@@ -224,7 +225,7 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 	CFStringRef uuidRef = CFUUIDCreateString(kCFAllocatorDefault, uuid);
 	CFRelease(uuid);
 	
-	NSString *result = [NSString stringWithString:(NSString *)uuidRef];
+	NSString *result = [NSString stringWithString:(HAS_ARC(__bridge) NSString *)uuidRef];
 	CFRelease(uuidRef);
     
 	return [self b64DigestForString:result];
@@ -282,7 +283,9 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 		}
 	}
 	
-	return [[[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding] autorelease];
+	NSString *resultStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
+    NO_ARC([resultStr autorelease];)
+    return resultStr;
 }
 
 +(NSString *)hexEncodedStringForData:(NSData *)data {

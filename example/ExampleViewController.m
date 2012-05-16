@@ -51,7 +51,8 @@ NO_ARC(
     NSString *message = [NSString stringWithFormat:@"[TIME] %f secs total (+ %f secs)", totalDelta, intervalDelta];
     [self addMessage:message];
     
-    [_deltaRequestDate release], _deltaRequestDate = now;
+    NO_ARC([_deltaRequestDate release];)
+    _deltaRequestDate = now;
 }
 
 -(void)startRequest{
@@ -66,8 +67,10 @@ NO_ARC(
 }
 
 -(void)startTimers{
-    NO_ARC([_startRequestDate release]), _startRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-    NO_ARC([_deltaRequestDate release]), _deltaRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    NO_ARC([_startRequestDate release];)
+    _startRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    NO_ARC([_deltaRequestDate release];)
+    _deltaRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
 }
 
 #pragma mark - View lifecycle

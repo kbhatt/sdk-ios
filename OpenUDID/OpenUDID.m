@@ -35,6 +35,7 @@
 
 #import "OpenUDID.h"
 #import "PHConstants.h"
+#import "PHARCLogic.h"
 #import <CommonCrypto/CommonDigest.h> // Need to import for CC_MD5 access
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #import <UIKit/UIPasteboard.h>
@@ -176,7 +177,7 @@ static int const kOpenUDIDRedundancySlots = 100;
     {
       //generate a new uuid and store it in user defaults
       CFUUIDRef uuid = CFUUIDCreate(NULL);
-      guuid = (NSString *) CFUUIDCreateString(NULL, uuid);
+      guuid = (HAS_ARC(__bridge) NSString *) CFUUIDCreateString(NULL, uuid);
       CFRelease(uuid);
     }
   

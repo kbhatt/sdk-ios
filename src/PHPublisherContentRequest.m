@@ -150,7 +150,9 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
 
 -(UIButton *)closeButton{
     if (_closeButton == nil) {
-        _closeButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        NO_ARC([_closeButton retain];)
+        
         _closeButton.frame = CGRectMake(0, 0, 40, 40);
         _closeButton.hidden = YES;
         
@@ -324,7 +326,9 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
 
 -(void)didSucceedWithResponse:(NSDictionary *)responseData{
     NO_ARC([_content release];)
-    _content = [[PHContent contentWithDictionary:responseData] retain];
+    _content = [PHContent contentWithDictionary:responseData];
+    NO_ARC([responseData retain];)
+    
     if (!!_content) {
         if ([self.delegate respondsToSelector:@selector(requestDidGetContent:)]) {
             [self.delegate performSelector:@selector(requestDidGetContent:) withObject:self];

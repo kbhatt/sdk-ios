@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "PHURLLoader.h"
+#import "PHARCLogic.h"
 
 @class PHContent;
 @class PHContentView;
@@ -24,16 +25,13 @@
 @end
 
 @interface PHContentView : UIView<UIWebViewDelegate, PHURLLoaderDelegate> {
-    PHContent *_content;
     UIInterfaceOrientation _orientation;
-    NSObject<PHContentViewDelegate> *_delegate;
     
     UIWebView *_webView;
     BOOL _willAnimate;
     
     NSMutableDictionary *_redirects;
     UIActivityIndicatorView *_activityView;
-    UIView *_targetView;
 }
 
 +(PHContentView *)dequeueContentViewInstance;
@@ -42,8 +40,8 @@
 -(id)initWithContent:(PHContent *)content;
 
 @property(nonatomic, retain) PHContent *content;
-@property(nonatomic, assign) NSObject<PHContentViewDelegate> *delegate;
-@property(nonatomic, assign) UIView *targetView;
+@property(nonatomic, IF_ARC(unsafe_unretained, assign)) NSObject<PHContentViewDelegate> *delegate;
+@property(nonatomic, IF_ARC(unsafe_unretained, assign)) UIView *targetView;
 
 -(void) show:(BOOL)animated;
 -(void) dismiss:(BOOL)animated;

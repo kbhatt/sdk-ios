@@ -30,6 +30,7 @@
 #if HASARC
 	#define IF_ARC(ARCBlock, NoARCBlock) ARCBlock
 	#define NO_ARC(NoARCBlock) 
+    #define HAS_ARC(ARCBlock) ARCBlock
 	#define STRONG strong
 	#define __STRONG __strong
 	#if HASWEAK
@@ -44,6 +45,7 @@
 #else
 	#define IF_ARC(ARCBlock, NoARCBlock) NoARCBlock
 	#define NO_ARC(NoARCBlock) NoARCBlock
+    #define HAS_ARC(ARCBlock)
 	#define STRONG retain
 	#define __STRONG 
 	#define WEAK assign

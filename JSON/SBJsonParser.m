@@ -290,7 +290,7 @@ static char ctrl[0x22];
     if (len && *(c + len) == '\"')
     {
         *o = [[NSMutableString alloc] initWithBytes:(char*)c length:len encoding:NSUTF8StringEncoding];
-        NO_ARC([o autorelease];)
+        NO_ARC([*o autorelease];)
         c += len + 1;
         return YES;
     }
@@ -344,7 +344,7 @@ static char ctrl[0x22];
                     return NO;
                     break;
             }
-            CFStringAppendCharacters((CFMutableStringRef)*o, &uc, 1);
+            CFStringAppendCharacters((HAS_ARC(__bridge) CFMutableStringRef)*o, &uc, 1);
             c++;
             
         } else if (*c < 0x20) {

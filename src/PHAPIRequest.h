@@ -7,6 +7,8 @@
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "PHARCLogic.h"
+
 @class PHAPIRequest;
 @protocol PHAPIRequestDelegate <NSObject>
 -(void)request:(PHAPIRequest *)request didSucceedWithResponse:(NSDictionary *)responseData;
@@ -14,16 +16,9 @@
 @end
 
 @interface PHAPIRequest : NSObject {
-    NSURL *_URL;
-    NSString *_token, *_secret;
     NSURLConnection *_connection;
-    NSDictionary *_signedParameters;
-    id<NSObject> _delegate;
     NSMutableData *_connectionData;
-    NSString *_urlPath;
-    NSDictionary *_additionalParameters;
     NSURLResponse *_response;
-    int _hashCode;
 }
 
 +(NSString *) base64SignatureWithString:(NSString *)string;
@@ -42,7 +37,7 @@
 @property (nonatomic, readonly) NSString *token;
 @property (nonatomic, readonly) NSString *secret;
 @property (nonatomic, readonly) NSDictionary *signedParameters;
-@property (nonatomic, assign) id<NSObject> delegate;
+@property (nonatomic, IF_ARC(unsafe_unretained, retain)) id<NSObject> delegate;
 @property (nonatomic, retain) NSDictionary *additionalParameters;
 @property (nonatomic, assign) int hashCode;
 

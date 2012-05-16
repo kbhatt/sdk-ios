@@ -8,6 +8,7 @@
 
 #import "PHNotificationBadgeRenderer.h"
 #import "PHConstants.h"
+#import "PHARCLogic.h"
 
 static UIImage *BadgeImage;
 
@@ -21,7 +22,8 @@ static UIImage *BadgeImage;
         else
             badge = convertByteDataToUIImage((playHavenImage *)&badge_image);
         
-        BadgeImage = [[badge stretchableImageWithLeftCapWidth:14 topCapHeight:0] retain];
+        BadgeImage = [badge stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+        NO_ARC([BadgeImage retain];)
     }
 }
 

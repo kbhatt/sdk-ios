@@ -234,8 +234,9 @@ NO_ARC(
     ([_prefetchOperations release], _prefetchOperations = nil);
     ([_customUDID release], _customUDID = nil);
     [super dealloc];
-}
 )
+}
+
 
 #pragma mark - NSOperationQueue observer
 
@@ -244,9 +245,9 @@ NO_ARC(
     if ([keyPath isEqualToString:@"operations"]){
         
         if ([self.prefetchOperations.operations count] == 0){
-            if ([self.delegate respondsToSelector:@selector(requestFinishedPrefetching:)]){
+            if ([self.delegate respondsToSelector:@selector(requestFinishedPrefetching:)])
                 [self.delegate performSelector:@selector(requestFinishedPrefetching:) withObject:self];
-            }
+            
             //REQUEST_RELEASE see REQUEST_RETAIN
             [self finish];
         }

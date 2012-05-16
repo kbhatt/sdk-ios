@@ -99,7 +99,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
         return request;
 
     NSMutableURLRequest *copy = [request mutableCopy];
-    NO_ARC(
+    NO_ARC([copy autorelease];)
     copy.URL = [NSURL URLWithString:[string substringToIndex:hash.location]];
     return copy;
 }
@@ -126,17 +126,17 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
     @synchronized(self) // NSDateFormatter isn't thread safe
     {
         // RFC 1123 date format - Sun, 06 Nov 1994 08:49:37 GMT
-        if (!RFC1123DateFormatter) RFC1123DateFormatter = [CreateDateFormatter(@"EEE, dd MMM yyyy HH:mm:ss z") retain];
+        if (!RFC1123DateFormatter) RFC1123DateFormatter = IF_ARC(CreateDateFormatter(@"EEE, dd MMM yyyy HH:mm:ss z");, [CreateDateFormatter(@"EEE, dd MMM yyyy HH:mm:ss z") retain];)
         date = [RFC1123DateFormatter dateFromString:httpDate];
         if (!date)
         {
             // ANSI C date format - Sun Nov  6 08:49:37 1994
-            if (!ANSICDateFormatter) ANSICDateFormatter = [CreateDateFormatter(@"EEE MMM d HH:mm:ss yyyy") retain];
+            if (!ANSICDateFormatter) ANSICDateFormatter = IF_ARC(CreateDateFormatter(@"EEE, dd MMM yyyy HH:mm:ss z");, [CreateDateFormatter(@"EEE MMM d HH:mm:ss yyyy") retain];)
             date = [ANSICDateFormatter dateFromString:httpDate];
             if (!date)
             {
                 // RFC 850 date format - Sunday, 06-Nov-94 08:49:37 GMT
-                if (!RFC850DateFormatter) RFC850DateFormatter = [CreateDateFormatter(@"EEEE, dd-MMM-yy HH:mm:ss z") retain];
+                if (!RFC850DateFormatter) RFC850DateFormatter = IF_ARC(CreateDateFormatter(@"EEE, dd MMM yyyy HH:mm:ss z");, [CreateDateFormatter(@"EEEE, dd-MMM-yy HH:mm:ss z") retain]);
                 date = [RFC850DateFormatter dateFromString:httpDate];
             }
         }
@@ -289,11 +289,12 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
 
                 diskCacheUsage = [[diskCacheInfo objectForKey:kSDURLCacheInfoDiskUsageKey] unsignedIntValue];
 
-                periodicMaintenanceTimer = [[NSTimer scheduledTimerWithTimeInterval:5
+                periodicMaintenanceTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                                              target:self
                                                                            selector:@selector(periodicMaintenance)
                                                                            userInfo:nil
-                                                                            repeats:YES] retain];
+                                                                           repeats:YES];
+                NO_ARC([periodicMaintenanceTimer release];)
             }
         }
     }
@@ -522,7 +523,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
                                                                                            cachedResponse, @"cachedResponse",
                                                                                            request, @"request", nil]];
         NO_ARC([operation release];)
-        [ioQueue addOperation:opeation];
+        [ioQueue addOperation:operation];
     }
 }
 

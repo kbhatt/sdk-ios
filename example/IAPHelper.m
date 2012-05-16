@@ -56,11 +56,9 @@ static IAPHelper *sharedIAPHelper;
     return sharedIAPHelper;
 }
 
+NO_ARC(
 + (id)allocWithZone:(NSZone *)zone {
     return [[self sharedIAPHelper] retain];
-}
-- (id)copyWithZone:(NSZone *)zone {
-    return self;
 }
 - (id)retain {
     return self;
@@ -73,6 +71,11 @@ static IAPHelper *sharedIAPHelper;
 }
 - (id)autorelease {
     return self;
+}
+)
+
+- (id)copyWithZone:(NSZone *)zone {
+return self;
 }
 
 NO_ARC(

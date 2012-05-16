@@ -14,6 +14,7 @@
 
 @synthesize source = _source;
 @synthesize callback = _callback;
+@synthesize URL = _URL;
 
 -(NSURL *) URL{
     if (_URL == nil) {

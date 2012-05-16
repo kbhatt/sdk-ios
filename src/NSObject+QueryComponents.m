@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+QueryComponents.h"
+#import "PHARCLogic.h"
 @implementation NSString (QueryComponents)
 - (NSString *)stringByDecodingURLFormat
 {
@@ -57,12 +58,12 @@
 - (NSString *)stringFromQueryComponents
 {
     NSString *result = nil;
-    for(NSString *key in [self allKeys])
+    for(HAS_ARC(__strong) NSString *key in [self allKeys])
     {
         key = [key stringByEncodingURLFormat];
         NSArray *allValues = [self objectForKey:key];
         if([allValues isKindOfClass:[NSArray class]])
-            for(NSString *value in allValues)
+            for(HAS_ARC(__strong) NSString *value in allValues)
             {
                 value = [[value description] stringByEncodingURLFormat];
                 if(!result)
