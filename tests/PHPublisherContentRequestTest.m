@@ -65,7 +65,7 @@
     *emptyDict = [parser objectWithString:empty],
     *keywordDict = [parser objectWithString:keyword],
     *rectDict = [parser objectWithString:rect];
-    [parser release];
+    NO_ARC([parser release];)
     
     PHContent *emptyUnit = [PHContent contentWithDictionary:emptyDict];
     STAssertNil(emptyUnit, @"Empty definition should result in nil!");
@@ -99,14 +99,14 @@
 -(void)testCloseButtonDelayParameter{
   PHContent *content = [[PHContent alloc] init];
   STAssertTrue(content.closeButtonDelay == 10.0f, @"Default closeButton delay value incorrect!");
-  [content release];
+  NO_ARC([content release];)
   
   NSString
   *rect = @"{\"frame\":{\"x\":60,\"y\":40,\"w\":200,\"h\":400},\"url\":\"http://google.com\",\"transition\":\"PH_DIALOG\",\"context\":{\"awesome\":\"awesome\"},\"close_delay\":23}";
   
   PH_SBJSONPARSER_CLASS *parser = [[PH_SBJSONPARSER_CLASS alloc] init];
   NSDictionary *rectDict = [parser objectWithString:rect];
-  [parser release];
+  NO_ARC([parser release];)
   
   PHContent *rectUnit = [PHContent contentWithDictionary:rectDict];
   STAssertTrue(rectUnit.closeButtonDelay == 23.0f, @"Expected 23 got %f", content.closeButtonDelay);
@@ -116,14 +116,14 @@
 -(void)testCloseButtonUrlParameter{
   PHContent *content = [[PHContent alloc] init];
   STAssertTrue(content.closeButtonURLPath == nil, @"CloseButtonURLPath property not available");
-  [content release];
+  NO_ARC([content release];)
   
   NSString
   *rect = @"{\"frame\":{\"x\":60,\"y\":40,\"w\":200,\"h\":400},\"url\":\"http://google.com\",\"transition\":\"PH_DIALOG\",\"context\":{\"awesome\":\"awesome\"},\"close_ping\":\"http://playhaven.com\"}";
   
   PH_SBJSONPARSER_CLASS *parser = [[PH_SBJSONPARSER_CLASS alloc] init];
   NSDictionary *rectDict = [parser objectWithString:rect];
-  [parser release];
+  NO_ARC([parser release];)
   
   PHContent *rectUnit = [PHContent contentWithDictionary:rectDict];
   STAssertTrue([rectUnit.closeButtonURLPath isEqualToString:@"http://playhaven.com"], @"Expected 'http://playhaven.com got %@", content.closeButtonURLPath);
@@ -139,8 +139,10 @@
     PHContentView *contentView = [[PHContentView alloc] initWithContent:content];
     STAssertTrue([contentView respondsToSelector:@selector(show:)],@"Should respond to show selector");
     STAssertTrue([contentView respondsToSelector:@selector(dismiss:)],@"Should respond to dismiss selector");
+    
+    NO_ARC(
     [contentView release];
-    [content release];
+    [content release];)
 }
 
 @end
@@ -192,6 +194,7 @@ NO_ARC(
     [super dealloc];
 }
 )
+
 @end
 
 @implementation PHContentViewRedirectRecyclingTest
@@ -373,7 +376,7 @@ NO_ARC(
     STAssertTrue(_didPreload, @"Preloading didn't happen!");
     STAssertTrue([_request state] == PHPublisherContentRequestPreloaded,@"Request wasn't preloaded!");
     
-    IF_ARC(_request = nil;, ([_request release], _request = nil);)
+    NO_ARC(([_request release], _request = nil);)
 }
 
 @end

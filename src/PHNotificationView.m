@@ -70,7 +70,8 @@ static NSMutableDictionary *RendererMap;
         NSDictionary *newNotificationData = self.notificationData;
         
         //create new Renderer
-        [_notificationRenderer release], _notificationRenderer = [PHNotificationView newRendererForData:newNotificationData];
+        NO_ARC([_notificationRenderer release];)
+        _notificationRenderer = [PHNotificationView newRendererForData:newNotificationData];
         
         //adjust size while preserving center;
         CGPoint oldCenter = self.center;
@@ -83,19 +84,20 @@ static NSMutableDictionary *RendererMap;
     }
 }
 
-NO_ARC(
+
 -(void)dealloc{
     [_request setDelegate:nil];
     [self removeObserver:self forKeyPath:@"notificationData"];
-    
+        
+    NO_ARC(
     ([_app release],_app = nil);
     ([_secret release], _secret = nil);
     ([_placement release], _placement = nil);
     ([_notificationData release], _notificationData = nil);
     ([_notificationRenderer release], _notificationRenderer = nil);
     [super dealloc];
+    )
 }
-)
 
 -(void)refresh{
     if (!_request) {

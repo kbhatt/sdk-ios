@@ -30,13 +30,15 @@
     [request send];
 }
 
-NO_ARC(
+
 -(void)dealloc{
     [PHAPIRequest cancelAllRequestsWithDelegate:self];
+NO_ARC(
     [customUDIDField release];
     [super dealloc];
-}
 )
+}
+
 
 #pragma mark - PHAPIRequestDelegate
 -(void)request:(PHAPIRequest *)request didSucceedWithResponse:(NSDictionary *)responseData{

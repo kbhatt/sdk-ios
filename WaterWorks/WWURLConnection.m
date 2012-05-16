@@ -97,6 +97,7 @@ NO_ARC(
     result.request = request;
     result.delegate = delegate;
     
+    NO_ARC([result autorelease];)
     return result;
 }
 
@@ -149,7 +150,7 @@ NO_ARC(
                             WWURLFileResponse *responseObject = [WWURLFileResponse new];
                             responseObject.filePath = responsePath;
                             [[self allResponses] setObject:responseObject forKey:url];
-                            [responseObject release];
+                            NO_ARC([responseObject release];)
                         }
                     }
                     
@@ -187,9 +188,10 @@ NO_ARC(
 @synthesize delegate = _delegate;
 @synthesize request = _request;
 
-NO_ARC(
+
 -(void)dealloc{
     [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(startInBackground) object:nil];
+NO_ARC(
     _delegate = nil;
     ([_request release], _request = nil);
     
@@ -216,7 +218,7 @@ NO_ARC(
         }
         
         [self.delegate connection:nil didReceiveResponse:response];
-        [response release];
+        NO_ARC([response release];)
     }
     
     if ([self.delegate respondsToSelector:@selector(connection:didReceiveData:)]) {

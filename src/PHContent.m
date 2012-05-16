@@ -20,6 +20,7 @@
     if (shouldCreateInstance) {
         PHContent *result = [[PHContent alloc] init];
         NO_ARC([result autorelease];)
+        
         id frameValue = [dictionaryRepresentation valueForKey:@"frame"];
         if ([frameValue isKindOfClass:[NSString class]]) {
             [result setFramesWithDictionary:

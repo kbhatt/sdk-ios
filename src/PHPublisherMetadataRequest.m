@@ -21,7 +21,9 @@
 @implementation PHPublisherMetadataRequest
 
 +(id)requestForApp:(NSString *)token secret:(NSString *)secret placement:(NSString *)placement delegate:(id)delegate{
-    return [[[[self class] alloc] initWithApp:token secret:secret placement:placement delegate:delegate] autorelease];
+    PHPublisherMetadataRequest *request = [[[self class] alloc] initWithApp:token secret:secret placement:placement delegate:delegate];
+    NO_ARC([request autorelease]);
+    return request;
 }
 
 -(id)initWithApp:(NSString *)token secret:(NSString *)secret placement:(NSString *)placement delegate:(id)delegate{

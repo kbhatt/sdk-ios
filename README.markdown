@@ -90,6 +90,49 @@ Asynchronously reports a game open to PlayHaven.
     request.customUDID = @"CUSTOM_UDID" //optional, see below.
     [request send];
 
+**NEW**: If you are using an internal identifier to track individual devices in this game, you may use the customUDID
+parameter to pass this identifier along to PlayHaven with the open request.
+
+Where MYTOKEN and MYSECRET are the token and secret for your game. That's it!
+See "Recording game opens" in the API Reference section for more information about recording game opens.
+
+### Request the Cross-Promotion Widget
+We recommend adding the Cross-Promotion Widget to an attractive "More Games" button in a prominent part of your game's UI. The most popular place to add this button is in the main menu, but we have seen great results from buttons on game over or level complete screens as well. Be creative and find places in your game where it is natural for users to want to jump to a new game.
+
+Inside your button's event handler, use the following code to request the pre-configured Cross-Promotion Widget:
+
+	PHPublisherContentRequest *request = [PHPublisherContentRequest requestForApp:MYTOKEN secret:MYSECRET placement:@"more_games" delegate:self];
+	request.showsOverlayImmediately = YES;
+	[request send];
+	
+*NOTE:* The Cross-Promotion Widget only supports the "more_games" placement tag.  Please ensure that this tag is used for any location you wish to integrate the Cross-Promotion Widget.  Support for custom placements is coming soon!
+
+You will need to implement PHPublisherContentRequestDelegate methods if you would like to know when the Cross-Promotion Widget has loaded or dismissed. See "Requesting content for your placements" in the API Reference section for more information about these delegate methods as well as other things you can do with PHPublisherContentRequest.
+
+### Add a Notification View (Notifier Badge)
+Adding a notification view to your "More Games" button will greatly increase the number of Cross-Promotion Widget opens for your game, by up to 300%. To create a notification view:
+
+    PHNotificationView *notificationView = [[PHNotificationView alloc] initWithApp:MYTOKEN secret:MYSECRET placement:@"more_games"];
+    [myView addSubview:notificationView];
+    [notificationView release]; 
+    
+Add the notification view as a subview somewhere in your view controller's view. Adjust the position of the badge by setting the notificationView's center property. 
+
+    notificationView.center = CGPointMake(10,10);
+
+The notification view will query and update itself when its -(void)refresh method is called.
+
+    [notificationView refresh];
+
+See "Notifications with PHNotificationView" in the API Reference section for more information about customizing the presentation of your PHNotificationView instances.
+
+API Reference
+-------------
+### Recording game opens
+Asynchronously reports a game open to PlayHaven. A delegate is not needed for this request, but if you would like to receive a callback when this request succeeds or fails refer to the implementation found in *example/PublisherOpenViewController.m*.
+
+	[[PHPublisherOpenRequest requestForApp:(NSString *)token secret:(NSString *)secret] send]
+
 #### Precaching content templates
 PlayHaven will automatically download and store a number of content templates after a successful PHPublisherOpenRequest. This happens automatically in the background after each open request, so there's no integration required to take advantage of this feature.
 

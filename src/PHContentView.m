@@ -464,9 +464,9 @@ NO_ARC(
         }
         
         //NOTE: It's important to keep the invocation object around while we're invoking. This will prevent occasional EXC_BAD_ACCESS errors.
-        [redirect retain];
+        NO_ARC([redirect retain];)
         [redirect invoke];
-        [redirect release];
+        NO_ARC([redirect release];)
         
         return NO;
     }
@@ -512,7 +512,7 @@ NO_ARC(
         loader.delegate = self;
         loader.context = [NSDictionary dictionaryWithObject:callback forKey:@"callback"];
         [loader open];
-        [loader release];
+        IF_ARC(loader = nil;, [loader release];)
     }
 }
 
@@ -523,7 +523,7 @@ NO_ARC(
         loader.opensFinalURLOnDevice = NO;
         loader.targetURL = [NSURL URLWithString:pingPath];
         [loader open];
-        [loader release];
+        IF_ARC(loader = nil;, [loader release];)
     }
     
     [self dismiss:_willAnimate];
@@ -553,7 +553,8 @@ NO_ARC(
     if (!!error) {
         _error = [jsonWriter stringWithObject:error];
     }
-    [jsonWriter release];
+    
+    NO_ARC([jsonWriter release];)
     
     NSString *callbackCommand = [NSString stringWithFormat:@"var PlayHavenAPICallback = (window[\"PlayHavenAPICallback\"])? PlayHavenAPICallback : function(c,r,e){try{PlayHaven.nativeAPI.callback(c,r,e);return \"OK\";}catch(err){ return JSON.stringify(err);}}; PlayHavenAPICallback(\"%@\",%@,%@)", _callback, _response, _error];
     NSString *callbackResponse = [_webView stringByEvaluatingJavaScriptFromString:callbackCommand];

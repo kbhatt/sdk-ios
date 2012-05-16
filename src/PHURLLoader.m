@@ -29,7 +29,8 @@
 #pragma mark Static
 
 +(PHURLLoader *) openDeviceURL:(NSString *)url{
-    PHURLLoader *result = [[[PHURLLoader alloc] init] autorelease];
+    PHURLLoader *result = [[PHURLLoader alloc] init];
+    NO_ARC([result autorelease])
     result.targetURL = [NSURL URLWithString:url];
     [result open];
     

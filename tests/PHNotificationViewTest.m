@@ -37,8 +37,10 @@
     [_notificationView refresh];
 }
 
+NO_ARC(
 -(void)testRelease{
-    IF_ARC(_notificationView = nil;, [_notificationView release];) 
+    _notificationView = nil;, [_notificationView release];
 }
+)
 
 @end

@@ -27,7 +27,7 @@
                                 attributes:nil
                                      error:NULL];
     }
-    [fileManager release];
+    NO_ARC([fileManager release];)
     
     return [[PH_SDURLCACHE_CLASS defaultCachePath] stringByAppendingPathComponent:PH_PREFETCH_URL_PLIST];
 }
@@ -43,7 +43,6 @@
 
 NO_ARC(
 - (void)dealloc {
-
     ([prefetchURL release], prefetchURL = nil);
     [super dealloc];
 }
@@ -51,10 +50,11 @@ NO_ARC(
 
 - (void)main {
 
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    IF_ARC(@autoreleasepool {, NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];)
     NSURLRequest *request = [NSURLRequest requestWithURL:self.prefetchURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:PH_REQUEST_TIMEOUT];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:NULL error:NULL];
-    [pool drain];
+
+    [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    IF_ARC(}, [pool drain];)
 }
 
 @end

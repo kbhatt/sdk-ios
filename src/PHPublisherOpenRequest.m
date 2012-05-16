@@ -91,7 +91,7 @@ NSString *getMACAddress(){
                                                                  diskCapacity:PH_MAX_SIZE_FILESYSTEM_CACHE
                                                                      diskPath:[PH_SDURLCACHE_CLASS defaultCachePath]];
         [NSURLCache setSharedURLCache:urlCache];
-        [urlCache release];
+        NO_ARC([urlCache release];)
     }
 }
 
@@ -158,7 +158,7 @@ NSString *getMACAddress(){
             NSURL *url = [NSURL URLWithString:urlString];
             PHURLPrefetchOperation *urlpo = [[PHURLPrefetchOperation alloc] initWithURL:url];
             [self.prefetchOperations addOperation:urlpo];
-            [urlpo release];
+            NO_ARC([urlpo release];)
         }
         
         NSString *session = (NSString *)[responseData valueForKey:@"session"];
@@ -166,7 +166,7 @@ NSString *getMACAddress(){
             [PHAPIRequest setSession:session];
         }
         
-        [fileManager release];
+        NO_ARC([fileManager release];)
     }
     
     // Don't finish the request before prefetching has completed!
@@ -180,16 +180,21 @@ NSString *getMACAddress(){
 -(void) downloadPrefetchURLs{
     
     NSString *cachePlist = [PHURLPrefetchOperation getCachePlistFile];
-    if ([[[[NSFileManager alloc] init] autorelease] fileExistsAtPath:cachePlist]){
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NO_ARC([fileManager autorelease])
+    
+    if ([fileManager fileExistsAtPath:cachePlist]){
         
-        NSMutableDictionary *prefetchUrlDictionary = [[[NSMutableDictionary alloc] initWithContentsOfFile:cachePlist] autorelease];
+        NSMutableDictionary *prefetchUrlDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:cachePlist];
+        NO_ARC([prefetchUrlDictionary autorelease]);
+        
         NSArray *urlArray = (NSArray *)[prefetchUrlDictionary objectForKey:@"precache"];
         for (NSString *urlString in urlArray){
             
             NSURL *url = [NSURL URLWithString:urlString];
             PHURLPrefetchOperation *urlpo = [[PHURLPrefetchOperation alloc] initWithURL:url];
             [self.prefetchOperations addOperation:urlpo];
-            [urlpo release];
+            NO_ARC([urlpo release];)
         }
     }
 }
@@ -201,9 +206,12 @@ NSString *getMACAddress(){
 -(void) clearPrefetchCache{
     
     NSString *cachePlist = [PHURLPrefetchOperation getCachePlistFile];
-    NSMutableDictionary *prefetchUrlDictionary = [[[NSMutableDictionary alloc] initWithContentsOfFile:cachePlist] autorelease];
+    NSMutableDictionary *prefetchUrlDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:cachePlist];
+    NO_ARC([prefetchUrlDictionary autorelease])
     NSArray *urlArray = (NSArray *)[prefetchUrlDictionary objectForKey:@"precache"];
-    NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NO_ARC([fileManager autorelease])
+    
     for (NSString *urlString in urlArray){
         
         NSURL *url = [NSURL URLWithString:urlString];

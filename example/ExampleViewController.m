@@ -66,8 +66,8 @@ NO_ARC(
 }
 
 -(void)startTimers{
-    [_startRequestDate release], _startRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-    [_deltaRequestDate release], _deltaRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    NO_ARC([_startRequestDate release]), _startRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    NO_ARC([_deltaRequestDate release]), _deltaRequestDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
 }
 
 #pragma mark - View lifecycle

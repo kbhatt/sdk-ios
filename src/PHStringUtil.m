@@ -325,7 +325,7 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 			}
 		}
 		
-		[scanner release];
+		NO_ARC([scanner release];)
 	}
 	
 	return result;

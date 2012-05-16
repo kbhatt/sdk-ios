@@ -81,7 +81,7 @@ NO_ARC(
     
     UIBarButtonItem *toggleButton = [[UIBarButtonItem alloc] initWithTitle:@"Toggle" style:UIBarButtonItemStyleBordered target:self action:@selector(touchedToggleStatusBar:)];
     self.navigationItem.rightBarButtonItem = toggleButton;
-    [toggleButton release];
+    NO_ARC([toggleButton release];)
 }
 
 -(void)touchedToggleStatusBar:(id)sender{
@@ -116,7 +116,8 @@ NO_ARC(
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        NO_ARC([cell autorelease];)
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -152,33 +153,33 @@ NO_ARC(
             controller.token = self.tokenField.text;
             controller.secret = self.secretField.text;
             [self.navigationController pushViewController:controller animated:YES];
-            [controller release];
+            NO_ARC([controller release];)
         } else if (indexPath.row == 1){
             PublisherContentViewController *controller = [[PublisherContentViewController alloc] initWithNibName:@"PublisherContentViewController" bundle:nil];
             controller.title = @"Content";
             controller.token = self.tokenField.text;
             controller.secret = self.secretField.text;
             [self.navigationController pushViewController:controller animated:YES];
-            [controller release];
+            NO_ARC([controller release];)
         } else if (indexPath.row == 2){
             PublisherIAPTrackingViewController *controller = [[PublisherIAPTrackingViewController alloc] initWithNibName:@"PublisherIAPTrackingViewController" bundle:nil];
             controller.title = @"IAP Tracking";
             controller.token = self.tokenField.text;
             controller.secret = self.secretField.text;
             [self.navigationController pushViewController:controller animated:YES];
-            [controller release];
+            NO_ARC([controller release];)
         } else if (indexPath.row == 3){
             PublisherCancelContentViewController *controller = [[PublisherCancelContentViewController alloc] initWithNibName:@"PublisherContentViewController" bundle:nil];
             controller.title = @"Content";
             controller.token = self.tokenField.text;
             controller.secret = self.secretField.text;
             [self.navigationController pushViewController:controller animated:YES];
-            [controller release];
+            NO_ARC([controller release];)
         }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing Credentials" message:@"You must supply a PlayHaven API token and secret to use this app. To get a token and secret, please visit http://playhaven.com on your computer and sign up." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
+        NO_ARC([alert release];)
     }
     
 }

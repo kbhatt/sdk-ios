@@ -88,7 +88,9 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
         request.delegate = delegate;
         return request;
     } else {
-        return [[[[self class] alloc] initWithApp:token secret:secret placement:placement delegate:delegate] autorelease];
+        request = [[[self class] alloc] initWithApp:token secret:secret placement:placement delegate:delegate];
+        NO_ARC([request autorelease]);
+        return request;
     }
 }
 
@@ -168,18 +170,19 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss = @"P
     return _closeButton;
 }
 
-NO_ARC(
+
 -(void)dealloc{
     [PHPublisherContentRequest cancelPreviousPerformRequestsWithTarget:self selector:@selector(showCloseButtonBecauseOfTimeout) object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NO_ARC(
     ([_content release], _content = nil);
     ([_placement release], _placement = nil);
     ([_contentViews release], _contentViews = nil);
     ([_closeButton release], _closeButton = nil);
     ([_overlayWindow release], _overlayWindow = nil);
     [super dealloc];
+    )
 }
-)
 
 #pragma mark - Internal UI management
 -(void)placeCloseButton{
@@ -320,7 +323,8 @@ NO_ARC(
 }
 
 -(void)didSucceedWithResponse:(NSDictionary *)responseData{
-    [_content release], _content = [[PHContent contentWithDictionary:responseData] retain];
+    NO_ARC([_content release];)
+    _content = [[PHContent contentWithDictionary:responseData] retain];
     if (!!_content) {
         if ([self.delegate respondsToSelector:@selector(requestDidGetContent:)]) {
             [self.delegate performSelector:@selector(requestDidGetContent:) withObject:self];
@@ -449,8 +453,11 @@ NO_ARC(
 
 -(void)pushContent:(PHContent *)content{
     PHContentView *contentView = [PHContentView dequeueContentViewInstance];
-    if (!contentView)
-        contentView = [[[PHContentView alloc] initWithContent:nil] autorelease];
+    if (!contentView) {
+        contentView = [[PHContentView alloc] initWithContent:nil];
+        NO_ARC([content autorelease]);
+    }
+        
     
     
     [contentView redirectRequest:@"ph://subcontent" toTarget:self action:@selector(requestSubcontent:callback:source:)];
@@ -469,10 +476,10 @@ NO_ARC(
 }
 
 -(void)removeContentView:(PHContentView *)contentView{
-    [contentView retain];
+    NO_ARC([contentView retain];)
     [self.contentViews removeObject:contentView];
     [PHContentView enqueueContentViewInstance:contentView];
-    [contentView release];
+    NO_ARC([contentView release];)
 }
 
 -(void)dismissFromButton{
@@ -485,7 +492,7 @@ NO_ARC(
             
             [self removeContentView:contentView];
         }
-        [contentViews release];
+        IF_ARC(contentViews = nil;, [contentViews release];)
     }
     
     if ([self.delegate respondsToSelector:@selector(request:contentDidDismissWithType:)]) {
@@ -512,7 +519,7 @@ NO_ARC(
             
             [self removeContentView:contentView];
         }
-        [contentViews release];
+        IF_ARC(contentViews = nil;, [contentViews release];)
     }
     
     if ([self.delegate respondsToSelector:@selector(request:contentDidDismissWithType:)]) {
@@ -683,7 +690,7 @@ NO_ARC(
             if ([self.delegate respondsToSelector:@selector(request:makePurchase:)]) {
                 [(id <PHPublisherContentRequestDelegate>)self.delegate request:self makePurchase:purchase];
             }
-            [purchase release];
+            NO_ARC([purchase release];)
         }
     }
 }

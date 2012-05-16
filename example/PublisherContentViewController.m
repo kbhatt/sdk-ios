@@ -17,16 +17,17 @@
 @synthesize animateSwitch;
 
 
-NO_ARC(
+
 -(void)dealloc{
     [PHAPIRequest cancelAllRequestsWithDelegate:self];
-    
+        
+    NO_ARC(
     ([_notificationView release], _notificationView = nil);
     ([_placementField release], _placementField = nil);
     ([_request release], _request = nil);
     [super dealloc];
+    )
 }
-)
 
 -(void)startRequest{
     if (self.request == nil) {
@@ -137,7 +138,8 @@ NO_ARC(
     [self setPlacementField:nil];
     [super viewDidUnload];
     [_notificationView removeFromSuperview];
-    ([_notificationView release], _notificationView = nil);
+    
+    IF_ARC(_notificationView = nil;, [_notificationView release];)
 }
 
 -(void)viewDidAppear:(BOOL)animated{
