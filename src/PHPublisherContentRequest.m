@@ -14,7 +14,7 @@
 #import "PHReward.h"
 #import "PHPurchase.h"
 #import "PHPublisherIAPTrackingRequest.h"
-#import "JSON.h"
+#import "SBJson.h"
 #import "OpenUDID.h"
 
 NSString *const PHPublisherContentRequestRewardIDKey = @"reward";

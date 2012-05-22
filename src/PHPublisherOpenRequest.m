@@ -8,7 +8,7 @@
 
 #import "PHPublisherOpenRequest.h"
 #import "PHConstants.h"
-#import "SDURLSDURLCache.h"
+#import "SDURLCache.h"
 #import "PHURLPrefetchOperation.h"
 
 #if PH_USE_OPENUDID == 1

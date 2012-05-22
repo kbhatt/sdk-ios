@@ -16,3 +16,6 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+Pods
+Podfile.lock
+

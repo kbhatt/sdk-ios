@@ -9,7 +9,7 @@
 #import "PHContentView.h"
 #import "PHContent.h"
 #import "NSObject+QueryComponents.h"
-#import "JSON.h"
+#import "SBJson.h"
 #import "PHConstants.h"
 #import "SDURLCache.h"
 #import "PHUrlPrefetchOperation.h"

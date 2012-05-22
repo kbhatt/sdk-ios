@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F9054AA1DAB45AAA90BD34A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
+		11DB6A19EF5545D1A0DCB5EB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
+		49F0F6804956436F8CF68A48 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
+		4F1667E6EF104A9492894CC5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
+		639316EEE469485681E21DCB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
+		A250650AE94D47E5BA695490 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
+		ACE338E2D5334378A73CF9EE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
+		AE32930AB6BC406990C1E7E8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12672BF434245ACB4C04B82 /* libPods.a */; };
 		D175008E149193790037A036 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D175008D149193790037A036 /* CFNetwork.framework */; };
 		D1BD481B14C0ED3300EE8A5A /* PHPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BD481914C0CC6300EE8A5A /* PHPurchase.m */; };
 		D1BD481C14C0EDC500EE8A5A /* PHPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BD481914C0CC6300EE8A5A /* PHPurchase.m */; };
@@ -338,6 +346,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B12672BF434245ACB4C04B82 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D175008D149193790037A036 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D1BD481814C0CC6300EE8A5A /* PHPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPurchase.h; sourceTree = "<group>"; };
 		D1BD481914C0CC6300EE8A5A /* PHPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPurchase.m; sourceTree = "<group>"; };
@@ -418,7 +427,7 @@
 		EAB4429413454F34000DA3E9 /* PHContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PHContent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EAB4429513454F34000DA3E9 /* PHContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PHContent.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		EAB442A113455467000DA3E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		EAB6A3AF14EED62D00EAC692 /* libPlayHavenNoStoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPlayHavenNoStoreKit.a; path = "libPlayHaven-NoStoreKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAB6A3AF14EED62D00EAC692 /* libPlayHaven-NoStoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPlayHaven-NoStoreKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EABAA6971450ED640040B937 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EABC0C75152B8A3200441393 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		EABC0C7B152B8A6500441393 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
@@ -454,6 +463,7 @@
 				EA12ABD51365DBB700CB2F24 /* UIKit.framework in Frameworks */,
 				EA12ABD61365DBB700CB2F24 /* Foundation.framework in Frameworks */,
 				EA12ABD71365DBB700CB2F24 /* CoreGraphics.framework in Frameworks */,
+				AE32930AB6BC406990C1E7E8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +477,7 @@
 				EAB44397134554B3000DA3E9 /* Foundation.framework in Frameworks */,
 				EAB44398134554B3000DA3E9 /* UIKit.framework in Frameworks */,
 				EAB44399134554B3000DA3E9 /* CoreGraphics.framework in Frameworks */,
+				A250650AE94D47E5BA695490 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +491,7 @@
 				EA86C7E014D9E75600CB1551 /* UIKit.framework in Frameworks */,
 				EA86C7E114D9E75600CB1551 /* Foundation.framework in Frameworks */,
 				EA86C7E214D9E75600CB1551 /* CoreGraphics.framework in Frameworks */,
+				639316EEE469485681E21DCB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA9AB62014A3B0AA00079704 /* Foundation.framework in Frameworks */,
+				49F0F6804956436F8CF68A48 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAB6A39214EED62D00EAC692 /* Foundation.framework in Frameworks */,
+				ACE338E2D5334378A73CF9EE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF1684D1534E2DE006B6993 /* Foundation.framework in Frameworks */,
+				4F1667E6EF104A9492894CC5 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF168841534E34F006B6993 /* Foundation.framework in Frameworks */,
+				0F9054AA1DAB45AAA90BD34A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +541,7 @@
 				EAF168C91534E59C006B6993 /* UIKit.framework in Frameworks */,
 				EAF168CA1534E59C006B6993 /* Foundation.framework in Frameworks */,
 				EAF168CB1534E59C006B6993 /* CoreGraphics.framework in Frameworks */,
+				11DB6A19EF5545D1A0DCB5EB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,7 +555,7 @@
 				EA12ABD31365DBB700CB2F24 /* Example.app */,
 				EA9AB61F14A3B0AA00079704 /* libPlayHaven.a */,
 				EA86C7EC14D9E75600CB1551 /* Example (Fixtures).app */,
-				EAB6A3AF14EED62D00EAC692 /* libPlayHavenNoStoreKit.a */,
+				EAB6A3AF14EED62D00EAC692 /* libPlayHaven-NoStoreKit.a */,
 				EAF168671534E2DE006B6993 /* libPlayHaven-Safe.a */,
 				EAF168A21534E34F006B6993 /* libPlayHaven-Safe_NoStoreKit.a */,
 				EAF168DB1534E59C006B6993 /* SafeExample.app */,
@@ -571,6 +588,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				EAB442A113455467000DA3E9 /* QuartzCore.framework */,
+				B12672BF434245ACB4C04B82 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -902,6 +920,7 @@
 				EA12ABCF1365DBB700CB2F24 /* Sources */,
 				EA12ABD01365DBB700CB2F24 /* Frameworks */,
 				EA12ABD11365DBB700CB2F24 /* Resources */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -920,6 +939,7 @@
 				EA14C65D1342604000E228E0 /* Sources */,
 				EA14C65E1342604000E228E0 /* Frameworks */,
 				EA14C65F1342604000E228E0 /* ShellScript */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -937,6 +957,7 @@
 				EA86C7BE14D9E75600CB1551 /* Sources */,
 				EA86C7DC14D9E75600CB1551 /* Frameworks */,
 				EA86C7E314D9E75600CB1551 /* Resources */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -954,6 +975,7 @@
 				EA9AB61B14A3B0AA00079704 /* Sources */,
 				EA9AB61C14A3B0AA00079704 /* Frameworks */,
 				EA9AB61D14A3B0AA00079704 /* Headers */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -971,6 +993,7 @@
 				EAB6A37914EED62D00EAC692 /* Sources */,
 				EAB6A39114EED62D00EAC692 /* Frameworks */,
 				EAB6A39314EED62D00EAC692 /* Headers */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -978,7 +1001,7 @@
 			);
 			name = "PlayHaven NoStoreKit";
 			productName = PlayHaven;
-			productReference = EAB6A3AF14EED62D00EAC692 /* libPlayHavenNoStoreKit.a */;
+			productReference = EAB6A3AF14EED62D00EAC692 /* libPlayHaven-NoStoreKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		EAF168321534E2DE006B6993 /* PlayHaven Safe */ = {
@@ -988,6 +1011,7 @@
 				EAF168331534E2DE006B6993 /* Sources */,
 				EAF1684C1534E2DE006B6993 /* Frameworks */,
 				EAF1684E1534E2DE006B6993 /* Headers */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1005,6 +1029,7 @@
 				EAF1686A1534E34F006B6993 /* Sources */,
 				EAF168831534E34F006B6993 /* Frameworks */,
 				EAF168851534E34F006B6993 /* Headers */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1022,6 +1047,7 @@
 				EAF168A41534E59C006B6993 /* Sources */,
 				EAF168C51534E59C006B6993 /* Frameworks */,
 				EAF168CC1534E59C006B6993 /* Resources */,
+				7C0B225AFDD84F7583C47229 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1136,6 +1162,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7C0B225AFDD84F7583C47229 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		EA14C65F1342604000E228E0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1475,6 +1515,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1484,14 +1525,9 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					Cache,
-					example,
-					JSON,
-					src,
-				);
 				INFOPLIST_FILE = example/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1501,20 +1537,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = example/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "PH_USE_STOREKIT=1";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					Cache,
-					example,
-					JSON,
-					src,
-				);
 				INFOPLIST_FILE = example/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1526,6 +1558,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -1533,8 +1566,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "PH_UNIT_TESTING=1";
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = tests/Info.plist;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1546,6 +1581,7 @@
 				);
 				PRODUCT_NAME = "Unit Tests";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1557,13 +1593,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "PH_UNIT_TESTING=1";
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = tests/Info.plist;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1575,6 +1614,7 @@
 				);
 				PRODUCT_NAME = "Unit Tests";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
 			};
@@ -1585,6 +1625,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1596,6 +1637,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "example/Info-fixtures.plist";
 				PRODUCT_NAME = "Example (Fixtures)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1605,6 +1647,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = example/Prefix.pch;
@@ -1613,6 +1656,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "example/Info-fixtures.plist";
 				PRODUCT_NAME = "Example (Fixtures)";
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1636,6 +1680,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1656,6 +1701,7 @@
 					"PH_USE_STOREKIT=1",
 				);
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1681,6 +1727,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "PlayHaven-NoStoreKit";
@@ -1701,6 +1748,7 @@
 					PH_DONT_DISMISS_WHEN_BACKGROUNDED,
 				);
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "PlayHaven-NoStoreKit";
@@ -1728,6 +1776,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "PlayHaven-Safe";
@@ -1750,6 +1799,7 @@
 					"PH_USE_MAC_ADDRESS=0",
 				);
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "PlayHaven-Safe";
@@ -1778,6 +1828,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "PlayHaven-Safe_NoStoreKit";
@@ -1800,6 +1851,7 @@
 					"PH_USE_UNIQUE_IDENTIFIER=0",
 				);
 				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "PlayHaven-Safe_NoStoreKit";
@@ -1812,6 +1864,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1825,14 +1878,9 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					Cache,
-					example,
-					JSON,
-					src,
-				);
 				INFOPLIST_FILE = "Info-safe.plist";
 				PRODUCT_NAME = SafeExample;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1842,6 +1890,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = example/Prefix.pch;
@@ -1852,14 +1901,9 @@
 				);
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					Cache,
-					example,
-					JSON,
-					src,
-				);
 				INFOPLIST_FILE = "Info-safe.plist";
 				PRODUCT_NAME = SafeExample;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
