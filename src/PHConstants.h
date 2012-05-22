@@ -60,49 +60,6 @@
 #define PH_USE_STOREKIT 1
 #endif
 
-// PH_NAMESPACE_LIBS
-// The Unity3D plugin requires namespaced classes so that they may co-exist 
-// alongside libraries that use the same classes. However, source builds that are 
-// also using these classes should be able to use the existing implementations.
-#ifdef PH_NAMESPACE_LIBS
-#define PH_NAMESPACE_SBJSON 1
-#define PH_NAMESPACE_SDURLCACHE 1
-#define PH_NAMESPACE_OPENUDID 1
-#endif
-
-// PH_NAMESPACE_SBJSON
-// The Unity3D plugin requires namespaced SBJSON classes so that they may co-exist 
-// alongside libraries that use SBJSON. However, source builds that are also using 
-// SBJSON should be able to use the SBJSON classes already in their project. This 
-// allows the SDK to accommodate both.
-#ifndef PH_NAMESPACE_SBJSON
-#define PH_SBJSONBASE_CLASS SBJsonBase
-#define PH_SBJSONPARSER_CLASS SBJsonParser
-#define PH_SBJSONWRITER_CLASS SBJsonWriter
-#define PH_SBJSONERRORDOMAIN_CONST SBJSONErrorDomain
-#else
-#define PH_SBJSONBASE_CLASS SBJsonBasePH
-#define PH_SBJSONPARSER_CLASS SBJsonParserPH
-#define PH_SBJSONWRITER_CLASS SBJsonWriterPH
-#define PH_SBJSONERRORDOMAIN_CONST SBJSONErrorDomainPH
-#endif
-
-// PH_NAMESPACE_SDURLCACHE
-#ifndef PH_NAMESPACE_SDURLCACHE
-#define PH_SDURLCACHE_CLASS SDURLCache
-#define PH_SDCACHEDURLRESPONSE_CLASS SDCachedURLResponse
-#else
-#define PH_SDURLCACHE_CLASS SDURLCachePH
-#define PH_SDCACHEDURLRESPONSE_CLASS SDCachedURLResponsePH
-#endif
-
-// PH_NAMESPACE_OPENUDID
-#ifndef PH_NAMESPACE_OPENUDID
-#define PH_OPENUDID_CLASS OpenUDID
-#else
-#define PH_OPENUDID_CLASS OpenUDIDPH
-#endif
-
 
 // PH_USE_UNIQUE_IDENTIFIER
 // This will lead to rejection from the app store very soon, but will help PlayHaven

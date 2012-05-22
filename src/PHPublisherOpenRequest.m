@@ -8,7 +8,7 @@
 
 #import "PHPublisherOpenRequest.h"
 #import "PHConstants.h"
-#import "SDURLCache.h"
+#import "SDURLSDURLCache.h"
 #import "PHURLPrefetchOperation.h"
 
 #if PH_USE_OPENUDID == 1
@@ -86,11 +86,11 @@ NSString *getMACAddress(){
     
     if  (self == [PHPublisherOpenRequest class]){
         // Initializes pre-fetching and webview caching
-        PH_SDURLCACHE_CLASS *urlCache = [[PH_SDURLCACHE_CLASS alloc] initWithMemoryCapacity:PH_MAX_SIZE_MEMORY_CACHE
-                                                                 diskCapacity:PH_MAX_SIZE_FILESYSTEM_CACHE
-                                                                     diskPath:[PH_SDURLCACHE_CLASS defaultCachePath]];
-        [NSURLCache setSharedURLCache:urlCache];
-        [urlCache release];
+        SDURLCache *urlSDURLCache = [[SDURLCache alloc] initWithMemoryCapacity:PH_MAX_SIZE_MEMORY_SDURLCache
+                                                                 diskCapacity:PH_MAX_SIZE_FILESYSTEM_SDURLCache
+                                                                     diskPath:[SDURLCache defaultSDURLCachePath]];
+        [NSURLSDURLCache setSharedURLSDURLCache:urlSDURLCache];
+        [urlSDURLCache release];
     }
 }
 
@@ -113,7 +113,7 @@ NSString *getMACAddress(){
     }
     
 #if PH_USE_OPENUDID == 1
-        [additionalParameters setValue:[PH_OPENUDID_CLASS value] forKey:@"d_odid"];
+        [additionalParameters setValue:[OpenUDID value] forKey:@"d_odid"];
 #endif
 #if PH_USE_MAC_ADDRESS == 1
     if (![PHAPIRequest optOutStatus]) {
@@ -143,15 +143,15 @@ NSString *getMACAddress(){
     
     if ([responseData count] > 0){
         
-        NSString *cachePlist = [PHURLPrefetchOperation getCachePlistFile];
+        NSString *SDURLCachePlist = [PHURLPrefetchOperation getSDURLCachePlistFile];
         NSFileManager *fileManager = [[NSFileManager alloc] init];
-        if ([fileManager fileExistsAtPath:cachePlist]){
+        if ([fileManager fileExistsAtPath:SDURLCachePlist]){
             
-            [fileManager removeItemAtPath:cachePlist error:NULL];
+            [fileManager removeItemAtPath:SDURLCachePlist error:NULL];
         }
-        [responseData writeToFile:cachePlist atomically:YES];
+        [responseData writeToFile:SDURLCachePlist atomically:YES];
         
-        NSArray *urlArray = (NSArray *)[responseData valueForKey:@"precache"];
+        NSArray *urlArray = (NSArray *)[responseData valueForKey:@"preSDURLCache"];
         for (NSString *urlString in urlArray){
             
             NSURL *url = [NSURL URLWithString:urlString];
@@ -174,15 +174,15 @@ NSString *getMACAddress(){
     }
 }
 
-#pragma mark - Precache URL selectors
+#pragma mark - PreSDURLCache URL selectors
 
 -(void) downloadPrefetchURLs{
     
-    NSString *cachePlist = [PHURLPrefetchOperation getCachePlistFile];
-    if ([[[[NSFileManager alloc] init] autorelease] fileExistsAtPath:cachePlist]){
+    NSString *SDURLCachePlist = [PHURLPrefetchOperation getSDURLCachePlistFile];
+    if ([[[[NSFileManager alloc] init] autorelease] fileExistsAtPath:SDURLCachePlist]){
         
-        NSMutableDictionary *prefetchUrlDictionary = [[[NSMutableDictionary alloc] initWithContentsOfFile:cachePlist] autorelease];
-        NSArray *urlArray = (NSArray *)[prefetchUrlDictionary objectForKey:@"precache"];
+        NSMutableDictionary *prefetchUrlDictionary = [[[NSMutableDictionary alloc] initWithContentsOfFile:SDURLCachePlist] autorelease];
+        NSArray *urlArray = (NSArray *)[prefetchUrlDictionary objectForKey:@"preSDURLCache"];
         for (NSString *urlString in urlArray){
             
             NSURL *url = [NSURL URLWithString:urlString];
@@ -197,7 +197,7 @@ NSString *getMACAddress(){
     [self.prefetchOperations cancelAllOperations];
 }
 
--(void) clearPrefetchCache{
+-(void) clearPrefetchSDURLCache{
     
 }
 

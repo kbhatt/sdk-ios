@@ -297,7 +297,7 @@ static NSString *const kSessionPasteboard = @"com.playhaven.session";
     }
     
     NSString *responseString = [[NSString alloc] initWithData:_connectionData encoding:NSUTF8StringEncoding];    
-    PH_SBJSONPARSER_CLASS *parser = [[PH_SBJSONPARSER_CLASS alloc] init];
+    SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary* resultDictionary = [parser objectWithString:responseString];
     [parser release];
     [responseString release];

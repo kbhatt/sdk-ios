@@ -1,3 +1,5 @@
+This release is compatabile with CocoaPods.
+
 PlayHaven SDK 1.10.4
 ====================
 PlayHaven is a mobile game LTV-maximization platform to help you take control of the business of your games.

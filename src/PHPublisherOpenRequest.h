@@ -18,6 +18,6 @@
 
 -(void) downloadPrefetchURLs;
 -(void) cancelPrefetchDownload;
--(void) clearPrefetchCache;
+-(void) clearPrefetchSDURLCache;
 
 @end
