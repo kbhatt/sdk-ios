@@ -76,6 +76,134 @@
 		EA328B47151BF68B00DE3CAD /* PublisherOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA328B46151BF68B00DE3CAD /* PublisherOpenViewController.xib */; };
 		EA328B48151BF99400DE3CAD /* PublisherOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA328B46151BF68B00DE3CAD /* PublisherOpenViewController.xib */; };
 		EA328B49151BF9A000DE3CAD /* PublisherOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA328B46151BF68B00DE3CAD /* PublisherOpenViewController.xib */; };
+		EA32CE4B157842F6005DBAEE /* PHPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BD481914C0CC6300EE8A5A /* PHPurchase.m */; };
+		EA32CE4C157842F6005DBAEE /* PHUrlPrefetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D118AE5C14B78C3C00C76E2C /* PHUrlPrefetchOperation.m */; };
+		EA32CE4D157842F6005DBAEE /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E15B7B14981C39001241EE /* SDURLCache.m */; };
+		EA32CE4E157842F6005DBAEE /* PHPublisherMetadataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03810E13B26A1A00A31FF7 /* PHPublisherMetadataRequest.m */; };
+		EA32CE4F157842F6005DBAEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA12ABDF1365DBB700CB2F24 /* main.m */; };
+		EA32CE50157842F6005DBAEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA12ABE21365DBB700CB2F24 /* AppDelegate.m */; };
+		EA32CE51157842F6005DBAEE /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA12ABE81365DBB700CB2F24 /* RootViewController.m */; };
+		EA32CE52157842F6005DBAEE /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB44264134539F4000DA3E9 /* SBJsonBase.m */; };
+		EA32CE53157842F6005DBAEE /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB44266134539F4000DA3E9 /* SBJsonParser.m */; };
+		EA32CE54157842F6005DBAEE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB44268134539F4000DA3E9 /* SBJsonWriter.m */; };
+		EA32CE55157842F6005DBAEE /* NSObject+QueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC53A92134E5F7A00F2F956 /* NSObject+QueryComponents.m */; };
+		EA32CE56157842F6005DBAEE /* UIDevice+HardwareString.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4ABA0F135F859D0062AE77 /* UIDevice+HardwareString.m */; };
+		EA32CE57157842F6005DBAEE /* PHURLLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4C1910134E84D300755983 /* PHURLLoader.m */; };
+		EA32CE58157842F6005DBAEE /* PHAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA523DB21343F7BA0057DEA5 /* PHAPIRequest.m */; };
+		EA32CE59157842F6005DBAEE /* PHStringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA523D901343EE790057DEA5 /* PHStringUtil.m */; };
+		EA32CE5A157842F6005DBAEE /* PHContent.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB4429513454F34000DA3E9 /* PHContent.m */; };
+		EA32CE5B157842F6005DBAEE /* PHContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BB5DD13463C00007F95FA /* PHContentView.m */; };
+		EA32CE5C157842F6005DBAEE /* PHPublisherContentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAED519E134B949D00D0DCB6 /* PHPublisherContentRequest.m */; };
+		EA32CE5D157842F6005DBAEE /* PHPublisherOpenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA523D8E1343EE790057DEA5 /* PHPublisherOpenRequest.m */; };
+		EA32CE5E157842F6005DBAEE /* ExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA12AC3B13662AD700CB2F24 /* ExampleViewController.m */; };
+		EA32CE5F157842F6005DBAEE /* PublisherOpenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA12AC3E13662DC400CB2F24 /* PublisherOpenViewController.m */; };
+		EA32CE60157842F6005DBAEE /* PublisherContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA12AC441366339D00CB2F24 /* PublisherContentViewController.m */; };
+		EA32CE61157842F6005DBAEE /* PHPublisherSubContentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0F5FB1385D1120062B950 /* PHPublisherSubContentRequest.m */; };
+		EA32CE62157842F6005DBAEE /* PHNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03811513B272C400A31FF7 /* PHNotificationView.m */; };
+		EA32CE63157842F6005DBAEE /* PHNotificationRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03811A13B298AF00A31FF7 /* PHNotificationRenderer.m */; };
+		EA32CE64157842F6005DBAEE /* PHNotificationBadgeRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03811E13B2A0F200A31FF7 /* PHNotificationBadgeRenderer.m */; };
+		EA32CE65157842F6005DBAEE /* PHReward.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB2B44613CBD172006D2391 /* PHReward.m */; };
+		EA32CE66157842F6005DBAEE /* PHConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1799DF14200FAE005F286F /* PHConstants.m */; };
+		EA32CE67157842F6005DBAEE /* PHPublisherIAPTrackingRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA019C8014C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m */; };
+		EA32CE68157842F6005DBAEE /* PublisherIAPTrackingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFF5E7614F707A300E96C2C /* PublisherIAPTrackingViewController.m */; };
+		EA32CE69157842F6005DBAEE /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4AC25D15019C230069D264 /* IAPHelper.m */; };
+		EA32CE6A157842F6005DBAEE /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = EA06AA64151A812B00C11220 /* OpenUDID.m */; };
+		EA32CE6B157842F6005DBAEE /* PublisherCancelContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5FA4761542120600F1517A /* PublisherCancelContentViewController.m */; };
+		EA32CE6C157842F6005DBAEE /* PHNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */; };
+		EA32CE6D157842F6005DBAEE /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EA451029156298E80095538E /* SDCachedURLResponse.m */; };
+		EA32CE6F157842F6005DBAEE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA019C8514C102D4008FBCB1 /* StoreKit.framework */; };
+		EA32CE70157842F6005DBAEE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D175008D149193790037A036 /* CFNetwork.framework */; };
+		EA32CE71157842F6005DBAEE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABAA6971450ED640040B937 /* SystemConfiguration.framework */; };
+		EA32CE72157842F6005DBAEE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		EA32CE73157842F6005DBAEE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		EA32CE74157842F6005DBAEE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		EA32CE76157842F6005DBAEE /* PublisherOpenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA328B46151BF68B00DE3CAD /* PublisherOpenViewController.xib */; };
+		EA32CE77157842F6005DBAEE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA12ABDB1365DBB700CB2F24 /* InfoPlist.strings */; };
+		EA32CE78157842F6005DBAEE /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA12ABE41365DBB700CB2F24 /* MainWindow.xib */; };
+		EA32CE79157842F6005DBAEE /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA12ABEA1365DBB700CB2F24 /* RootViewController.xib */; };
+		EA32CE7A157842F6005DBAEE /* PublisherContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA50F3D21436426F0055EB3A /* PublisherContentViewController.xib */; };
+		EA32CE7B157842F6005DBAEE /* ExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABC1CE6143A770000638B09 /* ExampleViewController.xib */; };
+		EA32CE7C157842F6005DBAEE /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = EA2B07A014E9EBA60087A45F /* 512.png */; };
+		EA32CE7D157842F6005DBAEE /* PublisherIAPTrackingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFF5E7914F7082800E96C2C /* PublisherIAPTrackingViewController.xib */; };
+		EA32CE7E157842F6005DBAEE /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = EACFC89D1500328E007EF54F /* 57.png */; };
+		EA32CE7F157842F6005DBAEE /* 72.png in Resources */ = {isa = PBXBuildFile; fileRef = EACFC8A0150033A6007EF54F /* 72.png */; };
+		EA32CE80157842F6005DBAEE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EABC0C75152B8A3200441393 /* Settings.bundle */; };
+		EA32CEDF157843A2005DBAEE /* iphonesim in Resources */ = {isa = PBXBuildFile; fileRef = EA32CE8A157843A2005DBAEE /* iphonesim */; };
+		EA32CEE0157843A2005DBAEE /* COPYRIGHT in Resources */ = {isa = PBXBuildFile; fileRef = EA32CE8B157843A2005DBAEE /* COPYRIGHT */; };
+		EA32CEE1157843A2005DBAEE /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = EA32CE8D157843A2005DBAEE /* index.html */; };
+		EA32CEE3157843A2005DBAEE /* libFoneMonkeyWebView.5.5b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA32CE90157843A2005DBAEE /* libFoneMonkeyWebView.5.5b.a */; };
+		EA32CEE4157843A2005DBAEE /* FoneMonkeyRunner.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA32CE91157843A2005DBAEE /* FoneMonkeyRunner.plist */; };
+		EA32CEE5157843A2005DBAEE /* libFoneMonkey.5.5b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA32CE9A157843A2005DBAEE /* libFoneMonkey.5.5b.a */; };
+		EA32CEE7157843A2005DBAEE /* ReleaseNotes.html in Resources */ = {isa = PBXBuildFile; fileRef = EA32CE9C157843A2005DBAEE /* ReleaseNotes.html */; };
+		EA32CEE8157843A2005DBAEE /* FMClear.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CE9E157843A2005DBAEE /* FMClear.png */; };
+		EA32CEE9157843A2005DBAEE /* FMCommand.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CE9F157843A2005DBAEE /* FMCommand.png */; };
+		EA32CEEA157843A2005DBAEE /* FMCommandEditViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA0157843A2005DBAEE /* FMCommandEditViewController_iPad.xib */; };
+		EA32CEEB157843A2005DBAEE /* FMCommandEditViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA1157843A2005DBAEE /* FMCommandEditViewController_iPhone.xib */; };
+		EA32CEEC157843A2005DBAEE /* FMConsoleController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA2157843A2005DBAEE /* FMConsoleController_iPad.xib */; };
+		EA32CEED157843A2005DBAEE /* FMConsoleController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA3157843A2005DBAEE /* FMConsoleController_iPhone.xib */; };
+		EA32CEEE157843A2005DBAEE /* FMDataDrive.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA4157843A2005DBAEE /* FMDataDrive.png */; };
+		EA32CEEF157843A2005DBAEE /* FMDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA5157843A2005DBAEE /* FMDelete.png */; };
+		EA32CEF0157843A2005DBAEE /* FMEdit.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA6157843A2005DBAEE /* FMEdit.png */; };
+		EA32CEF1157843A2005DBAEE /* FMGetVariable.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA7157843A2005DBAEE /* FMGetVariable.png */; };
+		EA32CEF2157843A2005DBAEE /* FMGorilla_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA8157843A2005DBAEE /* FMGorilla_iPad.xib */; };
+		EA32CEF3157843A2005DBAEE /* FMGorilla_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEA9157843A2005DBAEE /* FMGorilla_iPhone.xib */; };
+		EA32CEF4157843A2005DBAEE /* FMGorillaView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEAA157843A2005DBAEE /* FMGorillaView_iPad.xib */; };
+		EA32CEF5157843A2005DBAEE /* FMGorillaView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEAB157843A2005DBAEE /* FMGorillaView_iPhone.xib */; };
+		EA32CEF6157843A2005DBAEE /* FMInputText.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEAC157843A2005DBAEE /* FMInputText.png */; };
+		EA32CEF7157843A2005DBAEE /* FMObjConnect.html in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEAD157843A2005DBAEE /* FMObjConnect.html */; };
+		EA32CEF8157843A2005DBAEE /* FMObjConnect.jslib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEAE157843A2005DBAEE /* FMObjConnect.jslib */; };
+		EA32CEF9157843A2005DBAEE /* FMOpenScriptDialog_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEAF157843A2005DBAEE /* FMOpenScriptDialog_iPad.xib */; };
+		EA32CEFA157843A2005DBAEE /* FMOpenScriptDialog_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB0157843A2005DBAEE /* FMOpenScriptDialog_iPhone.xib */; };
+		EA32CEFB157843A2005DBAEE /* FMPauseMovie.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB1157843A2005DBAEE /* FMPauseMovie.png */; };
+		EA32CEFC157843A2005DBAEE /* FMPlayMovie.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB2157843A2005DBAEE /* FMPlayMovie.png */; };
+		EA32CEFD157843A2005DBAEE /* FMQunitAPI.jslib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB3157843A2005DBAEE /* FMQunitAPI.jslib */; };
+		EA32CEFE157843A2005DBAEE /* FMReturn.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB4157843A2005DBAEE /* FMReturn.png */; };
+		EA32CEFF157843A2005DBAEE /* FMRotate.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB5157843A2005DBAEE /* FMRotate.png */; };
+		EA32CF00157843A2005DBAEE /* FMSaveScriptDialog_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB6157843A2005DBAEE /* FMSaveScriptDialog_iPad.xib */; };
+		EA32CF01157843A2005DBAEE /* FMSaveScriptDialog_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB7157843A2005DBAEE /* FMSaveScriptDialog_iPhone.xib */; };
+		EA32CF02157843A2005DBAEE /* FMTouch.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB8157843A2005DBAEE /* FMTouch.png */; };
+		EA32CF03157843A2005DBAEE /* FMWebDriver.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEB9157843A2005DBAEE /* FMWebDriver.png */; };
+		EA32CF04157843A2005DBAEE /* FoneMonkey.jslib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEBA157843A2005DBAEE /* FoneMonkey.jslib */; };
+		EA32CF05157843A2005DBAEE /* gorilla-32.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEBB157843A2005DBAEE /* gorilla-32.png */; };
+		EA32CF06157843A2005DBAEE /* gorillalogic.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEBC157843A2005DBAEE /* gorillalogic.png */; };
+		EA32CF07157843A2005DBAEE /* icon_arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEBD157843A2005DBAEE /* icon_arrow_down.png */; };
+		EA32CF08157843A2005DBAEE /* icon_arrow_up.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEBE157843A2005DBAEE /* icon_arrow_up.png */; };
+		EA32CF09157843A2005DBAEE /* icon_controls_3.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEBF157843A2005DBAEE /* icon_controls_3.png */; };
+		EA32CF0A157843A2005DBAEE /* icon_controls_4.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC0157843A2005DBAEE /* icon_controls_4.png */; };
+		EA32CF0B157843A2005DBAEE /* icon_filming.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC1157843A2005DBAEE /* icon_filming.png */; };
+		EA32CF0C157843A2005DBAEE /* icon_script.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC2157843A2005DBAEE /* icon_script.png */; };
+		EA32CF0D157843A2005DBAEE /* icon_timer.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC3157843A2005DBAEE /* icon_timer.png */; };
+		EA32CF0E157843A2005DBAEE /* jquery-latest.jslib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC4157843A2005DBAEE /* jquery-latest.jslib */; };
+		EA32CF0F157843A2005DBAEE /* Move.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC5157843A2005DBAEE /* Move.png */; };
+		EA32CF10157843A2005DBAEE /* objc.template in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC6157843A2005DBAEE /* objc.template */; };
+		EA32CF11157843A2005DBAEE /* optionsBg.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC7157843A2005DBAEE /* optionsBg.png */; };
+		EA32CF12157843A2005DBAEE /* optionsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC8157843A2005DBAEE /* optionsIcon.png */; };
+		EA32CF13157843A2005DBAEE /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEC9157843A2005DBAEE /* Pause.png */; };
+		EA32CF14157843A2005DBAEE /* qunit.css in Resources */ = {isa = PBXBuildFile; fileRef = EA32CECA157843A2005DBAEE /* qunit.css */; };
+		EA32CF15157843A2005DBAEE /* qunit.jslib in Resources */ = {isa = PBXBuildFile; fileRef = EA32CECB157843A2005DBAEE /* qunit.jslib */; };
+		EA32CF16157843A2005DBAEE /* qunit.template in Resources */ = {isa = PBXBuildFile; fileRef = EA32CECC157843A2005DBAEE /* qunit.template */; };
+		EA32CF17157843A2005DBAEE /* Scroll.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CECD157843A2005DBAEE /* Scroll.png */; };
+		EA32CF18157843A2005DBAEE /* ScrollDown.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CECE157843A2005DBAEE /* ScrollDown.png */; };
+		EA32CF19157843A2005DBAEE /* ScrollLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CECF157843A2005DBAEE /* ScrollLeft.png */; };
+		EA32CF1A157843A2005DBAEE /* ScrollRight.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED0157843A2005DBAEE /* ScrollRight.png */; };
+		EA32CF1B157843A2005DBAEE /* ScrollUp.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED1157843A2005DBAEE /* ScrollUp.png */; };
+		EA32CF1C157843A2005DBAEE /* Select.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED2157843A2005DBAEE /* Select.png */; };
+		EA32CF1D157843A2005DBAEE /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED3157843A2005DBAEE /* shadow.png */; };
+		EA32CF1E157843A2005DBAEE /* shadowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED4157843A2005DBAEE /* shadowUp.png */; };
+		EA32CF1F157843A2005DBAEE /* Shake.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED5157843A2005DBAEE /* Shake.png */; };
+		EA32CF20157843A2005DBAEE /* Slide.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED6157843A2005DBAEE /* Slide.png */; };
+		EA32CF21157843A2005DBAEE /* Switch.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED7157843A2005DBAEE /* Switch.png */; };
+		EA32CF22157843A2005DBAEE /* Tab.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED8157843A2005DBAEE /* Tab.png */; };
+		EA32CF23157843A2005DBAEE /* TouchLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CED9157843A2005DBAEE /* TouchLeft.png */; };
+		EA32CF24157843A2005DBAEE /* TouchRight.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEDA157843A2005DBAEE /* TouchRight.png */; };
+		EA32CF25157843A2005DBAEE /* uiautomation.template in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEDB157843A2005DBAEE /* uiautomation.template */; };
+		EA32CF26157843A2005DBAEE /* Verify.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEDC157843A2005DBAEE /* Verify.png */; };
+		EA32CF27157843A2005DBAEE /* VScroll.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEDD157843A2005DBAEE /* VScroll.png */; };
+		EA32CF28157843A2005DBAEE /* WaitFor.png in Resources */ = {isa = PBXBuildFile; fileRef = EA32CEDE157843A2005DBAEE /* WaitFor.png */; };
+		EA32CF29157843D2005DBAEE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB442A113455467000DA3E9 /* QuartzCore.framework */; };
+		EA32CF2E15784585005DBAEE /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA32CF2C157843FA005DBAEE /* libxml2.dylib */; };
+		EA32CF301578458F005DBAEE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA32CF2F1578458F005DBAEE /* CoreLocation.framework */; };
+		EA32CF321578459E005DBAEE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA32CF311578459E005DBAEE /* libsqlite3.dylib */; };
 		EA45102B156298E80095538E /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EA451029156298E80095538E /* SDCachedURLResponse.m */; };
 		EA45102C156298E80095538E /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EA451029156298E80095538E /* SDCachedURLResponse.m */; };
 		EA45102D156298E80095538E /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EA451029156298E80095538E /* SDCachedURLResponse.m */; };
@@ -469,6 +597,92 @@
 		EA328B46151BF68B00DE3CAD /* PublisherOpenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublisherOpenViewController.xib; sourceTree = "<group>"; };
 		EA328B82151BFAF600DE3CAD /* Info-udid.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-udid.plist"; path = "/Users/jesus/Workspace/playhaven/sdk-ios/Info-udid.plist"; sourceTree = "<absolute>"; };
 		EA328BBB151BFC9B00DE3CAD /* Info-mac.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-mac.plist"; path = "/Users/jesus/Workspace/playhaven/sdk-ios/Info-mac.plist"; sourceTree = "<absolute>"; };
+		EA32CE84157842F6005DBAEE /* MonkeyExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonkeyExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA32CE86157842F7005DBAEE /* Info-monkey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-monkey.plist"; path = "/Users/jesus/Workspace/playhaven/sdk-ios/Info-monkey.plist"; sourceTree = "<absolute>"; };
+		EA32CE8A157843A2005DBAEE /* iphonesim */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iphonesim; sourceTree = "<group>"; };
+		EA32CE8B157843A2005DBAEE /* COPYRIGHT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYRIGHT; sourceTree = "<group>"; };
+		EA32CE8D157843A2005DBAEE /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		EA32CE8F157843A2005DBAEE /* libFoneMonkeyMediaPlayer.5.5b.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFoneMonkeyMediaPlayer.5.5b.a; sourceTree = "<group>"; };
+		EA32CE90157843A2005DBAEE /* libFoneMonkeyWebView.5.5b.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFoneMonkeyWebView.5.5b.a; sourceTree = "<group>"; };
+		EA32CE91157843A2005DBAEE /* FoneMonkeyRunner.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FoneMonkeyRunner.plist; sourceTree = "<group>"; };
+		EA32CE93157843A2005DBAEE /* FMCommandEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCommandEvent.h; sourceTree = "<group>"; };
+		EA32CE94157843A2005DBAEE /* FoneMonkey+OCUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FoneMonkey+OCUnit.h"; sourceTree = "<group>"; };
+		EA32CE95157843A2005DBAEE /* FoneMonkeyAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoneMonkeyAPI.h; sourceTree = "<group>"; };
+		EA32CE96157843A2005DBAEE /* TouchSynthesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSynthesis.h; sourceTree = "<group>"; };
+		EA32CE97157843A2005DBAEE /* UIControl+FMready.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+FMready.h"; sourceTree = "<group>"; };
+		EA32CE98157843A2005DBAEE /* UIView+FMReady.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FMReady.h"; sourceTree = "<group>"; };
+		EA32CE9A157843A2005DBAEE /* libFoneMonkey.5.5b.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFoneMonkey.5.5b.a; sourceTree = "<group>"; };
+		EA32CE9B157843A2005DBAEE /* libFoneMonkeyOCUnit.5.5b.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFoneMonkeyOCUnit.5.5b.a; sourceTree = "<group>"; };
+		EA32CE9C157843A2005DBAEE /* ReleaseNotes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ReleaseNotes.html; sourceTree = "<group>"; };
+		EA32CE9E157843A2005DBAEE /* FMClear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMClear.png; sourceTree = "<group>"; };
+		EA32CE9F157843A2005DBAEE /* FMCommand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMCommand.png; sourceTree = "<group>"; };
+		EA32CEA0157843A2005DBAEE /* FMCommandEditViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMCommandEditViewController_iPad.xib; sourceTree = "<group>"; };
+		EA32CEA1157843A2005DBAEE /* FMCommandEditViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMCommandEditViewController_iPhone.xib; sourceTree = "<group>"; };
+		EA32CEA2157843A2005DBAEE /* FMConsoleController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMConsoleController_iPad.xib; sourceTree = "<group>"; };
+		EA32CEA3157843A2005DBAEE /* FMConsoleController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMConsoleController_iPhone.xib; sourceTree = "<group>"; };
+		EA32CEA4157843A2005DBAEE /* FMDataDrive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMDataDrive.png; sourceTree = "<group>"; };
+		EA32CEA5157843A2005DBAEE /* FMDelete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMDelete.png; sourceTree = "<group>"; };
+		EA32CEA6157843A2005DBAEE /* FMEdit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMEdit.png; sourceTree = "<group>"; };
+		EA32CEA7157843A2005DBAEE /* FMGetVariable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMGetVariable.png; sourceTree = "<group>"; };
+		EA32CEA8157843A2005DBAEE /* FMGorilla_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMGorilla_iPad.xib; sourceTree = "<group>"; };
+		EA32CEA9157843A2005DBAEE /* FMGorilla_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMGorilla_iPhone.xib; sourceTree = "<group>"; };
+		EA32CEAA157843A2005DBAEE /* FMGorillaView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMGorillaView_iPad.xib; sourceTree = "<group>"; };
+		EA32CEAB157843A2005DBAEE /* FMGorillaView_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMGorillaView_iPhone.xib; sourceTree = "<group>"; };
+		EA32CEAC157843A2005DBAEE /* FMInputText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMInputText.png; sourceTree = "<group>"; };
+		EA32CEAD157843A2005DBAEE /* FMObjConnect.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FMObjConnect.html; sourceTree = "<group>"; };
+		EA32CEAE157843A2005DBAEE /* FMObjConnect.jslib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FMObjConnect.jslib; sourceTree = "<group>"; };
+		EA32CEAF157843A2005DBAEE /* FMOpenScriptDialog_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMOpenScriptDialog_iPad.xib; sourceTree = "<group>"; };
+		EA32CEB0157843A2005DBAEE /* FMOpenScriptDialog_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMOpenScriptDialog_iPhone.xib; sourceTree = "<group>"; };
+		EA32CEB1157843A2005DBAEE /* FMPauseMovie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMPauseMovie.png; sourceTree = "<group>"; };
+		EA32CEB2157843A2005DBAEE /* FMPlayMovie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMPlayMovie.png; sourceTree = "<group>"; };
+		EA32CEB3157843A2005DBAEE /* FMQunitAPI.jslib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FMQunitAPI.jslib; sourceTree = "<group>"; };
+		EA32CEB4157843A2005DBAEE /* FMReturn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMReturn.png; sourceTree = "<group>"; };
+		EA32CEB5157843A2005DBAEE /* FMRotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMRotate.png; sourceTree = "<group>"; };
+		EA32CEB6157843A2005DBAEE /* FMSaveScriptDialog_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMSaveScriptDialog_iPad.xib; sourceTree = "<group>"; };
+		EA32CEB7157843A2005DBAEE /* FMSaveScriptDialog_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMSaveScriptDialog_iPhone.xib; sourceTree = "<group>"; };
+		EA32CEB8157843A2005DBAEE /* FMTouch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMTouch.png; sourceTree = "<group>"; };
+		EA32CEB9157843A2005DBAEE /* FMWebDriver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMWebDriver.png; sourceTree = "<group>"; };
+		EA32CEBA157843A2005DBAEE /* FoneMonkey.jslib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FoneMonkey.jslib; sourceTree = "<group>"; };
+		EA32CEBB157843A2005DBAEE /* gorilla-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gorilla-32.png"; sourceTree = "<group>"; };
+		EA32CEBC157843A2005DBAEE /* gorillalogic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gorillalogic.png; sourceTree = "<group>"; };
+		EA32CEBD157843A2005DBAEE /* icon_arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_down.png; sourceTree = "<group>"; };
+		EA32CEBE157843A2005DBAEE /* icon_arrow_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_up.png; sourceTree = "<group>"; };
+		EA32CEBF157843A2005DBAEE /* icon_controls_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_controls_3.png; sourceTree = "<group>"; };
+		EA32CEC0157843A2005DBAEE /* icon_controls_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_controls_4.png; sourceTree = "<group>"; };
+		EA32CEC1157843A2005DBAEE /* icon_filming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_filming.png; sourceTree = "<group>"; };
+		EA32CEC2157843A2005DBAEE /* icon_script.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_script.png; sourceTree = "<group>"; };
+		EA32CEC3157843A2005DBAEE /* icon_timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_timer.png; sourceTree = "<group>"; };
+		EA32CEC4157843A2005DBAEE /* jquery-latest.jslib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "jquery-latest.jslib"; sourceTree = "<group>"; };
+		EA32CEC5157843A2005DBAEE /* Move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Move.png; sourceTree = "<group>"; };
+		EA32CEC6157843A2005DBAEE /* objc.template */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = objc.template; sourceTree = "<group>"; };
+		EA32CEC7157843A2005DBAEE /* optionsBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = optionsBg.png; sourceTree = "<group>"; };
+		EA32CEC8157843A2005DBAEE /* optionsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = optionsIcon.png; sourceTree = "<group>"; };
+		EA32CEC9157843A2005DBAEE /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
+		EA32CECA157843A2005DBAEE /* qunit.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = qunit.css; sourceTree = "<group>"; };
+		EA32CECB157843A2005DBAEE /* qunit.jslib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = qunit.jslib; sourceTree = "<group>"; };
+		EA32CECC157843A2005DBAEE /* qunit.template */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = qunit.template; sourceTree = "<group>"; };
+		EA32CECD157843A2005DBAEE /* Scroll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Scroll.png; sourceTree = "<group>"; };
+		EA32CECE157843A2005DBAEE /* ScrollDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScrollDown.png; sourceTree = "<group>"; };
+		EA32CECF157843A2005DBAEE /* ScrollLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScrollLeft.png; sourceTree = "<group>"; };
+		EA32CED0157843A2005DBAEE /* ScrollRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScrollRight.png; sourceTree = "<group>"; };
+		EA32CED1157843A2005DBAEE /* ScrollUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScrollUp.png; sourceTree = "<group>"; };
+		EA32CED2157843A2005DBAEE /* Select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Select.png; sourceTree = "<group>"; };
+		EA32CED3157843A2005DBAEE /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		EA32CED4157843A2005DBAEE /* shadowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadowUp.png; sourceTree = "<group>"; };
+		EA32CED5157843A2005DBAEE /* Shake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shake.png; sourceTree = "<group>"; };
+		EA32CED6157843A2005DBAEE /* Slide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slide.png; sourceTree = "<group>"; };
+		EA32CED7157843A2005DBAEE /* Switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Switch.png; sourceTree = "<group>"; };
+		EA32CED8157843A2005DBAEE /* Tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tab.png; sourceTree = "<group>"; };
+		EA32CED9157843A2005DBAEE /* TouchLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TouchLeft.png; sourceTree = "<group>"; };
+		EA32CEDA157843A2005DBAEE /* TouchRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TouchRight.png; sourceTree = "<group>"; };
+		EA32CEDB157843A2005DBAEE /* uiautomation.template */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = uiautomation.template; sourceTree = "<group>"; };
+		EA32CEDC157843A2005DBAEE /* Verify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Verify.png; sourceTree = "<group>"; };
+		EA32CEDD157843A2005DBAEE /* VScroll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VScroll.png; sourceTree = "<group>"; };
+		EA32CEDE157843A2005DBAEE /* WaitFor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaitFor.png; sourceTree = "<group>"; };
+		EA32CF2A157843EF005DBAEE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		EA32CF2C157843FA005DBAEE /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		EA32CF2F1578458F005DBAEE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EA32CF311578459E005DBAEE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EA451029156298E80095538E /* SDCachedURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCachedURLResponse.m; sourceTree = "<group>"; };
 		EA45102A156298E80095538E /* SDCachedURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCachedURLResponse.h; sourceTree = "<group>"; };
 		EA4ABA0E135F859D0062AE77 /* UIDevice+HardwareString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+HardwareString.h"; sourceTree = "<group>"; };
@@ -568,6 +782,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EA32CE6E157842F6005DBAEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA32CF321578459E005DBAEE /* libsqlite3.dylib in Frameworks */,
+				EA32CF301578458F005DBAEE /* CoreLocation.framework in Frameworks */,
+				EA32CF2E15784585005DBAEE /* libxml2.dylib in Frameworks */,
+				EA32CF29157843D2005DBAEE /* QuartzCore.framework in Frameworks */,
+				EA32CE6F157842F6005DBAEE /* StoreKit.framework in Frameworks */,
+				EA32CE70157842F6005DBAEE /* CFNetwork.framework in Frameworks */,
+				EA32CE71157842F6005DBAEE /* SystemConfiguration.framework in Frameworks */,
+				EA32CE72157842F6005DBAEE /* UIKit.framework in Frameworks */,
+				EA32CE73157842F6005DBAEE /* Foundation.framework in Frameworks */,
+				EA32CE74157842F6005DBAEE /* CoreGraphics.framework in Frameworks */,
+				EA32CEE3157843A2005DBAEE /* libFoneMonkeyWebView.5.5b.a in Frameworks */,
+				EA32CEE5157843A2005DBAEE /* libFoneMonkey.5.5b.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA86C7DC14D9E75600CB1551 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -640,6 +873,7 @@
 				EAF168671534E2DE006B6993 /* libPlayHaven-Safe.a */,
 				EAF168A21534E34F006B6993 /* libPlayHaven-Safe_NoStoreKit.a */,
 				EAF168DB1534E59C006B6993 /* SafeExample.app */,
+				EA32CE84157842F6005DBAEE /* MonkeyExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -647,6 +881,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				EA32CF311578459E005DBAEE /* libsqlite3.dylib */,
+				EA32CF2F1578458F005DBAEE /* CoreLocation.framework */,
+				EA32CE88157843A2005DBAEE /* FoneMonkey */,
 				EA328B2F151A9D4400DE3CAD /* README.markdown */,
 				EABC0C87152BD08200441393 /* PlayHaven_SDK_Agreement.rtf */,
 				EA86C7F014D9E77D00CB1551 /* WaterWorks */,
@@ -662,6 +899,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA32CF2C157843FA005DBAEE /* libxml2.dylib */,
+				EA32CF2A157843EF005DBAEE /* SenTestingKit.framework */,
 				EA019C8514C102D4008FBCB1 /* StoreKit.framework */,
 				D175008D149193790037A036 /* CFNetwork.framework */,
 				EABAA6971450ED640040B937 /* SystemConfiguration.framework */,
@@ -757,6 +996,7 @@
 				EABC0C7B152B8A6500441393 /* Prefix.pch */,
 				EABC0C75152B8A3200441393 /* Settings.bundle */,
 				EA8C313614DC9F710075B473 /* Info-fixtures.plist */,
+				EA32CE86157842F7005DBAEE /* Info-monkey.plist */,
 				EAF168DD1534E59C006B6993 /* Info-safe.plist */,
 				EA328B82151BFAF600DE3CAD /* Info-udid.plist */,
 				EA328BBB151BFC9B00DE3CAD /* Info-mac.plist */,
@@ -792,6 +1032,141 @@
 				EA2B07A214E9EBA60087A45F /* 512.png */,
 			);
 			path = light;
+			sourceTree = "<group>";
+		};
+		EA32CE88157843A2005DBAEE /* FoneMonkey */ = {
+			isa = PBXGroup;
+			children = (
+				EA32CE89157843A2005DBAEE /* bin */,
+				EA32CE8B157843A2005DBAEE /* COPYRIGHT */,
+				EA32CE8C157843A2005DBAEE /* docs */,
+				EA32CE8E157843A2005DBAEE /* extralibs */,
+				EA32CE91157843A2005DBAEE /* FoneMonkeyRunner.plist */,
+				EA32CE92157843A2005DBAEE /* include */,
+				EA32CE99157843A2005DBAEE /* lib */,
+				EA32CE9C157843A2005DBAEE /* ReleaseNotes.html */,
+				EA32CE9D157843A2005DBAEE /* resources */,
+			);
+			path = FoneMonkey;
+			sourceTree = "<group>";
+		};
+		EA32CE89157843A2005DBAEE /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				EA32CE8A157843A2005DBAEE /* iphonesim */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		EA32CE8C157843A2005DBAEE /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				EA32CE8D157843A2005DBAEE /* index.html */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		EA32CE8E157843A2005DBAEE /* extralibs */ = {
+			isa = PBXGroup;
+			children = (
+				EA32CE8F157843A2005DBAEE /* libFoneMonkeyMediaPlayer.5.5b.a */,
+				EA32CE90157843A2005DBAEE /* libFoneMonkeyWebView.5.5b.a */,
+			);
+			path = extralibs;
+			sourceTree = "<group>";
+		};
+		EA32CE92157843A2005DBAEE /* include */ = {
+			isa = PBXGroup;
+			children = (
+				EA32CE93157843A2005DBAEE /* FMCommandEvent.h */,
+				EA32CE94157843A2005DBAEE /* FoneMonkey+OCUnit.h */,
+				EA32CE95157843A2005DBAEE /* FoneMonkeyAPI.h */,
+				EA32CE96157843A2005DBAEE /* TouchSynthesis.h */,
+				EA32CE97157843A2005DBAEE /* UIControl+FMready.h */,
+				EA32CE98157843A2005DBAEE /* UIView+FMReady.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		EA32CE99157843A2005DBAEE /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				EA32CE9A157843A2005DBAEE /* libFoneMonkey.5.5b.a */,
+				EA32CE9B157843A2005DBAEE /* libFoneMonkeyOCUnit.5.5b.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		EA32CE9D157843A2005DBAEE /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA32CE9E157843A2005DBAEE /* FMClear.png */,
+				EA32CE9F157843A2005DBAEE /* FMCommand.png */,
+				EA32CEA0157843A2005DBAEE /* FMCommandEditViewController_iPad.xib */,
+				EA32CEA1157843A2005DBAEE /* FMCommandEditViewController_iPhone.xib */,
+				EA32CEA2157843A2005DBAEE /* FMConsoleController_iPad.xib */,
+				EA32CEA3157843A2005DBAEE /* FMConsoleController_iPhone.xib */,
+				EA32CEA4157843A2005DBAEE /* FMDataDrive.png */,
+				EA32CEA5157843A2005DBAEE /* FMDelete.png */,
+				EA32CEA6157843A2005DBAEE /* FMEdit.png */,
+				EA32CEA7157843A2005DBAEE /* FMGetVariable.png */,
+				EA32CEA8157843A2005DBAEE /* FMGorilla_iPad.xib */,
+				EA32CEA9157843A2005DBAEE /* FMGorilla_iPhone.xib */,
+				EA32CEAA157843A2005DBAEE /* FMGorillaView_iPad.xib */,
+				EA32CEAB157843A2005DBAEE /* FMGorillaView_iPhone.xib */,
+				EA32CEAC157843A2005DBAEE /* FMInputText.png */,
+				EA32CEAD157843A2005DBAEE /* FMObjConnect.html */,
+				EA32CEAE157843A2005DBAEE /* FMObjConnect.jslib */,
+				EA32CEAF157843A2005DBAEE /* FMOpenScriptDialog_iPad.xib */,
+				EA32CEB0157843A2005DBAEE /* FMOpenScriptDialog_iPhone.xib */,
+				EA32CEB1157843A2005DBAEE /* FMPauseMovie.png */,
+				EA32CEB2157843A2005DBAEE /* FMPlayMovie.png */,
+				EA32CEB3157843A2005DBAEE /* FMQunitAPI.jslib */,
+				EA32CEB4157843A2005DBAEE /* FMReturn.png */,
+				EA32CEB5157843A2005DBAEE /* FMRotate.png */,
+				EA32CEB6157843A2005DBAEE /* FMSaveScriptDialog_iPad.xib */,
+				EA32CEB7157843A2005DBAEE /* FMSaveScriptDialog_iPhone.xib */,
+				EA32CEB8157843A2005DBAEE /* FMTouch.png */,
+				EA32CEB9157843A2005DBAEE /* FMWebDriver.png */,
+				EA32CEBA157843A2005DBAEE /* FoneMonkey.jslib */,
+				EA32CEBB157843A2005DBAEE /* gorilla-32.png */,
+				EA32CEBC157843A2005DBAEE /* gorillalogic.png */,
+				EA32CEBD157843A2005DBAEE /* icon_arrow_down.png */,
+				EA32CEBE157843A2005DBAEE /* icon_arrow_up.png */,
+				EA32CEBF157843A2005DBAEE /* icon_controls_3.png */,
+				EA32CEC0157843A2005DBAEE /* icon_controls_4.png */,
+				EA32CEC1157843A2005DBAEE /* icon_filming.png */,
+				EA32CEC2157843A2005DBAEE /* icon_script.png */,
+				EA32CEC3157843A2005DBAEE /* icon_timer.png */,
+				EA32CEC4157843A2005DBAEE /* jquery-latest.jslib */,
+				EA32CEC5157843A2005DBAEE /* Move.png */,
+				EA32CEC6157843A2005DBAEE /* objc.template */,
+				EA32CEC7157843A2005DBAEE /* optionsBg.png */,
+				EA32CEC8157843A2005DBAEE /* optionsIcon.png */,
+				EA32CEC9157843A2005DBAEE /* Pause.png */,
+				EA32CECA157843A2005DBAEE /* qunit.css */,
+				EA32CECB157843A2005DBAEE /* qunit.jslib */,
+				EA32CECC157843A2005DBAEE /* qunit.template */,
+				EA32CECD157843A2005DBAEE /* Scroll.png */,
+				EA32CECE157843A2005DBAEE /* ScrollDown.png */,
+				EA32CECF157843A2005DBAEE /* ScrollLeft.png */,
+				EA32CED0157843A2005DBAEE /* ScrollRight.png */,
+				EA32CED1157843A2005DBAEE /* ScrollUp.png */,
+				EA32CED2157843A2005DBAEE /* Select.png */,
+				EA32CED3157843A2005DBAEE /* shadow.png */,
+				EA32CED4157843A2005DBAEE /* shadowUp.png */,
+				EA32CED5157843A2005DBAEE /* Shake.png */,
+				EA32CED6157843A2005DBAEE /* Slide.png */,
+				EA32CED7157843A2005DBAEE /* Switch.png */,
+				EA32CED8157843A2005DBAEE /* Tab.png */,
+				EA32CED9157843A2005DBAEE /* TouchLeft.png */,
+				EA32CEDA157843A2005DBAEE /* TouchRight.png */,
+				EA32CEDB157843A2005DBAEE /* uiautomation.template */,
+				EA32CEDC157843A2005DBAEE /* Verify.png */,
+				EA32CEDD157843A2005DBAEE /* VScroll.png */,
+				EA32CEDE157843A2005DBAEE /* WaitFor.png */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 		EA523D891343EE670057DEA5 /* tests */ = {
@@ -1093,6 +1468,23 @@
 			productReference = EA14C6611342604000E228E0 /* Unit Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		EA32CE49157842F6005DBAEE /* Example (Monkey) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA32CE81157842F6005DBAEE /* Build configuration list for PBXNativeTarget "Example (Monkey)" */;
+			buildPhases = (
+				EA32CE4A157842F6005DBAEE /* Sources */,
+				EA32CE6E157842F6005DBAEE /* Frameworks */,
+				EA32CE75157842F6005DBAEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Example (Monkey)";
+			productName = example;
+			productReference = EA32CE84157842F6005DBAEE /* MonkeyExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EA86C7BD14D9E75600CB1551 /* Example (Fixtures) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA86C7E914D9E75600CB1551 /* Build configuration list for PBXNativeTarget "Example (Fixtures)" */;
@@ -1226,6 +1618,7 @@
 				EAB6A37814EED62D00EAC692 /* PlayHaven NoStoreKit */,
 				EAF168321534E2DE006B6993 /* PlayHaven Safe */,
 				EAF168691534E34F006B6993 /* PlayHaven Safe NoStoreKit */,
+				EA32CE49157842F6005DBAEE /* Example (Monkey) */,
 			);
 		};
 /* End PBXProject section */
@@ -1256,6 +1649,94 @@
 				EA8C313314DC791B0075B473 /* content-subcontent.json in Resources */,
 				EA328B30151A9D4400DE3CAD /* README.markdown in Resources */,
 				EA328B47151BF68B00DE3CAD /* PublisherOpenViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA32CE75157842F6005DBAEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA32CE76157842F6005DBAEE /* PublisherOpenViewController.xib in Resources */,
+				EA32CE77157842F6005DBAEE /* InfoPlist.strings in Resources */,
+				EA32CE78157842F6005DBAEE /* MainWindow.xib in Resources */,
+				EA32CE79157842F6005DBAEE /* RootViewController.xib in Resources */,
+				EA32CE7A157842F6005DBAEE /* PublisherContentViewController.xib in Resources */,
+				EA32CE7B157842F6005DBAEE /* ExampleViewController.xib in Resources */,
+				EA32CE7C157842F6005DBAEE /* 512.png in Resources */,
+				EA32CE7D157842F6005DBAEE /* PublisherIAPTrackingViewController.xib in Resources */,
+				EA32CE7E157842F6005DBAEE /* 57.png in Resources */,
+				EA32CE7F157842F6005DBAEE /* 72.png in Resources */,
+				EA32CE80157842F6005DBAEE /* Settings.bundle in Resources */,
+				EA32CEDF157843A2005DBAEE /* iphonesim in Resources */,
+				EA32CEE0157843A2005DBAEE /* COPYRIGHT in Resources */,
+				EA32CEE1157843A2005DBAEE /* index.html in Resources */,
+				EA32CEE4157843A2005DBAEE /* FoneMonkeyRunner.plist in Resources */,
+				EA32CEE7157843A2005DBAEE /* ReleaseNotes.html in Resources */,
+				EA32CEE8157843A2005DBAEE /* FMClear.png in Resources */,
+				EA32CEE9157843A2005DBAEE /* FMCommand.png in Resources */,
+				EA32CEEA157843A2005DBAEE /* FMCommandEditViewController_iPad.xib in Resources */,
+				EA32CEEB157843A2005DBAEE /* FMCommandEditViewController_iPhone.xib in Resources */,
+				EA32CEEC157843A2005DBAEE /* FMConsoleController_iPad.xib in Resources */,
+				EA32CEED157843A2005DBAEE /* FMConsoleController_iPhone.xib in Resources */,
+				EA32CEEE157843A2005DBAEE /* FMDataDrive.png in Resources */,
+				EA32CEEF157843A2005DBAEE /* FMDelete.png in Resources */,
+				EA32CEF0157843A2005DBAEE /* FMEdit.png in Resources */,
+				EA32CEF1157843A2005DBAEE /* FMGetVariable.png in Resources */,
+				EA32CEF2157843A2005DBAEE /* FMGorilla_iPad.xib in Resources */,
+				EA32CEF3157843A2005DBAEE /* FMGorilla_iPhone.xib in Resources */,
+				EA32CEF4157843A2005DBAEE /* FMGorillaView_iPad.xib in Resources */,
+				EA32CEF5157843A2005DBAEE /* FMGorillaView_iPhone.xib in Resources */,
+				EA32CEF6157843A2005DBAEE /* FMInputText.png in Resources */,
+				EA32CEF7157843A2005DBAEE /* FMObjConnect.html in Resources */,
+				EA32CEF8157843A2005DBAEE /* FMObjConnect.jslib in Resources */,
+				EA32CEF9157843A2005DBAEE /* FMOpenScriptDialog_iPad.xib in Resources */,
+				EA32CEFA157843A2005DBAEE /* FMOpenScriptDialog_iPhone.xib in Resources */,
+				EA32CEFB157843A2005DBAEE /* FMPauseMovie.png in Resources */,
+				EA32CEFC157843A2005DBAEE /* FMPlayMovie.png in Resources */,
+				EA32CEFD157843A2005DBAEE /* FMQunitAPI.jslib in Resources */,
+				EA32CEFE157843A2005DBAEE /* FMReturn.png in Resources */,
+				EA32CEFF157843A2005DBAEE /* FMRotate.png in Resources */,
+				EA32CF00157843A2005DBAEE /* FMSaveScriptDialog_iPad.xib in Resources */,
+				EA32CF01157843A2005DBAEE /* FMSaveScriptDialog_iPhone.xib in Resources */,
+				EA32CF02157843A2005DBAEE /* FMTouch.png in Resources */,
+				EA32CF03157843A2005DBAEE /* FMWebDriver.png in Resources */,
+				EA32CF04157843A2005DBAEE /* FoneMonkey.jslib in Resources */,
+				EA32CF05157843A2005DBAEE /* gorilla-32.png in Resources */,
+				EA32CF06157843A2005DBAEE /* gorillalogic.png in Resources */,
+				EA32CF07157843A2005DBAEE /* icon_arrow_down.png in Resources */,
+				EA32CF08157843A2005DBAEE /* icon_arrow_up.png in Resources */,
+				EA32CF09157843A2005DBAEE /* icon_controls_3.png in Resources */,
+				EA32CF0A157843A2005DBAEE /* icon_controls_4.png in Resources */,
+				EA32CF0B157843A2005DBAEE /* icon_filming.png in Resources */,
+				EA32CF0C157843A2005DBAEE /* icon_script.png in Resources */,
+				EA32CF0D157843A2005DBAEE /* icon_timer.png in Resources */,
+				EA32CF0E157843A2005DBAEE /* jquery-latest.jslib in Resources */,
+				EA32CF0F157843A2005DBAEE /* Move.png in Resources */,
+				EA32CF10157843A2005DBAEE /* objc.template in Resources */,
+				EA32CF11157843A2005DBAEE /* optionsBg.png in Resources */,
+				EA32CF12157843A2005DBAEE /* optionsIcon.png in Resources */,
+				EA32CF13157843A2005DBAEE /* Pause.png in Resources */,
+				EA32CF14157843A2005DBAEE /* qunit.css in Resources */,
+				EA32CF15157843A2005DBAEE /* qunit.jslib in Resources */,
+				EA32CF16157843A2005DBAEE /* qunit.template in Resources */,
+				EA32CF17157843A2005DBAEE /* Scroll.png in Resources */,
+				EA32CF18157843A2005DBAEE /* ScrollDown.png in Resources */,
+				EA32CF19157843A2005DBAEE /* ScrollLeft.png in Resources */,
+				EA32CF1A157843A2005DBAEE /* ScrollRight.png in Resources */,
+				EA32CF1B157843A2005DBAEE /* ScrollUp.png in Resources */,
+				EA32CF1C157843A2005DBAEE /* Select.png in Resources */,
+				EA32CF1D157843A2005DBAEE /* shadow.png in Resources */,
+				EA32CF1E157843A2005DBAEE /* shadowUp.png in Resources */,
+				EA32CF1F157843A2005DBAEE /* Shake.png in Resources */,
+				EA32CF20157843A2005DBAEE /* Slide.png in Resources */,
+				EA32CF21157843A2005DBAEE /* Switch.png in Resources */,
+				EA32CF22157843A2005DBAEE /* Tab.png in Resources */,
+				EA32CF23157843A2005DBAEE /* TouchLeft.png in Resources */,
+				EA32CF24157843A2005DBAEE /* TouchRight.png in Resources */,
+				EA32CF25157843A2005DBAEE /* uiautomation.template in Resources */,
+				EA32CF26157843A2005DBAEE /* Verify.png in Resources */,
+				EA32CF27157843A2005DBAEE /* VScroll.png in Resources */,
+				EA32CF28157843A2005DBAEE /* WaitFor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1397,6 +1878,48 @@
 				EA24FCAC1554510D0074FC13 /* PHNetworkUtil.m in Sources */,
 				EA45102B156298E80095538E /* SDCachedURLResponse.m in Sources */,
 				EA7CF59D156C365C0095572E /* PlayHavenTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA32CE4A157842F6005DBAEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA32CE4B157842F6005DBAEE /* PHPurchase.m in Sources */,
+				EA32CE4C157842F6005DBAEE /* PHUrlPrefetchOperation.m in Sources */,
+				EA32CE4D157842F6005DBAEE /* SDURLCache.m in Sources */,
+				EA32CE4E157842F6005DBAEE /* PHPublisherMetadataRequest.m in Sources */,
+				EA32CE4F157842F6005DBAEE /* main.m in Sources */,
+				EA32CE50157842F6005DBAEE /* AppDelegate.m in Sources */,
+				EA32CE51157842F6005DBAEE /* RootViewController.m in Sources */,
+				EA32CE52157842F6005DBAEE /* SBJsonBase.m in Sources */,
+				EA32CE53157842F6005DBAEE /* SBJsonParser.m in Sources */,
+				EA32CE54157842F6005DBAEE /* SBJsonWriter.m in Sources */,
+				EA32CE55157842F6005DBAEE /* NSObject+QueryComponents.m in Sources */,
+				EA32CE56157842F6005DBAEE /* UIDevice+HardwareString.m in Sources */,
+				EA32CE57157842F6005DBAEE /* PHURLLoader.m in Sources */,
+				EA32CE58157842F6005DBAEE /* PHAPIRequest.m in Sources */,
+				EA32CE59157842F6005DBAEE /* PHStringUtil.m in Sources */,
+				EA32CE5A157842F6005DBAEE /* PHContent.m in Sources */,
+				EA32CE5B157842F6005DBAEE /* PHContentView.m in Sources */,
+				EA32CE5C157842F6005DBAEE /* PHPublisherContentRequest.m in Sources */,
+				EA32CE5D157842F6005DBAEE /* PHPublisherOpenRequest.m in Sources */,
+				EA32CE5E157842F6005DBAEE /* ExampleViewController.m in Sources */,
+				EA32CE5F157842F6005DBAEE /* PublisherOpenViewController.m in Sources */,
+				EA32CE60157842F6005DBAEE /* PublisherContentViewController.m in Sources */,
+				EA32CE61157842F6005DBAEE /* PHPublisherSubContentRequest.m in Sources */,
+				EA32CE62157842F6005DBAEE /* PHNotificationView.m in Sources */,
+				EA32CE63157842F6005DBAEE /* PHNotificationRenderer.m in Sources */,
+				EA32CE64157842F6005DBAEE /* PHNotificationBadgeRenderer.m in Sources */,
+				EA32CE65157842F6005DBAEE /* PHReward.m in Sources */,
+				EA32CE66157842F6005DBAEE /* PHConstants.m in Sources */,
+				EA32CE67157842F6005DBAEE /* PHPublisherIAPTrackingRequest.m in Sources */,
+				EA32CE68157842F6005DBAEE /* PublisherIAPTrackingViewController.m in Sources */,
+				EA32CE69157842F6005DBAEE /* IAPHelper.m in Sources */,
+				EA32CE6A157842F6005DBAEE /* OpenUDID.m in Sources */,
+				EA32CE6B157842F6005DBAEE /* PublisherCancelContentViewController.m in Sources */,
+				EA32CE6C157842F6005DBAEE /* PHNetworkUtil.m in Sources */,
+				EA32CE6D157842F6005DBAEE /* SDCachedURLResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1804,6 +2327,82 @@
 			};
 			name = Release;
 		};
+		EA32CE82157842F6005DBAEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = example/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "PH_USE_STOREKIT=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					Cache,
+					example,
+					JSON,
+					src,
+				);
+				INFOPLIST_FILE = "Info-monkey.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FoneMonkey/extralibs\"",
+					"\"$(SRCROOT)/FoneMonkey/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = MonkeyExample;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EA32CE83157842F6005DBAEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = example/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "PH_USE_STOREKIT=1";
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					Cache,
+					example,
+					JSON,
+					src,
+				);
+				INFOPLIST_FILE = "Info-monkey.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FoneMonkey/extralibs\"",
+					"\"$(SRCROOT)/FoneMonkey/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = MonkeyExample;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		EA86C7EA14D9E75600CB1551 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2122,6 +2721,15 @@
 			buildConfigurations = (
 				EA14C6631342604000E228E0 /* Debug */,
 				EA14C6641342604000E228E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA32CE81157842F6005DBAEE /* Build configuration list for PBXNativeTarget "Example (Monkey)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA32CE82157842F6005DBAEE /* Debug */,
+				EA32CE83157842F6005DBAEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
