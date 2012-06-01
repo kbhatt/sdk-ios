@@ -1,0 +1,4 @@
+#define MT_BUILD_STAMP @"BUILD 120601.1600"
+#define MT_BUILD_DATE @"2012-06-01 16:00:32 PDT"
+#define MT_BUILD_NUMBER @""
+#define MT_VERSION @""

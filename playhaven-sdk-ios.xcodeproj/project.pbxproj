@@ -208,9 +208,9 @@
 		EA95BB32157945B200D3D351 /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = EACFC89D1500328E007EF54F /* 57.png */; };
 		EA95BB33157945B200D3D351 /* 72.png in Resources */ = {isa = PBXBuildFile; fileRef = EACFC8A0150033A6007EF54F /* 72.png */; };
 		EA95BB34157945B200D3D351 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EABC0C75152B8A3200441393 /* Settings.bundle */; };
-		EA95BB3D15794A5900D3D351 /* libMonkeyTalk-1.0.8.beta4c.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA95BB3C15794A5900D3D351 /* libMonkeyTalk-1.0.8.beta4c.a */; };
 		EA95BB3F15794A6800D3D351 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA95BB3E15794A6800D3D351 /* libsqlite3.dylib */; };
 		EA95BB4015794A7100D3D351 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB442A113455467000DA3E9 /* QuartzCore.framework */; };
+		EA95BB5A157969EE00D3D351 /* libMonkeyTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA95BB4F157969B900D3D351 /* libMonkeyTalk.a */; };
 		EA9AB62014A3B0AA00079704 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		EA9AB63114A3B0D500079704 /* NSObject+QueryComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC53A92134E5F7A00F2F956 /* NSObject+QueryComponents.m */; };
 		EA9AB63314A3B0D500079704 /* UIDevice+HardwareString.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4ABA0F135F859D0062AE77 /* UIDevice+HardwareString.m */; };
@@ -470,6 +470,44 @@
 		EAFF5E7D14F8154E00E96C2C /* PHPurchaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFF5E7C14F8154E00E96C2C /* PHPurchaseTest.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EA95BB4E157969B900D3D351 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D34D970312231CCF001D0B47;
+			remoteInfo = MonkeyTalk;
+		};
+		EA95BB50157969B900D3D351 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D34D975312232255001D0B47;
+			remoteInfo = MonkeyTalkOCUnit;
+		};
+		EA95BB52157969B900D3D351 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 446F15B91427F1CD0097E32A;
+			remoteInfo = MonkeyTalkMediaPlayer;
+		};
+		EA95BB54157969B900D3D351 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 44C7011F1476CE0E00A91333;
+			remoteInfo = MonkeyTalkWebView;
+		};
+		EA95BB5E15796C7200D3D351 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D34D967112231AE2001D0B47;
+			remoteInfo = MonkeyTalk;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -557,8 +595,8 @@
 		EA8C313614DC9F710075B473 /* Info-fixtures.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-fixtures.plist"; sourceTree = "<group>"; };
 		EA95BB38157945B200D3D351 /* MonkeyExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonkeyExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA95BB3A157945B200D3D351 /* Info-monkey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-monkey.plist"; path = "/Users/jesus/Workspace/playhaven/sdk-ios/Info-monkey.plist"; sourceTree = "<absolute>"; };
-		EA95BB3C15794A5900D3D351 /* libMonkeyTalk-1.0.8.beta4c.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libMonkeyTalk-1.0.8.beta4c.a"; sourceTree = "<group>"; };
 		EA95BB3E15794A6800D3D351 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MonkeyTalk.xcodeproj; path = "monkeytalk-agent-ios/MonkeyTalk.xcodeproj"; sourceTree = "<group>"; };
 		EA9AB61F14A3B0AA00079704 /* libPlayHaven.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlayHaven.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB19C8C1357BA390067F27A /* PHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHConstants.h; sourceTree = "<group>"; };
 		EAB2B44513CBD172006D2391 /* PHReward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHReward.h; sourceTree = "<group>"; };
@@ -644,6 +682,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA95BB5A157969EE00D3D351 /* libMonkeyTalk.a in Frameworks */,
 				EA95BB4015794A7100D3D351 /* QuartzCore.framework in Frameworks */,
 				EA95BB3F15794A6800D3D351 /* libsqlite3.dylib in Frameworks */,
 				EA95BB23157945B200D3D351 /* StoreKit.framework in Frameworks */,
@@ -652,7 +691,6 @@
 				EA95BB26157945B200D3D351 /* UIKit.framework in Frameworks */,
 				EA95BB27157945B200D3D351 /* Foundation.framework in Frameworks */,
 				EA95BB28157945B200D3D351 /* CoreGraphics.framework in Frameworks */,
-				EA95BB3D15794A5900D3D351 /* libMonkeyTalk-1.0.8.beta4c.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,8 +761,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */,
 				EA95BB3E15794A6800D3D351 /* libsqlite3.dylib */,
-				EA95BB3C15794A5900D3D351 /* libMonkeyTalk-1.0.8.beta4c.a */,
 				EA328B2F151A9D4400DE3CAD /* README.markdown */,
 				EABC0C87152BD08200441393 /* PlayHaven_SDK_Agreement.rtf */,
 				EA86C7F014D9E77D00CB1551 /* WaterWorks */,
@@ -960,6 +998,17 @@
 				EA86C7F914D9EB8600CB1551 /* content-integration.json */,
 			);
 			path = WaterWorks;
+			sourceTree = "<group>";
+		};
+		EA95BB42157969B800D3D351 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA95BB4F157969B900D3D351 /* libMonkeyTalk.a */,
+				EA95BB51157969B900D3D351 /* libMonkeyTalkOCUnit.a */,
+				EA95BB53157969B900D3D351 /* libMonkeyTalkMediaPlayer.a */,
+				EA95BB55157969B900D3D351 /* libMonkeyTalkWebView.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EAB4425D134539F4000DA3E9 /* JSON */ = {
@@ -1200,6 +1249,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EA95BB5F15796C7200D3D351 /* PBXTargetDependency */,
 			);
 			name = "Example (Monkey)";
 			productName = example;
@@ -1312,6 +1362,12 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA95BB42157969B800D3D351 /* Products */;
+					ProjectRef = EA95BB41157969B800D3D351 /* MonkeyTalk.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				EA14C6601342604000E228E0 /* Unit Tests */,
@@ -1326,6 +1382,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA95BB4F157969B900D3D351 /* libMonkeyTalk.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMonkeyTalk.a;
+			remoteRef = EA95BB4E157969B900D3D351 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA95BB51157969B900D3D351 /* libMonkeyTalkOCUnit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMonkeyTalkOCUnit.a;
+			remoteRef = EA95BB50157969B900D3D351 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA95BB53157969B900D3D351 /* libMonkeyTalkMediaPlayer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMonkeyTalkMediaPlayer.a;
+			remoteRef = EA95BB52157969B900D3D351 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA95BB55157969B900D3D351 /* libMonkeyTalkWebView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMonkeyTalkWebView.a;
+			remoteRef = EA95BB54157969B900D3D351 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		EA12ABD11365DBB700CB2F24 /* Resources */ = {
@@ -1773,6 +1860,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA95BB5F15796C7200D3D351 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MonkeyTalk;
+			targetProxy = EA95BB5E15796C7200D3D351 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EA12ABDB1365DBB700CB2F24 /* InfoPlist.strings */ = {
