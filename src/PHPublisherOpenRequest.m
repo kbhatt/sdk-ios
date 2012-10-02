@@ -10,7 +10,7 @@
 #import "PHConstants.h"
 #import "SDURLCache.h"
 #import "PHTimeInGame.h"
-#import "PHTimeInGame.h"
+#import "PHAssetCache.h"
 
 #if PH_USE_OPENUDID == 1
 #import "OpenUDID.h"
@@ -83,19 +83,6 @@ NSString *getMACAddress(){
 @end
 
 @implementation PHPublisherOpenRequest
-
-+(void)initialize{
-    
-    if  (self == [PHPublisherOpenRequest class]){
-        // Initializes pre-fetching and webview caching
-        PH_SDURLCACHE_CLASS *urlCache = [[PH_SDURLCACHE_CLASS alloc] initWithMemoryCapacity:PH_MAX_SIZE_MEMORY_CACHE
-                                                                 diskCapacity:PH_MAX_SIZE_FILESYSTEM_CACHE
-                                                                     diskPath:[PH_SDURLCACHE_CLASS defaultCachePath]];
-        [NSURLCache setSharedURLCache:urlCache];
-        [urlCache release];
-    }
-}
-
 @synthesize customUDID = _customUDID;
 
 -(NSDictionary *)additionalParameters{    
@@ -135,9 +122,7 @@ NSString *getMACAddress(){
     if (!!urlArray) {
         for (NSString *urlString in urlArray){            
             NSURL *url = [NSURL URLWithString:urlString];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:PH_REQUEST_TIMEOUT];
-            NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:nil];
-            [connection start];
+            [[PHAssetCache sharedAssetCache] precacheAssetAtURL:url];
         }
     }
     
@@ -146,15 +131,10 @@ NSString *getMACAddress(){
         [PHAPIRequest setSession:session];
     }
     
-    if ([self.delegate respondsToSelector:@selector(request:didSucceedWithResponse:)]) {
-        [self.delegate performSelector:@selector(request:didSucceedWithResponse:) withObject:self withObject:responseData];
-    }
-    
     // Reset time in game counters;
     [[PHTimeInGame getInstance] resetCounters];
     
-    [self finish];
-    
+    [super didSucceedWithResponse:responseData];
 }
 
 #pragma mark - NSObject

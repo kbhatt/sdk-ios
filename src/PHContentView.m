@@ -11,9 +11,9 @@
 #import "NSObject+QueryComponents.h"
 #import "JSON.h"
 #import "PHConstants.h"
-#import "SDURLCache.h"
 #import "PHPurchase.h"
 #import "PHStoreProductViewControllerDelegate.h"
+#import "PHAssetCache.h"
 
 #define MAX_MARGIN 20
 
@@ -413,17 +413,20 @@ static NSMutableSet *allContentViews = nil;
 
 -(void)loadTemplate {
     [_webView stopLoading];
+    [[PHAssetCache sharedAssetCache] stopPrecaching];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:self.content.URL
-                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                         timeoutInterval:PH_REQUEST_TIMEOUT];
     
-    NSCachedURLResponse *response = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
-    if (response) {
+    NSURL *templateURL = self.content.URL;
+    PHAsset *asset = [[PHAssetCache sharedAssetCache] assetAtURL:templateURL];
+    if (asset) {
         PH_NOTE(@"Found local copy of template!");
-        [_webView loadData:response.data MIMEType:response.response.MIMEType textEncodingName:response.response.textEncodingName baseURL:response.response.URL];
+        [_webView loadData:asset.data MIMEType:asset.MIMEType textEncodingName:asset.textEncodingName baseURL:asset.URL];
     } else {
-        PH_LOG(@"Loading template from network: %@", self.content.URL);
+        PH_LOG(@"Loading template from network: %@", templateURL);
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:templateURL
+                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                             timeoutInterval:PH_REQUEST_TIMEOUT];
         [_webView loadRequest:request];
     }
 

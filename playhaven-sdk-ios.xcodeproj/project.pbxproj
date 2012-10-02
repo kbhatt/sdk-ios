@@ -81,6 +81,12 @@
 		EA24FCAE1554510D0074FC13 /* PHNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */; };
 		EA24FCAF1554510D0074FC13 /* PHNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */; };
 		EA24FCB01554510D0074FC13 /* PHNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */; };
+		EA28E657161B77D3001194C9 /* PHAssetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA28E656161B77D3001194C9 /* PHAssetCache.m */; };
+		EA28E658161B77D3001194C9 /* PHAssetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA28E656161B77D3001194C9 /* PHAssetCache.m */; };
+		EA28E659161B77D3001194C9 /* PHAssetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA28E656161B77D3001194C9 /* PHAssetCache.m */; };
+		EA28E65A161B77D3001194C9 /* PHAssetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA28E656161B77D3001194C9 /* PHAssetCache.m */; };
+		EA28E65B161B77D3001194C9 /* PHAssetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA28E656161B77D3001194C9 /* PHAssetCache.m */; };
+		EA28E65E161B7E85001194C9 /* PHAssetCacheTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA28E65D161B7E85001194C9 /* PHAssetCacheTest.m */; };
 		EA2B07A314E9EBA60087A45F /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = EA2B07A014E9EBA60087A45F /* 512.png */; };
 		EA2B07A614E9EBA60087A45F /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = EA2B07A214E9EBA60087A45F /* 512.png */; };
 		EA2B81AE1613BFE3008D7788 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA019C8514C102D4008FBCB1 /* StoreKit.framework */; };
@@ -562,6 +568,9 @@
 		EA1799DF14200FAE005F286F /* PHConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHConstants.m; sourceTree = "<group>"; };
 		EA24FCA91554510D0074FC13 /* PHNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHNetworkUtil.h; sourceTree = "<group>"; };
 		EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHNetworkUtil.m; sourceTree = "<group>"; };
+		EA28E655161B77D3001194C9 /* PHAssetCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHAssetCache.h; sourceTree = "<group>"; };
+		EA28E656161B77D3001194C9 /* PHAssetCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHAssetCache.m; sourceTree = "<group>"; };
+		EA28E65D161B7E85001194C9 /* PHAssetCacheTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHAssetCacheTest.m; sourceTree = "<group>"; };
 		EA2B07A014E9EBA60087A45F /* 512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512.png; sourceTree = "<group>"; };
 		EA2B07A214E9EBA60087A45F /* 512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512.png; sourceTree = "<group>"; };
 		EA328B2F151A9D4400DE3CAD /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
@@ -962,6 +971,7 @@
 				EAE5598514F866CA0023BBEF /* PHPublisherIAPTrackingRequestTest.m */,
 				EA7CF59C156C365C0095572E /* PlayHavenTest.m */,
 				D108A83D15A6B68600082388 /* PHTimeInGameTest.m */,
+				EA28E65D161B7E85001194C9 /* PHAssetCacheTest.m */,
 			);
 			name = "Unit Testing";
 			path = tests;
@@ -991,6 +1001,8 @@
 				EA6031CD1361FFD6007B2BF5 /* PlayHavenSDK.h */,
 				EA24FCA91554510D0074FC13 /* PHNetworkUtil.h */,
 				EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */,
+				EA28E655161B77D3001194C9 /* PHAssetCache.h */,
+				EA28E656161B77D3001194C9 /* PHAssetCache.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1614,6 +1626,7 @@
 				D108A83515A6553700082388 /* PHTimeInGame.m in Sources */,
 				EA8A531515B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
 				EADB57BB16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EA28E658161B77D3001194C9 /* PHAssetCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1659,6 +1672,8 @@
 				D108A83415A6553700082388 /* PHTimeInGame.m in Sources */,
 				D108A83E15A6B68600082388 /* PHTimeInGameTest.m in Sources */,
 				EADB57BA16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EA28E657161B77D3001194C9 /* PHAssetCache.m in Sources */,
+				EA28E65E161B7E85001194C9 /* PHAssetCacheTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1709,6 +1724,7 @@
 				EAD610F515AC9212001D3E90 /* PHURLLoader+Automation.m in Sources */,
 				EA8A531615B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
 				EADB57BC16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EA28E659161B77D3001194C9 /* PHAssetCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1755,6 +1771,7 @@
 				D108A83615A6553700082388 /* PHTimeInGame.m in Sources */,
 				EA8A531715B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
 				EADB57BD16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EA28E65A161B77D3001194C9 /* PHAssetCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1928,6 +1945,7 @@
 				D108A83715A6553700082388 /* PHTimeInGame.m in Sources */,
 				EA8A531815B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
 				EADB57BE16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EA28E65B161B77D3001194C9 /* PHAssetCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
