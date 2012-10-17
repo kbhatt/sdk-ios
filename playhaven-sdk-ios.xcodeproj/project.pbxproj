@@ -166,6 +166,12 @@
 		EA62D68F1579925300B31E62 /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = EACFC89D1500328E007EF54F /* 57.png */; };
 		EA62D6901579925300B31E62 /* 72.png in Resources */ = {isa = PBXBuildFile; fileRef = EACFC8A0150033A6007EF54F /* 72.png */; };
 		EA62D6911579925300B31E62 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EABC0C75152B8A3200441393 /* Settings.bundle */; };
+		EA67D69D162F67970074FA68 /* PHNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */; };
+		EA67D69E162F67970074FA68 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
+		EA67D69F162F67AA0074FA68 /* PHNetworkUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = EA24FCA91554510D0074FC13 /* PHNetworkUtil.h */; };
+		EA67D6A0162F67AA0074FA68 /* PHStoreProductViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */; };
+		EA67D6A1162F6D110074FA68 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
+		EA67D6A2162F6DB10074FA68 /* PHStoreProductViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */; };
 		EA6ADFC51475CF3A00DBE60B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABAA6971450ED640040B937 /* SystemConfiguration.framework */; };
 		EA6ADFC81475F22C00DBE60B /* PHPublisherContentRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6ADFC71475F22C00DBE60B /* PHPublisherContentRequestTest.m */; };
 		EA7BC61A13537F8700B4518D /* PHURLLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7BC61813537F8700B4518D /* PHURLLoaderTest.m */; };
@@ -1151,6 +1157,7 @@
 				EA9AB66914A3B2EE00079704 /* PHReward.h in Headers */,
 				EA9AB66B14A3B2EE00079704 /* PHPublisherOpenRequest.h in Headers */,
 				EA5E5C5914C60D660026B3E0 /* SDURLCache.h in Headers */,
+				EA67D6A2162F6DB10074FA68 /* PHStoreProductViewControllerDelegate.h in Headers */,
 				EA019C8114C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EA06AA66151A812B00C11220 /* OpenUDID.h in Headers */,
 				EA24FCAB1554510D0074FC13 /* PHNetworkUtil.h in Headers */,
@@ -1214,6 +1221,8 @@
 				EAF1685E1534E2DE006B6993 /* PHReward.h in Headers */,
 				EAF1685F1534E2DE006B6993 /* PHPublisherOpenRequest.h in Headers */,
 				EAF168601534E2DE006B6993 /* SDURLCache.h in Headers */,
+				EA67D69F162F67AA0074FA68 /* PHNetworkUtil.h in Headers */,
+				EA67D6A0162F67AA0074FA68 /* PHStoreProductViewControllerDelegate.h in Headers */,
 				EAF168621534E2DE006B6993 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EAF168631534E2DE006B6993 /* OpenUDID.h in Headers */,
 				EA451035156298E80095538E /* SDCachedURLResponse.h in Headers */,
@@ -1762,6 +1771,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA67D6A1162F6D110074FA68 /* PHStoreProductViewControllerDelegate.m in Sources */,
 				EAFF5E6C14F6EC8300E96C2C /* SBJsonBase.m in Sources */,
 				EAFF5E6D14F6EC8300E96C2C /* SBJsonParser.m in Sources */,
 				EAFF5E6E14F6EC8300E96C2C /* SBJsonWriter.m in Sources */,
@@ -1827,6 +1837,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA67D69D162F67970074FA68 /* PHNetworkUtil.m in Sources */,
+				EA67D69E162F67970074FA68 /* PHStoreProductViewControllerDelegate.m in Sources */,
 				EAF168341534E2DE006B6993 /* SBJsonBase.m in Sources */,
 				EAF168351534E2DE006B6993 /* SBJsonParser.m in Sources */,
 				EAF168361534E2DE006B6993 /* SBJsonWriter.m in Sources */,

@@ -12,7 +12,7 @@
 #define PH_SDK_VERSION @"1.12.1"
 
 #ifndef PH_BASE_URL
-#define PH_BASE_URL @"http://api2.playhaven.com"
+#define PH_BASE_URL @"http://demo-api2.playhaven.com"
 #endif
 
 #ifndef PH_CONTENT_ADDRESS
