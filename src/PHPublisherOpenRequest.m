@@ -14,6 +14,8 @@
 
 #if PH_USE_OPENUDID == 1
 #import "OpenUDID.h"
+#import "PHConnectionManager.h"
+#import "PHResourceCacher.h"
 #endif
 
 @interface PHAPIRequest (Private)
@@ -82,13 +84,35 @@
 - (void)didSucceedWithResponse:(NSDictionary *)responseData
 {
     NSArray *urlArray = (NSArray *)[responseData valueForKey:@"precache"];
+
+    if (!urlArray)
+    {
+        DLog(@"prefilling url array");
+
+        urlArray = [NSArray arrayWithObjects:@"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/more-games.html.gz",
+                                             @"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/announcement.html.gz",
+                                             @"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/data-collection.html.gz",
+                                             @"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/image.html.gz",
+                                             @"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/promo.html.gz",
+                                             @"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/gow.html.gz", nil];
+    }
+
     if (!!urlArray) {
-        for (NSString *urlString in urlArray) {
-            NSURL *url = [NSURL URLWithString:urlString];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:PH_REQUEST_TIMEOUT];
-            NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:nil];
-            [connection start];
-        }
+
+        DLog(@"starting to cache content");
+
+        [PHResourceCacher cacherWithThingsToDownload:urlArray];
+
+//        for (NSString *urlString in urlArray) {
+//            NSURL *url = [NSURL URLWithString:urlString];
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:PH_REQUEST_TIMEOUT];
+//
+//            if (![PHConnectionManager isRequestPending:request])
+//                [PHConnectionManager createConnectionFromRequest:request forDelegate:self withContext:nil];
+
+//            NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:nil];
+//            [connection start];
+//        }
     }
 
     NSString *session = (NSString *)[responseData valueForKey:@"session"];

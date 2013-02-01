@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2391BD8B16BB643200105789 /* PHConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62348DF5C94983127880EC16 /* PHConnectionManager.m */; };
+		2391BD8C16BB643200105789 /* PHResourceCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 62348C5886308073361F8F76 /* PHResourceCacher.m */; };
+		62348033646FF95083F176D0 /* PHResourceCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 62348C5886308073361F8F76 /* PHResourceCacher.m */; };
+		6234889693774905F020BAD2 /* PHConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62348DF5C94983127880EC16 /* PHConnectionManager.m */; };
 		D108A83015A6553700082388 /* PHTimeInGame.h in Headers */ = {isa = PBXBuildFile; fileRef = D108A82E15A6553700082388 /* PHTimeInGame.h */; };
 		D108A83115A6553700082388 /* PHTimeInGame.h in Headers */ = {isa = PBXBuildFile; fileRef = D108A82E15A6553700082388 /* PHTimeInGame.h */; };
 		D108A83215A6553700082388 /* PHTimeInGame.h in Headers */ = {isa = PBXBuildFile; fileRef = D108A82E15A6553700082388 /* PHTimeInGame.h */; };
@@ -535,6 +539,10 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		62348700A10A3389FCC961D1 /* PHResourceCacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHResourceCacher.h; sourceTree = "<group>"; };
+		62348C5886308073361F8F76 /* PHResourceCacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHResourceCacher.m; sourceTree = "<group>"; };
+		62348D8D11EF586B60EC9380 /* PHConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHConnectionManager.h; sourceTree = "<group>"; };
+		62348DF5C94983127880EC16 /* PHConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHConnectionManager.m; sourceTree = "<group>"; };
 		D108A82E15A6553700082388 /* PHTimeInGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHTimeInGame.h; sourceTree = "<group>"; };
 		D108A82F15A6553700082388 /* PHTimeInGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTimeInGame.m; sourceTree = "<group>"; };
 		D108A83D15A6B68600082388 /* PHTimeInGameTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHTimeInGameTest.m; sourceTree = "<group>"; };
@@ -1026,6 +1034,10 @@
 				EA6031CD1361FFD6007B2BF5 /* PlayHavenSDK.h */,
 				EA24FCA91554510D0074FC13 /* PHNetworkUtil.h */,
 				EA24FCAA1554510D0074FC13 /* PHNetworkUtil.m */,
+				62348DF5C94983127880EC16 /* PHConnectionManager.m */,
+				62348D8D11EF586B60EC9380 /* PHConnectionManager.h */,
+				62348C5886308073361F8F76 /* PHResourceCacher.m */,
+				62348700A10A3389FCC961D1 /* PHResourceCacher.h */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1622,6 +1634,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2391BD8B16BB643200105789 /* PHConnectionManager.m in Sources */,
+				2391BD8C16BB643200105789 /* PHResourceCacher.m in Sources */,
 				D1BD481D14C0EDD100EE8A5A /* PHPurchase.m in Sources */,
 				D1E15B7D14981E90001241EE /* SDURLCache.m in Sources */,
 				EA03811813B272FB00A31FF7 /* PHPublisherMetadataRequest.m in Sources */,
@@ -1707,6 +1721,8 @@
 				D108A83E15A6B68600082388 /* PHTimeInGameTest.m in Sources */,
 				EADB57BA16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
 				EA98C12D16640E4500B6AA8C /* PHNetworkUtilTest.m in Sources */,
+				6234889693774905F020BAD2 /* PHConnectionManager.m in Sources */,
+				62348033646FF95083F176D0 /* PHResourceCacher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
