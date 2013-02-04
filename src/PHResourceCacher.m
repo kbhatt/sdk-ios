@@ -17,15 +17,25 @@
 
 - (id)initWithThingsToDownload:(id)things
 {
+    DLog(@"things: %@", [things description]);
+
     self = [super init];
     if (self)
     {
         for (NSString *urlString in things)
         {
+            DLog(@"");
+
             NSURL *url = [NSURL URLWithString:urlString];
+
+            // TODO: Perhaps these need to match?
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url
+//                                                     cachePolicy:NSURLRequestReturnCacheDataElseLoad
+//                                                 timeoutInterval:PH_REQUEST_TIMEOUT + 10];
+
             NSURLRequest *request = [NSURLRequest requestWithURL:url
-                                                     cachePolicy:NSURLRequestReturnCacheDataElseLoad
-                                                 timeoutInterval:PH_REQUEST_TIMEOUT];
+                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                 timeoutInterval:PH_REQUEST_TIMEOUT + 10];
 
             DLog(@"caching content for url: %@", [[request URL] absoluteString]);
 

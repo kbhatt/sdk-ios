@@ -36,6 +36,7 @@
     NSString        *_urlPath;
     int              _hashCode;
 
+    BOOL theRightWayToStopTheRequestFromBeingSentTwiceIfItsActuallyNeeded;
 //    NSURLConnection *_connection;
 //    NSMutableData   *_connectionData;
 //    NSURLResponse   *_response;

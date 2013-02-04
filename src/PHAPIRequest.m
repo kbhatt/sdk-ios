@@ -354,15 +354,17 @@ static NSString *sPlayHavenPluginIdentifier;
                                 // really only be nil when the apirequest was first created), though that's what it's actually doing
                                 // as it is never set to nil when the connection finishes. Was this prevention here intentionally?
 
-    static BOOL theRightWayToStopTheRequestFromBeingSentTwiceIfItsActuallyNeeded = YES;
-    if (theRightWayToStopTheRequestFromBeingSentTwiceIfItsActuallyNeeded)
+    if (!theRightWayToStopTheRequestFromBeingSentTwiceIfItsActuallyNeeded)
     {
         PH_LOG(@"Sending request: %@", [self.URL absoluteString]);
         NSURLRequest *request = [NSURLRequest requestWithURL:self.URL
                                                  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                              timeoutInterval:PH_REQUEST_TIMEOUT];
 
-        [PHConnectionManager createConnectionFromRequest:request forDelegate:self withContext:nil];
+        if ([PHConnectionManager createConnectionFromRequest:request forDelegate:self withContext:nil])
+            theRightWayToStopTheRequestFromBeingSentTwiceIfItsActuallyNeeded = YES;
+        else
+            [self didFailWithError:nil]; // TODO: Create error
 
 //#ifdef PH_USE_NETWORK_FIXTURES
 //        _connection = [[WWURLConnection connectionWithRequest:request delegate:self] retain];
@@ -373,7 +375,7 @@ static NSString *sPlayHavenPluginIdentifier;
 
     }
 
-    theRightWayToStopTheRequestFromBeingSentTwiceIfItsActuallyNeeded = NO;
+
 
     //}
 }
@@ -440,6 +442,9 @@ static NSString *sPlayHavenPluginIdentifier;
                                                                                 nonce:nonce
                                                                                secret:self.secret];
 
+        DLog(@"expected signature: %@", expectedSignature);
+        DLog(@"request signature:  %@", requestSignature);
+
         if (![expectedSignature isEqualToString:requestSignature]) {
             [self didFailWithError:PHCreateError(PHRequestDigestErrorType)];
 
@@ -467,7 +472,8 @@ static NSString *sPlayHavenPluginIdentifier;
     [self didFailWithError:error];
 
     // REQUEST_RELEASE see REQUEST_RETAIN
-    [self finish];
+    //[self finish]; // TODO: Why is this here if it's also in didFailWithError which is called immediately above??
+    // TODO: Investigate this further. Having it here causes crash, and removing it makes things work more as expected. Why else would it be needed?
 }
 
 #pragma mark -

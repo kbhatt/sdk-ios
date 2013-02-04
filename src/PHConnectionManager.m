@@ -184,7 +184,11 @@ static PHConnectionManager *singleton = nil;
                          connection,
                          connectionBundle);
 
-    [[connectionManager pendingRequests] addObject:request];
+    [[connectionManager pendingRequests] addObject:[[request URL] absoluteString]];
+
+//    NSRange range = [[[request URL] absoluteString] rangeOfString:@"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/"];
+//    if (!(range.location == NSNotFound))
+//        sleep(5);
 
     // TODO: Do we need this?
     //[connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -195,6 +199,8 @@ static PHConnectionManager *singleton = nil;
 
 + (void)stopConnectionsForDelegate:(id<PHConnectionManagerDelegate>)delegate
 {
+    DLog(@"");
+
     PHConnectionManager *connectionManager = [PHConnectionManager sharedInstance];
     PHConnectionBundle  *connectionBundle  = nil;
 
@@ -208,7 +214,7 @@ static PHConnectionManager *singleton = nil;
 
             CFDictionaryRemoveValue(connectionManager.connections, connection);
 
-            [[connectionManager pendingRequests] removeObject:connectionBundle.request];
+            [[connectionManager pendingRequests] removeObject:[[connectionBundle.request URL] absoluteString]];
 
             if ([delegate respondsToSelector:@selector(connectionWasStoppedWithContext:)])
                 [delegate connectionWasStoppedWithContext:[connectionBundle context]];
@@ -219,12 +225,13 @@ static PHConnectionManager *singleton = nil;
 
 + (BOOL)isRequestPending:(NSURLRequest *)request
 {   // TODO: Make sure this is returning truthfully
-    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:request];
+    // TODO: Figure out the 'most correct' way to test for request equality
+    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:[[request URL] absoluteString]];
 }
 
 + (BOOL)isRequestComplete:(NSURLRequest *)request
 {   // TODO: Make sure this is returning truthfully
-    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:request];
+    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:[[request URL] absoluteString]];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -245,7 +252,7 @@ static PHConnectionManager *singleton = nil;
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    DLog(@"");
+    //DLog(@"");
     [[(PHConnectionBundle *)CFDictionaryGetValue(self.connections, connection) data] appendData:data];
 }
 
@@ -260,8 +267,8 @@ static PHConnectionManager *singleton = nil;
     id             context  = [connectionBundle context];
     id<PHConnectionManagerDelegate> delegate = [connectionBundle delegate];
 
-    [[self pendingRequests] removeObject:request];
-    [[self completeRequests] addObject:request];
+    [[self pendingRequests] removeObject:[[request URL] absoluteString]];
+    [[self completeRequests] addObject:[[request URL] absoluteString]];
 
     DLog(@"completing connection for url: %@", [[request URL] absoluteString]);
 
@@ -278,6 +285,7 @@ static PHConnectionManager *singleton = nil;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    DLog(@"");
     PH_LOG(@"Request failed with error: %@", [error localizedDescription]);
 
     PHConnectionBundle *connectionData = (PHConnectionBundle *)CFDictionaryGetValue(self.connections, connection);
@@ -286,7 +294,7 @@ static PHConnectionManager *singleton = nil;
     id            context  = [connectionData context];
     id<PHConnectionManagerDelegate> delegate = [connectionData delegate];
 
-    [[self pendingRequests] removeObject:request];
+    [[self pendingRequests] removeObject:[[request URL] absoluteString]];
 
     if ([delegate respondsToSelector:@selector(connectionDidFailWithError:request:andContext:)])
         [delegate connectionDidFailWithError:error request:request andContext:context];
@@ -311,7 +319,7 @@ static PHConnectionManager *singleton = nil;
 
 - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge  { DLog(@""); }
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge { DLog(@""); }
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse    { /*DLog(@"");*/ return cachedResponse; }
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse    { DLog(@""); return cachedResponse; }
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten
                                                totalBytesWritten:(NSInteger)totalBytesWritten
                                        totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite

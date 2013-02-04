@@ -450,12 +450,12 @@ static NSMutableSet *allContentViews = nil;
                                                   object:nil];
 }
 
-- (void)templateLoaded:(NSDictionary *)userInfo
+- (void)templateLoaded:(NSNotification *)notification
 {
     DLog(@"");
 
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:[userInfo objectForKey:@"requestUrlString"]
+                                                    name:[notification.object objectForKey:@"requestUrlString"]
                                                   object:nil];
 
     [self loadTemplate];
@@ -467,14 +467,19 @@ static NSMutableSet *allContentViews = nil;
 
     [_webView stopLoading];
 
+            // TODO: Perhaps these need to match?
+//    NSURLRequest *request = [NSURLRequest requestWithURL:self.content.URL
+//                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                         timeoutInterval:PH_REQUEST_TIMEOUT];
+
     NSURLRequest *request = [NSURLRequest requestWithURL:self.content.URL
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                         timeoutInterval:PH_REQUEST_TIMEOUT];
+                                         timeoutInterval:PH_REQUEST_TIMEOUT + 10];
 
     NSCachedURLResponse *response = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
 
     if ([PHConnectionManager isRequestPending:request]) {
-        PH_NOTE(@"Template is already being downloaded. Will come back when complete!");
+        PH_NOTE(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Template is already being downloaded. Will come back when complete!");
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(templateLoaded:)
@@ -482,13 +487,13 @@ static NSMutableSet *allContentViews = nil;
                                                    object:nil];
 
     } else if (response) {
-        PH_NOTE(@"Found local copy of template!");
+        PH_NOTE(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Found local copy of template!");
         [_webView loadData:response.data
                   MIMEType:response.response.MIMEType
           textEncodingName:response.response.textEncodingName
                    baseURL:response.response.URL];
     } else {
-        PH_LOG(@"Loading template from network: %@", self.content.URL);
+        PH_LOG(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Loading template from network: %@", self.content.URL);
         [_webView loadRequest:request];
     }
 }
