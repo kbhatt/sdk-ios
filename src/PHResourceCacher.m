@@ -34,7 +34,7 @@
 //                                                 timeoutInterval:PH_REQUEST_TIMEOUT + 10];
 
             NSURLRequest *request = [NSURLRequest requestWithURL:url
-                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                     cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                                  timeoutInterval:PH_REQUEST_TIMEOUT + 10];
 
             DLog(@"caching content for url: %@", [[request URL] absoluteString]);

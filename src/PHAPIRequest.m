@@ -383,6 +383,9 @@ static NSString *sPlayHavenPluginIdentifier;
 - (void)cancel
 {
     PH_LOG(@"%@ canceled!", NSStringFromClass([self class]));
+
+    // TODO: Confirm that by moving this from 'finish' to 'cancel' doesn't break anything
+    [PHConnectionManager stopConnectionsForDelegate:self];
     [self finish];
 }
 
@@ -394,8 +397,6 @@ static NSString *sPlayHavenPluginIdentifier;
     DLog(@"");
 
 //    [_connection cancel];
-
-    [PHConnectionManager stopConnectionsForDelegate:self];
 
     // REQUEST_RELEASE see REQUEST_RETAIN
     [[PHAPIRequest allRequests] removeObject:self];

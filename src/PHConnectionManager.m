@@ -206,19 +206,20 @@ static PHConnectionManager *singleton = nil;
 
     for (NSURLConnection *connection in [(NSMutableDictionary *)connectionManager.connections allKeys])
     {
-        connectionBundle = (PHConnectionBundle *)CFDictionaryGetValue(connectionManager.connections, connection);
+        connectionBundle = [(PHConnectionBundle *) CFDictionaryGetValue(connectionManager.connections, connection) retain];
 
+        // TODO: This code should only be called if the connection is still live, to avoid releasing the connection bundle too soon; Then remove the retain/release stuff
         if ([connectionBundle delegate] == delegate)
         {
             [connection cancel];
-
-            CFDictionaryRemoveValue(connectionManager.connections, connection);
 
             [[connectionManager pendingRequests] removeObject:[[connectionBundle.request URL] absoluteString]];
 
             if ([delegate respondsToSelector:@selector(connectionWasStoppedWithContext:)])
                 [delegate connectionWasStoppedWithContext:[connectionBundle context]];
 
+            CFDictionaryRemoveValue(connectionManager.connections, connection);
+            [connectionBundle release];
         }
     }
 }
@@ -259,7 +260,7 @@ static PHConnectionManager *singleton = nil;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     PH_NOTE(@"Request finished!");
-    PHConnectionBundle *connectionBundle = (PHConnectionBundle *)CFDictionaryGetValue(self.connections, connection);
+    PHConnectionBundle *connectionBundle = [(PHConnectionBundle *) CFDictionaryGetValue(self.connections, connection) retain];
 
     NSURLRequest  *request  = [connectionBundle request];
     NSURLResponse *response = [connectionBundle response];
@@ -275,12 +276,17 @@ static PHConnectionManager *singleton = nil;
     if ([delegate respondsToSelector:@selector(connectionDidFinishLoadingWithRequest:response:data:andContext:)])
         [delegate connectionDidFinishLoadingWithRequest:request response:response data:data andContext:context];
 
+    DLog(@"request: %@, response: %@, data: %@", [request description], [response description], data ? @"data" : @"no data");
+
     [[NSNotificationCenter defaultCenter] postNotificationName:[[request URL] absoluteString]
                                                         object:nil
-                                                      userInfo:[NSDictionary dictionaryWithObject:[[request URL] absoluteString]
-                                                                                           forKey:@"requestUrlString"]];
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                     request,  @"request",
+                                                                                     response, @"response",
+                                                                                     data,     @"data", nil]];
 
     CFDictionaryRemoveValue(self.connections, connection);
+    [connectionBundle release];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -288,11 +294,11 @@ static PHConnectionManager *singleton = nil;
     DLog(@"");
     PH_LOG(@"Request failed with error: %@", [error localizedDescription]);
 
-    PHConnectionBundle *connectionData = (PHConnectionBundle *)CFDictionaryGetValue(self.connections, connection);
+    PHConnectionBundle *connectionBundle = [(PHConnectionBundle *) CFDictionaryGetValue(self.connections, connection) retain];
 
-    NSURLRequest *request  = [connectionData request];
-    id            context  = [connectionData context];
-    id<PHConnectionManagerDelegate> delegate = [connectionData delegate];
+    NSURLRequest *request  = [connectionBundle request];
+    id            context  = [connectionBundle context];
+    id<PHConnectionManagerDelegate> delegate = [connectionBundle delegate];
 
     [[self pendingRequests] removeObject:[[request URL] absoluteString]];
 
@@ -301,10 +307,12 @@ static PHConnectionManager *singleton = nil;
 
     [[NSNotificationCenter defaultCenter] postNotificationName:[[request URL] absoluteString]
                                                         object:nil
-                                                      userInfo:[NSDictionary dictionaryWithObject:[[request URL] absoluteString]
-                                                                                           forKey:@"requestUrlString"]];
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                     request, @"request",
+                                                                                     error,   @"error", nil]];
 
     CFDictionaryRemoveValue(self.connections, connection);
+    [connectionBundle release];
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request

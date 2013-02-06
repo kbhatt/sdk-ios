@@ -454,11 +454,32 @@ static NSMutableSet *allContentViews = nil;
 {
     DLog(@"");
 
+    NSURLRequest  *request  = [notification.userInfo objectForKey:@"request"];
+    NSURLResponse *response = [notification.userInfo objectForKey:@"response"];
+    NSData        *data     = [notification.userInfo objectForKey:@"data"];
+    NSError       *error    = [notification.userInfo objectForKey:@"error"];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:[notification.object objectForKey:@"requestUrlString"]
+                                                    name:[[request URL] absoluteString]
                                                   object:nil];
 
-    [self loadTemplate];
+    DLog(@"request: %@, response: %@, data: %@, error: %@", [request description], [response description], data ? @"data" : @"no data", [error description]);
+
+    if (error) {
+        PH_LOG(@"XXXXXXXXXXXXXXXXXXXXXXXXX Error 1 pre-caching, so loading template from network: %@", self.content.URL);
+        [_webView loadRequest:request];
+    } else if (!response || !data) {
+        PH_LOG(@"XXXXXXXXXXXXXXXXXXXXXXXXX Error 2 pre-caching, so loading template from network: %@", self.content.URL);
+        [_webView loadRequest:request];
+    } else {
+        PH_NOTE(@"XXXXXXXXXXXXXXXXXXXXXXXX Have pre-cached template!");
+        [_webView loadData:data
+                  MIMEType:response.MIMEType
+          textEncodingName:response.textEncodingName
+                   baseURL:response.URL];
+    }
+
+    //[self loadTemplate];
 }
 
 - (void)loadTemplate
@@ -477,6 +498,8 @@ static NSMutableSet *allContentViews = nil;
                                          timeoutInterval:PH_REQUEST_TIMEOUT + 10];
 
     NSCachedURLResponse *response = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
+
+    DLog(@"Looking for cached template: %@", [[request URL] absoluteString]);
 
     if ([PHConnectionManager isRequestPending:request]) {
         PH_NOTE(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Template is already being downloaded. Will come back when complete!");
