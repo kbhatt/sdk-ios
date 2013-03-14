@@ -7,24 +7,21 @@
 //
 
 #import "PHPublisherSubContentRequest.h"
+#import "PHConstants.h"
 
 @implementation PHPublisherSubContentRequest
 @synthesize source   = _source;
 @synthesize callback = _callback;
 
-- (NSURL *)URL
+- (NSString *)urlPath
 {
-    if (_URL == nil) {
-        NSString *urlString = [self urlPath];
-        _URL = [[NSURL alloc] initWithString:urlString];
-    }
-
-    return _URL;
+    return PH_URL(/v3/publisher/content/);
 }
 
 - (void)dealloc
 {
     [_callback release], _callback = nil;
+
     [super dealloc];
 }
 @end

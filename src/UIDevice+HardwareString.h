@@ -15,7 +15,7 @@
  * @brief Category on UIDevice to find the <tt>hw.machine</tt> name of the current device
  * (<tt>iPhone4,1</tt> for instance), special cases for handling simulator builds
  **/
-//  TODO: Move this out of a category.
+// TODO: Move this out of a category.
 @interface UIDevice (HardwareString)
 - (NSString *)hardware;
 @end

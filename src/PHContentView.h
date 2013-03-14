@@ -23,9 +23,9 @@
  * transitions.
  **/
 @interface PHContentView : UIView <UIWebViewDelegate, PHURLLoaderDelegate> {
-    PHContent             *_content;
-    UIInterfaceOrientation _orientation;
-    NSObject<PHContentViewDelegate> *_delegate; // TODO: Change these to id<PHContentViewDelegate>
+    PHContent                 *_content;
+    UIInterfaceOrientation     _orientation;
+    id<PHContentViewDelegate> *_delegate; // TODO: Change these to id<PHContentViewDelegate>
 
     UIWebView *_webView;
     BOOL       _willAnimate;
@@ -66,7 +66,7 @@
 @property(nonatomic, retain) PHContent *content;    /**< Sets the PHContent instance for this view, PHContent defines the
                                                          template, transition, frame size, and context for this content unit */
 @property(nonatomic, assign) UIView    *targetView; /**< When shown, the content view will attempt to attach itself to this view. Defaults to nil */
-@property(nonatomic, assign) NSObject<PHContentViewDelegate> *delegate; /**< Content view delegate */ // TODO: Change these to id<PHContentViewDelegate>
+@property(nonatomic, assign) id<PHContentViewDelegate> *delegate; /**< Content view delegate */
 
 /**
  * Show the content unit, with animation. Loads the content template as well
@@ -129,7 +129,7 @@
  *
  * @brief Delegates receive messages about the state of the content view
  **/
-@protocol PHContentViewDelegate<NSObject>
+@protocol PHContentViewDelegate <NSObject>
 @optional
 
 /**

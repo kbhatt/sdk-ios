@@ -15,6 +15,10 @@
 #import "PHStringUtil.h"
 #import "PHPublisherIAPTrackingRequest.h"
 
+@interface PHAPIRequest (Private)
+- (void)finish;
+@end
+
 @interface PHPublisherIAPTrackingRequest (Private)
 + (NSMutableDictionary *)allConversionCookies;
 - (void)requestProductInformation;
@@ -81,6 +85,13 @@
     result.resolution  = (error.code == SKErrorPaymentCancelled) ? PHPurchaseResolutionCancel : PHPurchaseResolutionError;
     result.receiptData = receiptData;
     return result;
+}
+
+- (void)finish
+{
+    _request.delegate = nil;
+
+    [super finish];
 }
 
 - (void)dealloc

@@ -56,7 +56,6 @@
 
         [self.request cancel];
         self.request = nil;
-
         [self.navigationItem.rightBarButtonItem setTitle:@"Start"];
     }
 }
@@ -98,6 +97,7 @@
     [_notificationView clear];
 
     NSString *message = [NSString stringWithFormat:@"Displayed content: %@", content];
+
     [self addMessage:message];
 
     [self addElapsedTime];

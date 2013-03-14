@@ -41,7 +41,7 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
         _visibleViewController = [[UIViewController alloc] init];
     }
 
-    UIWindow *applicationWindow = [[[UIApplication sharedApplication] windows] lastObject];
+    UIWindow *applicationWindow = [[[UIApplication sharedApplication]windows] objectAtIndex:0];
     [applicationWindow addSubview:_visibleViewController.view];
 
     return _visibleViewController;

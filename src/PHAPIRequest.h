@@ -161,7 +161,7 @@
                                                         this with a hard-coded value */
 @property (nonatomic, readonly) NSURL    *URL;     /**< Lazily-initialized NSURL instance that contains a full request
                                                         URL with signed parameters */
-@property (nonatomic, retain)   NSDictionary *additionalParameters; /**< Subclasses can either override this implementation
+@property (nonatomic, retain)   NSDictionary *additionalParameters; /**< Subclasses can override this implementation
                                                                          to add custom parameters to requests */
 @property (nonatomic, readonly) NSDictionary *signedParameters;     /**< Lazily-initialized dictionary of base request
                                                                          parameters as well as necessary request signatures */

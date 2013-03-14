@@ -153,9 +153,11 @@
         PH_LOG(@"detected app store URL: %@", self.targetURL);
         [self finish];
         return nil;
-    } if (++_totalRedirects < MAXIMUM_REDIRECTS) { // TODO: ??? missing else or just bad/weird formatting?
+    }
+
+    if (++_totalRedirects < MAXIMUM_REDIRECTS) {
         return request;
-    } else {
+    } else { // TODO: Unneeded else, yeah?
         PH_LOG(@"max redirects with URL %@", self.targetURL);
         [self finish];
         return nil;

@@ -219,7 +219,6 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
                                                  selector:@selector(placeCloseButton)
                                                      name:UIDeviceOrientationDidChangeNotification
                                                    object:nil];
-
     }
 
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
@@ -309,11 +308,16 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
 {
     DLog(@"");
 
-    UIWindow *window = [[[UIApplication sharedApplication] windows] lastObject];
-    [window addSubview:self.overlayWindow];
+//    UIWindow *window = [[[UIApplication sharedApplication] windows] lastObject];
+//    [window addSubview:self.overlayWindow];
 
     // This should keep UIKeyboard instances from blocking the content view.
     // It should be fine if this runs more than once.
+    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    [window addSubview:self.overlayWindow];
+
+    //This should keep UIKeyboard instances from blocking the content view.
+    //It should be fine if this runs more than once.
     [window endEditing:YES];
 }
 
@@ -383,8 +387,8 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
     DLog(@"");
 
     if ([self setPublisherContentRequestState:PHPublisherContentRequestDone]) {
-        [PHAPIRequest cancelAllRequestsWithDelegate:self]; // TODO: Something is not right here; should be "...WithDelegate:self.delegate];"???
-                                                           // Ohhhhhh ... when subcontent requests are created, the instance of this class is used as the delegate
+        [PHAPIRequest cancelAllRequestsWithDelegate:self];
+
 
         [self hideOverlayWindow];
         [self hideCloseButton];
@@ -488,7 +492,6 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
 
         [self placeCloseButton];
     }
-
 }
 
 - (void)showContentIfReady
@@ -519,9 +522,12 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
         PHPublisherSubContentRequest *request = [PHPublisherSubContentRequest requestForApp:self.token secret:self.secret];
         request.delegate = self;
 
-        request.urlPath = [queryParameters valueForKey:@"url"];
+        //request.urlPath  = [queryParameters valueForKey:@"url"];
+
+        request.additionalParameters = [queryParameters objectForKey:@"additional_parameters"];
+
         request.callback = callback;
-        request.source = source;
+        request.source   = source;
 
         [request send];
     } else {
@@ -751,6 +757,7 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
                                           PHGID(),
                                           receipt,
                                           self.secret];
+
     NSString *generatedSignature = [PHStringUtil hexDigestForString:generatedSignatureString];
 
     return [generatedSignature isEqualToString:signature];

@@ -162,8 +162,9 @@ static NSString *sPlayHavenPluginIdentifier;
 + (NSString *)pluginIdentifier
 {
     @synchronized (self) {
-        if (sPlayHavenPluginIdentifier == nil) {
-            sPlayHavenPluginIdentifier = [[NSString alloc] initWithFormat:@"ios-%@", PH_SDK_VERSION];
+        if (sPlayHavenPluginIdentifier == nil || [sPlayHavenPluginIdentifier isEqualToString:@""]) {
+            [sPlayHavenPluginIdentifier autorelease];
+            sPlayHavenPluginIdentifier = [[NSString alloc] initWithFormat:@"ios"];
         }
     }
 
@@ -173,7 +174,31 @@ static NSString *sPlayHavenPluginIdentifier;
 + (void)setPluginIdentifier:(NSString *)identifier
 {
     @synchronized (self) {
-        [sPlayHavenPluginIdentifier release], sPlayHavenPluginIdentifier = [identifier copy];
+        [sPlayHavenPluginIdentifier autorelease];
+
+        if (!identifier || [identifier isEqualToString:@""]) {
+            PH_LOG(@"Setting the plugin identifier to nil or an empty string will result in using the default value: \"ios\"", nil);
+            sPlayHavenPluginIdentifier = [identifier copy];
+            return;
+        }
+
+        NSError *error = nil;
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^A-Za-z0-9\\-\\.\\_\\~]*"
+                                                                               options:NSRegularExpressionCaseInsensitive
+                                                                                 error:&error];
+
+        NSString *string = [regex stringByReplacingMatchesInString:identifier
+                                                           options:NSMatchingWithTransparentBounds
+                                                             range:NSMakeRange(0, [identifier length])
+                                                      withTemplate:@""];
+
+        if ([string length] > 42)
+            string = [string substringToIndex:42];
+
+        if (error || !string)
+            PH_LOG(@"There was an error setting the plugin identifier. Using the default value: \"ios\"", nil);
+
+        sPlayHavenPluginIdentifier = [string retain];
     }
 }
 
