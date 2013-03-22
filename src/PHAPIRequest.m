@@ -99,6 +99,8 @@ static NSString *sPlayHavenPluginIdentifier;
 
 + (NSString *)expectedSignatureValueForResponse:(NSString *)responseString nonce:(NSString *)nonce secret:(NSString *)secret
 {
+    //DLog(@"\nresponseString: %@\nnonce:    %@\nsecret:   %@", responseString, nonce, secret);
+
     const char   *cKey = [secret cStringUsingEncoding:NSUTF8StringEncoding];
     unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
 
@@ -434,7 +436,7 @@ static NSString *sPlayHavenPluginIdentifier;
 //{
 //    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
 //        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-//        PH_LOG(@"Request recieved HTTP response: %d", [httpResponse statusCode]);
+//        PH_LOG(@"Request received HTTP response: %d", [httpResponse statusCode]);
 //    }
 //
 //    /* We want to get response objects for everything */
@@ -467,9 +469,6 @@ static NSString *sPlayHavenPluginIdentifier;
         NSString *expectedSignature = [PHAPIRequest expectedSignatureValueForResponse:responseString
                                                                                 nonce:nonce
                                                                                secret:self.secret];
-
-        DLog(@"expected signature: %@", expectedSignature);
-        DLog(@"request signature:  %@", requestSignature);
 
         if (![expectedSignature isEqualToString:requestSignature]) {
             [self didFailWithError:PHCreateError(PHRequestDigestErrorType)];
@@ -522,6 +521,7 @@ static NSString *sPlayHavenPluginIdentifier;
 
 - (void)didSucceedWithResponse:(NSDictionary *)responseData
 {
+    DLog(@"");
     if ([self.delegate respondsToSelector:@selector(request:didSucceedWithResponse:)]) {
         [self.delegate performSelector:@selector(request:didSucceedWithResponse:) withObject:self withObject:responseData];
     }
@@ -531,6 +531,7 @@ static NSString *sPlayHavenPluginIdentifier;
 
 - (void)didFailWithError:(NSError *)error
 {
+    DLog(@"");
     if ([self.delegate respondsToSelector:@selector(request:didFailWithError:)]) {
         [self.delegate performSelector:@selector(request:didFailWithError:) withObject:self withObject:error];
     }

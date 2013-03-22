@@ -27,9 +27,9 @@
                         withContext:(id)context;
 
 + (void)stopConnectionsForDelegate:(id<PHConnectionManagerDelegate>)delegate;
-
-+ (BOOL)isRequestPending:(NSURLRequest *)request;
-+ (BOOL)isRequestComplete:(NSURLRequest *)request;
+//
+//+ (BOOL)isRequestPending:(NSURLRequest *)request;
+//+ (BOOL)isRequestComplete:(NSURLRequest *)request;
 
 //+ (NSUInteger)openConnectionCount;
 @end

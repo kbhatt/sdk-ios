@@ -12,13 +12,15 @@
 @synthesize URL        = _URL;
 @synthesize transition = _transition;
 @synthesize context    = _context;
+@synthesize imageUrls  = _imageUrls;
 @synthesize closeButtonDelay   = _closeButtonDelay;
 @synthesize closeButtonURLPath = _closeButtonURLPath;
 
+
 + (id)contentWithDictionary:(NSDictionary *)dictionaryRepresentation
 {
-    BOOL
-    shouldCreateInstance = !![dictionaryRepresentation valueForKey:@"frame"];
+    // TODO: What!? What is going on with this code...
+    BOOL shouldCreateInstance = !![dictionaryRepresentation valueForKey:@"frame"];
     shouldCreateInstance = shouldCreateInstance && !![dictionaryRepresentation valueForKey:@"url"];
     shouldCreateInstance = shouldCreateInstance && !![dictionaryRepresentation valueForKey:@"transition"];
 
@@ -56,6 +58,14 @@
         NSString *closeButtonURLPath = [dictionaryRepresentation valueForKey:@"close_ping"];
         result.closeButtonURLPath = closeButtonURLPath;
 
+        result.imageUrls = [dictionaryRepresentation valueForKey:@"image_urls"];
+
+        // TODO: Here for testing rico
+        if (!result.imageUrls)
+        {
+            result.imageUrls = [NSArray arrayWithObjects:@"http://media.playhaven.com/content-images/1/130208184841/candy_rico.jpg", nil];
+        }
+
         return result;
     } else {
         return nil;
@@ -78,6 +88,7 @@
     [_context release], _context = nil;
     [_closeButtonURLPath release], _closeButtonURLPath = nil;
     [_frameDict release], _frameDict = nil;
+    [_imageUrls release];
     [super dealloc];
 }
 

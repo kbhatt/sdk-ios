@@ -94,7 +94,8 @@
                                              //@"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/data-collection.html.gz",
                                              //@"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/image.html.gz",
                                              //@"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/promo.html.gz",
-                                             @"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/gow.html.gz", nil];
+                                             //@"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/html/gow.html.gz",
+                                             @"http://media.playhaven.com/content-images/1/130208184841/candy_rico.jpg", nil];
     }
 
     if (!!urlArray) {

@@ -16,6 +16,7 @@
 #import "PHPublisherIAPTrackingRequest.h"
 #import "JSON.h"
 #import "PHTimeInGame.h"
+#import "PHResourceCacher.h"
 
 NSString *const PHPublisherContentRequestRewardIDKey        = @"reward";
 NSString *const PHPublisherContentRequestRewardQuantityKey  = @"quantity";
@@ -55,7 +56,8 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
 - (void)dismissToBackground;
 - (void)continueLoadingIfNeeded;
 - (void)getContent;
-- (void)showContentIfReady;
+- (void)showContent;
+//- (void)showContentIfReady;
 - (void)pushContent:(PHContent *)content;
 - (void)removeContentView:(PHContentView *)contentView;
 
@@ -470,12 +472,22 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
             break;
         case PHPublisherContentRequestPreloaded:
             DLog(@"case PHPublisherContentRequestPreloaded");
-            [self showContentIfReady];
+            if (_targetState >= PHPublisherContentRequestDisplayingContent) {
+                [self showContent];
+            } else if (_targetState == PHPublisherContentRequestPreloaded) {
+                //[self getImages];
+            }
+//            [self showContentIfReady];
             break;
         default:
             DLog(@"case default");
             break;
     }
+}
+
+- (void)getImages
+{
+    [PHResourceCacher cacherWithThingsToDownload:[_content imageUrls]];
 }
 
 - (void)getContent
@@ -494,11 +506,12 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
     }
 }
 
-- (void)showContentIfReady
+//- (void)showContentIfReady
+- (void)showContent
 {
     DLog(@"");
 
-    if (_targetState >= PHPublisherContentRequestDisplayingContent) {
+    //if (_targetState >= PHPublisherContentRequestDisplayingContent) {
         if ([(id<PHPublisherContentRequestDelegate>)self.delegate respondsToSelector:@selector(request:contentWillDisplay:)]) {
             [(id<PHPublisherContentRequestDelegate>)self.delegate performSelector:@selector(request:contentWillDisplay:)
                                                                        withObject:self
@@ -511,7 +524,7 @@ PHPublisherContentDismissType * const PHPublisherNoContentTriggeredDismiss      
             [self showOverlayWindow];
             [self pushContent:_content];
         }
-    }
+    //}
 }
 
 #pragma mark -

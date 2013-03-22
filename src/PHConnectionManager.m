@@ -156,7 +156,15 @@ static PHConnectionManager *singleton = nil;
 
 + (BOOL)createConnectionFromRequest:(NSURLRequest *)request forDelegate:(id <PHConnectionManagerDelegate>)delegate withContext:(id)context
 {
-    DLog(@"creating connection for url: %@", [[request URL] absoluteString]);
+    //DLog(@"creating connection for url: %@", [[request URL] absoluteString]);
+
+
+//    NSMutableURLRequest* newRequest = [[request mutableCopyWithZone:nil] autorelease];
+//
+//    [newRequest setValue:@"Mozilla/5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B141"
+//      forHTTPHeaderField:@"User-Agent"];
+//
+//    request = newRequest;
 
     PHConnectionManager *connectionManager = [PHConnectionManager sharedInstance];
 
@@ -184,7 +192,7 @@ static PHConnectionManager *singleton = nil;
                          connection,
                          connectionBundle);
 
-    [[connectionManager pendingRequests] addObject:[[request URL] absoluteString]];
+//    [[connectionManager pendingRequests] addObject:[[request URL] absoluteString]];
 
 //    NSRange range = [[[request URL] absoluteString] rangeOfString:@"http://media.playhaven.com/content-templates/f0452b8fb73f0dd835130f062c84dca7bacb3acc/"];
 //    if (!(range.location == NSNotFound))
@@ -213,7 +221,7 @@ static PHConnectionManager *singleton = nil;
         {
             [connection cancel];
 
-            [[connectionManager pendingRequests] removeObject:[[connectionBundle.request URL] absoluteString]];
+//            [[connectionManager pendingRequests] removeObject:[[connectionBundle.request URL] absoluteString]];
 
             if ([delegate respondsToSelector:@selector(connectionWasStoppedWithContext:)])
                 [delegate connectionWasStoppedWithContext:[connectionBundle context]];
@@ -224,16 +232,16 @@ static PHConnectionManager *singleton = nil;
     }
 }
 
-+ (BOOL)isRequestPending:(NSURLRequest *)request
-{   // TODO: Make sure this is returning truthfully
-    // TODO: Figure out the 'most correct' way to test for request equality
-    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:[[request URL] absoluteString]];
-}
-
-+ (BOOL)isRequestComplete:(NSURLRequest *)request
-{   // TODO: Make sure this is returning truthfully
-    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:[[request URL] absoluteString]];
-}
+//+ (BOOL)isRequestPending:(NSURLRequest *)request
+//{   // TODO: Make sure this is returning truthfully
+//    // TODO: Figure out the 'most correct' way to test for request equality
+//    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:[[request URL] absoluteString]];
+//}
+//
+//+ (BOOL)isRequestComplete:(NSURLRequest *)request
+//{   // TODO: Make sure this is returning truthfully
+//    return [[[PHConnectionManager sharedInstance] pendingRequests] containsObject:[[request URL] absoluteString]];
+//}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -268,22 +276,22 @@ static PHConnectionManager *singleton = nil;
     id             context  = [connectionBundle context];
     id<PHConnectionManagerDelegate> delegate = [connectionBundle delegate];
 
-    [[self pendingRequests] removeObject:[[request URL] absoluteString]];
-    [[self completeRequests] addObject:[[request URL] absoluteString]];
+//    [[self pendingRequests] removeObject:[[request URL] absoluteString]];
+//    [[self completeRequests] addObject:[[request URL] absoluteString]];
 
     DLog(@"completing connection for url: %@", [[request URL] absoluteString]);
 
     if ([delegate respondsToSelector:@selector(connectionDidFinishLoadingWithRequest:response:data:andContext:)])
         [delegate connectionDidFinishLoadingWithRequest:request response:response data:data andContext:context];
 
-    DLog(@"request: %@, response: %@, data: %@", [request description], [response description], data ? @"data" : @"no data");
+    //DLog(@"request: %@, response: %@, data: %@", [request description], [response description], data ? @"data" : @"no data");
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:[[request URL] absoluteString]
-                                                        object:nil
-                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                     request,  @"request",
-                                                                                     response, @"response",
-                                                                                     data,     @"data", nil]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:[[request URL] absoluteString]
+//                                                        object:nil
+//                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                                                     request,  @"request",
+//                                                                                     response, @"response",
+//                                                                                     data,     @"data", nil]];
 
     CFDictionaryRemoveValue(self.connections, connection);
     [connectionBundle release];
@@ -300,16 +308,16 @@ static PHConnectionManager *singleton = nil;
     id            context  = [connectionBundle context];
     id<PHConnectionManagerDelegate> delegate = [connectionBundle delegate];
 
-    [[self pendingRequests] removeObject:[[request URL] absoluteString]];
+//    [[self pendingRequests] removeObject:[[request URL] absoluteString]];
 
     if ([delegate respondsToSelector:@selector(connectionDidFailWithError:request:andContext:)])
         [delegate connectionDidFailWithError:error request:request andContext:context];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:[[request URL] absoluteString]
-                                                        object:nil
-                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                     request, @"request",
-                                                                                     error,   @"error", nil]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:[[request URL] absoluteString]
+//                                                        object:nil
+//                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                                                     request, @"request",
+//                                                                                     error,   @"error", nil]];
 
     CFDictionaryRemoveValue(self.connections, connection);
     [connectionBundle release];
@@ -325,9 +333,28 @@ static PHConnectionManager *singleton = nil;
     return request;
 }
 
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
+{
+    DLog(@"mimeType: %@", cachedResponse.response.MIMEType);
+
+    if ([cachedResponse.response isKindOfClass:[NSHTTPURLResponse class]])
+        DLog(@"headers: %@", [((NSHTTPURLResponse *)cachedResponse.response).allHeaderFields description]);
+
+    if ([cachedResponse.response.MIMEType isEqualToString:@"image/jpeg"]) {
+        DLog(@"switching pictures");
+        return [[[NSCachedURLResponse alloc] initWithResponse:cachedResponse.response
+                                                         data:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"candy_rico_inverted"
+                                                                                                                             ofType:@"jpg"]]
+                                                     userInfo:cachedResponse.userInfo
+                                                storagePolicy:cachedResponse.storagePolicy] autorelease];
+    }
+
+    return cachedResponse;
+}
+
 - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge  { DLog(@""); }
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge { DLog(@""); }
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse    { DLog(@""); return cachedResponse; }
+//- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse    { DLog(@""); return cachedResponse; }
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten
                                                totalBytesWritten:(NSInteger)totalBytesWritten
                                        totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite

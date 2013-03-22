@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2333BBFA16C5812A00F7B38D /* candy_rico_inverted.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2333BBF916C5812A00F7B38D /* candy_rico_inverted.jpg */; };
 		2391BD8B16BB643200105789 /* PHConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62348DF5C94983127880EC16 /* PHConnectionManager.m */; };
 		2391BD8C16BB643200105789 /* PHResourceCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 62348C5886308073361F8F76 /* PHResourceCacher.m */; };
 		62348033646FF95083F176D0 /* PHResourceCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 62348C5886308073361F8F76 /* PHResourceCacher.m */; };
@@ -538,6 +539,7 @@
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2333BBF916C5812A00F7B38D /* candy_rico_inverted.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = candy_rico_inverted.jpg; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		62348700A10A3389FCC961D1 /* PHResourceCacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHResourceCacher.h; sourceTree = "<group>"; };
 		62348C5886308073361F8F76 /* PHResourceCacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHResourceCacher.m; sourceTree = "<group>"; };
@@ -1013,6 +1015,7 @@
 		EA523D8C1343EE790057DEA5 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				2333BBF916C5812A00F7B38D /* candy_rico_inverted.jpg */,
 				EAC53A90134E5F1700F2F956 /* Additions */,
 				EA523D931343EE8E0057DEA5 /* Common */,
 				EA523D941343EE9D0057DEA5 /* Publisher SDK */,
@@ -1542,6 +1545,7 @@
 				EA328B30151A9D4400DE3CAD /* README.markdown in Resources */,
 				EA328B47151BF68B00DE3CAD /* PublisherOpenViewController.xib in Resources */,
 				EAE8BCD91677EAFE008E161E /* PlayHaven SDK Agreement.markdown in Resources */,
+				2333BBFA16C5812A00F7B38D /* candy_rico_inverted.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

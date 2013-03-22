@@ -33,6 +33,7 @@ typedef enum {
     NSDictionary           *_context;
     NSTimeInterval          _closeButtonDelay;
     NSString               *_closeButtonURLPath;
+    NSArray                *_imageUrls;
 }
 
 /**
@@ -55,7 +56,9 @@ typedef enum {
 @property (nonatomic, assign) NSTimeInterval closeButtonDelay;    /**< Amount of time (in seconds) to wait after displaying the
                                                                        overlay before showing the native close button */
 @property (nonatomic, copy)   NSString      *closeButtonURLPath;  /**< The URL that should be pinged when the native close button is used */
-@property (nonatomic, assign) PHContentTransitionType transition; /**< Transition type, see PHContentTransitionType above */
+@property (nonatomic, retain) NSArray       *imageUrls;
+@property (nonatomic, assign) PHContentTransitionType transition;
+/**< Transition type, see PHContentTransitionType above */
 
 /**
  * Returns a CGRect if this content unit has a valid frame for \c orientation, otherwise returns CGRectNull

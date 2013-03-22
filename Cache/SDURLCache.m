@@ -426,7 +426,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
     // iOS 5 implements disk caching. SDURLCache then disables itself at runtime if the current device OS
     // version is 5 or greater
     NSArray *version = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
-    disabled = [[version objectAtIndex:0] intValue] >= 5;
+    //disabled = [[version objectAtIndex:0] intValue] >= 5;
 
     if (disabled)
     {
@@ -453,6 +453,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
 
 - (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forRequest:(NSURLRequest *)request
 {
+    DLog(@"request: %@", [[request URL] absoluteString]);
     if (disabled)
     {
         [super storeCachedResponse:cachedResponse forRequest:request];
@@ -504,6 +505,11 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
 
 - (NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request
 {
+    DLog(@"request: %@", [[request URL] absoluteString]);
+
+    if ([super cachedResponseForRequest:request])
+        DLog(@"returning something: %@", [[super cachedResponseForRequest:request] description]);
+
     if (disabled) return [super cachedResponseForRequest:request];
 
     request = [PH_SDURLCACHE_CLASS canonicalRequestForRequest:request];
@@ -511,7 +517,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
     NSCachedURLResponse *memoryResponse = [super cachedResponseForRequest:request];
     if (memoryResponse)
     {
-        //NSLog(@"Memory hit for URL: %@", request.URL);
+        NSLog(@"Memory hit for URL: %@", request.URL);
         return memoryResponse;
     }
 
@@ -558,7 +564,7 @@ static NSDateFormatter* CreateDateFormatter(NSString *format)
 
                 if (diskResponse)
                 {
-                    //NSLog(@"Disk hit for URL: %@", request.URL);
+                    NSLog(@"Disk hit for URL: %@", request.URL);
                     return diskResponse;
                 }
             }
