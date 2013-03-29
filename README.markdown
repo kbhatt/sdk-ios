@@ -107,10 +107,10 @@ You can use the OpenUDID in addition to our own proprietary identification syste
 
 NOTE: The "test device" feature of the PlayHaven Dashboard will only work with games that send either OpenUDID or UDIDs.
 
-By default `PH_USE_OPENUDID=1` is set, which sends the OpenUDID value for the current device with the open request. If you would like to opt out of OpenUDID collection, set `PH_USE_OPENUDID=0` instead. If you opt out of OpenUDID collection, you may also remove the OpenUDID classes from your project.
+Currently, `PH_USE_OPENUDID=1` and `PH_USE_UNIQUE_IDENTIFIER=1` are set by default, which sends the OpenUDID and/or UDID values for the current device with the open request. If you would like to disable UDID collection, you can add the preprocessor macros `PH_USE_OPENUDID=0` and `PH_USE_UNIQUE_IDENTIFIER=0` to your project's build settings. If you opt out of OpenUDID collection, you may also remove the OpenUDID classes from your project.
 
 By default `PH_USE_MAC_ADDRESS=1` is set, which sends the device's wifi MAC address along with these new tokens.
-  
+
 #### User opt-out
 To comply with Apple policies for the use of device information, we've provided a mechanism for your app to opt-out of collection of UDID and MAC addresses. To set the opt out status for your app, use the following method:
 
