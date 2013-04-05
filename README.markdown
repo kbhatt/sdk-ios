@@ -31,7 +31,7 @@ Private
 * In-App iTunes purchases support for content units. See [Links to the App Store](#links-to-the-app-store).
 * Fixes for crashes affecting devices running iOS versions lower than 5.0.
 
-1.12.0
+Public
 ======
 * The SDK now automatically records the number of game sessions and the length of game sessions. This depends on a proper open request implementation. See [Recording game opens](#recording-game-opens).
 
