@@ -25,7 +25,7 @@ Also see the [Integration](#integration) and [API Reference](#api-reference) sec
 Version History
 ===============
 
-1.12.1
+Private
 ======
 * iOS 6 compatibility improvements.
 * In-App iTunes purchases support for content units. See [Links to the App Store](#links-to-the-app-store).
