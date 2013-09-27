@@ -59,7 +59,6 @@ static UIImage *BadgeImage;
 #if !defined(__IPHONE_OS_VERSION_MIN_REQUIRED) || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
     else
     {
-        
         [[UIColor whiteColor] set];
         [value drawAtPoint:CGPointMake(10.0f, 1.0f) withFont:[UIFont boldSystemFontOfSize:17.0f]];
     }
