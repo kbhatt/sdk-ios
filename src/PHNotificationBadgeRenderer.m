@@ -48,8 +48,21 @@ static UIImage *BadgeImage;
     CGSize notificationSize = [self sizeForNotification:notificationData];
     [BadgeImage drawInRect:CGRectMake(0, 0, notificationSize.width, BadgeImage.size.height)];
 
-    [[UIColor whiteColor] set];
-    [value drawAtPoint:CGPointMake(10.0f, 1.0f) withFont:[UIFont boldSystemFontOfSize:17.0f]];
+    if ([value respondsToSelector:@selector(drawAtPoint:withAttributes:)])
+    {
+        [value drawAtPoint:CGPointMake(10.0f, 1.0f) withAttributes:
+         @{
+                     NSFontAttributeName : [UIFont boldSystemFontOfSize:17.0f],
+                     NSForegroundColorAttributeName : [UIColor whiteColor]
+        }];
+    }
+#if !defined(__IPHONE_OS_VERSION_MIN_REQUIRED) || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    else
+    {
+        [[UIColor whiteColor] set];
+        [value drawAtPoint:CGPointMake(10.0f, 1.0f) withFont:[UIFont boldSystemFontOfSize:17.0f]];
+    }
+#endif
 }
 
 - (CGSize)sizeForNotification:(NSDictionary *)notificationData
@@ -59,7 +72,21 @@ static UIImage *BadgeImage;
         return CGSizeZero;
     }
 
-    CGFloat valueWidth = [value sizeWithFont:[UIFont boldSystemFontOfSize:17.0f]].width + 20.0f;
+    CGFloat valueWidth = 0;
+    if ([value respondsToSelector:@selector(sizeWithAttributes:)])
+    {
+        valueWidth = [value sizeWithAttributes:
+        @{
+                    NSFontAttributeName : [UIFont boldSystemFontOfSize:17.0f]
+        }].width + 20.0f;
+    }
+#if !defined(__IPHONE_OS_VERSION_MIN_REQUIRED) || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    else
+    {
+        valueWidth = [value sizeWithFont:[UIFont boldSystemFontOfSize:17.0f]].width + 20.0f;
+    }
+#endif
+    
     return CGSizeMake(valueWidth, BadgeImage.size.height);
 }
 @end
