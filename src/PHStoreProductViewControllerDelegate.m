@@ -79,7 +79,7 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
             self.storeController.delegate = self;
             
             [[self visibleViewController] presentViewController:self.storeController animated:YES
-                        completion:NULL];;
+                        completion:NULL];
         }
         
         NSDictionary *parameters = @{SKStoreProductParameterITunesItemIdentifier : productId};
