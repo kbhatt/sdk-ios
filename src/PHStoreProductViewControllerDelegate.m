@@ -28,6 +28,7 @@
 static PHStoreProductViewControllerDelegate *_delegate = nil;
 
 @interface PHStoreProductViewControllerDelegate()
+@property (nonatomic, retain) SKStoreProductViewController *storeController;
 - (UIViewController *)visibleViewController;
 @end
 
@@ -48,7 +49,14 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
     return _delegate;
 }
 
-// TODO: This class isn't following retain/release principles correctly and is missing dealloc. Investigate further
+- (void)dealloc
+{
+    [_storeController release];
+    [_visibleViewController release];
+
+    [super dealloc];
+}
+
 - (UIViewController *)visibleViewController
 {
     if (_visibleViewController == nil) {
@@ -63,14 +71,20 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
 
 - (BOOL)showProductId:(NSString *)productId
 {
-    if ([SKStoreProductViewController class]) {
-        SKStoreProductViewController *controller = [SKStoreProductViewController new];
-        NSDictionary *parameters = [NSDictionary dictionaryWithObject:productId forKey:SKStoreProductParameterITunesItemIdentifier];
-        controller.delegate = self;
-        [controller loadProductWithParameters:parameters completionBlock:nil];
-
-        [[self visibleViewController] presentViewController:controller animated:YES completion:NULL];
-        [controller release];
+    if ([SKStoreProductViewController class] && nil != productId)
+    {
+        if (nil == self.storeController)
+        {
+            self.storeController = [[SKStoreProductViewController new] autorelease];
+            self.storeController.delegate = self;
+            
+            [[self visibleViewController] presentViewController:self.storeController animated:YES
+                        completion:NULL];;
+        }
+        
+        NSDictionary *parameters = @{SKStoreProductParameterITunesItemIdentifier : productId};
+        [self.storeController loadProductWithParameters:parameters completionBlock:nil];
+        
         return true;
     }
 
@@ -81,6 +95,7 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
 {
     [viewController dismissViewControllerAnimated:YES completion:^(void){
         [_visibleViewController.view removeFromSuperview];
+        self.storeController = nil;
     }];
 }
 
@@ -95,6 +110,7 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
         [_visibleViewController dismissViewControllerAnimated:YES completion:NULL];
     }
     [_visibleViewController.view removeFromSuperview];
+    self.storeController = nil;
 }
 @end
 #endif
