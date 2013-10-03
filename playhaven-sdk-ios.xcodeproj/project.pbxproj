@@ -75,6 +75,7 @@
 		E1769A8B171E29C300FE6518 /* PHPushRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1769A8A171E29C200FE6518 /* PHPushRequestTest.m */; };
 		E17A203D1718DC4600EF6C14 /* PushNotificationRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A203B1718DC4400EF6C14 /* PushNotificationRegistrationViewController.m */; };
 		E17A203E1718DC4600EF6C14 /* PushNotificationRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E17A203C1718DC4500EF6C14 /* PushNotificationRegistrationViewController.xib */; };
+		E1B5975617FAFB4500270C4D /* PHStringUtilTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B5975517FAFB4500270C4D /* PHStringUtilTest.m */; };
 		E1C8F4EF171CABD900F64E12 /* PlayHavenAppIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C8F4EE171CABD900F64E12 /* PlayHavenAppIdentity.m */; };
 		E1C8F4F0171CABD900F64E12 /* PlayHavenAppIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C8F4EE171CABD900F64E12 /* PlayHavenAppIdentity.m */; };
 		E1C8F4F1171CABD900F64E12 /* PlayHavenAppIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C8F4EE171CABD900F64E12 /* PlayHavenAppIdentity.m */; };
@@ -607,6 +608,7 @@
 		E17A203C1718DC4500EF6C14 /* PushNotificationRegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushNotificationRegistrationViewController.xib; sourceTree = "<group>"; };
 		E1AB2C5917D5EB6900B3FE71 /* PHAPIRequest+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PHAPIRequest+Private.h"; sourceTree = "<group>"; };
 		E1B04AA417D9E8C200DE38F6 /* PHPublisherContentRequest+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PHPublisherContentRequest+Private.h"; sourceTree = "<group>"; };
+		E1B5975517FAFB4500270C4D /* PHStringUtilTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHStringUtilTest.m; sourceTree = "<group>"; };
 		E1C8F4ED171CABD900F64E12 /* PlayHavenAppIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayHavenAppIdentity.h; sourceTree = "<group>"; };
 		E1C8F4EE171CABD900F64E12 /* PlayHavenAppIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayHavenAppIdentity.m; sourceTree = "<group>"; };
 		E1C8F4F8171CC94400F64E12 /* PHPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushRequest.h; sourceTree = "<group>"; };
@@ -1086,6 +1088,7 @@
 				E1769A8A171E29C200FE6518 /* PHPushRequestTest.m */,
 				E1508EB617297F2A00DDE809 /* PHPushDeliveryRequestTest.m */,
 				E122A1D5172ACA33001F3A14 /* PHPushProviderTest.m */,
+				E1B5975517FAFB4500270C4D /* PHStringUtilTest.m */,
 			);
 			name = "Unit Testing";
 			path = tests;
@@ -1804,6 +1807,7 @@
 				E1769A8B171E29C300FE6518 /* PHPushRequestTest.m in Sources */,
 				E1508EB717297F2A00DDE809 /* PHPushDeliveryRequestTest.m in Sources */,
 				E1508EB81729845E00DDE809 /* PHPushDeliveryRequest.m in Sources */,
+				E1B5975617FAFB4500270C4D /* PHStringUtilTest.m in Sources */,
 				E122A1C8172A8889001F3A14 /* PHPushProvider.m in Sources */,
 				62348E9579DDAD6E0F900501 /* PHError.m in Sources */,
 				E122A1D6172ACA33001F3A14 /* PHPushProviderTest.m in Sources */,
