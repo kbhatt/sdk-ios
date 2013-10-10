@@ -27,6 +27,7 @@
 #import "PHPublisherIAPTrackingRequest.h"
 
 #import "PHNotificationView.h"
+#import "PHStoreProductViewController.h"
 #import "PHReward.h"
 #import "PHPurchase.h"
 

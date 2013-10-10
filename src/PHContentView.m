@@ -24,7 +24,7 @@
 #import "NSObject+QueryComponents.h"
 #import "JSON.h"
 #import "PHConstants.h"
-#import "PHStoreProductViewControllerDelegate.h"
+#import "PHStoreProductViewController.h"
 #import "PHConnectionManager.h"
 #import "PHResourceCacher.h"
 
@@ -693,7 +693,7 @@ static NSMutableSet *allContentViews = nil;
     NSDictionary *queryComponents = [contextData valueForKey:@"queryComponents"];
     BOOL shouldUseInternal = [[queryComponents valueForKey:@"in_app_store_enabled"] boolValue] && ([SKStoreProductViewController class] != nil);
     if (shouldUseInternal) {
-        [[PHStoreProductViewControllerDelegate getDelegate] showProductId:[queryComponents valueForKey:@"application_id"]];
+        [[PHStoreProductViewController sharedInstance] showProductId:[queryComponents valueForKey:@"application_id"]];
     }
 #endif
 

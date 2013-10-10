@@ -177,11 +177,32 @@
     [self.view addSubview:_notificationView];
     [_notificationView setCenter:CGPointMake(self.view.frame.size.width - 22, 19)];
     [_notificationView refresh];
+    
+    [[PHStoreProductViewController sharedInstance] setDelegate:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [_notificationView removeFromSuperview];
+    
+    [[PHStoreProductViewController sharedInstance] setDelegate:nil];
 }
+
+#pragma mark - PHStoreProductViewControllerDelegate
+
+- (void)storeProductViewController:(PHStoreProductViewController *)aController
+            willPresentProductWithID:(NSString *)aProductID
+{
+    [self addMessage:[NSString stringWithFormat:@"Will present in-app store for product id: %@",
+                aProductID]];
+}
+
+- (void)storeProductViewController:(PHStoreProductViewController *)aController
+            didDismissProductWithID:(NSString *)aProductID
+{
+    [self addMessage:[NSString stringWithFormat:@"Did dismiss in-app store for product id: %@",
+                aProductID]];
+}
+
 @end

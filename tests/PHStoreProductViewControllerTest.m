@@ -13,26 +13,33 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 
- PublisherContentViewController.h
+ PHStoreProductViewControllerTest.m
  playhaven-sdk-ios
 
- Created by Jesus Fernandez on 4/25/11.
+ Created by Anton Fedorchenko on 10/10/13
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#import <UIKit/UIKit.h>
-#import "ExampleViewController.h"
+#import <SenTestingKit/SenTestingKit.h>
 #import "PlayHavenSDK.h"
 
-@interface PublisherContentViewController : ExampleViewController
-            <PHPublisherContentRequestDelegate, PHStoreProductViewControllerDelegate>
-{
-    PHNotificationView *_notificationView;
-    UITextField        *_placementField;
+@interface PHStoreProductViewControllerTest : SenTestCase
+@end
 
-    PHPublisherContentRequest *_request;
+@implementation PHStoreProductViewControllerTest
+
+- (void)testSingleton
+{
+    PHStoreProductViewController *theSharedInstance = [PHStoreProductViewController sharedInstance];
+    STAssertNotNil(theSharedInstance, @"Cannot access singleton instance!");
+    
+    STAssertEqualObjects(theSharedInstance, [PHStoreProductViewController new], @"");
 }
-@property (nonatomic, retain) IBOutlet UITextField *placementField;
-@property (nonatomic, retain) IBOutlet UISwitch    *showsOverlaySwitch;
-@property (nonatomic, retain) IBOutlet UISwitch    *animateSwitch;
-@property (nonatomic, retain) PHPublisherContentRequest *request;
+
+- (void)testStore
+{
+    PHStoreProductViewController *theSharedInstance = [PHStoreProductViewController sharedInstance];
+    STAssertFalse([theSharedInstance showProductId:nil], @"In-app store should not be shown for nil"
+                "product!");
+}
+
 @end
