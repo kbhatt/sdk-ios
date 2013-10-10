@@ -65,6 +65,10 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 + (void)initialize
 {
     if  (self == [PHAPIRequest class]) {
+        // Tom DiZoglio: Added DNS resolution once before the first call to media and api2
+        // playhaven.com servers. Speeds up initial few calls, then after that stays the same. I
+        // think AT&T is caching DNS at that point.
+        
         [[PHNetworkUtil sharedInstance] checkDNSResolutionForURLPath:PH_BASE_URL];
         [[PHNetworkUtil sharedInstance] checkDNSResolutionForURLPath:PH_CONTENT_ADDRESS];
 #ifdef PH_USE_NETWORK_FIXTURES
