@@ -66,6 +66,7 @@
 		E122A1CB172A8889001F3A14 /* PHPushProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E122A1C7172A8889001F3A14 /* PHPushProvider.m */; };
 		E122A1CC172A8889001F3A14 /* PHPushProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E122A1C7172A8889001F3A14 /* PHPushProvider.m */; };
 		E122A1D6172ACA33001F3A14 /* PHPushProviderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E122A1D5172ACA33001F3A14 /* PHPushProviderTest.m */; };
+		E14C1C601806D5BA005997A1 /* PHStoreProductViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */; };
 		E1508EB417293F7A00DDE809 /* PHPushDeliveryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */; };
 		E1508EB717297F2A00DDE809 /* PHPushDeliveryRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB617297F2A00DDE809 /* PHPushDeliveryRequestTest.m */; };
 		E1508EB81729845E00DDE809 /* PHPushDeliveryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */; };
@@ -87,14 +88,14 @@
 		E1CB0F5317C647ED00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CB0F5417C647EE00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CB0F5517C647EF00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
-		E69D85961718E82D00CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
-		E69D85971718E83700CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
-		E69D85981718E83F00CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
-		E69D85991718E84500CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
-		E69D859A1718E85400CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69D859B1718E85B00CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69D859C1718E86200CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69D859D1718E86700CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69D85961718E82D00CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
+		E69D85971718E83700CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
+		E69D85981718E83F00CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
+		E69D85991718E84500CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
+		E69D859A1718E85400CA4997 /* PHStoreProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69D859B1718E85B00CA4997 /* PHStoreProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69D859C1718E86200CA4997 /* PHStoreProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69D859D1718E86700CA4997 /* PHStoreProductViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EADB57B816094C7F000433D8 /* PHStoreProductViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69D859E1718E8E800CA4997 /* PHNetworkUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = EA24FCA91554510D0074FC13 /* PHNetworkUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69D859F1718E8ED00CA4997 /* PHNetworkUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = EA24FCA91554510D0074FC13 /* PHNetworkUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69D85A01718E8F100CA4997 /* PHNetworkUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = EA24FCA91554510D0074FC13 /* PHNetworkUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -394,10 +395,10 @@
 		EAD8CFDF1607CCB30027F1D5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8CFDD1607CCA60027F1D5 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EAD8CFE01607CCBD0027F1D5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8CFDD1607CCA60027F1D5 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EAD8CFE11607CCC70027F1D5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD8CFDD1607CCA60027F1D5 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		EADB57BB16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
-		EADB57BC16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
-		EADB57BD16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
-		EADB57BE16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */; };
+		EADB57BB16094C7F000433D8 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
+		EADB57BC16094C7F000433D8 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
+		EADB57BD16094C7F000433D8 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
+		EADB57BE16094C7F000433D8 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
 		EAE0F5FD1385D1120062B950 /* PHPublisherSubContentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0F5FB1385D1120062B950 /* PHPublisherSubContentRequest.m */; };
 		EAE36A6115BF70CE00892B81 /* IAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE36A5F15BF70CE00892B81 /* IAPViewController.m */; };
 		EAE36A6215BF70CE00892B81 /* IAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE36A5F15BF70CE00892B81 /* IAPViewController.m */; };
@@ -599,6 +600,7 @@
 		E122A1C6172A8889001F3A14 /* PHPushProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushProvider.h; sourceTree = "<group>"; };
 		E122A1C7172A8889001F3A14 /* PHPushProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushProvider.m; sourceTree = "<group>"; };
 		E122A1D5172ACA33001F3A14 /* PHPushProviderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushProviderTest.m; sourceTree = "<group>"; };
+		E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHStoreProductViewControllerTest.m; sourceTree = "<group>"; };
 		E1508EB217293F7900DDE809 /* PHPushDeliveryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushDeliveryRequest.h; sourceTree = "<group>"; };
 		E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushDeliveryRequest.m; sourceTree = "<group>"; };
 		E1508EB617297F2A00DDE809 /* PHPushDeliveryRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushDeliveryRequestTest.m; sourceTree = "<group>"; };
@@ -738,8 +740,8 @@
 		EAD610EE15AC9212001D3E90 /* PHURLLoader+Automation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHURLLoader+Automation.m"; sourceTree = "<group>"; };
 		EAD610EF15AC9212001D3E90 /* zepto.viewportposition.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = zepto.viewportposition.js; sourceTree = "<group>"; };
 		EAD8CFDD1607CCA60027F1D5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHStoreProductViewControllerDelegate.h; sourceTree = "<group>"; };
-		EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHStoreProductViewControllerDelegate.m; sourceTree = "<group>"; };
+		EADB57B816094C7F000433D8 /* PHStoreProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHStoreProductViewController.h; sourceTree = "<group>"; };
+		EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHStoreProductViewController.m; sourceTree = "<group>"; };
 		EAE0F5FA1385D1120062B950 /* PHPublisherSubContentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPublisherSubContentRequest.h; sourceTree = "<group>"; };
 		EAE0F5FB1385D1120062B950 /* PHPublisherSubContentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPublisherSubContentRequest.m; sourceTree = "<group>"; };
 		EAE36A5E15BF70CE00892B81 /* IAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPViewController.h; sourceTree = "<group>"; };
@@ -1089,6 +1091,7 @@
 				E1508EB617297F2A00DDE809 /* PHPushDeliveryRequestTest.m */,
 				E122A1D5172ACA33001F3A14 /* PHPushProviderTest.m */,
 				E1B5975517FAFB4500270C4D /* PHStringUtilTest.m */,
+				E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */,
 			);
 			name = "Unit Testing";
 			path = tests;
@@ -1254,8 +1257,8 @@
 		EADB57B716094C16000433D8 /* iTunes */ = {
 			isa = PBXGroup;
 			children = (
-				EADB57B816094C7F000433D8 /* PHStoreProductViewControllerDelegate.h */,
-				EADB57B916094C7F000433D8 /* PHStoreProductViewControllerDelegate.m */,
+				EADB57B816094C7F000433D8 /* PHStoreProductViewController.h */,
+				EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */,
 			);
 			name = iTunes;
 			sourceTree = "<group>";
@@ -1285,7 +1288,7 @@
 				EA9AB66914A3B2EE00079704 /* PHReward.h in Headers */,
 				EA9AB66B14A3B2EE00079704 /* PHPublisherOpenRequest.h in Headers */,
 				EA5E5C5914C60D660026B3E0 /* SDURLCache.h in Headers */,
-				E69D859A1718E85400CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */,
+				E69D859A1718E85400CA4997 /* PHStoreProductViewController.h in Headers */,
 				EA24FCAB1554510D0074FC13 /* PHNetworkUtil.h in Headers */,
 				EA019C8114C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EA451033156298E80095538E /* SDCachedURLResponse.h in Headers */,
@@ -1322,7 +1325,7 @@
 				EAB6A3A714EED62D00EAC692 /* PHReward.h in Headers */,
 				EAB6A3A814EED62D00EAC692 /* PHPublisherOpenRequest.h in Headers */,
 				EAB6A3A914EED62D00EAC692 /* SDURLCache.h in Headers */,
-				E69D859B1718E85B00CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */,
+				E69D859B1718E85B00CA4997 /* PHStoreProductViewController.h in Headers */,
 				E69D859E1718E8E800CA4997 /* PHNetworkUtil.h in Headers */,
 				EAB6A3AB14EED62D00EAC692 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EA451034156298E80095538E /* SDCachedURLResponse.h in Headers */,
@@ -1355,7 +1358,7 @@
 				EAF1685E1534E2DE006B6993 /* PHReward.h in Headers */,
 				EAF1685F1534E2DE006B6993 /* PHPublisherOpenRequest.h in Headers */,
 				EAF168601534E2DE006B6993 /* SDURLCache.h in Headers */,
-				E69D859C1718E86200CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */,
+				E69D859C1718E86200CA4997 /* PHStoreProductViewController.h in Headers */,
 				E69D859F1718E8ED00CA4997 /* PHNetworkUtil.h in Headers */,
 				EAF168621534E2DE006B6993 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EA451035156298E80095538E /* SDCachedURLResponse.h in Headers */,
@@ -1392,7 +1395,7 @@
 				EAF168991534E34F006B6993 /* PHReward.h in Headers */,
 				EAF1689A1534E34F006B6993 /* PHPublisherOpenRequest.h in Headers */,
 				EAF1689B1534E34F006B6993 /* SDURLCache.h in Headers */,
-				E69D859D1718E86700CA4997 /* PHStoreProductViewControllerDelegate.h in Headers */,
+				E69D859D1718E86700CA4997 /* PHStoreProductViewController.h in Headers */,
 				E69D85A01718E8F100CA4997 /* PHNetworkUtil.h in Headers */,
 				EAF1689D1534E34F006B6993 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				EA451036156298E80095538E /* SDCachedURLResponse.h in Headers */,
@@ -1774,7 +1777,7 @@
 				EA45102C156298E80095538E /* SDCachedURLResponse.m in Sources */,
 				D108A83515A6553700082388 /* PHTimeInGame.m in Sources */,
 				EA8A531515B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
-				EADB57BB16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EADB57BB16094C7F000433D8 /* PHStoreProductViewController.m in Sources */,
 				EAE36A6115BF70CE00892B81 /* IAPViewController.m in Sources */,
 				EAA86A96167FFDE100F6B388 /* IDViewController.m in Sources */,
 				6234811B3CABA0F980B67137 /* PHConnectionManager.m in Sources */,
@@ -1804,6 +1807,7 @@
 				EA7CF59D156C365C0095572E /* PlayHavenTest.m in Sources */,
 				D108A83E15A6B68600082388 /* PHTimeInGameTest.m in Sources */,
 				EA98C12D16640E4500B6AA8C /* PHNetworkUtilTest.m in Sources */,
+				E14C1C601806D5BA005997A1 /* PHStoreProductViewControllerTest.m in Sources */,
 				E1769A8B171E29C300FE6518 /* PHPushRequestTest.m in Sources */,
 				E1508EB717297F2A00DDE809 /* PHPushDeliveryRequestTest.m in Sources */,
 				E1508EB81729845E00DDE809 /* PHPushDeliveryRequest.m in Sources */,
@@ -1859,7 +1863,7 @@
 				EAD610F415AC9212001D3E90 /* PHTestController.m in Sources */,
 				EAD610F515AC9212001D3E90 /* PHURLLoader+Automation.m in Sources */,
 				EA8A531615B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
-				EADB57BC16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EADB57BC16094C7F000433D8 /* PHStoreProductViewController.m in Sources */,
 				EAE36A6215BF70CE00892B81 /* IAPViewController.m in Sources */,
 				EAA86A97167FFDE100F6B388 /* IDViewController.m in Sources */,
 				62348FFE44D67C4BDBE3F305 /* PHConnectionManager.m in Sources */,
@@ -1914,7 +1918,7 @@
 				EA45102D156298E80095538E /* SDCachedURLResponse.m in Sources */,
 				D108A83615A6553700082388 /* PHTimeInGame.m in Sources */,
 				EA8A531715B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
-				EADB57BD16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EADB57BD16094C7F000433D8 /* PHStoreProductViewController.m in Sources */,
 				EAE36A6315BF70CE00892B81 /* IAPViewController.m in Sources */,
 				EAA86A98167FFDE100F6B388 /* IDViewController.m in Sources */,
 				6234847223A7D7C6CF3B498B /* PHConnectionManager.m in Sources */,
@@ -1958,7 +1962,7 @@
 				D108A83815A6553700082388 /* PHTimeInGame.m in Sources */,
 				6234819E8A7FD7CCF6C92C29 /* PHConnectionManager.m in Sources */,
 				62348D753B6B0F894B6AF667 /* PHResourceCacher.m in Sources */,
-				E69D85961718E82D00CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				E69D85961718E82D00CA4997 /* PHStoreProductViewController.m in Sources */,
 				EA24FCB01554510D0074FC13 /* PHNetworkUtil.m in Sources */,
 				62348FFCC626F750CCD2F7B8 /* PHError.m in Sources */,
 			);
@@ -1994,7 +1998,7 @@
 				D108A83915A6553700082388 /* PHTimeInGame.m in Sources */,
 				62348E17221039AFE93CDE47 /* PHConnectionManager.m in Sources */,
 				623480364AAC6FE321B48FD8 /* PHResourceCacher.m in Sources */,
-				E69D85971718E83700CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				E69D85971718E83700CA4997 /* PHStoreProductViewController.m in Sources */,
 				E69D85A11718E90B00CA4997 /* PHNetworkUtil.m in Sources */,
 				62348FD32AC0287742CF7783 /* PHError.m in Sources */,
 			);
@@ -2030,7 +2034,7 @@
 				D108A83A15A6553700082388 /* PHTimeInGame.m in Sources */,
 				62348F22058DD45F4D63FF58 /* PHConnectionManager.m in Sources */,
 				62348042630B8C109AE07D23 /* PHResourceCacher.m in Sources */,
-				E69D85981718E83F00CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				E69D85981718E83F00CA4997 /* PHStoreProductViewController.m in Sources */,
 				E69D85A21718E90F00CA4997 /* PHNetworkUtil.m in Sources */,
 				62348DCCC498482D1F4208C3 /* PHError.m in Sources */,
 			);
@@ -2064,7 +2068,7 @@
 				EAF168811534E34F006B6993 /* PHPublisherIAPTrackingRequest.m in Sources */,
 				EA451032156298E80095538E /* SDCachedURLResponse.m in Sources */,
 				D108A83B15A6553700082388 /* PHTimeInGame.m in Sources */,
-				E69D85991718E84500CA4997 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				E69D85991718E84500CA4997 /* PHStoreProductViewController.m in Sources */,
 				E69D85A31718E91200CA4997 /* PHNetworkUtil.m in Sources */,
 				62348A2BFD742EB0863CF56F /* PHError.m in Sources */,
 			);
@@ -2109,7 +2113,7 @@
 				EA45102E156298E80095538E /* SDCachedURLResponse.m in Sources */,
 				D108A83715A6553700082388 /* PHTimeInGame.m in Sources */,
 				EA8A531815B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
-				EADB57BE16094C7F000433D8 /* PHStoreProductViewControllerDelegate.m in Sources */,
+				EADB57BE16094C7F000433D8 /* PHStoreProductViewController.m in Sources */,
 				EAE36A6415BF70CE00892B81 /* IAPViewController.m in Sources */,
 				EAA86A99167FFDE100F6B388 /* IDViewController.m in Sources */,
 				62348636C5791F9602B8FD64 /* PHConnectionManager.m in Sources */,

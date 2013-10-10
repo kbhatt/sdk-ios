@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 
- PHStoreProductViewControllerDelegate.m
+ PHStoreProductViewController.m
  playhaven-sdk-ios
 
  Created by Jesus Fernandez on 9/18/12.
@@ -23,34 +23,65 @@
 #import "PHConstants.h"
 
 #if PH_USE_STOREKIT != 0
-#import "PHStoreProductViewControllerDelegate.h"
+#import "PHStoreProductViewController.h"
 
-static PHStoreProductViewControllerDelegate *_delegate = nil;
+static PHStoreProductViewController *_storeController = nil;
 
-@interface PHStoreProductViewControllerDelegate()
+@interface PHStoreProductViewController()
 @property (nonatomic, retain) SKStoreProductViewController *storeController;
+@property (nonatomic, retain) NSString *productID;
 - (UIViewController *)visibleViewController;
 @end
 
-@implementation PHStoreProductViewControllerDelegate
-+ (PHStoreProductViewControllerDelegate *)getDelegate
+@implementation PHStoreProductViewController
++ (id)sharedInstance
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (_delegate == nil) {
-            _delegate = [PHStoreProductViewControllerDelegate new];
-            [[NSNotificationCenter defaultCenter] addObserver:_delegate
+        if (_storeController == nil) {
+            _storeController = [[super allocWithZone:NULL] init];
+            [[NSNotificationCenter defaultCenter] addObserver:_storeController
                                                      selector:@selector(appDidEnterBackground)
                                                          name:UIApplicationDidEnterBackgroundNotification
                                                        object:nil];
         }
     });
 
-    return _delegate;
+    return _storeController;
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    return [[self sharedInstance] retain];
+}
+ 
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+ 
+- (id)retain
+{
+    return self;
+}
+ 
+- (NSUInteger)retainCount
+{
+    return NSUIntegerMax;
+}
+ 
+- (oneway void)release
+{
+}
+ 
+- (id)autorelease
+{
+    return self;
 }
 
 - (void)dealloc
 {
+    [_productID release];
     [_storeController release];
     [_visibleViewController release];
 
@@ -73,6 +104,8 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
 {
     if ([SKStoreProductViewController class] && nil != productId)
     {
+        self.productID = productId;
+        
         if (nil == self.storeController)
         {
             self.storeController = [[SKStoreProductViewController new] autorelease];
@@ -82,20 +115,34 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
                         completion:NULL];
         }
         
+        if ([self.delegate respondsToSelector:@selector(
+                    storeProductViewController:willPresentProductWithID:)])
+        {
+            [self.delegate storeProductViewController:self willPresentProductWithID:productId];
+        }
+
         NSDictionary *parameters = @{SKStoreProductParameterITunesItemIdentifier : productId};
         [self.storeController loadProductWithParameters:parameters completionBlock:nil];
         
-        return true;
+        return YES;
     }
 
-    return false;
+    return NO;
 }
 
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
 {
     [viewController dismissViewControllerAnimated:YES completion:^(void){
         [_visibleViewController.view removeFromSuperview];
+        
+        if ([self.delegate respondsToSelector:@selector(
+                    storeProductViewController:didDismissProductWithID:)])
+        {
+            [self.delegate storeProductViewController:self didDismissProductWithID:self.productID];
+        }
+        
         self.storeController = nil;
+        self.productID = nil;
     }];
 }
 
@@ -107,10 +154,18 @@ static PHStoreProductViewControllerDelegate *_delegate = nil;
     if ([_visibleViewController respondsToSelector:@selector(presentedViewController)] &&
                 _visibleViewController.presentedViewController)
     {
-        [_visibleViewController dismissViewControllerAnimated:YES completion:NULL];
+        [_visibleViewController dismissViewControllerAnimated:NO completion:NULL];
+        
+        if ([self.delegate respondsToSelector:@selector(
+                    storeProductViewController:didDismissProductWithID:)])
+        {
+            [self.delegate storeProductViewController:self didDismissProductWithID:self.productID];
+        }
     }
+
     [_visibleViewController.view removeFromSuperview];
     self.storeController = nil;
+    self.productID = nil;
 }
 @end
 #endif
