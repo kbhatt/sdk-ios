@@ -35,6 +35,14 @@
 #import "WWURLConnection.h"
 #endif
 
+typedef NS_ENUM(NSUInteger, PHRequestStatus)
+{
+    kPHRequestStatusInitialized = 0,
+    kPHRequestStatusInProgress,
+    kPHRequestStatusSucceeded,
+    kPHRequestStatusFailed
+};
+
 static NSString *sPlayHavenSession;
 static NSString *const kSessionPasteboard = @"com.playhaven.session";
 static NSString *sPlayHavenPluginIdentifier;
@@ -43,7 +51,11 @@ static NSString *const kPHRequestParameterIDFVKey = @"idfv";
 static NSString *const kPHRequestParameterOptOutStatusKey = @"opt_out";
 static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
-@interface PHAPIRequest (Private)
+@interface PHAPIRequest ()
+@property (nonatomic, retain) NSNumber *networkStatus;
+@property (nonatomic, assign) PHRequestStatus requestStatus;
+@property (nonatomic, retain, readwrite) NSDictionary *signedParameters;
+
 + (NSMutableSet *)allRequests;
 - (void)finish;
 - (void)afterConnectionDidFinishLoading;
@@ -404,11 +416,12 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
         NSNumber
             *idiom      = [NSNumber numberWithInt:(int)UI_USER_INTERFACE_IDIOM()],
-            *connection = [NSNumber numberWithInt:PHNetworkStatus()],
             *width      = [NSNumber numberWithFloat:screenWidth],
             *height     = [NSNumber numberWithFloat:screenHeight],
             *scale      = [NSNumber numberWithFloat:screenScale];
         NSNumber *theOptOutStatus = @([PHAPIRequest optOutStatus]);
+        NSNumber *theConnection = nil == self.networkStatus ? self.networkStatus =
+                    @(PHNetworkStatus()) : self.networkStatus;
 
         [combinedParams addEntriesFromDictionary:self.additionalParameters];
 
@@ -422,7 +435,7 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
                                  os,             @"os",
                                  idiom,          @"idiom",
                                  appVersion,     @"app_version",
-                                 connection,     @"connection",
+                                 theConnection,  @"connection",
                                  PH_SDK_VERSION, @"sdk-ios",
                                  languages,      @"languages",
                                  width,          @"width",
@@ -445,6 +458,7 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
 - (void)dealloc
 {
+    [_networkStatus release];
     [_token release], _token = nil;
     [_secret release], _secret = nil;
     [_URL release], _URL = nil;
@@ -460,19 +474,28 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
 - (void)send
 {
-    if (!alreadySent)
+    if (kPHRequestStatusInProgress == self.requestStatus || kPHRequestStatusSucceeded ==
+                self.requestStatus)
     {
+        PH_DEBUG(@"Trying to re-send request with status = %u", self.requestStatus);
+        return;
+    }
+
+    self.requestStatus = kPHRequestStatusInProgress;
+    
+    [self obtainRequestParametersWithCompletionHandler:
+    ^{
         PH_LOG(@"Sending request: %@", [self.URL absoluteString]);
 
-        NSURLRequest *request = [NSURLRequest requestWithURL:self.URL
-                                                 cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                             timeoutInterval:PH_REQUEST_TIMEOUT];
+        NSURLRequest *request = [NSURLRequest requestWithURL:self.URL cachePolicy:
+                    NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:PH_REQUEST_TIMEOUT];
 
-        if ([PHConnectionManager createConnectionFromRequest:request forDelegate:self withContext:nil])
-            alreadySent = YES;
-        else
+        if (![PHConnectionManager createConnectionFromRequest:request forDelegate:self
+                    withContext:nil])
+        {
             [self didFailWithError:nil]; // TODO: Create error
-    }
+        }
+    }];
 }
 
 - (void)cancel
@@ -556,6 +579,7 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
             responseValue = nil;
         }
 
+        self.requestStatus = kPHRequestStatusSucceeded;
         [self didSucceedWithResponse:responseValue];
     }
 }
@@ -571,6 +595,8 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
 - (void)didFailWithError:(NSError *)error
 {
+    self.requestStatus = kPHRequestStatusFailed;
+    
     if ([self.delegate respondsToSelector:@selector(request:didFailWithError:)]) {
         [self.delegate performSelector:@selector(request:didFailWithError:) withObject:self withObject:error];
     }
@@ -703,6 +729,42 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
     }
     
     return theBase64EncodedDigest;
+}
+
+#pragma mark -
+
+- (void)obtainRequestParametersWithCompletionHandler:(void (^)(void))aCompletionHandler
+{
+    [self obtainNetworkStatusWithCompletionHandler:
+    ^(int inNetworkStatus)
+    {
+        self.signedParameters = nil;
+        self.networkStatus = @(inNetworkStatus);
+        
+        if (nil != aCompletionHandler)
+        {
+            aCompletionHandler();
+        }
+    }];
+}
+
+- (void)obtainNetworkStatusWithCompletionHandler:(void (^)(int inNetworkStatus))aCompletionHandler
+{
+    // Network status is obtained on a background thread due to blocking nature of the underlying
+    // PHNetworkStatus() function.
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+    ^{
+        int theNetworkStatus = PHNetworkStatus();
+        
+        if (nil != aCompletionHandler)
+        {
+            dispatch_async(dispatch_get_main_queue(),
+            ^{
+                aCompletionHandler(theNetworkStatus);
+            });
+        }
+    });
 }
 
 @end

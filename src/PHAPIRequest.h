@@ -49,11 +49,6 @@
     NSString        *_urlPath;
     int              _hashCode;
 
-    BOOL alreadySent;
-//    NSURLConnection *_connection;
-//    NSMutableData   *_connectionData;
-//    NSURLResponse   *_response;
-
     id<PHAPIRequestDelegate> _delegate;
 }
 
@@ -196,7 +191,7 @@
                                                         URL with signed parameters */
 @property (nonatomic, retain)   NSDictionary *additionalParameters; /**< Subclasses can override this implementation
                                                                          to add custom parameters to requests */
-@property (nonatomic, readonly) NSDictionary *signedParameters;     /**< Lazily-initialized dictionary of base request
+@property (nonatomic, retain, readonly) NSDictionary *signedParameters; /**< Lazily-initialized dictionary of base request
                                                                          parameters as well as necessary request signatures */
 @property (nonatomic, assign)   int hashCode;      /**< Unique hash code identifying this request. Used by the Unity3d plugin */
 

@@ -83,6 +83,8 @@
     [PHAPIRequest setSession:@"test_session"];
     
     PHAPIRequest *request = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    
+    NSNumber *theNetworkStatus = @(PHNetworkStatus());
     NSDictionary *signedParameters = [request signedParameters];
 
     // Test for existence of parameters
@@ -92,6 +94,8 @@
         *signature = [signedParameters valueForKey:@"sig4"],
         *nonce     = [signedParameters valueForKey:@"nonce"];
 
+    STAssertEqualObjects(theNetworkStatus, signedParameters[@"connection"], @"Network status "
+                "indicated by the request object doesn't match the expected one!");
     STAssertNotNil(session, @"Required session param is missing!");
     STAssertNotNil(token, @"Required token param is missing!");
     STAssertTrue(0 < [signature length], @"Required signature param is missing!");
@@ -111,6 +115,10 @@
     NSString *nonceParam = [NSString stringWithFormat:@"nonce=%@",nonce];
     STAssertFalse([parameterString rangeOfString:nonceParam].location == NSNotFound,
                   @"Nonce parameter not present!");
+
+    NSString *theConnectionParam = [NSString stringWithFormat:@"connection=%@", theNetworkStatus];
+    STAssertFalse([[request.URL absoluteString] rangeOfString:theConnectionParam].length == 0,
+                  @"Expected connection parameter is missed in the request URL!");
     
     // Test IDFV parameter
 
