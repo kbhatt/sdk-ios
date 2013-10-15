@@ -21,6 +21,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "PlayHavenSDK.h"
+#import "SenTestCase+PHAPIRequestSupport.h"
 
 @interface PHPublisherIAPTrackingRequestTest : SenTestCase
 @end
@@ -53,24 +54,28 @@
 {
     PHPublisherIAPTrackingRequest *request = [PHPublisherIAPTrackingRequest requestForApp:@"APP" secret:@"SECRET" product:@"PRODUCT" quantity:1 resolution:PHPurchaseResolutionBuy receiptData:nil];
     [request send];
-    STAssertTrue([[request signedParameterString] rangeOfString:@"cookie"].location == NSNotFound, @"expected no cookie string parameterString: %@", [request signedParameterString]);
+    NSString *theRequestURLString = [[self URLForRequest:request] absoluteString];
+    STAssertTrue([theRequestURLString rangeOfString:@"cookie"].location == NSNotFound, @"expected no cookie string parameterString: %@", theRequestURLString);
     [request cancel];
 
     [PHPublisherIAPTrackingRequest setConversionCookie:@"COOKIE" forProduct:@"PRODUCT"];
 
     PHPublisherIAPTrackingRequest *request2a = [PHPublisherIAPTrackingRequest requestForApp:@"APP" secret:@"SECRET" product:@"PRODUCT_OTHER" quantity:1 resolution:PHPurchaseResolutionBuy receiptData:nil];
     [request2a send];
-    STAssertTrue([[request2a signedParameterString] rangeOfString:@"cookie"].location == NSNotFound, @"expected no cookie string parameterString: %@", [request2a signedParameterString]);
+    theRequestURLString = [[self URLForRequest:request2a] absoluteString];
+    STAssertTrue([theRequestURLString rangeOfString:@"cookie"].location == NSNotFound, @"expected no cookie string parameterString: %@", theRequestURLString);
     [request2a cancel];
 
     PHPublisherIAPTrackingRequest *request2 = [PHPublisherIAPTrackingRequest requestForApp:@"APP" secret:@"SECRET" product:@"PRODUCT" quantity:1 resolution:PHPurchaseResolutionBuy receiptData:nil];
     [request2 send];
-    STAssertTrue([[request2 signedParameterString] rangeOfString:@"cookie"].location != NSNotFound, @"expected cookie string parameterString: %@", [request2 signedParameterString]);
+    theRequestURLString = [[self URLForRequest:request2] absoluteString];
+    STAssertTrue([theRequestURLString rangeOfString:@"cookie"].location != NSNotFound, @"expected cookie string parameterString: %@", theRequestURLString);
     [request2 cancel];
 
     PHPublisherIAPTrackingRequest *request3 = [PHPublisherIAPTrackingRequest requestForApp:@"APP" secret:@"SECRET" product:@"PRODUCT" quantity:1 resolution:PHPurchaseResolutionBuy receiptData:nil];
+    theRequestURLString = [[self URLForRequest:request3] absoluteString];
     [request3 send];
-    STAssertTrue([[request3 signedParameterString] rangeOfString:@"cookie"].location == NSNotFound, @"cookie should only exist once! parameterString: %@", [request3 signedParameterString]);
+    STAssertTrue([theRequestURLString rangeOfString:@"cookie"].location == NSNotFound, @"cookie should only exist once! parameterString: %@", theRequestURLString);
     [request3 cancel];
 }
 
@@ -83,8 +88,9 @@
 
     PHPublisherIAPTrackingRequest *request = [PHPublisherIAPTrackingRequest requestForApp:token secret:secret];
 
+    NSURL *theRequestURL = [self URLForRequest:request];
     NSDictionary *signedParameters  = [request signedParameters];
-    NSString     *requestURLString  = [request.URL absoluteString];
+    NSString     *requestURLString  = [theRequestURL absoluteString];
 
 #if PH_USE_MAC_ADDRESS == 1
     if (PH_SYSTEM_VERSION_LESS_THAN(@"6.0"))
@@ -99,4 +105,5 @@
     STAssertTrue([requestURLString rangeOfString:@"mac="].location == NSNotFound, @"MAC param exists when it shouldn't.");
 #endif
 }
+
 @end

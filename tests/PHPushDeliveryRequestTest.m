@@ -21,6 +21,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "PHPushDeliveryRequest.h"
+#import "SenTestCase+PHAPIRequestSupport.h"
 
 static NSString *const kTestMessageID = @"testMessageID";
 static NSString *const kTestContentID = @"testContentID";
@@ -51,7 +52,8 @@ static NSString *const kTestContentID = @"testContentID";
                 NSUTF8StringEncoding] messageID:kTestMessageID contentUnitID:kTestContentID];
     STAssertNotNil(theRequest, @"Cannot create request through designated initializer");
 
-    NSString *theRequestQuery = [theRequest.URL query];
+    NSURL *theRequestURL = [self URLForRequest:theRequest];
+    NSString *theRequestQuery = [theRequestURL query];
     
     STAssertTrue((0 < [theRequestQuery rangeOfString:[NSString stringWithFormat:@"message_id=%@",
                 kTestMessageID]].length), @"Missed required parameter");

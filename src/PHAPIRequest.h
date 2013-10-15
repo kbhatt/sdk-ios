@@ -187,12 +187,16 @@
 @property (nonatomic, readonly) NSString *secret;  /**< API secret for this request, value is set during initialization */
 @property (nonatomic, copy)     NSString *urlPath; /**< API endpoint to use for this request, subclasses will override
                                                         this with a hard-coded value */
-@property (nonatomic, readonly) NSURL    *URL;     /**< Lazily-initialized NSURL instance that contains a full request
-                                                        URL with signed parameters */
+@property (nonatomic, retain, readonly) NSURL *URL; /**< NSURL instance that contains a full request
+                                                         URL with signed parameters. This property
+                                                         is lazily initialized and remains nil until
+                                                         request object gets 'send' message.*/
 @property (nonatomic, retain)   NSDictionary *additionalParameters; /**< Subclasses can override this implementation
                                                                          to add custom parameters to requests */
-@property (nonatomic, retain, readonly) NSDictionary *signedParameters; /**< Lazily-initialized dictionary of base request
-                                                                         parameters as well as necessary request signatures */
+@property (nonatomic, retain, readonly) NSDictionary *signedParameters; /**< Dictionary of base request parameters as well
+                                                                             as necessary request signatures. This property
+                                                                             is lazily initialized and remains nil until
+                                                                             request object gets 'send' message. */
 @property (nonatomic, assign)   int hashCode;      /**< Unique hash code identifying this request. Used by the Unity3d plugin */
 
 @property (nonatomic, assign)   id<PHAPIRequestDelegate>  delegate; /**< Request delegate, see PHAPIRequestDelegate */

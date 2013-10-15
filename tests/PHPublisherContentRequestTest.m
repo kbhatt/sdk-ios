@@ -27,6 +27,7 @@
 #import "PHPublisherContentRequest.h"
 #import "PHStringUtil.h"
 #import "PHPublisherContentRequest+Private.h"
+#import "SenTestCase+PHAPIRequestSupport.h"
 
 #define PUBLISHER_TOKEN @"PUBLISHER_TOKEN"
 #define PUBLISHER_SECRET @"PUBLISHER_SECRET"
@@ -284,6 +285,7 @@ static NSString *const kPHTestMessageID = @"87345";
                                                                            secret:PUBLISHER_SECRET];
     request.placement = @"placement_id";
 
+    NSString *requestURLString = [[self URLForRequest:request] absoluteString];
     NSDictionary *dictionary = [request signedParameters];
     STAssertNotNil([dictionary valueForKey:@"placement_id"], @"Expected 'placement_id' parameter.");
 
@@ -293,7 +295,6 @@ static NSString *const kPHTestMessageID = @"87345";
                   @"Placment_id parameter not present!");
 
     NSDictionary *signedParameters  = [request signedParameters];
-    NSString     *requestURLString  = [request.URL absoluteString];
 
 #if PH_USE_MAC_ADDRESS == 1
     if (PH_SYSTEM_VERSION_LESS_THAN(@"6.0"))
@@ -316,6 +317,7 @@ static NSString *const kPHTestMessageID = @"87345";
                                                       secret:kPHApplicationTestSecret
                                                    placement:kPHTestPlacement
                                                     delegate:nil];
+    NSURL *theRequestURL = [self URLForRequest:theTestRequest];
 
     STAssertEqualObjects(theTestRequest.placement, kPHTestPlacement, @"The request's placement "
             "doesn't mach the one passed in the initializer");
@@ -342,7 +344,7 @@ static NSString *const kPHTestMessageID = @"87345";
 
     STAssertEqualObjects(theContentIDParameter, @"", @"Missed mandatory parameter!");
 
-    NSString *theRequestQuery = [theTestRequest.URL query];
+    NSString *theRequestQuery = [theRequestURL query];
 
     STAssertTrue((0 < [theRequestQuery rangeOfString:
                               [NSString stringWithFormat:@"stime=%@", theSessionDuration]].length), @"");
@@ -366,12 +368,13 @@ static NSString *const kPHTestMessageID = @"87345";
                                                contentUnitID:kPHTestContentID
                                                    messageID:kPHTestMessageID];
 
+    NSURL *theRequestURL = [self URLForRequest:theTestRequest];
     NSString *thePlacementParameter =
                      [theTestRequest.additionalParameters objectForKey:@"placement_id"];
 
     STAssertEqualObjects(thePlacementParameter, @"", @"Missed mandatory parameter!");
 
-    NSString *theRequestQuery = [theTestRequest.URL query];
+    NSString *theRequestQuery = [theRequestURL query];
 
     STAssertTrue((0 < [theRequestQuery rangeOfString:@"placement_id="].length), @"");
 
@@ -388,13 +391,14 @@ static NSString *const kPHTestMessageID = @"87345";
                                                    messageID:kPHTestMessageID];
 
     STAssertNotNil(theTestRequest, @"Cannot created test request");
+    NSURL *theRequestURL = [self URLForRequest:theTestRequest];
     
     NSString *theMessageIDParameter = [theTestRequest.additionalParameters objectForKey:
                 @"message_id"];
 
     STAssertEqualObjects(theMessageIDParameter, kPHTestMessageID, @"Missed message_id parameter!");
 
-    NSString *theRequestQuery = [theTestRequest.URL query];
+    NSString *theRequestQuery = [theRequestURL query];
 
     STAssertTrue((0 < [theRequestQuery rangeOfString:[NSString stringWithFormat:@"message_id=%@",
                 kPHTestMessageID]].length), @"");
@@ -410,7 +414,7 @@ static NSString *const kPHTestMessageID = @"87345";
                                                       secret:kPHApplicationTestSecret
                                                    placement:kPHTestPlacement
                                                     delegate:nil];
-
+    NSURL *theRequestURL = [self URLForRequest:theTestRequest];
     STAssertNotNil(theTestRequest, @"Cannot created test request");
     
     NSString *theMessageIDParameter = [theTestRequest.additionalParameters objectForKey:
@@ -419,7 +423,7 @@ static NSString *const kPHTestMessageID = @"87345";
     STAssertNil(theMessageIDParameter, @"message_id parameter should not be specified for content"
                 " requests which are created with placement");
 
-    NSString *theRequestQuery = [theTestRequest.URL query];
+    NSString *theRequestQuery = [theRequestURL query];
 
     STAssertTrue(0 == [theRequestQuery rangeOfString:@"message_id="].length, @"");
     
@@ -615,8 +619,9 @@ static NSString *const kPHTestMessageID = @"87345";
                                                                         placement:@"more_games"
                                                                          delegate:nil];
     [request preload];
+    NSURL *theRequestURL = [self URLForRequest:request];
 
-    NSString *parameters = [request.URL absoluteString];
+    NSString *parameters = [theRequestURL absoluteString];
     STAssertFalse([parameters rangeOfString:@"preload=1"].location == NSNotFound, @"Expected 'preload=1' in parameter string, did not find it!");
     [request cancel];
 }
@@ -628,8 +633,9 @@ static NSString *const kPHTestMessageID = @"87345";
                                                                         placement:@"more_games"
                                                                          delegate:nil];
     [request send];
+    NSURL *theRequestURL = [self URLForRequest:request];
 
-    NSString *parameters = [request.URL absoluteString];
+    NSString *parameters = [theRequestURL absoluteString];
     STAssertFalse([parameters rangeOfString:@"preload=0"].location == NSNotFound, @"Expected 'preload=0' in parameter string, did not find it!");
     [request cancel];
 }

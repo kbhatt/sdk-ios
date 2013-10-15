@@ -25,6 +25,7 @@
 #import "PHStringUtil.h"
 #import "PHPublisherOpenRequest.h"
 #import "PHAPIRequest+Private.h"
+#import "SenTestCase+PHAPIRequestSupport.h"
 
 #define PUBLISHER_TOKEN @"PUBLISHER_TOKEN"
 #define PUBLISHER_SECRET @"PUBLISHER_SECRET"
@@ -85,6 +86,8 @@
     PHAPIRequest *request = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
     
     NSNumber *theNetworkStatus = @(PHNetworkStatus());
+    
+    NSString *theRequestURL = [[self URLForRequest:request] absoluteString];
     NSDictionary *signedParameters = [request signedParameters];
 
     // Test for existence of parameters
@@ -117,7 +120,7 @@
                   @"Nonce parameter not present!");
 
     NSString *theConnectionParam = [NSString stringWithFormat:@"connection=%@", theNetworkStatus];
-    STAssertFalse([[request.URL absoluteString] rangeOfString:theConnectionParam].length == 0,
+    STAssertFalse([theRequestURL rangeOfString:theConnectionParam].length == 0,
                   @"Expected connection parameter is missed in the request URL!");
     
     // Test IDFV parameter
@@ -125,7 +128,6 @@
     NSString *theIDFV = signedParameters[@"idfv"];
     NSString *theIDFA = signedParameters[@"ifa"];
     NSNumber *theAdTrackingFlag = signedParameters[@"tracking"];
-    NSString *theRequestURL = [request.URL absoluteString];
 
     if (PH_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0"))
     {
@@ -169,8 +171,8 @@
     [PHAPIRequest setOptOutStatus:NO];
 
     PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
-    NSString *theRequestURLString = [theRequest.URL absoluteString];
     NSString *theMAC = [theSignedParameters objectForKey:@"mac"];
 
 #if PH_USE_MAC_ADDRESS == 1
@@ -179,21 +181,21 @@
     {
 
         STAssertNotNil(theMAC, @"MAC param is missing!");
-        STAssertFalse([theRequestURLString rangeOfString:@"mac="].location == NSNotFound, @"MAC "
-                    "param is missing: %@", theRequestURLString);
+        STAssertFalse([theRequestURL rangeOfString:@"mac="].location == NSNotFound, @"MAC "
+                    "param is missing: %@", theRequestURL);
     }
     else
     {
         NSString *theUnexpectedMACMessage = @"MAC should not be sent on iOS 6 and later";
 
         STAssertNil([theSignedParameters objectForKey:@"mac"], @"%@!", theUnexpectedMACMessage);
-        STAssertTrue([theRequestURLString rangeOfString:@"mac="].length == 0, @"%@: %@",
-                    theUnexpectedMACMessage, theRequestURLString);
+        STAssertTrue([theRequestURL rangeOfString:@"mac="].length == 0, @"%@: %@",
+                    theUnexpectedMACMessage, theRequestURL);
     }
 #else
     STAssertNil(theMAC, @"MAC param is present!");
-    STAssertTrue([theRequestURLString rangeOfString:@"mac="].location == NSNotFound, @"MAC param "
-                "exists when it shouldn't: %@", theRequestURLString);
+    STAssertTrue([theRequestURL rangeOfString:@"mac="].location == NSNotFound, @"MAC param "
+                "exists when it shouldn't: %@", theRequestURL);
 #endif
 }
 
@@ -203,14 +205,14 @@
     [PHAPIRequest setOptOutStatus:YES];
 
     PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
-    NSString *theRequestURLString = [theRequest.URL absoluteString];
 
     NSString *theUnexpectedMACMessage = @"MAC should not be sent for opted out users";
 
     STAssertNil([theSignedParameters objectForKey:@"mac"], @"%@!", theUnexpectedMACMessage);
-    STAssertTrue([theRequestURLString rangeOfString:@"mac="].length == 0, @"%@: %@",
-                theUnexpectedMACMessage, theRequestURLString);
+    STAssertTrue([theRequestURL rangeOfString:@"mac="].length == 0, @"%@: %@",
+                theUnexpectedMACMessage, theRequestURL);
 }
 
 - (void)testIDFAParameterWithOptedInUser
@@ -219,8 +221,8 @@
     [PHAPIRequest setOptOutStatus:NO];
     
     PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
-    NSString *theRequestURL = [theRequest.URL absoluteString];
 
     NSString *theIDFA = theSignedParameters[@"ifa"];
 
@@ -247,8 +249,8 @@
     [PHAPIRequest setOptOutStatus:YES];
     
     PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
-    NSString *theRequestURL = [theRequest.URL absoluteString];
 
     NSString *theIDFA = theSignedParameters[@"ifa"];
 
@@ -266,11 +268,11 @@
     [PHAPIRequest setOptOutStatus:NO];
 
     PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
-    NSString *theRequestURLString = [theRequest.URL absoluteString];
     
     STAssertEqualObjects(theSignedParameters[@"opt_out"], @(NO), @"Incorrect opt-out value!");
-    STAssertTrue([theRequestURLString rangeOfString:@"opt_out=0"].length > 0, @"Incorrect opt-out "
+    STAssertTrue([theRequestURL rangeOfString:@"opt_out=0"].length > 0, @"Incorrect opt-out "
                 "value!");
 }
 
@@ -280,11 +282,11 @@
     [PHAPIRequest setOptOutStatus:YES];
 
     PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
-    NSString *theRequestURLString = [theRequest.URL absoluteString];
 
     STAssertEqualObjects(theSignedParameters[@"opt_out"], @(YES), @"Incorrect opt-out value!");
-    STAssertTrue([theRequestURLString rangeOfString:@"opt_out=1"].length > 0, @"Incorrect opt-out "
+    STAssertTrue([theRequestURL rangeOfString:@"opt_out=1"].length > 0, @"Incorrect opt-out "
                 "value!");
 
     // Revert out-out status.
@@ -300,7 +302,7 @@
     NSString
         *customUDID       = [PHAPIRequest customUDID],
         *pluginIdentifier = [PHAPIRequest pluginIdentifier],
-        *requestURLString = [request.URL absoluteString];
+        *requestURLString = [[self URLForRequest:request] absoluteString];
 
     STAssertTrue([requestURLString rangeOfString:@"d_custom="].location == NSNotFound,
                   @"Custom parameter exists when none should be set.");
@@ -313,7 +315,7 @@
     [PHAPIRequest setPluginIdentifier:nil];
 
     request          = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
-    requestURLString = [request.URL absoluteString];
+    requestURLString = [[self URLForRequest:request] absoluteString];
 
     customUDID       = [PHAPIRequest customUDID];
     pluginIdentifier = [PHAPIRequest pluginIdentifier];
@@ -329,7 +331,7 @@
     [PHAPIRequest setPluginIdentifier:@""];
 
     request          = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
-    requestURLString = [request.URL absoluteString];
+    requestURLString = [[self URLForRequest:request] absoluteString];
 
     customUDID       = [PHAPIRequest customUDID];
     pluginIdentifier = [PHAPIRequest pluginIdentifier];
@@ -345,7 +347,7 @@
     [PHAPIRequest setPluginIdentifier:(id)[NSNull null]];
 
     request          = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
-    requestURLString = [request.URL absoluteString];
+    requestURLString = [[self URLForRequest:request] absoluteString];
 
     customUDID       = [PHAPIRequest customUDID];
     pluginIdentifier = [PHAPIRequest pluginIdentifier];
@@ -411,7 +413,7 @@
     [PHAPIRequest setPluginIdentifier:@":?#[]@/!$&'()*+,;=\""];
 
     request          = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
-    requestURLString = [request.URL absoluteString];
+    requestURLString = [[self URLForRequest:request] absoluteString];
 
     customUDID       = [PHAPIRequest customUDID];
     pluginIdentifier = [PHAPIRequest pluginIdentifier];
@@ -429,7 +431,7 @@
     [openRequest setCustomUDID:@"one"];
 
     request          = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
-    requestURLString = [request.URL absoluteString];
+    requestURLString = [[self URLForRequest:request] absoluteString];
     signedParameters = [request signedParameters];
     customUDID       = [signedParameters valueForKey:@"d_custom"];
 
@@ -452,7 +454,7 @@
     [PHAPIRequest setCustomUDID:@"two"];
 
     request          = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
-    requestURLString = [request.URL absoluteString];
+    requestURLString = [[self URLForRequest:request] absoluteString];
     signedParameters = [request signedParameters];
     customUDID       = [signedParameters valueForKey:@"d_custom"];
 
@@ -475,7 +477,7 @@
     [request setCustomUDID:@"three"];
 
     request          = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
-    requestURLString = [request.URL absoluteString];
+    requestURLString = [[self URLForRequest:request] absoluteString];
     signedParameters = [request signedParameters];
     customUDID       = [signedParameters valueForKey:@"d_custom"];
 
@@ -502,7 +504,8 @@
     NSString     *desiredURLString = @"http://thisisatesturlstring.com";
 
     request.urlPath = desiredURLString;
-    STAssertFalse([[request.URL absoluteString] rangeOfString:desiredURLString].location == NSNotFound,
+    NSURL *theRequestURL = [self URLForRequest:request];
+    STAssertFalse([[theRequestURL absoluteString] rangeOfString:desiredURLString].location == NSNotFound,
                   @"urlPath not present in signed URL!");
 
 }

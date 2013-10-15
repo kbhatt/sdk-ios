@@ -88,6 +88,7 @@
 		E1CB0F5317C647ED00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CB0F5417C647EE00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CB0F5517C647EF00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
+		E1FADDFB180D85440095202B /* SenTestCase+PHAPIRequestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */; };
 		E69D85961718E82D00CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
 		E69D85971718E83700CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
 		E69D85981718E83F00CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
@@ -615,6 +616,8 @@
 		E1C8F4EE171CABD900F64E12 /* PlayHavenAppIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayHavenAppIdentity.m; sourceTree = "<group>"; };
 		E1C8F4F8171CC94400F64E12 /* PHPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushRequest.h; sourceTree = "<group>"; };
 		E1C8F4F9171CC94400F64E12 /* PHPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushRequest.m; sourceTree = "<group>"; };
+		E1FADDF8180D84AC0095202B /* SenTestCase+PHAPIRequestSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+PHAPIRequestSupport.h"; sourceTree = "<group>"; };
+		E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+PHAPIRequestSupport.m"; sourceTree = "<group>"; };
 		EA019C7F14C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPublisherIAPTrackingRequest.h; sourceTree = "<group>"; };
 		EA019C8014C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPublisherIAPTrackingRequest.m; sourceTree = "<group>"; };
 		EA019C8514C102D4008FBCB1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -956,6 +959,15 @@
 			name = PushNotifications;
 			sourceTree = "<group>";
 		};
+		E1FADDFC180D85C60095202B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E1FADDF8180D84AC0095202B /* SenTestCase+PHAPIRequestSupport.h */,
+				E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		EA019C7E14C0FC16008FBCB1 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
@@ -1076,6 +1088,7 @@
 		EA523D891343EE670057DEA5 /* Unit Testing */ = {
 			isa = PBXGroup;
 			children = (
+				E1FADDFC180D85C60095202B /* Extensions */,
 				EA6ADFC71475F22C00DBE60B /* PHPublisherContentRequestTest.m */,
 				EA03811213B26FF500A31FF7 /* PHNotificationViewTest.m */,
 				EA7BC61813537F8700B4518D /* PHURLLoaderTest.m */,
@@ -1806,6 +1819,7 @@
 				EAE5598614F866CA0023BBEF /* PHPublisherIAPTrackingRequestTest.m in Sources */,
 				EA7CF59D156C365C0095572E /* PlayHavenTest.m in Sources */,
 				D108A83E15A6B68600082388 /* PHTimeInGameTest.m in Sources */,
+				E1FADDFB180D85440095202B /* SenTestCase+PHAPIRequestSupport.m in Sources */,
 				EA98C12D16640E4500B6AA8C /* PHNetworkUtilTest.m in Sources */,
 				E14C1C601806D5BA005997A1 /* PHStoreProductViewControllerTest.m in Sources */,
 				E1769A8B171E29C300FE6518 /* PHPushRequestTest.m in Sources */,
