@@ -48,7 +48,9 @@
 
         //[self.placementField resignFirstResponder];
 
-        NSString *placement = (![self.placementField.text isEqualToString:@""]) ?
+        PH_DEBUG(@"%@ %@", self.placementField.description, self.placementField.text);
+
+        NSString *placement = (self.placementField.text && ![self.placementField.text isEqualToString:@""]) ?
                                     self.placementField.text :
                                     @"more_games";
 
@@ -177,7 +179,7 @@
     [self.view addSubview:_notificationView];
     [_notificationView setCenter:CGPointMake(self.view.frame.size.width - 22, 19)];
     [_notificationView refresh];
-    
+
     [[PHStoreProductViewController sharedInstance] setDelegate:self];
 }
 
@@ -185,7 +187,7 @@
 {
     [super viewDidDisappear:animated];
     [_notificationView removeFromSuperview];
-    
+
     [[PHStoreProductViewController sharedInstance] setDelegate:nil];
 }
 
