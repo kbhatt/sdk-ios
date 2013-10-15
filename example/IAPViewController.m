@@ -45,11 +45,11 @@
 
     PHPurchase *purchase = [PHPurchase new];
 
-    purchase.productIdentifier = ([self.productField.text isEqualToString:@""]) ?
-                                            @"com.playhaven.example.candy" :
-                                            self.productField.text;
-    purchase.quantity          = ([self.quantityField.text isEqualToString:@""]) ?
-                                            1 : [self.quantityField.text integerValue];
+    purchase.productIdentifier = (self.productField.text && ![self.productField.text isEqualToString:@""]) ?
+                                            self.productField.text :
+                                            @"com.playhaven.example.candy";
+    purchase.quantity          = (self.productField.text && ![self.quantityField.text isEqualToString:@""]) ?
+                                            [self.quantityField.text integerValue] : 1;
 
     [[IAPHelper sharedIAPHelper] startPurchase:purchase];
 
