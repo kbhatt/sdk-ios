@@ -48,8 +48,6 @@
 
         //[self.placementField resignFirstResponder];
 
-        PH_DEBUG(@"%@ %@", self.placementField.description, self.placementField.text);
-
         NSString *placement = (self.placementField.text && ![self.placementField.text isEqualToString:@""]) ?
                                     self.placementField.text :
                                     @"more_games";
