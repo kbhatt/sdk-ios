@@ -112,7 +112,11 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
             sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     PH_DEBUG(@"URL to open: %@", url);
-    return NO;
+    [[[[UIAlertView alloc] initWithTitle:@"URL Opened" message:[NSString stringWithFormat:
+                @"Application got URL: %@", [url absoluteString]] delegate:nil cancelButtonTitle:
+                nil otherButtonTitles:@"OK", nil] autorelease] show];
+    
+    return YES;
 }
 
 - (void)dealloc
