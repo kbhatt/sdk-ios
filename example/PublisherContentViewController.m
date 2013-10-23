@@ -82,6 +82,14 @@
     [self.navigationItem.rightBarButtonItem setTitle:@"Start"];
 }
 
+#pragma mark -
+
+- (void)sendRequest:(PHPublisherContentRequest *)aRequest
+{
+    aRequest.delegate = self;
+    [aRequest send];
+}
+
 #pragma mark - PHPublisherContentRequestDelegate
 - (void)requestWillGetContent:(PHPublisherContentRequest *)request
 {
@@ -93,7 +101,13 @@
 {
     NSString *message = [NSString stringWithFormat:@"Got content for placement: %@", request.placement];
     [self addMessage:message];
-    [self addElapsedTime];
+    
+    // Time is not tracked for requests created outside this view controller, like the ones passed
+    // to - [PublisherContentViewController sendRequest:]
+    if (request == self.request)
+    {
+        [self addElapsedTime];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request contentWillDisplay:(PHContent *)content
@@ -101,7 +115,10 @@
     NSString *message = [NSString stringWithFormat:@"Preparing to display content: %@", content];
     [self addMessage:message];
 
-    [self addElapsedTime];
+    if (request == self.request)
+    {
+        [self addElapsedTime];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request contentDidDisplay:(PHContent *)content
@@ -113,7 +130,10 @@
 
     [self addMessage:message];
 
-    [self addElapsedTime];
+    if (request == self.request)
+    {
+        [self addElapsedTime];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request contentDidDismissWithType:(PHPublisherContentDismissType *)type
@@ -121,14 +141,21 @@
     NSString *message = [NSString stringWithFormat:@"[OK] User dismissed request: %@ of type %@", request, type];
     [self addMessage:message];
 
-    [self finishRequest];
+    if (request == self.request)
+    {
+        [self finishRequest];
+    }
 }
 
 - (void)request:(PHAPIRequest *)request didFailWithError:(NSError *)error
 {
     NSString *message = [NSString stringWithFormat:@"[ERROR] Failed with error: %@", error];
     [self addMessage:message];
-    [self finishRequest];
+
+    if (request == self.request)
+    {
+        [self finishRequest];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request unlockedReward:(PHReward *)reward

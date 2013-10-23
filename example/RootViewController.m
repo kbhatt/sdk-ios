@@ -42,6 +42,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 - (void)saveTokenAndSecretToDefaults;
 @property (nonatomic, retain) UIButton *clearCacheButton;
 @property (nonatomic, readonly) NSArray *controllersInformation;
+@property (nonatomic, retain) PHPublisherContentRequest *delayedRequest;
 @end
 
 @implementation RootViewController
@@ -65,6 +66,9 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 
 - (void)dealloc
 {
+    [PHPushProvider sharedInstance].delegate = nil;
+    
+    [_delayedRequest release];
     [_controllersInformation release];
     [tokenField release];
     [secretField release];
@@ -179,6 +183,8 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
     [toggleButton release];
 
     ((UITableView *)self.view).tableFooterView = [self viewForTableFooter];
+    
+    [PHPushProvider sharedInstance].delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -243,6 +249,11 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self navigateToControllerAtIndexPath:indexPath];
+}
+
+- (void)navigateToControllerAtIndexPath:(NSIndexPath *)indexPath
+{
     if ([self isTokenAndSecretFilledIn]) {
         [self saveTokenAndSecretToDefaults];
 
@@ -292,10 +303,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
                     kPHControllerDescriptionKey : @"/publisher/open/",
                     kPHAccessibilityLabelKey : @"open"},
 
-                    @{kPHClassNameKey : NSStringFromClass([PublisherContentViewController class]),
-                    kPHControllerNameKey : @"Content",
-                    kPHControllerDescriptionKey : @"/publisher/content/",
-                    kPHAccessibilityLabelKey : @"content"},
+                    [self contentCellDescription],
 
                     @{kPHClassNameKey : NSStringFromClass(
                     [PushNotificationRegistrationViewController class]),
@@ -327,6 +335,54 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
                     kPHAccessibilityLabelKey : @"identifiers"}] retain];
     }
     return _controllersInformation;
+}
+
+- (NSDictionary *)contentCellDescription
+{
+    return @{kPHClassNameKey : NSStringFromClass([PublisherContentViewController class]),
+                kPHControllerNameKey : @"Content",
+                kPHControllerDescriptionKey : @"/publisher/content/",
+                kPHAccessibilityLabelKey : @"content"};
+}
+
+#pragma mark - PHPushProviderDelegate
+
+- (BOOL)pushProvider:(PHPushProvider *)aProvider
+            shouldSendRequest:(PHPublisherContentRequest *)aRequest
+{
+    if ([[self.navigationController topViewController] isMemberOfClass:
+                [PublisherContentViewController class]])
+    {
+        [(PublisherContentViewController *)[self.navigationController topViewController]
+                    sendRequest:aRequest];
+    }
+    else
+    {
+        [self.navigationController popToViewController:self animated:NO];
+        self.navigationController.delegate = self;
+        
+        self.delayedRequest = aRequest;
+
+        NSIndexPath *theContentCellIndexPath = [NSIndexPath indexPathForRow:[self.controllersInformation
+                    indexOfObject:[self contentCellDescription]] inSection:0];
+        [self navigateToControllerAtIndexPath:theContentCellIndexPath];
+    }
+    
+    return NO;
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)aNavigationController
+            didShowViewController:(UIViewController *)aViewController animated:(BOOL)anAnimated
+{
+    if ([aViewController isMemberOfClass:[PublisherContentViewController class]])
+    {
+        [(PublisherContentViewController *)aViewController sendRequest:self.delayedRequest];
+
+        self.delayedRequest = nil;
+        self.navigationController.delegate = nil;
+    }
 }
 
 @end
