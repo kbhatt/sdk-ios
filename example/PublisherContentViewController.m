@@ -22,6 +22,10 @@
 #import "PublisherContentViewController.h"
 #import "IAPHelper.h"
 
+@interface PublisherContentViewController ()
+@property (nonatomic, retain) NSMutableSet *sentRequests;
+@end
+
 @implementation PublisherContentViewController
 @synthesize placementField = _placementField;
 @synthesize request        = _request;
@@ -30,10 +34,18 @@
 
 - (void)dealloc
 {
-    [PHAPIRequest cancelAllRequestsWithDelegate:self];
+    for (PHAPIRequest *theRequest in [_sentRequests allObjects])
+    {
+        theRequest.delegate = nil;
+        [theRequest cancel];
+        [_sentRequests removeObject:theRequest];
+    }
 
+    [_sentRequests release];
     [_notificationView release], _notificationView = nil;
     [_placementField release], _placementField = nil;
+    _request.delegate = nil;
+    [_request cancel];
     [_request release], _request = nil;
     [showsOverlaySwitch release];
     [animateSwitch release];
@@ -67,6 +79,7 @@
     } else {
         [self addMessage:@"Request canceled!"];
 
+        self.request.delegate = nil;
         [self.request cancel];
         self.request = nil;
         [self.navigationItem.rightBarButtonItem setTitle:@"Start"];
@@ -78,6 +91,7 @@
     [super finishRequest];
 
     // Cleaning up after a completed request
+    self.request.delegate = nil;
     self.request = nil;
     [self.navigationItem.rightBarButtonItem setTitle:@"Start"];
 }
@@ -86,6 +100,18 @@
 
 - (void)sendRequest:(PHPublisherContentRequest *)aRequest
 {
+    if (nil == aRequest)
+    {
+        return;
+    }
+    
+    if (nil == self.sentRequests)
+    {
+        self.sentRequests = [NSMutableSet set];
+    }
+    
+    [self.sentRequests addObject:aRequest];
+    
     aRequest.delegate = self;
     [aRequest send];
 }
@@ -145,6 +171,11 @@
     {
         [self finishRequest];
     }
+    else
+    {
+        request.delegate = nil;
+        [self.sentRequests removeObject:request];
+    }
 }
 
 - (void)request:(PHAPIRequest *)request didFailWithError:(NSError *)error
@@ -155,6 +186,11 @@
     if (request == self.request)
     {
         [self finishRequest];
+    }
+    else
+    {
+        request.delegate = nil;
+        [self.sentRequests removeObject:request];
     }
 }
 
