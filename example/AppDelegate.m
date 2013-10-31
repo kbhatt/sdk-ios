@@ -52,11 +52,11 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
 
     [PHPushProvider sharedInstance].applicationToken = theAppIdentity.applicationToken;
     [PHPushProvider sharedInstance].applicationSecret = theAppIdentity.applicationSecret;
-    
+
     [[PHPushProvider sharedInstance] registerForPushNotifications];
     [[PHPushProvider sharedInstance] handleRemoteNotificationWithUserInfo:[launchOptions
                 objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
-    
+
     [PHAPIRequest setOptOutStatus:NO];
 
 #if RUN_KIF_TESTS
@@ -112,14 +112,20 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
             sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     PH_DEBUG(@"URL to open: %@", url);
-    return NO;
+    [[[[UIAlertView alloc] initWithTitle:@"URL Opened"
+                                 message:[NSString stringWithFormat:@"Application got URL: %@", [url absoluteString]]
+                                delegate:nil
+                       cancelButtonTitle:nil
+                       otherButtonTitles:@"OK", nil] autorelease] show];
+
+    return YES;
 }
 
 - (void)dealloc
 {
     [[PlayHavenAppIdentity sharedIdentity] removeObserver:self forKeyPath:kPHApplicationTokenKey];
     [[PlayHavenAppIdentity sharedIdentity] removeObserver:self forKeyPath:kPHApplicationSecretKey];
-    
+
     [_window release];
     [_navigationController release];
     [super dealloc];
@@ -196,7 +202,7 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
             change:(NSDictionary *)aChange context:(void *)aContext
 {
     PlayHavenAppIdentity *theAppIdentity = [PlayHavenAppIdentity sharedIdentity];
-    
+
     if ([aKeyPath isEqualToString:kPHApplicationTokenKey])
     {
         [PHPushProvider sharedInstance].applicationToken = theAppIdentity.applicationToken;
