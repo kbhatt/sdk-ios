@@ -40,13 +40,13 @@
                                                                                    secret:self.secret];
     request.delegate    = self;
 
-    request.product     = (self.productField.text && ![self.productField.text isEqualToString:@""]) ?
+    request.product     = (0 < [self.productField.text length]) ?
                                     self.productField.text :
                                     @"com.playhaven.example.candy";
-    request.quantity    = (self.quantityField.text && ![self.quantityField.text isEqualToString:@""]) ?
+    request.quantity    = (0 < [self.quantityField.text length]) ?
                                     [self.quantityField.text integerValue] : 1;
 
-    request.receiptData = (self.receiptField.text && ![self.receiptField.text isEqualToString:@""]) ?
+    request.receiptData = (0 < [self.receiptField.text length]) ?
                                     [NSData decodeBase64WithString:self.receiptField.text] : nil;
 
     request.resolution  = (PHPurchaseResolutionType)[self.resolutionSegment selectedSegmentIndex];
