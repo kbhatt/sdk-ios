@@ -48,7 +48,7 @@
 
         //[self.placementField resignFirstResponder];
 
-        NSString *placement = (self.placementField.text && ![self.placementField.text isEqualToString:@""]) ?
+        NSString *placement = (0 < [self.placementField.text length]) ?
                                     self.placementField.text :
                                     @"more_games";
 
