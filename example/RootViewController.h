@@ -23,7 +23,7 @@
 #import "PlayHavenSDK.h"
 
 @interface RootViewController : UITableViewController <PHPushProviderDelegate,
-            UINavigationControllerDelegate>
+                                                       UINavigationControllerDelegate>
 {
     UITextField *tokenField;
     UITextField *secretField;

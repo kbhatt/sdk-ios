@@ -67,7 +67,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 - (void)dealloc
 {
     [PHPushProvider sharedInstance].delegate = nil;
-    
+
     [_delayedRequest release];
     [_controllersInformation release];
     [tokenField release];
@@ -183,7 +183,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
     [toggleButton release];
 
     ((UITableView *)self.view).tableFooterView = [self viewForTableFooter];
-    
+
     [PHPushProvider sharedInstance].delegate = self;
 }
 
@@ -311,7 +311,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
                     kPHControllerDescriptionKey : @"/publisher/push/"},
 
                     @{kPHClassNameKey : NSStringFromClass([PublisherIAPTrackingViewController class]),
-                     kPHControllerNameKey : @"IAP Tracking",
+                    kPHControllerNameKey : @"IAP Tracking",
                     kPHControllerDescriptionKey : @""},
 
                     @{kPHClassNameKey : NSStringFromClass([PublisherCancelContentViewController class]),
@@ -350,24 +350,25 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 - (BOOL)pushProvider:(PHPushProvider *)aProvider
             shouldSendRequest:(PHPublisherContentRequest *)aRequest
 {
-    if ([[self.navigationController topViewController] isMemberOfClass:
-                [PublisherContentViewController class]])
+    if ([[self.navigationController topViewController]
+                        isMemberOfClass:[PublisherContentViewController class]])
     {
         [(PublisherContentViewController *)[self.navigationController topViewController]
-                    sendRequest:aRequest];
+                        sendRequest:aRequest];
     }
     else
     {
         [self.navigationController popToViewController:self animated:NO];
         self.navigationController.delegate = self;
-        
+
         self.delayedRequest = aRequest;
 
-        NSIndexPath *theContentCellIndexPath = [NSIndexPath indexPathForRow:[self.controllersInformation
-                    indexOfObject:[self contentCellDescription]] inSection:0];
+        NSIndexPath *theContentCellIndexPath =
+                            [NSIndexPath indexPathForRow:[self.controllersInformation indexOfObject:[self contentCellDescription]]
+                                               inSection:0];
         [self navigateToControllerAtIndexPath:theContentCellIndexPath];
     }
-    
+
     return NO;
 }
 
@@ -384,5 +385,4 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
         self.navigationController.delegate = nil;
     }
 }
-
 @end

@@ -41,12 +41,15 @@
         [_sentRequests removeObject:theRequest];
     }
 
-    [_sentRequests release];
-    [_notificationView release], _notificationView = nil;
-    [_placementField release], _placementField = nil;
     _request.delegate = nil;
     [_request cancel];
+
     [_request release], _request = nil;
+
+    [_sentRequests release], _sentRequests = nil;
+    [_notificationView release], _notificationView = nil;
+    [_placementField release], _placementField = nil;
+
     [showsOverlaySwitch release];
     [animateSwitch release];
 
@@ -104,14 +107,14 @@
     {
         return;
     }
-    
+
     if (nil == self.sentRequests)
     {
         self.sentRequests = [NSMutableSet set];
     }
-    
+
     [self.sentRequests addObject:aRequest];
-    
+
     aRequest.delegate = self;
     [aRequest send];
 }
@@ -127,7 +130,7 @@
 {
     NSString *message = [NSString stringWithFormat:@"Got content for placement: %@", request.placement];
     [self addMessage:message];
-    
+
     // Time is not tracked for requests created outside this view controller, like the ones passed
     // to - [PublisherContentViewController sendRequest:]
     if (request == self.request)
@@ -240,7 +243,7 @@
     [self.view addSubview:_notificationView];
     [_notificationView setCenter:CGPointMake(self.view.frame.size.width - 22, 19)];
     [_notificationView refresh];
-    
+
     [[PHStoreProductViewController sharedInstance] setDelegate:self];
 }
 
@@ -248,7 +251,7 @@
 {
     [super viewDidDisappear:animated];
     [_notificationView removeFromSuperview];
-    
+
     [[PHStoreProductViewController sharedInstance] setDelegate:nil];
 }
 
