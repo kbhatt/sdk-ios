@@ -25,6 +25,7 @@
 #import "PHNetworkUtil.h"
 
 @interface IDViewController ()
+@property (assign, nonatomic) IBOutlet UIView *containerView;
 @end
 
 @implementation IDViewController
@@ -40,6 +41,17 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)])
+    {
+        self.IDFVLabel.text = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    }
+    else
+    {
+        self.IDFVLabel.text = @"";
+    }
+
     self.IFALabel.text  = [[[NSClassFromString(@"ASIdentifierManager") sharedManager] advertisingIdentifier] UUIDString];
 
     CFDataRef macBytes   = [[PHNetworkUtil sharedInstance] newMACBytes];
@@ -54,6 +66,13 @@
     self.PHIDLabel.text = [PHAPIRequest session];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self adjustContainerViewFrame];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -62,6 +81,7 @@
 
 - (void)dealloc
 {
+    [_IDFVLabel release];
     [_IFALabel release];
     [_MACLabel release];
     [_PHIDLabel release];
@@ -75,4 +95,20 @@
     [self setPHIDLabel:nil];
     [super viewDidUnload];
 }
+
+- (void)adjustContainerViewFrame
+{
+    if (NSFoundationVersionNumber_iOS_6_1 < floor(NSFoundationVersionNumber))
+    {
+        CGRect theUpdatedFrame = self.containerView.frame;
+        CGSize theStatusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
+        CGFloat theContainerOffset = self.navigationController.navigationBar.frame.size.height +
+                    MIN(theStatusBarSize.width, theStatusBarSize.height);
+
+        theUpdatedFrame.origin.y += theContainerOffset;
+        theUpdatedFrame.size.height -= theContainerOffset;
+        self.containerView.frame = theUpdatedFrame;
+    }
+}
+
 @end
