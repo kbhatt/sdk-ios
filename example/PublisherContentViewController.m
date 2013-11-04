@@ -22,6 +22,11 @@
 #import "PublisherContentViewController.h"
 #import "IAPHelper.h"
 
+@interface PHPublisherContentRequest (Properties)
+@property (nonatomic, retain, readonly) NSString *contentUnitID;
+@property (nonatomic, retain, readonly) NSString *messageID;
+@end
+
 @interface PublisherContentViewController ()
 @property (nonatomic, retain) NSMutableSet *sentRequests;
 @end
@@ -122,13 +127,30 @@
 #pragma mark - PHPublisherContentRequestDelegate
 - (void)requestWillGetContent:(PHPublisherContentRequest *)request
 {
-    NSString *message = [NSString stringWithFormat:@"Getting content for placement: %@", request.placement];
+    NSMutableString *message = [NSMutableString stringWithString:@"Getting content for "];
+
+    if (request.placement)
+        [message appendFormat:@"placement: %@", request.placement];
+    else if (request.contentUnitID && request.messageID)
+        [message appendFormat:@"content unit id: %@, message id: %@", request.contentUnitID, request.messageID];
+    else
+        [message appendFormat:@"request. Warning: Request has no placement or content unit id/message id."];
+
     [self addMessage:message];
 }
 
 - (void)requestDidGetContent:(PHPublisherContentRequest *)request
 {
-    NSString *message = [NSString stringWithFormat:@"Got content for placement: %@", request.placement];
+
+    NSMutableString *message = [NSMutableString stringWithString:@"Got content for "];
+
+    if (request.placement)
+        [message appendFormat:@"placement: %@", request.placement];
+    else if (request.contentUnitID && request.messageID)
+        [message appendFormat:@"content unit id: %@, message id: %@", request.contentUnitID, request.messageID];
+    else
+        [message appendFormat:@"request. Warning: Request has no placement or content unit id/message id."];
+
     [self addMessage:message];
 
     // Time is not tracked for requests created outside this view controller, like the ones passed
