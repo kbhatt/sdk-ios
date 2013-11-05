@@ -96,11 +96,24 @@
     [super viewDidUnload];
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+            duration:(NSTimeInterval)duration
+{
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+
+    [self adjustContainerViewFrame];
+}
+
+#pragma mark - Private
+
 - (void)adjustContainerViewFrame
 {
     if (NSFoundationVersionNumber_iOS_6_1 < floor(NSFoundationVersionNumber))
     {
-        CGRect theUpdatedFrame = self.containerView.frame;
+        const CGFloat kHLContainerViewOffset = 20.f;
+        
+        CGRect theUpdatedFrame = CGRectInset(self.view.bounds, kHLContainerViewOffset,
+                    kHLContainerViewOffset);
         CGSize theStatusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
         CGFloat theContainerOffset = self.navigationController.navigationBar.frame.size.height +
                     MIN(theStatusBarSize.width, theStatusBarSize.height);
