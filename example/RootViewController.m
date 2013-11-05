@@ -171,6 +171,10 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
     [super viewDidLoad];
     self.title = @"PlayHaven";
 
+    NSDictionary *theAppInfo = [[NSBundle mainBundle] infoDictionary];
+    self.applicationVersion.text = [NSString stringWithFormat:@"App Version %@; SDK %@",
+                theAppInfo[(NSString *)kCFBundleVersionKey], PH_SDK_VERSION];
+
     UIBarButtonItem *toggleButton = [[UIBarButtonItem alloc] initWithTitle:@"Toggle"
                                                                      style:UIBarButtonItemStyleBordered
                                                                     target:self
