@@ -481,7 +481,7 @@ static NSMutableSet *allContentViews = nil;
     } else {
         [PHResourceCacher pause];
 
-        PH_LOG(@"Loading template from network or cahce: %@", self.content.URL);
+        PH_LOG(@"Loading template from network or cache: %@", self.content.URL);
         [_webView loadRequest:request];
     }
 }
