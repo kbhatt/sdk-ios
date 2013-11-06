@@ -22,6 +22,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "PHPublisherOpenRequest.h"
 #import "PHConstants.h"
+#import "SenTestCase+PHAPIRequestSupport.h"
 
 #define EXPECTED_HASH @"3L0xlrDOt02UrTDwMSnye05Awwk"
 //#define EXPECTED_HASH @"sbiA9ROvCFEPANNFLbq3BK6m_dU-"
@@ -36,7 +37,8 @@
     NSString *token  = @"PUBLISHER_TOKEN",
              *secret = @"PUBLISHER_SECRET";
     PHPublisherOpenRequest *request = [PHPublisherOpenRequest requestForApp:(NSString *)token secret:(NSString *)secret];
-    NSString *requestURLString = [request.URL absoluteString];
+    NSURL *theRequestURL = [self URLForRequest:request];
+    NSString *requestURLString = [theRequestURL absoluteString];
 
     STAssertNotNil(requestURLString, @"Parameter string is nil?");
     STAssertFalse([requestURLString rangeOfString:@"token="].location == NSNotFound,
@@ -57,9 +59,10 @@
     [PHAPIRequest setCustomUDID:nil];
 
     PHPublisherOpenRequest *request = [PHPublisherOpenRequest requestForApp:token secret:secret];
+    NSURL *theRequestURL = [self URLForRequest:request];
 
     NSDictionary *signedParameters  = [request signedParameters];
-    NSString     *requestURLString  = [request.URL absoluteString];
+    NSString     *requestURLString  = [theRequestURL absoluteString];
 
 //#define PH_USE_MAC_ADDRESS 1
 #if PH_USE_MAC_ADDRESS == 1
@@ -84,7 +87,8 @@
     [PHAPIRequest setCustomUDID:nil];
 
     PHPublisherOpenRequest *request = [PHPublisherOpenRequest requestForApp:token secret:secret];
-    NSString *requestURLString = [request.URL absoluteString];
+    NSURL *theRequestURL = [self URLForRequest:request];
+    NSString *requestURLString = [theRequestURL absoluteString];
 
     STAssertNotNil(requestURLString, @"Parameter string is nil?");
     STAssertTrue([requestURLString rangeOfString:@"d_custom="].location == NSNotFound,
@@ -92,7 +96,8 @@
 
     PHPublisherOpenRequest *request2 = [PHPublisherOpenRequest requestForApp:token secret:secret];
     request2.customUDID = @"CUSTOM_UDID";
-    requestURLString = [request2.URL absoluteString];
+    theRequestURL = [self URLForRequest:request2];
+    requestURLString = [theRequestURL absoluteString];
     STAssertFalse([requestURLString rangeOfString:@"d_custom="].location == NSNotFound,
                  @"Custom parameter missing when one is set.");
 }
@@ -103,12 +108,13 @@
     NSString *theTestSecret = @"PUBLISHER_SECRET";
     PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:theTestToken secret:
                 theTestSecret];
-
+    NSURL *theRequestURL = [self URLForRequest:theRequest];
+    
     STAssertNotNil([theRequest.additionalParameters objectForKey:@"tz"], @"Missed time zone!");
-    STAssertTrue(0 < [[theRequest.URL absoluteString] rangeOfString:@"tz="].length, @"Missed time "
+    STAssertTrue(0 < [[theRequestURL absoluteString] rangeOfString:@"tz="].length, @"Missed time "
                 "zone!");
 
-    NSScanner *theTimeZoneScanner = [NSScanner scannerWithString:[theRequest.URL absoluteString]];
+    NSScanner *theTimeZoneScanner = [NSScanner scannerWithString:[theRequestURL absoluteString]];
 
     STAssertTrue([theTimeZoneScanner scanUpToString:@"tz=" intoString:NULL], @"Missed time zone!");
     STAssertTrue([theTimeZoneScanner scanString:@"tz=" intoString:NULL], @"Missed time zone!");

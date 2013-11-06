@@ -22,6 +22,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "PHPublisherMetadataRequest.h"
 #import "PHConstants.h"
+#import "SenTestCase+PHAPIRequestSupport.h"
 
 @interface PHPublisherMetadataRequestTest : SenTestCase
 @end
@@ -42,8 +43,9 @@
 
     PHPublisherMetadataRequest *request = [PHPublisherMetadataRequest requestForApp:token secret:secret];
 
+    NSURL *theRequestURL = [self URLForRequest:request];
     NSDictionary *signedParameters  = [request signedParameters];
-    NSString     *requestURLString  = [request.URL absoluteString];
+    NSString     *requestURLString  = [theRequestURL absoluteString];
 
 //#define PH_USE_MAC_ADDRESS 1
 #if PH_USE_MAC_ADDRESS == 1

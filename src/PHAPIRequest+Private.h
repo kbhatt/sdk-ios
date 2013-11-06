@@ -60,4 +60,9 @@
  **/
 + (NSString *)v4SignatureWithIdentifiers:(NSDictionary *)anIdentifiers token:(NSString *)aToken
             nonce:(NSString *)aNonce signatureKey:(NSString *)aKey;
+
+/**
+ * Constructs request URL and returns result to the given completion handler.
+ **/
+- (void)constructRequestURLWithCompletionHandler:(void (^)(NSURL *inURL))aCompletionHandler;
 @end
