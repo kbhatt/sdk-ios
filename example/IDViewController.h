@@ -22,6 +22,7 @@
 #import <UIKit/UIKit.h>
 
 @interface IDViewController : UIViewController
+@property (retain, nonatomic) IBOutlet UILabel *IDFVLabel;
 @property (retain, nonatomic) IBOutlet UILabel *IFALabel;
 @property (retain, nonatomic) IBOutlet UILabel *MACLabel;
 @property (retain, nonatomic) IBOutlet UILabel *PHIDLabel;
