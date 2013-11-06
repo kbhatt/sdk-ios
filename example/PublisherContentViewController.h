@@ -35,4 +35,6 @@
 @property (nonatomic, retain) IBOutlet UISwitch    *showsOverlaySwitch;
 @property (nonatomic, retain) IBOutlet UISwitch    *animateSwitch;
 @property (nonatomic, retain) PHPublisherContentRequest *request;
+
+- (void)sendRequest:(PHPublisherContentRequest *)aRequest;
 @end

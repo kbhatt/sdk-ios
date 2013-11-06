@@ -22,6 +22,15 @@
 #import "PublisherContentViewController.h"
 #import "IAPHelper.h"
 
+@interface PHPublisherContentRequest (Properties)
+@property (nonatomic, retain, readonly) NSString *contentUnitID;
+@property (nonatomic, retain, readonly) NSString *messageID;
+@end
+
+@interface PublisherContentViewController ()
+@property (nonatomic, retain) NSMutableSet *sentRequests;
+@end
+
 @implementation PublisherContentViewController
 @synthesize placementField = _placementField;
 @synthesize request        = _request;
@@ -30,11 +39,22 @@
 
 - (void)dealloc
 {
-    [PHAPIRequest cancelAllRequestsWithDelegate:self];
+    for (PHAPIRequest *theRequest in [_sentRequests allObjects])
+    {
+        theRequest.delegate = nil;
+        [theRequest cancel];
+        [_sentRequests removeObject:theRequest];
+    }
 
+    _request.delegate = nil;
+    [_request cancel];
+
+    [_request release], _request = nil;
+
+    [_sentRequests release], _sentRequests = nil;
     [_notificationView release], _notificationView = nil;
     [_placementField release], _placementField = nil;
-    [_request release], _request = nil;
+
     [showsOverlaySwitch release];
     [animateSwitch release];
 
@@ -67,6 +87,7 @@
     } else {
         [self addMessage:@"Request canceled!"];
 
+        self.request.delegate = nil;
         [self.request cancel];
         self.request = nil;
         [self.navigationItem.rightBarButtonItem setTitle:@"Start"];
@@ -78,22 +99,66 @@
     [super finishRequest];
 
     // Cleaning up after a completed request
+    self.request.delegate = nil;
     self.request = nil;
     [self.navigationItem.rightBarButtonItem setTitle:@"Start"];
+}
+
+#pragma mark -
+
+- (void)sendRequest:(PHPublisherContentRequest *)aRequest
+{
+    if (nil == aRequest)
+    {
+        return;
+    }
+
+    if (nil == self.sentRequests)
+    {
+        self.sentRequests = [NSMutableSet set];
+    }
+
+    [self.sentRequests addObject:aRequest];
+
+    aRequest.delegate = self;
+    [aRequest send];
 }
 
 #pragma mark - PHPublisherContentRequestDelegate
 - (void)requestWillGetContent:(PHPublisherContentRequest *)request
 {
-    NSString *message = [NSString stringWithFormat:@"Getting content for placement: %@", request.placement];
+    NSMutableString *message = [NSMutableString stringWithString:@"Getting content for "];
+
+    if (request.placement)
+        [message appendFormat:@"placement: %@", request.placement];
+    else if (request.contentUnitID && request.messageID)
+        [message appendFormat:@"content unit id: %@, message id: %@", request.contentUnitID, request.messageID];
+    else
+        [message appendFormat:@"request. Warning: Request has no placement or content unit id/message id."];
+
     [self addMessage:message];
 }
 
 - (void)requestDidGetContent:(PHPublisherContentRequest *)request
 {
-    NSString *message = [NSString stringWithFormat:@"Got content for placement: %@", request.placement];
+
+    NSMutableString *message = [NSMutableString stringWithString:@"Got content for "];
+
+    if (request.placement)
+        [message appendFormat:@"placement: %@", request.placement];
+    else if (request.contentUnitID && request.messageID)
+        [message appendFormat:@"content unit id: %@, message id: %@", request.contentUnitID, request.messageID];
+    else
+        [message appendFormat:@"request. Warning: Request has no placement or content unit id/message id."];
+
     [self addMessage:message];
-    [self addElapsedTime];
+
+    // Time is not tracked for requests created outside this view controller, like the ones passed
+    // to - [PublisherContentViewController sendRequest:]
+    if (request == self.request)
+    {
+        [self addElapsedTime];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request contentWillDisplay:(PHContent *)content
@@ -101,7 +166,10 @@
     NSString *message = [NSString stringWithFormat:@"Preparing to display content: %@", content];
     [self addMessage:message];
 
-    [self addElapsedTime];
+    if (request == self.request)
+    {
+        [self addElapsedTime];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request contentDidDisplay:(PHContent *)content
@@ -113,7 +181,10 @@
 
     [self addMessage:message];
 
-    [self addElapsedTime];
+    if (request == self.request)
+    {
+        [self addElapsedTime];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request contentDidDismissWithType:(PHPublisherContentDismissType *)type
@@ -121,14 +192,31 @@
     NSString *message = [NSString stringWithFormat:@"[OK] User dismissed request: %@ of type %@", request, type];
     [self addMessage:message];
 
-    [self finishRequest];
+    if (request == self.request)
+    {
+        [self finishRequest];
+    }
+    else
+    {
+        request.delegate = nil;
+        [self.sentRequests removeObject:request];
+    }
 }
 
 - (void)request:(PHAPIRequest *)request didFailWithError:(NSError *)error
 {
     NSString *message = [NSString stringWithFormat:@"[ERROR] Failed with error: %@", error];
     [self addMessage:message];
-    [self finishRequest];
+
+    if (request == self.request)
+    {
+        [self finishRequest];
+    }
+    else
+    {
+        request.delegate = nil;
+        [self.sentRequests removeObject:request];
+    }
 }
 
 - (void)request:(PHPublisherContentRequest *)request unlockedReward:(PHReward *)reward
