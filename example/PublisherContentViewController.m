@@ -124,34 +124,31 @@
     [aRequest send];
 }
 
+- (NSString *)descriptionForRequest:(PHPublisherContentRequest *)request
+{
+    if (request.placement)
+        return [NSString stringWithFormat:@"placement - %@", request.placement];
+    else if (request.contentUnitID && request.messageID)
+        return [NSString stringWithFormat:@"content unit id - %@, message id - %@", request.contentUnitID, request.messageID];
+    else
+        return [NSString stringWithFormat:@"empty request"];
+}
+
 #pragma mark - PHPublisherContentRequestDelegate
 - (void)requestWillGetContent:(PHPublisherContentRequest *)request
 {
-    NSMutableString *message = [NSMutableString stringWithString:@"Getting content for "];
-
-    if (request.placement)
-        [message appendFormat:@"placement: %@", request.placement];
-    else if (request.contentUnitID && request.messageID)
-        [message appendFormat:@"content unit id: %@, message id: %@", request.contentUnitID, request.messageID];
-    else
-        [message appendFormat:@"request. Warning: Request has no placement or content unit id/message id."];
-
+    NSString *message = [NSString stringWithFormat:@"Getting content for %@", [self descriptionForRequest:request]];
     [self addMessage:message];
+
+    NSLog(@"Request (%@) will get content", [self descriptionForRequest:request]);
 }
 
 - (void)requestDidGetContent:(PHPublisherContentRequest *)request
 {
-
-    NSMutableString *message = [NSMutableString stringWithString:@"Got content for "];
-
-    if (request.placement)
-        [message appendFormat:@"placement: %@", request.placement];
-    else if (request.contentUnitID && request.messageID)
-        [message appendFormat:@"content unit id: %@, message id: %@", request.contentUnitID, request.messageID];
-    else
-        [message appendFormat:@"request. Warning: Request has no placement or content unit id/message id."];
-
+    NSString *message = [NSString stringWithFormat:@"Got content for %@", [self descriptionForRequest:request]];
     [self addMessage:message];
+
+    NSLog(@"Request (%@) did get content", [self descriptionForRequest:request]);
 
     // Time is not tracked for requests created outside this view controller, like the ones passed
     // to - [PublisherContentViewController sendRequest:]
@@ -166,6 +163,8 @@
     NSString *message = [NSString stringWithFormat:@"Preparing to display content: %@", content];
     [self addMessage:message];
 
+    NSLog(@"Request (%@) will display content", [self descriptionForRequest:request]);
+
     if (request == self.request)
     {
         [self addElapsedTime];
@@ -178,8 +177,9 @@
     [_notificationView clear];
 
     NSString *message = [NSString stringWithFormat:@"Displayed content: %@", content];
-
     [self addMessage:message];
+
+    NSLog(@"Request (%@) did display content", [self descriptionForRequest:request]);
 
     if (request == self.request)
     {
@@ -191,6 +191,8 @@
 {
     NSString *message = [NSString stringWithFormat:@"[OK] User dismissed request: %@ of type %@", request, type];
     [self addMessage:message];
+
+    NSLog(@"Request (%@) will did dismiss with type: %@", [self descriptionForRequest:request], type.description);
 
     if (request == self.request)
     {
@@ -208,6 +210,9 @@
     NSString *message = [NSString stringWithFormat:@"[ERROR] Failed with error: %@", error];
     [self addMessage:message];
 
+    NSLog(@"Request (%@) will did fail with error: %@",
+            [self descriptionForRequest:(PHPublisherContentRequest *)request], error.description);
+
     if (request == self.request)
     {
         [self finishRequest];
@@ -223,12 +228,18 @@
 {
     NSString *message = [NSString stringWithFormat:@"Unlocked reward: %dx %@", reward.quantity, reward.name];
     [self addMessage:message];
+
+    NSLog(@"Request (%@) unlocked reward: %dx %@.",
+            [self descriptionForRequest:request], reward.quantity, reward.name);
 }
 
 - (void)request:(PHPublisherContentRequest *)request makePurchase:(PHPurchase *)purchase
 {
     NSString *message = [NSString stringWithFormat:@"Initiating purchase for: %dx %@", purchase.quantity, purchase.productIdentifier];
     [self addMessage:message];
+
+    NSLog(@"Request (%@) initiating purchase: %dx %@.",
+            [self descriptionForRequest:request], purchase.quantity, purchase.productIdentifier);
 
     [[IAPHelper sharedIAPHelper] startPurchase:purchase];
 }
