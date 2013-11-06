@@ -124,7 +124,7 @@
     [aRequest send];
 }
 
-- (NSString *)whatToCallThisRequest:(PHPublisherContentRequest *)request
+- (NSString *)descriptionForRequest:(PHPublisherContentRequest *)request
 {
     if (request.placement)
         return [NSString stringWithFormat:@"placement - %@", request.placement];
@@ -137,18 +137,18 @@
 #pragma mark - PHPublisherContentRequestDelegate
 - (void)requestWillGetContent:(PHPublisherContentRequest *)request
 {
-    NSString *message = [NSString stringWithFormat:@"Getting content for %@", [self whatToCallThisRequest:request]];
+    NSString *message = [NSString stringWithFormat:@"Getting content for %@", [self descriptionForRequest:request]];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) will get content", [self whatToCallThisRequest:request]);
+    NSLog(@"Request (%@) will get content", [self descriptionForRequest:request]);
 }
 
 - (void)requestDidGetContent:(PHPublisherContentRequest *)request
 {
-    NSString *message = [NSString stringWithFormat:@"Got content for %@", [self whatToCallThisRequest:request]];
+    NSString *message = [NSString stringWithFormat:@"Got content for %@", [self descriptionForRequest:request]];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) did get content", [self whatToCallThisRequest:request]);
+    NSLog(@"Request (%@) did get content", [self descriptionForRequest:request]);
 
     // Time is not tracked for requests created outside this view controller, like the ones passed
     // to - [PublisherContentViewController sendRequest:]
@@ -163,7 +163,7 @@
     NSString *message = [NSString stringWithFormat:@"Preparing to display content: %@", content];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) will display content", [self whatToCallThisRequest:request]);
+    NSLog(@"Request (%@) will display content", [self descriptionForRequest:request]);
 
     if (request == self.request)
     {
@@ -179,7 +179,7 @@
     NSString *message = [NSString stringWithFormat:@"Displayed content: %@", content];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) did display content", [self whatToCallThisRequest:request]);
+    NSLog(@"Request (%@) did display content", [self descriptionForRequest:request]);
 
     if (request == self.request)
     {
@@ -192,7 +192,7 @@
     NSString *message = [NSString stringWithFormat:@"[OK] User dismissed request: %@ of type %@", request, type];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) will did dismiss with type: %@", [self whatToCallThisRequest:request], type.description);
+    NSLog(@"Request (%@) will did dismiss with type: %@", [self descriptionForRequest:request], type.description);
 
     if (request == self.request)
     {
@@ -211,7 +211,7 @@
     [self addMessage:message];
 
     NSLog(@"Request (%@) will did fail with error: %@",
-            [self whatToCallThisRequest:(PHPublisherContentRequest *)request], error.description);
+            [self descriptionForRequest:(PHPublisherContentRequest *)request], error.description);
 
     if (request == self.request)
     {
@@ -230,7 +230,7 @@
     [self addMessage:message];
 
     NSLog(@"Request (%@) unlocked reward: %dx %@.",
-            [self whatToCallThisRequest:request], reward.quantity, reward.name);
+            [self descriptionForRequest:request], reward.quantity, reward.name);
 }
 
 - (void)request:(PHPublisherContentRequest *)request makePurchase:(PHPurchase *)purchase
@@ -239,7 +239,7 @@
     [self addMessage:message];
 
     NSLog(@"Request (%@) initiating purchase: %dx %@.",
-            [self whatToCallThisRequest:request], purchase.quantity, purchase.productIdentifier);
+            [self descriptionForRequest:request], purchase.quantity, purchase.productIdentifier);
 
     [[IAPHelper sharedIAPHelper] startPurchase:purchase];
 }
