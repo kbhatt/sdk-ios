@@ -192,7 +192,7 @@
     NSString *message = [NSString stringWithFormat:@"[OK] User dismissed request: %@ of type %@", request, type];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) will did dismiss with type: %@", [self descriptionForRequest:request], type.description);
+    NSLog(@"Request (%@) did dismiss with type: %@", [self descriptionForRequest:request], type.description);
 
     if (request == self.request)
     {
@@ -210,7 +210,7 @@
     NSString *message = [NSString stringWithFormat:@"[ERROR] Failed with error: %@", error];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) will did fail with error: %@",
+    NSLog(@"Request (%@) did fail with error: %@",
             [self descriptionForRequest:(PHPublisherContentRequest *)request], error.description);
 
     if (request == self.request)
