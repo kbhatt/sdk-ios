@@ -39,18 +39,10 @@
 
 - (void)dealloc
 {
-    for (PHAPIRequest *theRequest in [_sentRequests allObjects])
-    {
-        theRequest.delegate = nil;
-        [theRequest cancel];
-        [_sentRequests removeObject:theRequest];
-    }
-
-    _request.delegate = nil;
-    [_request cancel];
+    // Clean up all the remaining content requests initiated by the controller
+    [PHAPIRequest cancelAllRequestsWithDelegate:self];
 
     [_request release], _request = nil;
-
     [_sentRequests release], _sentRequests = nil;
     [_notificationView release], _notificationView = nil;
     [_placementField release], _placementField = nil;
