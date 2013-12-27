@@ -148,6 +148,14 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
        [[PHPushProvider sharedInstance] handleRemoteNotificationWithUserInfo:self.remoteNotificationInfo];
        self.remoteNotificationInfo = nil;
     }
+
+    if ([self.navigationController.topViewController isKindOfClass:
+                [PushNotificationRegistrationViewController class]])
+    {
+        [(PushNotificationRegistrationViewController *)[self.navigationController
+                    topViewController] addMessage:[NSString stringWithFormat:
+                    @"Got APNS Device Token: %@", [aDeviceToken description]]];
+    }
 }
 
 - (void)application:(UIApplication *)anApplication
