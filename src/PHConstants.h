@@ -117,7 +117,6 @@
 /*@{*/
 #ifdef PH_NAMESPACE_LIBS
 #define PH_NAMESPACE_SBJSON     1
-#define PH_NAMESPACE_SDURLCACHE 1
 #endif
 
 /**
@@ -136,17 +135,6 @@
 #define PH_SBJSONPARSER_CLASS      SBJsonParserPH
 #define PH_SBJSONWRITER_CLASS      SBJsonWriterPH
 #define PH_SBJSONERRORDOMAIN_CONST SBJSONErrorDomainPH
-#endif
-
-/**
- * The \c PH_NAMESPACE_SDURLCACHE Macros
- **/
-#ifndef PH_NAMESPACE_SDURLCACHE
-#define PH_SDURLCACHE_CLASS          SDURLCache
-#define PH_SDCACHEDURLRESPONSE_CLASS SDCachedURLResponse
-#else
-#define PH_SDURLCACHE_CLASS          SDURLCachePH
-#define PH_SDCACHEDURLRESPONSE_CLASS SDCachedURLResponsePH
 #endif
 
 /**

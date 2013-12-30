@@ -21,7 +21,6 @@
 
 #import "PHPublisherOpenRequest.h"
 #import "PHConstants.h"
-#import "SDURLCache.h"
 #import "PHTimeInGame.h"
 #import "PHNetworkUtil.h"
 #import "PHResourceCacher.h"
@@ -35,18 +34,6 @@ static NSString *const kPHTimeZoneKey = @"tz";
 
 @implementation PHPublisherOpenRequest
 //@synthesize customUDID = _customUDID;
-
-+ (void)initialize
-{
-    if (self == [PHPublisherOpenRequest class]) {
-        // Initializes pre-fetching and webview caching
-        PH_SDURLCACHE_CLASS *urlCache = [[PH_SDURLCACHE_CLASS alloc] initWithMemoryCapacity:PH_MAX_SIZE_MEMORY_CACHE
-                                                                               diskCapacity:PH_MAX_SIZE_FILESYSTEM_CACHE
-                                                                                   diskPath:[PH_SDURLCACHE_CLASS defaultCachePath]];
-        [NSURLCache setSharedURLCache:urlCache];
-        [urlCache release];
-    }
-}
 
 - (NSDictionary *)additionalParameters
 {
