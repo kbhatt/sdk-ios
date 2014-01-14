@@ -28,7 +28,6 @@
 #import "IAPViewController.h"
 #import "IDViewController.h"
 #import "PushNotificationRegistrationViewController.h"
-#import "SDURLCache.h"
 #import "PlayHavenAppIdentity.h"
 
 static NSString *kPHClassNameKey = @"ClassName";
@@ -127,41 +126,26 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 
 - (void)updateCacheButton
 {
-    if ([[NSURLCache sharedURLCache] isKindOfClass:[PH_SDURLCACHE_CLASS class]]) {
-        NSUInteger currentCacheUsage =
-                           [[NSURLCache sharedURLCache] currentDiskUsage] +
-                           [[NSURLCache sharedURLCache] currentMemoryUsage];
+    NSUInteger currentCacheUsage =
+                       [[NSURLCache sharedURLCache] currentDiskUsage] +
+                       [[NSURLCache sharedURLCache] currentMemoryUsage];
 
-        if (currentCacheUsage) {
-            CGFloat f_size = [[NSNumber numberWithUnsignedInt:currentCacheUsage] floatValue] / 1024;
+    if (currentCacheUsage) {
+        CGFloat f_size = [[NSNumber numberWithUnsignedInt:currentCacheUsage] floatValue] / 1024;
 
-            NSString *s_size;
+        NSString *s_size;
 
-            if (f_size < 1024) s_size = [NSString stringWithFormat:@"(%.2f Kb)", f_size];
-            else               s_size = [NSString stringWithFormat:@"(%.2f Mb)", f_size / 1024];
+        if (f_size < 1024) s_size = [NSString stringWithFormat:@"(%.2f Kb)", f_size];
+        else               s_size = [NSString stringWithFormat:@"(%.2f Mb)", f_size / 1024];
 
-            [clearCacheButton setTitle:[NSString stringWithFormat:@"Clear Cache %@", s_size]
-                              forState:UIControlStateNormal];
-            [clearCacheButton setEnabled:YES];
-        } else {
-            [clearCacheButton setEnabled:NO];
-        }
-
-        [clearCacheButton addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
+        [clearCacheButton setTitle:[NSString stringWithFormat:@"Clear Cache %@", s_size]
+                          forState:UIControlStateNormal];
+        [clearCacheButton setEnabled:YES];
     } else {
-        [clearCacheButton setTitle:@"Set Cache" forState:UIControlStateNormal];
-        [clearCacheButton addTarget:self action:@selector(setCache:) forControlEvents:UIControlEventTouchUpInside];
+        [clearCacheButton setEnabled:NO];
     }
-}
 
-- (void)setCache:(id)sender
-{
-    PH_SDURLCACHE_CLASS *urlCache = [[[PH_SDURLCACHE_CLASS alloc] initWithMemoryCapacity:PH_MAX_SIZE_MEMORY_CACHE
-                                                                            diskCapacity:PH_MAX_SIZE_FILESYSTEM_CACHE
-                                                                                diskPath:[PH_SDURLCACHE_CLASS defaultCachePath]] autorelease];
-    [NSURLCache setSharedURLCache:urlCache];
-
-    [self updateCacheButton];
+    [clearCacheButton addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)clearCache:(id)sender
