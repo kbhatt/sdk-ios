@@ -32,6 +32,10 @@
 static NSString *const kPHApplicationTokenKey = @"applicationToken";
 static NSString *const kPHApplicationSecretKey = @"applicationSecret";
 
+@interface AppDelegate ()
+@property (nonatomic, retain) NSDictionary *remoteNotificationInfo;
+@end
+
 @implementation AppDelegate
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
@@ -54,8 +58,8 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
     [PHPushProvider sharedInstance].applicationSecret = theAppIdentity.applicationSecret;
 
     [[PHPushProvider sharedInstance] registerForPushNotifications];
-    [[PHPushProvider sharedInstance] handleRemoteNotificationWithUserInfo:[launchOptions
-                objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+
+    self.remoteNotificationInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 
     [PHAPIRequest setOptOutStatus:NO];
 
@@ -126,6 +130,7 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
     [[PlayHavenAppIdentity sharedIdentity] removeObserver:self forKeyPath:kPHApplicationTokenKey];
     [[PlayHavenAppIdentity sharedIdentity] removeObserver:self forKeyPath:kPHApplicationSecretKey];
 
+    [_remoteNotificationInfo release];
     [_window release];
     [_navigationController release];
     [super dealloc];
@@ -137,6 +142,12 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
             didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)aDeviceToken
 {
     [[PHPushProvider sharedInstance] registerAPNSDeviceToken:aDeviceToken];
+
+    if (self.remoteNotificationInfo)
+    {
+       [[PHPushProvider sharedInstance] handleRemoteNotificationWithUserInfo:self.remoteNotificationInfo];
+       self.remoteNotificationInfo = nil;
+    }
 
     if ([self.navigationController.topViewController isKindOfClass:
                 [PushNotificationRegistrationViewController class]])
@@ -160,6 +171,8 @@ static NSString *const kPHApplicationSecretKey = @"applicationSecret";
 {
     NSString *theLogMessage = [NSString stringWithFormat:
                 @"Error in registration for PN: %@", anError];
+
+    self.remoteNotificationInfo = nil;
 
     if ([self.navigationController.topViewController isKindOfClass:
                 [PushNotificationRegistrationViewController class]])
