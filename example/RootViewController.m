@@ -131,7 +131,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
                        [[NSURLCache sharedURLCache] currentMemoryUsage];
 
     if (currentCacheUsage) {
-        CGFloat f_size = [[NSNumber numberWithUnsignedInt:currentCacheUsage] floatValue] / 1024;
+        CGFloat f_size = [[NSNumber numberWithUnsignedInteger:currentCacheUsage] floatValue] / 1024;
 
         NSString *s_size;
 

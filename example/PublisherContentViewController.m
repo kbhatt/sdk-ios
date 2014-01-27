@@ -218,20 +218,22 @@
 
 - (void)request:(PHPublisherContentRequest *)request unlockedReward:(PHReward *)reward
 {
-    NSString *message = [NSString stringWithFormat:@"Unlocked reward: %dx %@", reward.quantity, reward.name];
+    NSString *message = [NSString stringWithFormat:@"Unlocked reward: %ld %@",
+                (long)reward.quantity, reward.name];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) unlocked reward: %dx %@.",
-            [self descriptionForRequest:request], reward.quantity, reward.name);
+    NSLog(@"Request (%@) unlocked reward: %ld %@.",
+            [self descriptionForRequest:request], (long)reward.quantity, reward.name);
 }
 
 - (void)request:(PHPublisherContentRequest *)request makePurchase:(PHPurchase *)purchase
 {
-    NSString *message = [NSString stringWithFormat:@"Initiating purchase for: %dx %@", purchase.quantity, purchase.productIdentifier];
+    NSString *message = [NSString stringWithFormat:@"Initiating purchase for: %ld %@",
+                (long)purchase.quantity, purchase.productIdentifier];
     [self addMessage:message];
 
-    NSLog(@"Request (%@) initiating purchase: %dx %@.",
-            [self descriptionForRequest:request], purchase.quantity, purchase.productIdentifier);
+    NSLog(@"Request (%@) initiating purchase: %ld %@.", [self descriptionForRequest:request],
+                (long)purchase.quantity, purchase.productIdentifier);
 
     [[IAPHelper sharedIAPHelper] startPurchase:purchase];
 }

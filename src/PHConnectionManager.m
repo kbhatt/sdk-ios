@@ -205,7 +205,7 @@ static PHConnectionManager *singleton = nil;
 
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        PH_LOG(@"Request recieved HTTP response: %d", [httpResponse statusCode]);
+        PH_LOG(@"Request recieved HTTP response: %ld", (long)[httpResponse statusCode]);
     }
 
     PHConnectionBundle *connectionBundle = (PHConnectionBundle *)CFDictionaryGetValue(self.connections, connection);

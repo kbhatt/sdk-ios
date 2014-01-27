@@ -39,7 +39,7 @@ static NSString *const kPHTimeZoneKey = @"tz";
 {
     NSMutableDictionary *additionalParameters = [NSMutableDictionary dictionary];
 
-    [additionalParameters setValue:[NSNumber numberWithInt:[[PHTimeInGame getInstance] getCountSessions]]
+    [additionalParameters setValue:[NSNumber numberWithInteger:[[PHTimeInGame getInstance] getCountSessions]]
                             forKey:@"scount"];
     [additionalParameters setValue:[NSNumber numberWithInt:(int)floor([[PHTimeInGame getInstance] getSumSessionDuration])]
                             forKey:@"ssum"];
@@ -96,8 +96,8 @@ static NSString *const kPHTimeZoneKey = @"tz";
 
 - (NSString *)timeZoneOffsetFromGMTAsString
 {
-    return [NSString stringWithFormat:@"%d.%d", [[NSTimeZone systemTimeZone] secondsFromGMT] / 3600,
-                ([[NSTimeZone systemTimeZone] secondsFromGMT] % 3600) / 60];
+    return [NSString stringWithFormat:@"%ld.%ld", (long)([[NSTimeZone systemTimeZone] secondsFromGMT]
+                / 3600), (long)(([[NSTimeZone systemTimeZone] secondsFromGMT] % 3600) / 60)];
 }
 
 @end

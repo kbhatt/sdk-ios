@@ -460,7 +460,7 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
     if (kPHRequestStatusInProgress == self.requestStatus || kPHRequestStatusSucceeded ==
                 self.requestStatus)
     {
-        PH_DEBUG(@"Trying to re-send request with status = %u", self.requestStatus);
+        PH_DEBUG(@"Trying to re-send request with status = %lu", (unsigned long)self.requestStatus);
         return;
     }
 
