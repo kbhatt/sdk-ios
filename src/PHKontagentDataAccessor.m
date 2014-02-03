@@ -21,9 +21,10 @@
 
 #import "PHKontagentDataAccessor.h"
 
-static NSString *const kPHKontagentAPIKey = @"PHKontagentAPIKey";
-static NSString *const kPHpersistentValuesFileName = @"PersistentValues";
-static NSString *const kPHKontagentSenderIDKeyPrefix = @"com.kontagent.lib.SENDER_ID";
+NSString *const kPHKontagentAPIKey = @"PHKontagentAPIKey";
+NSString *const kPHKontagentSenderIDKeyPrefix = @"com.kontagent.lib.SENDER_ID.";
+
+static NSString *const kPHPersistentValuesFileName = @"PersistentValues";
 
 static PHKontagentDataAccessor *sSharedDataAccessor = nil;
 
@@ -53,7 +54,6 @@ static PHKontagentDataAccessor *sSharedDataAccessor = nil;
 {
     NSMutableDictionary *theCombinedPreferences = [NSMutableDictionary dictionaryWithDictionary:
                 [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-    NSString *theAPIKeyPrefix = [NSString stringWithFormat:@"%@.", kPHKontagentSenderIDKeyPrefix];
     NSMutableDictionary *theAPIKeySIDPairs = [NSMutableDictionary dictionary];
     
     // API keys from PersistentValues override the ones stored in NSUserDefaults
@@ -61,9 +61,10 @@ static PHKontagentDataAccessor *sSharedDataAccessor = nil;
     
     for (NSString *theDefault in [theCombinedPreferences allKeys])
     {
-        if ([theDefault isKindOfClass:[NSString class]] && [theDefault hasPrefix:theAPIKeyPrefix])
+        if ([theDefault isKindOfClass:[NSString class]] && [theDefault hasPrefix:
+                    kPHKontagentSenderIDKeyPrefix])
         {
-            NSRange thePrefixRange = [theDefault rangeOfString:theAPIKeyPrefix];
+            NSRange thePrefixRange = [theDefault rangeOfString:kPHKontagentSenderIDKeyPrefix];
             NSString *theAPIKey = [theDefault substringFromIndex:thePrefixRange.location +
                         thePrefixRange.length];
             
@@ -87,31 +88,34 @@ static PHKontagentDataAccessor *sSharedDataAccessor = nil;
     NSString *theStoredSenderID = [self senderIDForAPIKey:anAPIKey];
     if (nil == theStoredSenderID)
     {
-        NSString *theSenderIDStoreKey = [self senderIDStoreKeyWithAPIKey:anAPIKey];
+        NSString *theSenderIDStoreKey = [[self class] senderIDStoreKeyWithAPIKey:anAPIKey];
         [[NSUserDefaults standardUserDefaults] setObject:aSenderID forKey:theSenderIDStoreKey];
     }
 }
 
 #pragma mark -
 
-- (NSDictionary *)persistentValues
++ (NSURL *)persistentValuesFileURL
 {
-    NSURL *theStoreURL = [[[[NSFileManager defaultManager] URLsForDirectory:
+    return [[[[NSFileManager defaultManager] URLsForDirectory:
                 NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject]
-                URLByAppendingPathComponent:kPHpersistentValuesFileName];
-
-    return [NSDictionary dictionaryWithContentsOfURL:theStoreURL];
+                URLByAppendingPathComponent:kPHPersistentValuesFileName];
 }
 
-- (NSString *)senderIDStoreKeyWithAPIKey:(NSString *)anAPIKey
+- (NSDictionary *)persistentValues
 {
-    return [NSString stringWithFormat:@"%@.%@", kPHKontagentSenderIDKeyPrefix, anAPIKey];
+    return [NSDictionary dictionaryWithContentsOfURL:[[self class] persistentValuesFileURL]];
+}
+
++ (NSString *)senderIDStoreKeyWithAPIKey:(NSString *)anAPIKey
+{
+    return [NSString stringWithFormat:@"%@%@", kPHKontagentSenderIDKeyPrefix, anAPIKey];
 }
 
 - (NSString *)senderIDForAPIKey:(NSString *)anAPIKey
 {
     NSDictionary *thePersistentValues = [self persistentValues];
-    NSString *theSenderIDStoreKey = [self senderIDStoreKeyWithAPIKey:anAPIKey];
+    NSString *theSenderIDStoreKey = [[self class] senderIDStoreKeyWithAPIKey:anAPIKey];
     NSString *theSenderID = thePersistentValues[theSenderIDStoreKey];
     
     if (nil == theSenderID)
