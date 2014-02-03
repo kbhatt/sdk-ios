@@ -19,7 +19,18 @@
  Created by Anton Fedorchenko on 9/3/13.
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+typedef NS_ENUM(NSUInteger, PHRequestHTTPMethod)
+{
+    PHRequestHTTPGet = 0,
+    PHRequestHTTPPost
+};
+
 @interface PHAPIRequest ()
+
+/**
+ * Indicates HTTP method used to transfer parameters to the server. Default is PHRequestHTTPGet.
+ **/
+@property (nonatomic, assign, readonly) PHRequestHTTPMethod HTTPMethod;
 
 /**
  * List of identifiers used for v4-style signature generation.
