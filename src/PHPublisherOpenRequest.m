@@ -24,8 +24,14 @@
 #import "PHTimeInGame.h"
 #import "PHNetworkUtil.h"
 #import "PHResourceCacher.h"
+#import "PHAPIRequest+Private.h"
+#import "PHKontagentDataAccessor.h"
 
 static NSString *const kPHTimeZoneKey = @"tz";
+static NSString *const kPHKontagentSenderIDs = @"ktsids";
+
+static NSString *const kPHResponseKTAPIKey = @"ktapi";
+static NSString *const kPHResponseKTSIDKey = @"ktsid";
 
 @interface PHAPIRequest (Private)
 - (void)finish;
@@ -44,13 +50,32 @@ static NSString *const kPHTimeZoneKey = @"tz";
     [additionalParameters setValue:[NSNumber numberWithInt:(int)floor([[PHTimeInGame getInstance] getSumSessionDuration])]
                             forKey:@"ssum"];
     [additionalParameters setObject:[self timeZoneOffsetFromGMTAsString] forKey:kPHTimeZoneKey];
+    
+    NSString *theKontagentSenderID = [[PHKontagentDataAccessor sharedAccessor] primarySenderID];
 
+    // Send all API key and Sender ID pairs to the server if primary sender ID is not defined yet.
+    if (nil == theKontagentSenderID)
+    {
+        NSString *theAPIKeySIDs = [self parameterValueWithAPIKeySIDPairs:
+                    [[PHKontagentDataAccessor sharedAccessor] allAPIKeySenderIDPairs]];
+
+        if (nil != theAPIKeySIDs)
+        {
+            additionalParameters[kPHKontagentSenderIDs] = theAPIKeySIDs;
+        }
+    }
+    
     return  additionalParameters;
 }
 
 - (NSString *)urlPath
 {
     return PH_URL(/v3/publisher/open/);
+}
+
+- (PHRequestHTTPMethod)HTTPMethod
+{
+    return PHRequestHTTPPost;
 }
 
 #pragma mark - PHAPIRequest response delegate
@@ -74,6 +99,9 @@ static NSString *const kPHTimeZoneKey = @"tz";
     if (!!session) {
         [PHAPIRequest setSession:session];
     }
+    
+    [self storePrimarySenderID:responseData[kPHResponseKTSIDKey] forAPIKey:
+                responseData[kPHResponseKTAPIKey]];
 
     if ([self.delegate respondsToSelector:@selector(request:didSucceedWithResponse:)]) {
         [self.delegate performSelector:@selector(request:didSucceedWithResponse:) withObject:self withObject:responseData];
@@ -98,6 +126,45 @@ static NSString *const kPHTimeZoneKey = @"tz";
 {
     return [NSString stringWithFormat:@"%d.%d", [[NSTimeZone systemTimeZone] secondsFromGMT] / 3600,
                 ([[NSTimeZone systemTimeZone] secondsFromGMT] % 3600) / 60];
+}
+
+#pragma mark -
+
+- (NSString *)parameterValueWithAPIKeySIDPairs:(NSDictionary *)aDictionary
+{
+    if (0 == [aDictionary count])
+    {
+        return nil;
+    }
+    
+    NSMutableArray *theFlatPairs = [NSMutableArray arrayWithCapacity:[aDictionary count]];
+    
+    for (NSString *theKey in [aDictionary allKeys])
+    {
+        NSString *theAPIKeySIDEntry = [NSString stringWithFormat:@"{\"api\":\"%@\",\"sid\":\"%@\"}",
+                    theKey, aDictionary[theKey]];
+        [theFlatPairs addObject:theAPIKeySIDEntry];
+    }
+
+    return [NSString stringWithFormat:@"[%@]", [theFlatPairs componentsJoinedByString:@","]];
+}
+
+- (void)storePrimarySenderID:(NSString *)aSenderID forAPIKey:(NSString *)anAPIKey
+{
+    if (nil == aSenderID && nil == anAPIKey)
+    {
+        return;
+    }
+    
+    if ((0 == [aSenderID length] && 0 < [anAPIKey length]) ||
+                (0 < [aSenderID length] && 0 == [anAPIKey length]))
+    {
+        PH_LOG(@"ERROR: One of the parameters is incorrect (Sender ID: %@; KT API key: %@)!",
+                    aSenderID, anAPIKey);
+        return;
+    }
+    
+    [[PHKontagentDataAccessor sharedAccessor] storePrimarySenderID:aSenderID forAPIKey:anAPIKey];
 }
 
 @end
