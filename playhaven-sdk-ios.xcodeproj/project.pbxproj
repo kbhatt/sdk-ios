@@ -85,6 +85,7 @@
 		E15FAEC2189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */; };
 		E15FAEC3189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */; };
 		E15FAEC4189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */; };
+		E15FAEC7189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FAEC6189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m */; };
 		E1769A8B171E29C300FE6518 /* PHPushRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1769A8A171E29C200FE6518 /* PHPushRequestTest.m */; };
 		E17A203D1718DC4600EF6C14 /* PushNotificationRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A203B1718DC4400EF6C14 /* PushNotificationRegistrationViewController.m */; };
 		E17A203E1718DC4600EF6C14 /* PushNotificationRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E17A203C1718DC4500EF6C14 /* PushNotificationRegistrationViewController.xib */; };
@@ -596,6 +597,8 @@
 		E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHKontagentDataAccessor.m; sourceTree = "<group>"; };
 		E15FAEBE189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHKontagentDataAccessorTest.m; sourceTree = "<group>"; };
 		E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHKontagentDataAccessor+Private.h"; sourceTree = "<group>"; };
+		E15FAEC5189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHKontagentDataAccessor+UnitTesting.h"; sourceTree = "<group>"; };
+		E15FAEC6189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHKontagentDataAccessor+UnitTesting.m"; sourceTree = "<group>"; };
 		E1769A8A171E29C200FE6518 /* PHPushRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushRequestTest.m; sourceTree = "<group>"; };
 		E17A203A1718DC4300EF6C14 /* PushNotificationRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationRegistrationViewController.h; sourceTree = "<group>"; };
 		E17A203B1718DC4400EF6C14 /* PushNotificationRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationRegistrationViewController.m; sourceTree = "<group>"; };
@@ -950,6 +953,8 @@
 			children = (
 				E1FADDF8180D84AC0095202B /* SenTestCase+PHAPIRequestSupport.h */,
 				E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */,
+				E15FAEC5189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.h */,
+				E15FAEC6189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1800,6 +1805,7 @@
 				EAFF5E7D14F8154E00E96C2C /* PHPurchaseTest.m in Sources */,
 				EAE5598614F866CA0023BBEF /* PHPublisherIAPTrackingRequestTest.m in Sources */,
 				EA7CF59D156C365C0095572E /* PlayHavenTest.m in Sources */,
+				E15FAEC7189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m in Sources */,
 				D108A83E15A6B68600082388 /* PHTimeInGameTest.m in Sources */,
 				E1FADDFB180D85440095202B /* SenTestCase+PHAPIRequestSupport.m in Sources */,
 				EA98C12D16640E4500B6AA8C /* PHNetworkUtilTest.m in Sources */,
