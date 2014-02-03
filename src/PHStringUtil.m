@@ -219,6 +219,11 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 
 + (NSString *)stringByUrlEncodingString:(NSString *)input
 {
+    if (nil == input)
+    {
+        return nil;
+    }
+    
     CFStringRef value = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                 (CFStringRef) input,
                                                                 NULL,
