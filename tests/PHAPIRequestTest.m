@@ -26,12 +26,18 @@
 #import "PHPublisherOpenRequest.h"
 #import "PHAPIRequest+Private.h"
 #import "SenTestCase+PHAPIRequestSupport.h"
+#import "PHKontagentDataAccessor+UnitTesting.h"
 
 #define PUBLISHER_TOKEN @"PUBLISHER_TOKEN"
 #define PUBLISHER_SECRET @"PUBLISHER_SECRET"
 
 #define HASH_STRING  @"DEVICE_ID:PUBLISHER_TOKEN:PUBLISHER_SECRET:NONCE"
 #define EXPECTED_HASH @"3L0xlrDOt02UrTDwMSnye05Awwk"
+
+static NSString *const kPHTestAPIKey1 = @"f25a3b41dbcb4c13bd8d6b0b282eec32";
+static NSString *const kPHTestAPIKey2 = @"d45a3b4c13bd82eec32b8d6b0b241dbc";
+static NSString *const kPHTestSID1 = @"13565276206185677368";
+static NSString *const kPHTestSID2 = @"12256527677368061856";
 
 @interface PHAPIRequest (Private)
 + (NSMutableSet *)allRequests;
@@ -53,6 +59,14 @@
 @interface PHAPIRequestByHashCodeTest : SenTestCase @end
 
 @implementation PHAPIRequestTest
+
+- (void)setUp
+{
+    [super setUp];
+
+    // Cancel request to remove it from the cache
+    [[PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET] cancel];
+}
 
 - (void)testSignatureHash
 {
@@ -573,6 +587,85 @@
     
     [PHAPIRequest setOptOutStatus:NO];
     STAssertFalse([PHAPIRequest optOutStatus], @"Incorrect default opt-out status!");
+}
+
+- (void)testHTTPMethod
+{
+    PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    STAssertNotNil(theRequest, @"");
+    
+    STAssertEquals(PHRequestHTTPGet, theRequest.HTTPMethod, @"Default HTTPMethod doesn't match the "
+                "expected one!");
+}
+
+- (void)testKTSIDParameterCase1
+{
+    // Cleanup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+
+    PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    STAssertNotNil(theRequest, @"");
+    
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
+    NSDictionary *theSignedParameters = [theRequest signedParameters];
+
+    // Check that after cleanup no ktsid is not included in the request parameters
+    STAssertNil(theSignedParameters[@"ktsid"], @"No ktsid parameter is expected after KT locations "
+                "cleanup!");
+    STAssertTrue(0 == [theRequestURL rangeOfString:@"ktsid"].length, @"No ktsid parameter is "
+                "expected after KT locations cleanup!");
+}
+
+- (void)testKTSIDParameterCase2
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+    [PHKontagentDataAccessor storeSIDInPersistentValues:kPHTestSID1 forAPIKey:kPHTestAPIKey1];
+    [PHKontagentDataAccessor storeSIDInUserDefaults:kPHTestSID2 forAPIKey:kPHTestAPIKey2];
+    
+    PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    STAssertNotNil(theRequest, @"");
+    
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
+    NSDictionary *theSignedParameters = [theRequest signedParameters];
+
+    // Check that after cleanup no ktsid is not included in the request parameters
+    STAssertNil(theSignedParameters[@"ktsid"], @"No ktsid parameter is expected until primary SID "
+                "is defined!");
+    STAssertTrue(0 == [theRequestURL rangeOfString:@"ktsid"].length, @"No ktsid parameter is "
+                "expected until primary SID is defined!");
+}
+
+- (void)testKTSIDParameterCase3
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+    [PHKontagentDataAccessor storeSIDInPersistentValues:kPHTestSID1 forAPIKey:kPHTestAPIKey1];
+    [PHKontagentDataAccessor storeSIDInUserDefaults:kPHTestSID2 forAPIKey:kPHTestAPIKey2];
+    
+    [[PHKontagentDataAccessor sharedAccessor] storePrimarySenderID:kPHTestSID1 forAPIKey:
+                kPHTestAPIKey1];
+    
+    PHAPIRequest *theRequest = [PHAPIRequest requestForApp:PUBLISHER_TOKEN secret:PUBLISHER_SECRET];
+    STAssertNotNil(theRequest, @"");
+    
+    NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
+    NSDictionary *theSignedParameters = [theRequest signedParameters];
+
+    // Check that primary SID is included in the request parameters
+    STAssertEqualObjects(kPHTestSID1, theSignedParameters[@"ktsid"] , @"Missed ktsid parameter!");
+    STAssertTrue(0 < [theRequestURL rangeOfString:@"ktsid"].length, @"Missed ktsid parameter!");
+    
+    // Check that primary SID is included in the request signature
+    STAssertEqualObjects(kPHTestSID1, [PHAPIRequest identifiers][@"ktsid"], @"Missed ktsid "
+                "parameter!");
+
+    NSString *theExpectedSignature = [PHAPIRequest v4SignatureWithIdentifiers:[PHAPIRequest
+                identifiers] token:[theRequest signedParameters][@"token"] nonce:[theRequest
+                signedParameters][@"nonce"] signatureKey:theRequest.secret];
+    
+    STAssertEqualObjects(theExpectedSignature, [theRequest signedParameters][@"sig4"],
+                @"Request signature doesn't match the expected one!");
 }
 
 @end

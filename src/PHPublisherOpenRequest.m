@@ -39,7 +39,6 @@ static NSString *const kPHResponseKTSIDKey = @"ktsid";
 @end
 
 @implementation PHPublisherOpenRequest
-//@synthesize customUDID = _customUDID;
 
 - (NSDictionary *)additionalParameters
 {
