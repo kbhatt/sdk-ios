@@ -70,7 +70,6 @@ static NSString *const kPHHTTPMethodPost = @"POST";
 + (void)setSession:(NSString *)session;
 - (void)processRequestResponse:(NSDictionary *)responseData;
 
-- (void)didSucceedWithResponse:(NSDictionary *)responseData;
 - (void)didFailWithError:(NSError *)error;
 @end
 

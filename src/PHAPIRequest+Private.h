@@ -76,4 +76,11 @@ typedef NS_ENUM(NSUInteger, PHRequestHTTPMethod)
  * Constructs request URL and returns result to the given completion handler.
  **/
 - (void)constructRequestURLWithCompletionHandler:(void (^)(NSURL *inURL))aCompletionHandler;
+
+/**
+ * Invoked upon receiving a response from the server. Subclasses may override this method to
+ * implement their own logic of processing server response.
+ **/
+- (void)didSucceedWithResponse:(NSDictionary *)aResponseDictionary;
+
 @end

@@ -26,6 +26,8 @@
 #import "PHAPIRequest+Private.h"
 #import "PHKontagentDataAccessor.h"
 #import "PHKontagentDataAccessor+UnitTesting.h"
+#import "PHConstants.h"
+#import "JSON.h"
 
 #define EXPECTED_HASH @"3L0xlrDOt02UrTDwMSnye05Awwk"
 
@@ -246,6 +248,134 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
 
     // Cleanup API keys and SIDs in KT locations
     [PHKontagentDataAccessor cleanupKTLocations];
+}
+
+- (void)testResponseWithNoSID
+{
+    // Cleanuo API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+
+    PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:
+                kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+    
+    [theRequest didSucceedWithResponse:[self responseDictionaryWithJSONFileName:
+                @"openRequestResponse"]];
+    STAssertNil([[PHKontagentDataAccessor sharedAccessor] primarySenderID], @"Primary SID should "
+                "not be set on response having no ktapi and ktsid key:value pairs!");
+}
+
+- (void)testResponseWithSID
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+
+    PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:
+                kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+    
+    // Expected SID should be the same as the one specified in the stub response
+    NSString *theExpectedSID = @"5611190844015425273";
+    [theRequest didSucceedWithResponse:[self responseDictionaryWithJSONFileName:
+                @"openRequestResponseWithAPIKeyAndSID"]];
+    STAssertEqualObjects(theExpectedSID,[[PHKontagentDataAccessor sharedAccessor] primarySenderID],
+                @"Primary SID doesn't match the expected one specified in the in the response!");
+
+    // Check that response without ktapi and ktsid key:value pairs doesn't discard the primary SID
+    theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+    
+    [theRequest didSucceedWithResponse:[self responseDictionaryWithJSONFileName:
+                @"openRequestResponse"]];
+    STAssertEqualObjects(theExpectedSID,[[PHKontagentDataAccessor sharedAccessor] primarySenderID],
+                @"Primary SID doesn't match the expected one specified in the in the response!");
+}
+
+- (void)testResponseWithNewAPIKey
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+
+    PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:
+                kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+    
+    // Expected SID should be the same as the one specified in the stub response
+    NSString *theExpectedSID = @"5611190844015425273";
+    NSDictionary *theResponseDictionary = [self responseDictionaryWithJSONFileName:
+                @"openRequestResponseWithAPIKeyAndSID"];
+    
+    [theRequest didSucceedWithResponse:theResponseDictionary];
+    STAssertEqualObjects(theExpectedSID,[[PHKontagentDataAccessor sharedAccessor] primarySenderID],
+                @"Primary SID doesn't match the expected one specified in the in the response!");
+    
+
+    // Create one more request to check that new API key - SID successfully overrides the old one
+    theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+    
+    NSMutableDictionary *theUpdatedResponse = [NSMutableDictionary dictionaryWithDictionary:
+                theResponseDictionary];
+    NSString *theNewSID = @"1140154190562527384";
+    theUpdatedResponse[@"ktapi"] = @"467583e493c7895b6b5abea9c8155d4d";
+    theUpdatedResponse[@"ktsid"] = theNewSID;
+    
+    [theRequest didSucceedWithResponse:theUpdatedResponse];
+    STAssertEqualObjects(theNewSID,[[PHKontagentDataAccessor sharedAccessor] primarySenderID],
+                @"Primary SID doesn't match the expected one specified in the in the response!");
+}
+
+- (void)testResponseWithMissedSID
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+
+    PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:
+                kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+    
+    NSMutableDictionary *theUpdatedResponse = [NSMutableDictionary dictionaryWithDictionary:
+                [self responseDictionaryWithJSONFileName:@"openRequestResponse"]];
+    theUpdatedResponse[@"ktapi"] = @"467583e493c7895b6b5abea9c8155d4d";
+    
+    [theRequest didSucceedWithResponse:theUpdatedResponse];
+    STAssertNil([[PHKontagentDataAccessor sharedAccessor] primarySenderID], @"Primary SID should "
+                "not be set on response with missed ktsid!");
+}
+
+- (void)testResponseWithMissedAPIKey
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+
+    PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:
+                kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+    
+    NSMutableDictionary *theUpdatedResponse = [NSMutableDictionary dictionaryWithDictionary:
+                [self responseDictionaryWithJSONFileName:@"openRequestResponse"]];
+    theUpdatedResponse[@"ktsid"] = @"1140154190562527384";
+    
+    [theRequest didSucceedWithResponse:theUpdatedResponse];
+    STAssertNil([[PHKontagentDataAccessor sharedAccessor] primarySenderID], @"Primary SID should be"
+                "not be set on response with missed ktapi!");
+}
+
+#pragma mark -
+
+- (NSDictionary *)responseDictionaryWithJSONFileName:(NSString *)aFileName
+{
+    NSError *theError = nil;
+    NSString *thetheStubResponse = [NSString stringWithContentsOfURL:[[NSBundle bundleForClass:
+                [self class]] URLForResource:aFileName withExtension:@"json"] encoding:
+                NSUTF8StringEncoding error:&theError];
+    STAssertNotNil(thetheStubResponse, @"Cannot create data with stub response!");
+    
+    PH_SBJSONPARSER_CLASS *theParser = [[[PH_SBJSONPARSER_CLASS alloc] init] autorelease];
+    NSDictionary *theResponseDictionary = [theParser objectWithString:thetheStubResponse];
+    STAssertNotNil(thetheStubResponse, @"Cannot parse stub response!");
+
+    return theResponseDictionary[@"response"];
 }
 
 @end
