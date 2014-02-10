@@ -57,6 +57,8 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 static NSString *const kPHKontagentSenderIDKey = @"ktsid";
 
 static NSString *const kPHHTTPMethodPost = @"POST";
+static NSString *const kPHHTTPContentTypeURLEncoded = @"application/x-www-form-urlencoded";
+static NSString *const kPHHTTPHeaderContentType = @"Content-Type";
 
 @interface PHAPIRequest ()
 @property (nonatomic, assign) PHRequestStatus requestStatus;
@@ -490,6 +492,9 @@ static NSString *const kPHHTTPMethodPost = @"POST";
 
             [theMutableRequest setHTTPMethod:kPHHTTPMethodPost];
             [theMutableRequest setHTTPBody:theRequestData];
+            [theMutableRequest setValue:kPHHTTPContentTypeURLEncoded forHTTPHeaderField:
+                        kPHHTTPHeaderContentType];
+            request = theMutableRequest;
         }
         else
         {
