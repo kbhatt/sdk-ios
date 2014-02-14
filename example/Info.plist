@@ -52,5 +52,7 @@
 	</array>
 	<key>PHDefaultUserIsOptedOut</key>
 	<true/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
