@@ -487,8 +487,8 @@ static NSString *const kPHHTTPHeaderContentType = @"Content-Type";
             NSMutableURLRequest *theMutableRequest = [NSMutableURLRequest requestWithURL:
                         theEndPointURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                         timeoutInterval:PH_REQUEST_TIMEOUT];
-            NSData *theRequestData = [[PHStringUtil stringByUrlEncodingString:[self.URL query]]
-                        dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:NO];
+            NSData *theRequestData = [[self.URL query] dataUsingEncoding:NSUTF8StringEncoding
+                        allowLossyConversion:NO];
 
             [theMutableRequest setHTTPMethod:kPHHTTPMethodPost];
             [theMutableRequest setHTTPBody:theRequestData];
