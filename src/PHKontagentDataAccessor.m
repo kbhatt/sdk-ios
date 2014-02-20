@@ -25,6 +25,7 @@ NSString *const kPHKontagentAPIKey = @"PHKontagentAPIKey";
 NSString *const kPHKontagentSenderIDKeyPrefix = @"com.kontagent.lib.SENDER_ID.";
 
 static NSString *const kPHPersistentValuesFileName = @"PersistentValues";
+static NSString *const kPHPersistentValuesWithTypoFileName = @"PersistentValuest";
 
 static PHKontagentDataAccessor *sSharedDataAccessor = nil;
 
@@ -52,14 +53,18 @@ static PHKontagentDataAccessor *sSharedDataAccessor = nil;
 
 - (NSDictionary *)allAPIKeySenderIDPairs
 {
-    NSMutableDictionary *theCombinedPreferences = [NSMutableDictionary dictionaryWithDictionary:
-                [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+    NSDictionary *thePreferences = [self persistentValues];
+    
+    if (nil == thePreferences)
+    {
+        // Checkout if there is no PersistentValues file
+        thePreferences = [NSMutableDictionary dictionaryWithDictionary:
+                    [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+    }
+
     NSMutableDictionary *theAPIKeySIDPairs = [NSMutableDictionary dictionary];
     
-    // API keys from PersistentValues override the ones stored in NSUserDefaults
-    [theCombinedPreferences addEntriesFromDictionary:[self persistentValues]];
-    
-    for (NSString *theDefault in [theCombinedPreferences allKeys])
+    for (NSString *theDefault in [thePreferences allKeys])
     {
         if ([theDefault isKindOfClass:[NSString class]] && [theDefault hasPrefix:
                     kPHKontagentSenderIDKeyPrefix])
@@ -68,7 +73,7 @@ static PHKontagentDataAccessor *sSharedDataAccessor = nil;
             NSString *theAPIKey = [theDefault substringFromIndex:thePrefixRange.location +
                         thePrefixRange.length];
             
-            theAPIKeySIDPairs[theAPIKey] = theCombinedPreferences[theDefault];
+            theAPIKeySIDPairs[theAPIKey] = thePreferences[theDefault];
         }
     }
     
@@ -102,9 +107,28 @@ static PHKontagentDataAccessor *sSharedDataAccessor = nil;
                 URLByAppendingPathComponent:kPHPersistentValuesFileName];
 }
 
++ (NSURL *)persistentValuesWithTypoFileURL
+{
+    // NB: KT SDK 1.5.7 stored preferences in the file with a typo (PersistentValuest with
+    // extra 't' at the end), so that file should be checked if PersistentValues doesn't exist.
+
+    return [[[[NSFileManager defaultManager] URLsForDirectory:
+                NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject]
+                URLByAppendingPathComponent:kPHPersistentValuesWithTypoFileName];
+}
+
 - (NSDictionary *)persistentValues
 {
-    return [NSDictionary dictionaryWithContentsOfURL:[[self class] persistentValuesFileURL]];
+    NSDictionary *thePersistentValues = [NSDictionary dictionaryWithContentsOfURL:[[self class]
+                persistentValuesFileURL]];
+
+    if (nil == thePersistentValues)
+    {
+        thePersistentValues = [NSDictionary dictionaryWithContentsOfURL:[[self class]
+                    persistentValuesWithTypoFileURL]];
+    }
+    
+    return thePersistentValues;
 }
 
 + (NSString *)senderIDStoreKeyWithAPIKey:(NSString *)anAPIKey

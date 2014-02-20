@@ -29,6 +29,8 @@
     // Remove PersistentValues file.
     [[NSFileManager defaultManager] removeItemAtURL:[PHKontagentDataAccessor
                 persistentValuesFileURL] error:nil];
+    [[NSFileManager defaultManager] removeItemAtURL:[PHKontagentDataAccessor
+                persistentValuesWithTypoFileURL] error:nil];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPHKontagentAPIKey];
 

@@ -26,5 +26,6 @@ extern NSString *const kPHKontagentSenderIDKeyPrefix;
 
 @interface PHKontagentDataAccessor ()
 + (NSURL *)persistentValuesFileURL;
++ (NSURL *)persistentValuesWithTypoFileURL;
 + (NSString *)senderIDStoreKeyWithAPIKey:(NSString *)anAPIKey;
 @end

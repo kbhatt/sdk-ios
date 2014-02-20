@@ -203,16 +203,16 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
                 
     STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair1].length > 0,
                 @"The expected pair (%@) is not found in the URL parameters", theExpectedPair1);
-    STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair2].length > 0,
-                @"The expected pair (%@) is not found in the URL parameters", theExpectedPair2);
+    STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair2].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
     
     // Check that the pairs are included in the final URL
     STAssertTrue([[theRequestURL.absoluteString stringByReplacingPercentEscapesUsingEncoding:
                 NSUTF8StringEncoding] rangeOfString:theExpectedPair1].length > 0,
                 @"The expected pair (%@) is not found in the URL parameters", theExpectedPair1);
     STAssertTrue([[theRequestURL.absoluteString stringByReplacingPercentEscapesUsingEncoding:
-                NSUTF8StringEncoding] rangeOfString:theExpectedPair2].length > 0,
-                @"The expected pair (%@) is not found in the URL parameters", theExpectedPair2);
+                NSUTF8StringEncoding] rangeOfString:theExpectedPair2].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
 
     // Make sure that ktsid parameter with is not included in the request parameters
     STAssertNil(theSignedParameters[@"ktsid"], @"ktsid parameter is not expected after KL locations"

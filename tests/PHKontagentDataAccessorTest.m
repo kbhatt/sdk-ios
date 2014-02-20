@@ -141,7 +141,7 @@ static NSString *const kPHTestSID2 = @"12256527677368061856";
 
     [PHKontagentDataAccessor storeSIDInUserDefaults:kPHTestSID2 forAPIKey:kPHTestAPIKey2];
     
-    NSDictionary *thePairs = @{kPHTestAPIKey1 : kPHTestSID1, kPHTestAPIKey2 : kPHTestSID2};
+    NSDictionary *thePairs = @{kPHTestAPIKey1 : kPHTestSID1};
     STAssertEqualObjects(thePairs, [theSharedAccessor allAPIKeySenderIDPairs], @"Returned pairs "
                 "don't match the expected one!");
 
