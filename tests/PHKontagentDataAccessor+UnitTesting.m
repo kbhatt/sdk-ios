@@ -57,14 +57,25 @@
 
 + (void)storeSIDInPersistentValues:(NSString *)aSID forAPIKey:(NSString *)aKey
 {
-    NSFileManager *theFileManager = [NSFileManager defaultManager];
     NSURL *thePersistentValuesURL = [PHKontagentDataAccessor persistentValuesFileURL];
-    NSError *theError = nil;
+    [[self class] storeSID:aSID forAPIKey:aKey inFileAtURL:thePersistentValuesURL];
+}
 
-    if (![theFileManager fileExistsAtPath:[thePersistentValuesURL
-                URLByDeletingLastPathComponent].path isDirectory:nil])
++ (void)storeSIDInPersistentValuesWithTypo:(NSString *)aSID forAPIKey:(NSString *)aKey
+{
+    NSURL *thePersistentValuesURL = [PHKontagentDataAccessor persistentValuesWithTypoFileURL];
+    [[self class] storeSID:aSID forAPIKey:aKey inFileAtURL:thePersistentValuesURL];
+}
+
++ (void)storeSID:(NSString *)aSID forAPIKey:(NSString *)aKey inFileAtURL:(NSURL *)aFileURL
+{
+    NSFileManager *theFileManager = [NSFileManager defaultManager];
+    NSError *theError = nil;
+    
+    if (![theFileManager fileExistsAtPath:[aFileURL URLByDeletingLastPathComponent].path
+                isDirectory:nil])
     {
-        [theFileManager createDirectoryAtURL:[thePersistentValuesURL URLByDeletingLastPathComponent]
+        [theFileManager createDirectoryAtURL:[aFileURL URLByDeletingLastPathComponent]
                     withIntermediateDirectories:YES attributes:nil error:&theError];
 
         NSAssert(nil == theError, @"%s: Couldn't create Application Support folder: %@",
@@ -72,7 +83,7 @@
     }
 
     NSMutableDictionary *theStoredValues = [NSMutableDictionary dictionaryWithContentsOfURL:
-                thePersistentValuesURL];
+                aFileURL];
     NSDictionary *theNewValues = @{[PHKontagentDataAccessor senderIDStoreKeyWithAPIKey:aKey] :
                 aSID};
     
@@ -82,7 +93,7 @@
     }
     
     BOOL theResult = [(nil != theStoredValues ? theStoredValues : theNewValues) writeToURL:
-                thePersistentValuesURL atomically:YES];
+                aFileURL atomically:YES];
 
     NSAssert(theResult, @"%s: Cannot write file to the KT location which is needed for the test!",
                 __PRETTY_FUNCTION__);

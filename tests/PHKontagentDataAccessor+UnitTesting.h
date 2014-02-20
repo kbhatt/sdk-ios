@@ -25,4 +25,5 @@
 + (void)cleanupKTLocations;
 + (void)storeSIDInPersistentValues:(NSString *)aSID forAPIKey:(NSString *)aKey;
 + (void)storeSIDInUserDefaults:(NSString *)aSID forAPIKey:(NSString *)aKey;
++ (void)storeSIDInPersistentValuesWithTypo:(NSString *)aSID forAPIKey:(NSString *)aKey;
 @end

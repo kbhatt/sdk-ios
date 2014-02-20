@@ -33,8 +33,10 @@
 
 static NSString *const kPHTestAPIKey1 = @"f25a3b41dbcb4c13bd8d6b0b282eec32";
 static NSString *const kPHTestAPIKey2 = @"d45a3b4c13bd82eec32b8d6b0b241dbc";
+static NSString *const kPHTestAPIKey3 = @"3bd82eed45a332b8d6b0b241dbcb4c1c";
 static NSString *const kPHTestSID1 = @"13565276206185677368";
 static NSString *const kPHTestSID2 = @"12256527677368061856";
+static NSString *const kPHTestSID3 = @"73680618561225652767";
 
 static NSString *const kPHTestToken  = @"PUBLISHER_TOKEN";
 static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
@@ -246,6 +248,111 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
     STAssertEqualObjects(kPHTestSID1, theSignedParameters[@"ktsid"], @"The SID specified in the "
                 "request doesn't match the expected one!");
 
+    // Cleanup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+}
+
+- (void)testKTAPIKeySIDPairsCase4
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+    [PHKontagentDataAccessor storeSIDInPersistentValuesWithTypo:kPHTestSID2 forAPIKey:
+                kPHTestAPIKey1];
+    [PHKontagentDataAccessor storeSIDInUserDefaults:kPHTestSID1 forAPIKey:kPHTestAPIKey2];
+
+    PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:
+                kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+
+    NSURL *theRequestURL = [self URLForRequest:theRequest];
+    NSDictionary *theSignedParameters = [theRequest signedParameters];
+    
+    NSString *theExpectedPair1 =
+                @"{\"api\":\"f25a3b41dbcb4c13bd8d6b0b282eec32\",\"sid\":\"12256527677368061856\"}";
+    NSString *theExpectedPair2 =
+                @"{\"api\":\"d45a3b4c13bd82eec32b8d6b0b241dbc\",\"sid\":\"13565276206185677368\"}";
+
+    // The expected structure of the ktsids parameter:
+    // [{"api":"f25a3b41dbcb4c13bd8d6b0b282eec32","sid":"13565276206185677368"},
+    // {"api":"d45a3b4c13bd82eec32b8d6b0b241dbc","sid":"12256527677368061856"}]
+    
+    STAssertTrue([theSignedParameters[@"ktsids"] hasPrefix:@"[{"], @"Unexpected structure of the "
+                "of the 'ktsids' parameter value: %@", theSignedParameters[@"ktsids"]);
+                
+    STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair1].length > 0,
+                @"The expected pair (%@) is not found in the URL parameters", theExpectedPair1);
+    STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair2].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
+    
+    // Check that the pairs are included in the final URL
+    STAssertTrue([[theRequestURL.absoluteString stringByReplacingPercentEscapesUsingEncoding:
+                NSUTF8StringEncoding] rangeOfString:theExpectedPair1].length > 0,
+                @"The expected pair (%@) is not found in the URL parameters", theExpectedPair1);
+    STAssertTrue([[theRequestURL.absoluteString stringByReplacingPercentEscapesUsingEncoding:
+                NSUTF8StringEncoding] rangeOfString:theExpectedPair2].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
+
+    // Make sure that ktsid parameter with is not included in the request parameters
+    STAssertNil(theSignedParameters[@"ktsid"], @"ktsid parameter is not expected after KL locations"
+                " cleanup until it is set with -[PHKontagentDataAccessor "
+                "storePrimarySenderID:forAPIKey:]!");
+    
+    // Cleanup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+}
+
+- (void)testKTAPIKeySIDPairsCase5
+{
+    // Setup API keys and SIDs in KT locations
+    [PHKontagentDataAccessor cleanupKTLocations];
+    [PHKontagentDataAccessor storeSIDInPersistentValues:kPHTestSID1 forAPIKey:kPHTestAPIKey1];
+    [PHKontagentDataAccessor storeSIDInUserDefaults:kPHTestSID2 forAPIKey:kPHTestAPIKey2];
+    [PHKontagentDataAccessor storeSIDInUserDefaults:kPHTestSID3 forAPIKey:kPHTestAPIKey3];
+
+    PHPublisherOpenRequest *theRequest = [PHPublisherOpenRequest requestForApp:kPHTestToken secret:
+                kPHTestSecret];
+    STAssertNotNil(theRequest, @"");
+
+    NSURL *theRequestURL = [self URLForRequest:theRequest];
+    NSDictionary *theSignedParameters = [theRequest signedParameters];
+    
+    NSString *theExpectedPair1 =
+                @"{\"api\":\"f25a3b41dbcb4c13bd8d6b0b282eec32\",\"sid\":\"13565276206185677368\"}";
+    NSString *theExpectedPair2 =
+                @"{\"api\":\"d45a3b4c13bd82eec32b8d6b0b241dbc\",\"sid\":\"12256527677368061856\"}";
+    NSString *theExpectedPair3 =
+                @"{\"api\":\"3bd82eed45a332b8d6b0b241dbcb4c1c\",\"sid\":\"73680618561225652767\"}";
+
+    // The expected structure of the ktsids parameter:
+    // [{"api":"f25a3b41dbcb4c13bd8d6b0b282eec32","sid":"13565276206185677368"},
+    // {"api":"d45a3b4c13bd82eec32b8d6b0b241dbc","sid":"12256527677368061856"}]
+    
+    STAssertTrue([theSignedParameters[@"ktsids"] hasPrefix:@"[{"], @"Unexpected structure of the "
+                "of the 'ktsids' parameter value: %@", theSignedParameters[@"ktsids"]);
+                
+    STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair1].length > 0,
+                @"The expected pair (%@) is not found in the URL parameters", theExpectedPair1);
+    STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair2].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
+    STAssertTrue([theSignedParameters[@"ktsids"] rangeOfString:theExpectedPair3].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair3);
+    
+    // Check that the pairs are included in the final URL
+    STAssertTrue([[theRequestURL.absoluteString stringByReplacingPercentEscapesUsingEncoding:
+                NSUTF8StringEncoding] rangeOfString:theExpectedPair1].length > 0,
+                @"The expected pair (%@) is not found in the URL parameters", theExpectedPair1);
+    STAssertTrue([[theRequestURL.absoluteString stringByReplacingPercentEscapesUsingEncoding:
+                NSUTF8StringEncoding] rangeOfString:theExpectedPair2].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
+    STAssertTrue([[theRequestURL.absoluteString stringByReplacingPercentEscapesUsingEncoding:
+                NSUTF8StringEncoding] rangeOfString:theExpectedPair3].length == 0,
+                @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair3);
+
+    // Make sure that ktsid parameter with is not included in the request parameters
+    STAssertNil(theSignedParameters[@"ktsid"], @"ktsid parameter is not expected after KL locations"
+                " cleanup until it is set with -[PHKontagentDataAccessor "
+                "storePrimarySenderID:forAPIKey:]!");
+    
     // Cleanup API keys and SIDs in KT locations
     [PHKontagentDataAccessor cleanupKTLocations];
 }
