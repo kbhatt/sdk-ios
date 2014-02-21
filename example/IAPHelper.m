@@ -133,7 +133,7 @@
     NSArray    *products = response.products;
     SKProduct  *product  = [products count] == 1 ? [products objectAtIndex:0] : nil;
 
-    if ([purchase.productIdentifier isEqualToString:product.productIdentifier]) {
+    if (nil != product.productIdentifier && [purchase.productIdentifier isEqualToString:product.productIdentifier]) {
         // Ask the user to choose to purchase or not purchase an item
         NSString    *message = [NSString stringWithFormat:@"Do you want to buy %d %@ for %@?",
                                               purchase.quantity, product.localizedTitle, product.localizedPrice];
@@ -175,7 +175,10 @@
         [self.pendingRequests setValue:purchase forKey:[payment hashString]];
     }
 
-    [self.requestedProducts removeObjectForKey:purchase.productIdentifier];
+    if (nil != purchase.productIdentifier)
+    {
+        [self.requestedProducts removeObjectForKey:purchase.productIdentifier];
+    }
     
     // Either way, clean up the stored alert view
     [self.pendingPurchases removeObjectForKey:key];
