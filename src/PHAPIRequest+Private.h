@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Copyright 2013 Medium Entertainment, Inc.
+ Copyright 2013-2014 Medium Entertainment, Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -19,7 +19,18 @@
  Created by Anton Fedorchenko on 9/3/13.
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+typedef NS_ENUM(NSUInteger, PHRequestHTTPMethod)
+{
+    PHRequestHTTPGet = 0,
+    PHRequestHTTPPost
+};
+
 @interface PHAPIRequest ()
+
+/**
+ * Indicates HTTP method used to transfer parameters to the server. Default is PHRequestHTTPGet.
+ **/
+@property (nonatomic, assign, readonly) PHRequestHTTPMethod HTTPMethod;
 
 /**
  * List of identifiers used for v4-style signature generation.
@@ -65,4 +76,11 @@
  * Constructs request URL and returns result to the given completion handler.
  **/
 - (void)constructRequestURLWithCompletionHandler:(void (^)(NSURL *inURL))aCompletionHandler;
+
+/**
+ * Invoked upon receiving a response from the server. Subclasses may override this method to
+ * implement their own logic of processing server response.
+ **/
+- (void)didSucceedWithResponse:(NSDictionary *)aResponseDictionary;
+
 @end

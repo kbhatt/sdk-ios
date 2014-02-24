@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Copyright 2013 Medium Entertainment, Inc.
+ Copyright 2013-2014 Medium Entertainment, Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -219,6 +219,11 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 
 + (NSString *)stringByUrlEncodingString:(NSString *)input
 {
+    if (nil == input)
+    {
+        return nil;
+    }
+    
     CFStringRef value = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                 (CFStringRef) input,
                                                                 NULL,

@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Copyright 2013 Medium Entertainment, Inc.
+ Copyright 2013-2014 Medium Entertainment, Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@
 #import "PHNetworkUtil.h"
 #import "PHConstants.h"
 #import "PHAPIRequest+Private.h"
+#import "PHKontagentDataAccessor.h"
 
 #ifdef PH_USE_NETWORK_FIXTURES
 #import "WWURLConnection.h"
@@ -43,14 +44,21 @@ typedef NS_ENUM(NSUInteger, PHRequestStatus)
     kPHRequestStatusFailed
 };
 
-static NSString *sPlayHavenSession;
+static NSString *sPlayHavenSession = nil;
+static NSString *sPlayHavenPluginIdentifier = nil;
+static NSString *sPlayHavenCustomUDID = nil;
+
 static NSString *const kSessionPasteboard = @"com.playhaven.session";
-static NSString *sPlayHavenPluginIdentifier;
-static NSString *sPlayHavenCustomUDID;
 static NSString *const kPHRequestParameterIDFVKey = @"idfv";
 static NSString *const kPHRequestParameterOptOutStatusKey = @"opt_out";
 static NSString *const kPHRequestParameterConnectionKey = @"connection";
 static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
+
+static NSString *const kPHKontagentSenderIDKey = @"ktsid";
+
+static NSString *const kPHHTTPMethodPost = @"POST";
+static NSString *const kPHHTTPContentTypeURLEncoded = @"application/x-www-form-urlencoded";
+static NSString *const kPHHTTPHeaderContentType = @"Content-Type";
 
 @interface PHAPIRequest ()
 @property (nonatomic, assign) PHRequestStatus requestStatus;
@@ -64,7 +72,6 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 + (void)setSession:(NSString *)session;
 - (void)processRequestResponse:(NSDictionary *)responseData;
 
-- (void)didSucceedWithResponse:(NSDictionary *)responseData;
 - (void)didFailWithError:(NSError *)error;
 @end
 
@@ -472,8 +479,28 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
         self.URL = inURL;
         PH_LOG(@"Sending request: %@", [self.URL absoluteString]);
 
-        NSURLRequest *request = [NSURLRequest requestWithURL:self.URL cachePolicy:
-                    NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:PH_REQUEST_TIMEOUT];
+        NSURLRequest *request = nil;
+        
+        if (PHRequestHTTPPost == self.HTTPMethod)
+        {
+            NSURL *theEndPointURL = [[self class] URLByStrippingQuery:self.URL];
+            NSMutableURLRequest *theMutableRequest = [NSMutableURLRequest requestWithURL:
+                        theEndPointURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                        timeoutInterval:PH_REQUEST_TIMEOUT];
+            NSData *theRequestData = [[self.URL query] dataUsingEncoding:NSUTF8StringEncoding
+                        allowLossyConversion:NO];
+
+            [theMutableRequest setHTTPMethod:kPHHTTPMethodPost];
+            [theMutableRequest setHTTPBody:theRequestData];
+            [theMutableRequest setValue:kPHHTTPContentTypeURLEncoded forHTTPHeaderField:
+                        kPHHTTPHeaderContentType];
+            request = theMutableRequest;
+        }
+        else
+        {
+            request = [NSURLRequest requestWithURL:self.URL cachePolicy:
+                        NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:PH_REQUEST_TIMEOUT];
+        }
 
         if (![PHConnectionManager createConnectionFromRequest:request forDelegate:self
                     withContext:nil])
@@ -591,6 +618,36 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
 #pragma mark -
 
+- (PHRequestHTTPMethod)HTTPMethod
+{
+    return PHRequestHTTPGet;
+}
+
++ (NSURL *)URLByStrippingQuery:(NSURL *)anURL
+{
+    NSString *theQuery = [anURL query];
+
+    if (0 == [theQuery length])
+    {
+        return anURL;
+    }
+
+    NSRange theQueryRange = [[anURL absoluteString] rangeOfString:[NSString stringWithFormat:@"?%@",
+                theQuery]];
+    NSURL *theStrippedURL = nil;
+
+    if (0 < theQueryRange.length)
+    {
+        NSString *theStrippedString = [[anURL absoluteString] substringToIndex:
+                    theQueryRange.location];
+        theStrippedURL = [NSURL URLWithString:theStrippedString];
+    }
+
+    return theStrippedURL;
+}
+
+#pragma mark -
+
 // The functions returns request signature looking for X-PH-DIGEST header field using
 // caseinsennsetive comparsion. It fixes an issue with signature validation failing as some
 // iOS versions return expected header but with changed letters so that just first letter are in
@@ -658,6 +715,14 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
     if (0 < [theSession length])
     {
         theIdentifiers[@"session"] = theSession;
+    }
+    
+    // Sender ID, if any, must be sent on each request and included in the request signature.
+    NSString *theKTSenderIDKey = [[PHKontagentDataAccessor sharedAccessor] primarySenderID];
+    
+    if (nil != theKTSenderIDKey)
+    {
+        theIdentifiers[kPHKontagentSenderIDKey] = theKTSenderIDKey;
     }
 
     return theIdentifiers;

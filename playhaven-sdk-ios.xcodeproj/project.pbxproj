@@ -72,6 +72,22 @@
 		E1508EB9172987CF00DDE809 /* PHPushDeliveryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */; };
 		E1508EBB172987D300DDE809 /* PHPushDeliveryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */; };
 		E1508EBC172987D600DDE809 /* PHPushDeliveryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */; };
+		E15FAEB6189FB718007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEB7189FB71F007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEB8189FB72D007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEB9189FB72D007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEBA189FB72E007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEBB189FB72F007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEBC189FB730007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEBD189FB732007AEFE6 /* PHKontagentDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */; };
+		E15FAEBF189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FAEBE189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m */; };
+		E15FAEC1189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */; };
+		E15FAEC2189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */; };
+		E15FAEC3189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */; };
+		E15FAEC4189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */; };
+		E15FAEC7189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = E15FAEC6189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m */; };
+		E15FAECF18A11110007AEFE6 /* openRequestResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = E15FAECD18A11110007AEFE6 /* openRequestResponse.json */; };
+		E15FAED018A11110007AEFE6 /* openRequestResponseWithAPIKeyAndSID.json in Resources */ = {isa = PBXBuildFile; fileRef = E15FAECE18A11110007AEFE6 /* openRequestResponseWithAPIKeyAndSID.json */; };
 		E1769A8B171E29C300FE6518 /* PHPushRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1769A8A171E29C200FE6518 /* PHPushRequestTest.m */; };
 		E17A203D1718DC4600EF6C14 /* PushNotificationRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A203B1718DC4400EF6C14 /* PushNotificationRegistrationViewController.m */; };
 		E17A203E1718DC4600EF6C14 /* PushNotificationRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E17A203C1718DC4500EF6C14 /* PushNotificationRegistrationViewController.xib */; };
@@ -579,6 +595,14 @@
 		E1508EB217293F7900DDE809 /* PHPushDeliveryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushDeliveryRequest.h; sourceTree = "<group>"; };
 		E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushDeliveryRequest.m; sourceTree = "<group>"; };
 		E1508EB617297F2A00DDE809 /* PHPushDeliveryRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushDeliveryRequestTest.m; sourceTree = "<group>"; };
+		E15FADF3189C1153007AEFE6 /* PHKontagentDataAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHKontagentDataAccessor.h; sourceTree = "<group>"; };
+		E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHKontagentDataAccessor.m; sourceTree = "<group>"; };
+		E15FAEBE189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHKontagentDataAccessorTest.m; sourceTree = "<group>"; };
+		E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHKontagentDataAccessor+Private.h"; sourceTree = "<group>"; };
+		E15FAEC5189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHKontagentDataAccessor+UnitTesting.h"; sourceTree = "<group>"; };
+		E15FAEC6189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHKontagentDataAccessor+UnitTesting.m"; sourceTree = "<group>"; };
+		E15FAECD18A11110007AEFE6 /* openRequestResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = openRequestResponse.json; sourceTree = "<group>"; };
+		E15FAECE18A11110007AEFE6 /* openRequestResponseWithAPIKeyAndSID.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = openRequestResponseWithAPIKeyAndSID.json; sourceTree = "<group>"; };
 		E1769A8A171E29C200FE6518 /* PHPushRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushRequestTest.m; sourceTree = "<group>"; };
 		E17A203A1718DC4300EF6C14 /* PushNotificationRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationRegistrationViewController.h; sourceTree = "<group>"; };
 		E17A203B1718DC4400EF6C14 /* PushNotificationRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationRegistrationViewController.m; sourceTree = "<group>"; };
@@ -896,6 +920,25 @@
 			name = TimeInGame;
 			sourceTree = "<group>";
 		};
+		E15FADF2189C0FFC007AEFE6 /* Kontagent */ = {
+			isa = PBXGroup;
+			children = (
+				E15FADF3189C1153007AEFE6 /* PHKontagentDataAccessor.h */,
+				E15FADF4189C1153007AEFE6 /* PHKontagentDataAccessor.m */,
+				E15FAEC0189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h */,
+			);
+			name = Kontagent;
+			sourceTree = "<group>";
+		};
+		E15FAECC18A10FDC007AEFE6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E15FAECD18A11110007AEFE6 /* openRequestResponse.json */,
+				E15FAECE18A11110007AEFE6 /* openRequestResponseWithAPIKeyAndSID.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E1AB2C5717D5EAA300B3FE71 /* Private Interfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +966,8 @@
 			children = (
 				E1FADDF8180D84AC0095202B /* SenTestCase+PHAPIRequestSupport.h */,
 				E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */,
+				E15FAEC5189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.h */,
+				E15FAEC6189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1047,6 +1092,7 @@
 		EA523D891343EE670057DEA5 /* Unit Testing */ = {
 			isa = PBXGroup;
 			children = (
+				E15FAECC18A10FDC007AEFE6 /* Resources */,
 				E1FADDFC180D85C60095202B /* Extensions */,
 				EA6ADFC71475F22C00DBE60B /* PHPublisherContentRequestTest.m */,
 				EA03811213B26FF500A31FF7 /* PHNotificationViewTest.m */,
@@ -1064,6 +1110,7 @@
 				E122A1D5172ACA33001F3A14 /* PHPushProviderTest.m */,
 				E1B5975517FAFB4500270C4D /* PHStringUtilTest.m */,
 				E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */,
+				E15FAEBE189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m */,
 			);
 			name = "Unit Testing";
 			path = tests;
@@ -1107,6 +1154,7 @@
 		EA523D941343EE9D0057DEA5 /* Publisher SDK */ = {
 			isa = PBXGroup;
 			children = (
+				E15FADF2189C0FFC007AEFE6 /* Kontagent */,
 				E1C8F4F7171CC90E00F64E12 /* PushNotifications */,
 				EADB57B716094C16000433D8 /* iTunes */,
 				D108A82C15A654FA00082388 /* TimeInGame */,
@@ -1253,6 +1301,7 @@
 				EA9AB66214A3B2ED00079704 /* PHNotificationRenderer.h in Headers */,
 				EA9AB66314A3B2ED00079704 /* PHNotificationBadgeRenderer.h in Headers */,
 				EA9AB66414A3B2ED00079704 /* PHPublisherSubContentRequest.h in Headers */,
+				E15FAEC1189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */,
 				EA9AB66514A3B2ED00079704 /* PHContent.h in Headers */,
 				EA9AB66614A3B2ED00079704 /* PHContentView.h in Headers */,
 				EA9AB66714A3B2ED00079704 /* PHPublisherContentRequest.h in Headers */,
@@ -1290,6 +1339,7 @@
 				EAB6A3A314EED62D00EAC692 /* PHPublisherSubContentRequest.h in Headers */,
 				EAB6A3A414EED62D00EAC692 /* PHContent.h in Headers */,
 				EAB6A3A514EED62D00EAC692 /* PHContentView.h in Headers */,
+				E15FAEC2189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */,
 				EAB6A3A614EED62D00EAC692 /* PHPublisherContentRequest.h in Headers */,
 				EAB6A3A714EED62D00EAC692 /* PHReward.h in Headers */,
 				EAB6A3A814EED62D00EAC692 /* PHPublisherOpenRequest.h in Headers */,
@@ -1319,6 +1369,7 @@
 				EAF168581534E2DE006B6993 /* PHNotificationRenderer.h in Headers */,
 				EAF168591534E2DE006B6993 /* PHNotificationBadgeRenderer.h in Headers */,
 				EAF1685A1534E2DE006B6993 /* PHPublisherSubContentRequest.h in Headers */,
+				E15FAEC3189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */,
 				EAF1685B1534E2DE006B6993 /* PHContent.h in Headers */,
 				EAF1685C1534E2DE006B6993 /* PHContentView.h in Headers */,
 				EAF1685D1534E2DE006B6993 /* PHPublisherContentRequest.h in Headers */,
@@ -1339,6 +1390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF168861534E34F006B6993 /* JSON.h in Headers */,
+				E15FAEC4189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */,
 				EAF168871534E34F006B6993 /* SBJsonBase.h in Headers */,
 				EAF168881534E34F006B6993 /* SBJsonParser.h in Headers */,
 				EAF168891534E34F006B6993 /* SBJsonWriter.h in Headers */,
@@ -1606,6 +1658,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E15FAED018A11110007AEFE6 /* openRequestResponseWithAPIKeyAndSID.json in Resources */,
+				E15FAECF18A11110007AEFE6 /* openRequestResponse.json in Resources */,
 				EA8C313314DC791B0075B473 /* content-subcontent.json in Resources */,
 				EA328B30151A9D4400DE3CAD /* README.markdown in Resources */,
 				EA328B47151BF68B00DE3CAD /* PublisherOpenViewController.xib in Resources */,
@@ -1707,6 +1761,7 @@
 			files = (
 				D1BD481D14C0EDD100EE8A5A /* PHPurchase.m in Sources */,
 				EA03811813B272FB00A31FF7 /* PHPublisherMetadataRequest.m in Sources */,
+				E15FAEB6189FB718007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EA12ABE01365DBB700CB2F24 /* main.m in Sources */,
 				EA12ABE31365DBB700CB2F24 /* AppDelegate.m in Sources */,
 				EA12ABE91365DBB700CB2F24 /* RootViewController.m in Sources */,
@@ -1766,6 +1821,7 @@
 				EAFF5E7D14F8154E00E96C2C /* PHPurchaseTest.m in Sources */,
 				EAE5598614F866CA0023BBEF /* PHPublisherIAPTrackingRequestTest.m in Sources */,
 				EA7CF59D156C365C0095572E /* PlayHavenTest.m in Sources */,
+				E15FAEC7189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m in Sources */,
 				D108A83E15A6B68600082388 /* PHTimeInGameTest.m in Sources */,
 				E1FADDFB180D85440095202B /* SenTestCase+PHAPIRequestSupport.m in Sources */,
 				EA98C12D16640E4500B6AA8C /* PHNetworkUtilTest.m in Sources */,
@@ -1774,6 +1830,7 @@
 				E1508EB717297F2A00DDE809 /* PHPushDeliveryRequestTest.m in Sources */,
 				E1508EB81729845E00DDE809 /* PHPushDeliveryRequest.m in Sources */,
 				E1B5975617FAFB4500270C4D /* PHStringUtilTest.m in Sources */,
+				E15FAEBF189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m in Sources */,
 				E122A1C8172A8889001F3A14 /* PHPushProvider.m in Sources */,
 				62348E9579DDAD6E0F900501 /* PHError.m in Sources */,
 				E122A1D6172ACA33001F3A14 /* PHPushProviderTest.m in Sources */,
@@ -1801,6 +1858,7 @@
 				EA62D66B1579925300B31E62 /* PHContent.m in Sources */,
 				EA62D66C1579925300B31E62 /* PHContentView.m in Sources */,
 				EA62D66D1579925300B31E62 /* PHPublisherContentRequest.m in Sources */,
+				E15FAEB7189FB71F007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EA62D66E1579925300B31E62 /* PHPublisherOpenRequest.m in Sources */,
 				EA62D66F1579925300B31E62 /* ExampleViewController.m in Sources */,
 				EA62D6701579925300B31E62 /* PublisherOpenViewController.m in Sources */,
@@ -1846,6 +1904,7 @@
 				EA86C7C314D9E75600CB1551 /* main.m in Sources */,
 				EA86C7C414D9E75600CB1551 /* AppDelegate.m in Sources */,
 				EA86C7C514D9E75600CB1551 /* RootViewController.m in Sources */,
+				E15FAEB8189FB72D007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EA86C7C614D9E75600CB1551 /* SBJsonBase.m in Sources */,
 				EA86C7C714D9E75600CB1551 /* SBJsonParser.m in Sources */,
 				EA86C7C814D9E75600CB1551 /* SBJsonWriter.m in Sources */,
@@ -1902,6 +1961,7 @@
 				EA9AB63314A3B0D500079704 /* UIDevice+HardwareString.m in Sources */,
 				EA9AB63514A3B0D500079704 /* PHURLLoader.m in Sources */,
 				EA9AB63714A3B0D500079704 /* PHAPIRequest.m in Sources */,
+				E15FAEBA189FB72E007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EA9AB63914A3B0D500079704 /* PHStringUtil.m in Sources */,
 				EA9AB63B14A3B0D500079704 /* PHConstants.m in Sources */,
 				EA9AB63E14A3B0D500079704 /* PHPublisherMetadataRequest.m in Sources */,
@@ -1936,6 +1996,7 @@
 				EAB6A38114EED62D00EAC692 /* UIDevice+HardwareString.m in Sources */,
 				EAB6A38214EED62D00EAC692 /* PHURLLoader.m in Sources */,
 				EAB6A38314EED62D00EAC692 /* PHAPIRequest.m in Sources */,
+				E15FAEBB189FB72F007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EAB6A38414EED62D00EAC692 /* PHStringUtil.m in Sources */,
 				EAB6A38514EED62D00EAC692 /* PHConstants.m in Sources */,
 				EAB6A38614EED62D00EAC692 /* PHPublisherMetadataRequest.m in Sources */,
@@ -1970,6 +2031,7 @@
 				EAF1683B1534E2DE006B6993 /* UIDevice+HardwareString.m in Sources */,
 				EAF1683C1534E2DE006B6993 /* PHURLLoader.m in Sources */,
 				EAF1683D1534E2DE006B6993 /* PHAPIRequest.m in Sources */,
+				E15FAEBC189FB730007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EAF1683E1534E2DE006B6993 /* PHStringUtil.m in Sources */,
 				EAF1683F1534E2DE006B6993 /* PHConstants.m in Sources */,
 				EAF168401534E2DE006B6993 /* PHPublisherMetadataRequest.m in Sources */,
@@ -2014,6 +2076,7 @@
 				EAF1687C1534E34F006B6993 /* PHContent.m in Sources */,
 				EAF1687D1534E34F006B6993 /* PHContentView.m in Sources */,
 				EAF1687E1534E34F006B6993 /* PHPublisherContentRequest.m in Sources */,
+				E15FAEBD189FB732007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EAF1687F1534E34F006B6993 /* PHReward.m in Sources */,
 				EAF168801534E34F006B6993 /* PHPublisherOpenRequest.m in Sources */,
 				EAF168811534E34F006B6993 /* PHPublisherIAPTrackingRequest.m in Sources */,
@@ -2036,6 +2099,7 @@
 				EAF168AC1534E59C006B6993 /* SBJsonBase.m in Sources */,
 				EAF168AD1534E59C006B6993 /* SBJsonParser.m in Sources */,
 				EAF168AE1534E59C006B6993 /* SBJsonWriter.m in Sources */,
+				E15FAEB9189FB72D007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EAF168AF1534E59C006B6993 /* NSObject+QueryComponents.m in Sources */,
 				EAF168B01534E59C006B6993 /* UIDevice+HardwareString.m in Sources */,
 				EAF168B11534E59C006B6993 /* PHURLLoader.m in Sources */,
