@@ -114,13 +114,12 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
     NSDictionary *theQueryComponents = [theRequestURL queryComponents];
     STAssertNotNil(theQueryComponents, @"Request query should not be nil!");
 
-    NSString *theEncodedEventsJSON = theQueryComponents[@"events"];
-    STAssertNotNil(theEncodedEventsJSON, @"Missed required parameters!");
+    NSString *theEventsJSON = theQueryComponents[@"events"];
+    STAssertNotNil(theEventsJSON, @"Missed required parameters!");
 
     PH_SBJSONPARSER_CLASS *theJSONParser = [[PH_SBJSONPARSER_CLASS new] autorelease];
     NSError *theError = nil;
-    NSDictionary *theDecodedEvents = [theJSONParser objectWithString:[theEncodedEventsJSON
-                stringByDecodingURLFormat] error:&theError];
+    NSDictionary *theDecodedEvents = [theJSONParser objectWithString:theEventsJSON error:&theError];
     
     STAssertNotNil(theDecodedEvents, @"Cannot decode events JSON to dictionary representation!");
     STAssertNotNil(theDecodedEvents[@"events"], @"Missed required element!");
@@ -136,6 +135,15 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
                 "the event!");
     STAssertEqualObjects(theProperties, theEventDictionary[@"data"], @"Event's properties don't "
                 "match the ones that were passed to event initializer!");
+
+    // Verify events signature
+    NSString *theEventsSignature = theQueryComponents[@"events_sig"];
+    STAssertNotNil(theEventsSignature, @"Missed events signature!");
+
+    NSString *theExpectedSignature = [[PHAPIRequest class] v4SignatureWithMessage:theEventsJSON
+                signatureKey:theTestRequest.secret];
+    STAssertEqualObjects(theExpectedSignature, theEventsSignature, @"Event signature doesn't match "
+                "the expected one!");
 }
 
 @end

@@ -25,6 +25,9 @@
 #import "PHEvent.h"
 #import "NSObject+QueryComponents.h"
 
+static NSString *const kPHRequestParameterEventsKey = @"events";
+static NSString *const kPHRequestParameterEventsSignatureKey = @"events_sig";
+
 @interface PHEventRequest ()
 @property (nonatomic, retain, readonly) NSArray *events;
 @end
@@ -88,8 +91,21 @@
 
     NSString *theResultingJSON = [NSString stringWithFormat:@"{\"events\":[%@]}", [theEventsJSON
                 componentsJoinedByString:@","]];
+    NSMutableDictionary *theParameters = [NSMutableDictionary dictionaryWithDictionary:
+                @{kPHRequestParameterEventsKey : theResultingJSON}];
     
-    return @{@"events" : theResultingJSON};
+    NSString *theEventsSignature = [[self class] v4SignatureWithMessage:theResultingJSON
+                signatureKey:self.secret];
+    if (nil != theEventsSignature)
+    {
+        theParameters[kPHRequestParameterEventsSignatureKey] = theEventsSignature;
+    }
+    else
+    {
+        PH_LOG(@"[%s]ERROR: Cannot generate events signature!", __PRETTY_FUNCTION__);
+    }
+    
+    return theParameters;
 }
 
 @end
