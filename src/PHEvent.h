@@ -53,7 +53,7 @@
  *   @li NSDictionary
  *   @li NSNumber
  *   
- *  Note, at the moment PlayHaven's server has a limitation on the size of the events that cab be
+ *  Note, at the moment PlayHaven's server has a limitation on the size of the events that can be
  *  passed from the SDK to the server. As of PH SDK 1.22.0 this limit is 100 KB (to be accurate
  *  102000 bytes). In most cases you should not worry about the size of the event object but if you
  *  plan to pass a lot of data within aProperties dictionary and you are unsure about the size of
