@@ -103,6 +103,7 @@
 		E1CB0F5317C647ED00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CB0F5417C647EE00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CB0F5517C647EF00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
+		E1CEC62E18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC62D18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m */; };
 		E1FADDFB180D85440095202B /* SenTestCase+PHAPIRequestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */; };
 		E69D85961718E82D00CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
 		E69D85971718E83700CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
@@ -614,6 +615,7 @@
 		E1C8F4EE171CABD900F64E12 /* PlayHavenAppIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayHavenAppIdentity.m; sourceTree = "<group>"; };
 		E1C8F4F8171CC94400F64E12 /* PHPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushRequest.h; sourceTree = "<group>"; };
 		E1C8F4F9171CC94400F64E12 /* PHPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushRequest.m; sourceTree = "<group>"; };
+		E1CEC62D18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QueryComponentsTest.m"; sourceTree = "<group>"; };
 		E1FADDF8180D84AC0095202B /* SenTestCase+PHAPIRequestSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+PHAPIRequestSupport.h"; sourceTree = "<group>"; };
 		E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+PHAPIRequestSupport.m"; sourceTree = "<group>"; };
 		EA019C7F14C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPublisherIAPTrackingRequest.h; sourceTree = "<group>"; };
@@ -1094,6 +1096,7 @@
 			children = (
 				E15FAECC18A10FDC007AEFE6 /* Resources */,
 				E1FADDFC180D85C60095202B /* Extensions */,
+				E1CEC62D18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m */,
 				EA6ADFC71475F22C00DBE60B /* PHPublisherContentRequestTest.m */,
 				EA03811213B26FF500A31FF7 /* PHNotificationViewTest.m */,
 				EA7BC61813537F8700B4518D /* PHURLLoaderTest.m */,
@@ -1832,6 +1835,7 @@
 				E1B5975617FAFB4500270C4D /* PHStringUtilTest.m in Sources */,
 				E15FAEBF189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m in Sources */,
 				E122A1C8172A8889001F3A14 /* PHPushProvider.m in Sources */,
+				E1CEC62E18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m in Sources */,
 				62348E9579DDAD6E0F900501 /* PHError.m in Sources */,
 				E122A1D6172ACA33001F3A14 /* PHPushProviderTest.m in Sources */,
 			);
