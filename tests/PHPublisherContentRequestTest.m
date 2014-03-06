@@ -133,9 +133,8 @@ static NSString *const kPHTestMessageID = @"87345";
 
 - (void)testCloseButtonDelayParameter
 {
-  PHContent *content = [[PHContent alloc] init];
+  PHContent *content = [[[PHContent alloc] init] autorelease];
   STAssertTrue(content.closeButtonDelay == 10.0f, @"Default closeButton delay value incorrect!");
-  [content release];
 
   NSString *rect = @"{\"frame\":{\"x\":60,\"y\":40,\"w\":200,\"h\":400},\"url\":\"http://google.com\",\"transition\":\"PH_DIALOG\",\"context\":{\"awesome\":\"awesome\"},\"close_delay\":23}";
 
@@ -149,9 +148,8 @@ static NSString *const kPHTestMessageID = @"87345";
 
 - (void)testCloseButtonUrlParameter
 {
-  PHContent *content = [[PHContent alloc] init];
+  PHContent *content = [[[PHContent alloc] init] autorelease];
   STAssertTrue(content.closeButtonURLPath == nil, @"CloseButtonURLPath property not available");
-  [content release];
 
   NSString *rect = @"{\"frame\":{\"x\":60,\"y\":40,\"w\":200,\"h\":400},\"url\":\"http://google.com\",\"transition\":\"PH_DIALOG\",\"context\":{\"awesome\":\"awesome\"},\"close_ping\":\"http://playhaven.com\"}";
 
