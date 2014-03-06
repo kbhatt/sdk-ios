@@ -91,6 +91,14 @@
 		E128501218BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
 		E128501418BE67A900325902 /* PHEventTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501318BE67A900325902 /* PHEventTest.m */; };
 		E128501618BF4DD700325902 /* PHEventRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501518BF4DD700325902 /* PHEventRequestTest.m */; };
+		E128501A18BF8E0E00325902 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501818BF8E0E00325902 /* EventsViewController.m */; };
+		E128501B18BF8E0E00325902 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501818BF8E0E00325902 /* EventsViewController.m */; };
+		E128501C18BF8E0E00325902 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501818BF8E0E00325902 /* EventsViewController.m */; };
+		E128501D18BF8E0E00325902 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501818BF8E0E00325902 /* EventsViewController.m */; };
+		E128501E18BF8E0E00325902 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E128501918BF8E0E00325902 /* EventsViewController.xib */; };
+		E128501F18BF8E0E00325902 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E128501918BF8E0E00325902 /* EventsViewController.xib */; };
+		E128502018BF8E0E00325902 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E128501918BF8E0E00325902 /* EventsViewController.xib */; };
+		E128502118BF8E0E00325902 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E128501918BF8E0E00325902 /* EventsViewController.xib */; };
 		E14C1C601806D5BA005997A1 /* PHStoreProductViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */; };
 		E1508EB417293F7A00DDE809 /* PHPushDeliveryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */; };
 		E1508EB717297F2A00DDE809 /* PHPushDeliveryRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB617297F2A00DDE809 /* PHPushDeliveryRequestTest.m */; };
@@ -130,6 +138,14 @@
 		E1CB0F5417C647EE00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CB0F5517C647EF00E2036F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA0C7103169F6B06005151E8 /* Default-568h@2x.png */; };
 		E1CEC62E18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC62D18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m */; };
+		E1CEC62518C0CC5800D4BE56 /* EventsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC62118C0BE2900D4BE56 /* EventsInfoViewController.m */; };
+		E1CEC62618C0CC5800D4BE56 /* EventsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC62118C0BE2900D4BE56 /* EventsInfoViewController.m */; };
+		E1CEC62718C0CC5900D4BE56 /* EventsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC62118C0BE2900D4BE56 /* EventsInfoViewController.m */; };
+		E1CEC62818C0CC5A00D4BE56 /* EventsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CEC62118C0BE2900D4BE56 /* EventsInfoViewController.m */; };
+		E1CEC62918C0CC6200D4BE56 /* EventsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CEC62218C0BE2900D4BE56 /* EventsInfoViewController.xib */; };
+		E1CEC62A18C0CC6200D4BE56 /* EventsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CEC62218C0BE2900D4BE56 /* EventsInfoViewController.xib */; };
+		E1CEC62B18C0CC6300D4BE56 /* EventsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CEC62218C0BE2900D4BE56 /* EventsInfoViewController.xib */; };
+		E1CEC62C18C0CC6400D4BE56 /* EventsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CEC62218C0BE2900D4BE56 /* EventsInfoViewController.xib */; };
 		E1FADDFB180D85440095202B /* SenTestCase+PHAPIRequestSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */; };
 		E69D85961718E82D00CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
 		E69D85971718E83700CA4997 /* PHStoreProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB57B916094C7F000433D8 /* PHStoreProductViewController.m */; };
@@ -624,6 +640,9 @@
 		E1284FFA18BE419900325902 /* PHEventRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHEventRequest.m; sourceTree = "<group>"; };
 		E128501318BE67A900325902 /* PHEventTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHEventTest.m; sourceTree = "<group>"; };
 		E128501518BF4DD700325902 /* PHEventRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHEventRequestTest.m; sourceTree = "<group>"; };
+		E128501718BF8E0E00325902 /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
+		E128501818BF8E0E00325902 /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		E128501918BF8E0E00325902 /* EventsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsViewController.xib; sourceTree = "<group>"; };
 		E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHStoreProductViewControllerTest.m; sourceTree = "<group>"; };
 		E1508EB217293F7900DDE809 /* PHPushDeliveryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushDeliveryRequest.h; sourceTree = "<group>"; };
 		E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushDeliveryRequest.m; sourceTree = "<group>"; };
@@ -648,6 +667,9 @@
 		E1C8F4F8171CC94400F64E12 /* PHPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushRequest.h; sourceTree = "<group>"; };
 		E1C8F4F9171CC94400F64E12 /* PHPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushRequest.m; sourceTree = "<group>"; };
 		E1CEC62D18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QueryComponentsTest.m"; sourceTree = "<group>"; };
+		E1CEC62018C0BE2900D4BE56 /* EventsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsInfoViewController.h; sourceTree = "<group>"; };
+		E1CEC62118C0BE2900D4BE56 /* EventsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsInfoViewController.m; sourceTree = "<group>"; };
+		E1CEC62218C0BE2900D4BE56 /* EventsInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsInfoViewController.xib; sourceTree = "<group>"; };
 		E1FADDF8180D84AC0095202B /* SenTestCase+PHAPIRequestSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+PHAPIRequestSupport.h"; sourceTree = "<group>"; };
 		E1FADDFA180D85440095202B /* SenTestCase+PHAPIRequestSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+PHAPIRequestSupport.m"; sourceTree = "<group>"; };
 		EA019C7F14C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPublisherIAPTrackingRequest.h; sourceTree = "<group>"; };
@@ -1082,6 +1104,12 @@
 				EAA86A93167FFDE100F6B388 /* IDViewController.h */,
 				EAA86A94167FFDE100F6B388 /* IDViewController.m */,
 				EAA86A95167FFDE100F6B388 /* IDViewController.xib */,
+				E128501718BF8E0E00325902 /* EventsViewController.h */,
+				E128501818BF8E0E00325902 /* EventsViewController.m */,
+				E128501918BF8E0E00325902 /* EventsViewController.xib */,
+				E1CEC62018C0BE2900D4BE56 /* EventsInfoViewController.h */,
+				E1CEC62118C0BE2900D4BE56 /* EventsInfoViewController.m */,
+				E1CEC62218C0BE2900D4BE56 /* EventsInfoViewController.xib */,
 				62348609073FF1A6FE01DE56 /* NSData+Base64.m */,
 				62348AD5C67E43569CA54FBC /* NSData+Base64.h */,
 			);
@@ -1704,8 +1732,10 @@
 				EACFC8A1150033A6007EF54F /* 72.png in Resources */,
 				EABC0C76152B8A3200441393 /* Settings.bundle in Resources */,
 				EA8A531A15B091AC00E7B3ED /* URLLoaderViewController.xib in Resources */,
+				E128501E18BF8E0E00325902 /* EventsViewController.xib in Resources */,
 				EA2163B815BF71C900C9A8A9 /* IAPViewController.xib in Resources */,
 				EAA86A9A167FFDE100F6B388 /* IDViewController.xib in Resources */,
+				E1CEC62918C0CC6200D4BE56 /* EventsInfoViewController.xib in Resources */,
 				EA0C7104169F6B07005151E8 /* Default-568h@2x.png in Resources */,
 				E17A203E1718DC4600EF6C14 /* PushNotificationRegistrationViewController.xib in Resources */,
 			);
@@ -1740,8 +1770,10 @@
 				EA62D68F1579925300B31E62 /* 57.png in Resources */,
 				EA62D6901579925300B31E62 /* 72.png in Resources */,
 				EA62D6911579925300B31E62 /* Settings.bundle in Resources */,
+				E128501F18BF8E0E00325902 /* EventsViewController.xib in Resources */,
 				EA8A531B15B091AC00E7B3ED /* URLLoaderViewController.xib in Resources */,
 				E1CB0F5317C647ED00E2036F /* Default-568h@2x.png in Resources */,
+				E1CEC62A18C0CC6200D4BE56 /* EventsInfoViewController.xib in Resources */,
 				EA2163B915BF71C900C9A8A9 /* IAPViewController.xib in Resources */,
 				EAA86A9B167FFDE100F6B388 /* IDViewController.xib in Resources */,
 			);
@@ -1760,10 +1792,12 @@
 				EA86C7E714D9E75600CB1551 /* PublisherContentViewController.xib in Resources */,
 				EA86C7E814D9E75600CB1551 /* ExampleViewController.xib in Resources */,
 				E1CB0F5417C647EE00E2036F /* Default-568h@2x.png in Resources */,
+				E1CEC62B18C0CC6300D4BE56 /* EventsInfoViewController.xib in Resources */,
 				EA86C7F814D9EAC800CB1551 /* dev.wwfixtures in Resources */,
 				EA2B07A614E9EBA60087A45F /* 512.png in Resources */,
 				EAFF5E7B14F7082800E96C2C /* PublisherIAPTrackingViewController.xib in Resources */,
 				EABC0C77152B8A3200441393 /* Settings.bundle in Resources */,
+				E128502018BF8E0E00325902 /* EventsViewController.xib in Resources */,
 				EA8A531C15B091AC00E7B3ED /* URLLoaderViewController.xib in Resources */,
 				EA1146DC15EEAD2100EDB469 /* content-datacollection.json in Resources */,
 				EA2163BA15BF71C900C9A8A9 /* IAPViewController.xib in Resources */,
@@ -1788,6 +1822,8 @@
 				EAF168D61534E59C006B6993 /* 72.png in Resources */,
 				EAF168D71534E59C006B6993 /* Settings.bundle in Resources */,
 				EA8A531D15B091AC00E7B3ED /* URLLoaderViewController.xib in Resources */,
+				E1CEC62C18C0CC6400D4BE56 /* EventsInfoViewController.xib in Resources */,
+				E128502118BF8E0E00325902 /* EventsViewController.xib in Resources */,
 				EA2163BB15BF71C900C9A8A9 /* IAPViewController.xib in Resources */,
 				EAA86A9D167FFDE100F6B388 /* IDViewController.xib in Resources */,
 			);
@@ -1819,6 +1855,7 @@
 				D1BD481D14C0EDD100EE8A5A /* PHPurchase.m in Sources */,
 				EA03811813B272FB00A31FF7 /* PHPublisherMetadataRequest.m in Sources */,
 				E15FAEB6189FB718007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
+				E128501A18BF8E0E00325902 /* EventsViewController.m in Sources */,
 				EA12ABE01365DBB700CB2F24 /* main.m in Sources */,
 				EA12ABE31365DBB700CB2F24 /* AppDelegate.m in Sources */,
 				EA12ABE91365DBB700CB2F24 /* RootViewController.m in Sources */,
@@ -1846,6 +1883,7 @@
 				EA019C8314C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m in Sources */,
 				EAFF5E7714F707A400E96C2C /* PublisherIAPTrackingViewController.m in Sources */,
 				EA4AC25F15019C230069D264 /* IAPHelper.m in Sources */,
+				E1CEC62518C0CC5800D4BE56 /* EventsInfoViewController.m in Sources */,
 				E128500B18BE419900325902 /* PHEventRequest.m in Sources */,
 				EA5FA4771542120600F1517A /* PublisherCancelContentViewController.m in Sources */,
 				EA24FCAD1554510D0074FC13 /* PHNetworkUtil.m in Sources */,
@@ -1910,6 +1948,7 @@
 				EA62D6611579925300B31E62 /* AppDelegate.m in Sources */,
 				EA62D6621579925300B31E62 /* RootViewController.m in Sources */,
 				EA62D6631579925300B31E62 /* SBJsonBase.m in Sources */,
+				E128501B18BF8E0E00325902 /* EventsViewController.m in Sources */,
 				EA62D6641579925300B31E62 /* SBJsonParser.m in Sources */,
 				EA62D6651579925300B31E62 /* SBJsonWriter.m in Sources */,
 				EA62D6661579925300B31E62 /* NSObject+QueryComponents.m in Sources */,
@@ -1938,6 +1977,7 @@
 				EA62D67A1579925300B31E62 /* IAPHelper.m in Sources */,
 				EA62D67C1579925300B31E62 /* PublisherCancelContentViewController.m in Sources */,
 				EA62D67D1579925300B31E62 /* PHNetworkUtil.m in Sources */,
+				E1CEC62618C0CC5800D4BE56 /* EventsInfoViewController.m in Sources */,
 				EAD610F015AC9212001D3E90 /* KIFTestScenario+PHAdditions.m in Sources */,
 				EAD610F115AC9212001D3E90 /* KIFTestStep+PHAdditions.m in Sources */,
 				EAD610F215AC9212001D3E90 /* PHContentView+Automation.m in Sources */,
@@ -1974,6 +2014,7 @@
 				EA86C7C814D9E75600CB1551 /* SBJsonWriter.m in Sources */,
 				EA86C7C914D9E75600CB1551 /* NSObject+QueryComponents.m in Sources */,
 				EA86C7CA14D9E75600CB1551 /* UIDevice+HardwareString.m in Sources */,
+				E128501C18BF8E0E00325902 /* EventsViewController.m in Sources */,
 				EA86C7CB14D9E75600CB1551 /* PHURLLoader.m in Sources */,
 				EA86C7CC14D9E75600CB1551 /* PHAPIRequest.m in Sources */,
 				EA86C7CD14D9E75600CB1551 /* PHStringUtil.m in Sources */,
@@ -2003,6 +2044,7 @@
 				EADB57BD16094C7F000433D8 /* PHStoreProductViewController.m in Sources */,
 				EAE36A6315BF70CE00892B81 /* IAPViewController.m in Sources */,
 				EAA86A98167FFDE100F6B388 /* IDViewController.m in Sources */,
+				E1CEC62718C0CC5900D4BE56 /* EventsInfoViewController.m in Sources */,
 				6234847223A7D7C6CF3B498B /* PHConnectionManager.m in Sources */,
 				62348AEF0D79852FB3C32C14 /* PHResourceCacher.m in Sources */,
 				E1111532171C3AAF0012C465 /* PushNotificationRegistrationViewController.m in Sources */,
@@ -2199,9 +2241,11 @@
 				EAF168C31534E59C006B6993 /* IAPHelper.m in Sources */,
 				EA5FA4791542120600F1517A /* PublisherCancelContentViewController.m in Sources */,
 				EA24FCAF1554510D0074FC13 /* PHNetworkUtil.m in Sources */,
+				E1CEC62818C0CC5A00D4BE56 /* EventsInfoViewController.m in Sources */,
 				D108A83715A6553700082388 /* PHTimeInGame.m in Sources */,
 				EA8A531815B0918B00E7B3ED /* URLLoaderViewController.m in Sources */,
 				EADB57BE16094C7F000433D8 /* PHStoreProductViewController.m in Sources */,
+				E128501D18BF8E0E00325902 /* EventsViewController.m in Sources */,
 				EAE36A6415BF70CE00892B81 /* IAPViewController.m in Sources */,
 				EAA86A99167FFDE100F6B388 /* IDViewController.m in Sources */,
 				62348636C5791F9602B8FD64 /* PHConnectionManager.m in Sources */,

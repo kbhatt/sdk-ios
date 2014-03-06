@@ -29,6 +29,7 @@
 #import "IDViewController.h"
 #import "PushNotificationRegistrationViewController.h"
 #import "PlayHavenAppIdentity.h"
+#import "EventsViewController.h"
 
 static NSString *kPHClassNameKey = @"ClassName";
 static NSString *kPHControllerNameKey = @"ControllerName";
@@ -301,6 +302,11 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
                     @{kPHClassNameKey : NSStringFromClass([PublisherIAPTrackingViewController class]),
                     kPHControllerNameKey : @"IAP Tracking",
                     kPHControllerDescriptionKey : @""},
+
+                    @{kPHClassNameKey : NSStringFromClass([EventsViewController class]),
+                    kPHControllerNameKey : @"Custom Events",
+                    kPHControllerDescriptionKey : @"/publisher/event/",
+                    kPHAccessibilityLabelKey : @"events"},
 
                     @{kPHClassNameKey : NSStringFromClass([PublisherCancelContentViewController class]),
                     kPHControllerNameKey : @"Cancelled Content",
