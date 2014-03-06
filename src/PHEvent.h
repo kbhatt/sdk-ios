@@ -33,26 +33,26 @@
 /**
  * Convenience class method for creating autoreleased event object.
  **/
-+ (instancetype)eventWithType:(NSString *)aType properties:(NSDictionary *)aProperties;
++ (instancetype)eventWithProperties:(NSDictionary *)aProperties;
 
 /**
  * Constructs an event object that encapsulates data representing an event in your application.
- * @param aType
- *   Type of the event. You are free to define any types that make sense for your application. This
- *   property must not be nil.
  * @param aProperties
- *   An optional dictionary with event properties. You are free to define what properties should be
- *   included in the event object. The only restriction is imposed on the data type of the objects
- *   that can be passed within this dictionary, in particular the keys of this dictionary as well as
- *   the keys of all nested sub-dictionaries (if any) must be strings, the values can be of any type
- *   from the following list:
+ *  A dictionary with event properties. You are free to define what properties should be included
+ *  in the event object. The only restriction is imposed on the data type of the objects that can be
+ *  passed within this dictionary, in particular the keys of this dictionary as well as the keys of
+ *  all nested sub-dictionaries (if any) must be strings, the values can be of any type from the
+ *  following list:
  *
- *   @li NSNull
- *   @li NSString
- *   @li NSArray
- *   @li NSDictionary
- *   @li NSNumber
- *   
+ *  @li NSString
+ *  @li NSDictionary
+ *  @li NSNumber
+ *
+ *  If you pass values with other data types within the properties dictionary, the event object will
+ *  be successfully created but PlayHaven's server may return an error on attempt to send such an
+ *  event. Here is an example of a parameters dictionary that can be passed on event creation:
+ *  @{@"inventory" : @{@"swords" : @{@"katanas" : @(3)}}}
+ *
  *  Note, at the moment PlayHaven's server has a limitation on the size of the events that can be
  *  passed from the SDK to the server. As of PH SDK 1.22.0 this limit is 100 KB (to be accurate
  *  102000 bytes). In most cases you should not worry about the size of the event object but if you
@@ -65,12 +65,7 @@
  * @return
  *   An event object.
  **/
-- (instancetype)initWithType:(NSString *)aType properties:(NSDictionary *)aProperties;
-
-/**
- * Event type which is the same that was passed on event creation.
- **/
-@property (nonatomic, retain, readonly) NSString *type;
+- (instancetype)initWithProperties:(NSDictionary *)aProperties;
 
 /**
  * Event properties which are the same that were passed on event creation.

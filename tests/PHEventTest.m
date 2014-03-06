@@ -23,8 +23,6 @@
 #import "PlayHavenSDK.h"
 #import "JSON.h"
 
-static NSString *const kPHTestEventType = @"testType";
-
 static NSString *const kPHTestEventPropertyKey1 = @"EventPropertyKey1";
 static NSString *const kPHTestEventPropertyKey2 = @"EventPropertyKey2";
 static NSString *const kPHTestEventPropertyKey3 = @"EventPropertyKey3";
@@ -33,11 +31,9 @@ static NSString *const kPHTestEventPropertyKey5 = @"EventPropertyKey5";
 static NSString *const kPHTestEventPropertyKey6 = @"EventPropertyKey6";
 static NSString *const kPHTestEventPropertyKey7 = @"EventPropertyKey7";
 static NSString *const kPHTestEventPropertyKey8 = @"EventPropertyKey8";
-static NSString *const kPHTestEventPropertyKey9 = @"EventPropertyKey9";
 
 static NSString *const kPHTestEventPropertyValue1 = @"EventPropertyValue1";
 static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
-static NSString *const kPHTestEventPropertyValue3 = @"!@#$%^&*(+_)(GVLSAJUCBAIU";
 
 @interface PHEventTest : SenTestCase
 @end
@@ -48,44 +44,35 @@ static NSString *const kPHTestEventPropertyValue3 = @"!@#$%^&*(+_)(GVLSAJUCBAIU"
 {
     NSDictionary *theProperties = @{kPHTestEventPropertyKey1 : kPHTestEventPropertyValue1};
     
-    STAssertNil([PHEvent eventWithType:nil properties:nil], @"Event object should not be created "
-                "with nil type!");
-    STAssertNil([PHEvent eventWithType:nil properties:theProperties], @"Event object should not be "
-                "created with nil type!");
-    STAssertNotNil([PHEvent eventWithType:kPHTestEventType properties:nil], @"Cannot create event "
-                "object!");
-    STAssertNotNil([PHEvent eventWithType:kPHTestEventType properties:theProperties], @"Cannot "
-                "create event object!");
+    STAssertNil([PHEvent eventWithProperties:nil], @"Event object should not be created with nil "
+                "properties dictionary!");
+    STAssertNotNil([PHEvent eventWithProperties:theProperties], @"Cannot create event object!");
 
     // Create properties dictionary that cannot be converted into JSON
     theProperties = @{kPHTestEventPropertyKey1 : [kPHTestEventPropertyValue1 dataUsingEncoding:
                 NSUTF8StringEncoding]};
-    STAssertNil([PHEvent eventWithType:kPHTestEventType properties:theProperties], @"Event object "
+    STAssertNil([PHEvent eventWithProperties:theProperties], @"Event object "
                 "should not be created with properties that cannot be converted into JSON!");
 
     // Create properties dictionary that cannot be converted into JSON
     theProperties = @{kPHTestEventPropertyKey1 : [NSDate date]};
-    STAssertNil([PHEvent eventWithType:kPHTestEventType properties:theProperties], @"Event object "
-                "should not be created with properties that cannot be converted into JSON!");
+    STAssertNil([PHEvent eventWithProperties:theProperties], @"Event object should not be created "
+                "with properties that cannot be converted into JSON!");
 
     // Create properties dictionary that cannot be converted into JSON
     theProperties = @{kPHTestEventPropertyKey1 : [NSSet setWithObject:kPHTestEventPropertyValue1]};
-    STAssertNil([PHEvent eventWithType:kPHTestEventType properties:theProperties], @"Event object "
-                "should not be created with properties that cannot be converted into JSON!");
+    STAssertNil([PHEvent eventWithProperties:theProperties], @"Event object should not be created "
+                "with properties that cannot be converted into JSON!");
 }
 
 - (void)testCreationWithInitializer
 {
     NSDictionary *theProperties = @{kPHTestEventPropertyKey1 : kPHTestEventPropertyValue1};
     
-    STAssertNil([[[PHEvent alloc] initWithType:nil properties:nil] autorelease], @"Event object "
-                "should not be created with nil type!");
-    STAssertNil([[[PHEvent alloc] initWithType:nil properties:theProperties] autorelease], @"Event "
-                "object should not be created with nil type!");
-    STAssertNotNil([[[PHEvent alloc] initWithType:kPHTestEventType properties:nil] autorelease],
-                @"Cannot create event object!");
-    STAssertNotNil([[[PHEvent alloc] initWithType:kPHTestEventType properties:theProperties]
-                autorelease], @"Cannot create event object!");
+    STAssertNil([[[PHEvent alloc] initWithProperties:nil] autorelease], @"Event object should not "
+                "be created with nil properties dictionary!");
+    STAssertNotNil([[[PHEvent alloc] initWithProperties:theProperties] autorelease], @"Cannot "
+                "create event object!");
 }
 
 - (void)testEventProperties
@@ -103,13 +90,10 @@ static NSString *const kPHTestEventPropertyValue3 = @"!@#$%^&*(+_)(GVLSAJUCBAIU"
         kPHTestEventPropertyKey6 : [NSDecimalNumber numberWithFloat:theTestFloatValue],
         kPHTestEventPropertyKey7 : [NSNull null],
         kPHTestEventPropertyKey8 : @(theTestBoolValue),
-        kPHTestEventPropertyKey9 : kPHTestEventPropertyValue3
     };
 
-    PHEvent *theTestEvent = [PHEvent eventWithType:kPHTestEventType properties:theProperties];
+    PHEvent *theTestEvent = [PHEvent eventWithProperties:theProperties];
     STAssertNotNil(theTestEvent, @"Cannot create event object!");
-    STAssertEqualObjects(kPHTestEventType, theTestEvent.type, @"Event's type doesn't match the one "
-                "passed to the ititializer!");
     STAssertEqualObjects(theProperties, theTestEvent.properties, @"Event's properties don't match "
                 "the ones passed to the ititializer!");
     
@@ -123,11 +107,9 @@ static NSString *const kPHTestEventPropertyValue3 = @"!@#$%^&*(+_)(GVLSAJUCBAIU"
                 &theError];
     
     STAssertNotNil(theDecodedEvent, @"Cannot decode the event JSON: %@", theError);
-    STAssertEqualObjects(kPHTestEventType, theDecodedEvent[@"type"], @"Event's type doesn't match "
-                "the one passed to the ititializer!");
-    STAssertTrue((NSUInteger)[[NSDate date] timeIntervalSince1970] >= [theDecodedEvent[@"timestamp"]
+    STAssertTrue((NSUInteger)[[NSDate date] timeIntervalSince1970] >= [theDecodedEvent[@"ts"]
                 integerValue], @"Unexpected time stamp of the event!");
-    STAssertEqualObjects(theProperties, theDecodedEvent[@"data"], @"Event's properties don't match "
+    STAssertEqualObjects(theProperties, theDecodedEvent[@"event"], @"Event's properties don't match "
                 "the ones passed to the initializer!");
 }
 

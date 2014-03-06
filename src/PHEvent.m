@@ -23,9 +23,8 @@
 #import "PHConstants.h"
 #import "JSON.h"
 
-static NSString *const kPHEventTypeKey = @"type";
-static NSString *const kPHEventTimestampKey = @"timestamp";
-static NSString *const kPHEventDataKey = @"data";
+static NSString *const kPHEventTimestampKey = @"ts";
+static NSString *const kPHEventPropertiesKey = @"event";
 
 @interface PHEvent ()
 @property (nonatomic, assign, readonly) NSTimeInterval timestamp;
@@ -35,21 +34,18 @@ static NSString *const kPHEventDataKey = @"data";
 @implementation PHEvent
 @synthesize eventDictionary = _eventDictionary;
 
-+ (id)eventWithType:(NSString *)aType properties:(NSDictionary *)aProperties
++ (id)eventWithProperties:(NSDictionary *)aProperties
 {
-    return [[[self alloc] initWithType:aType properties:aProperties] autorelease];
+    return [[[self alloc] initWithProperties:aProperties] autorelease];
 }
 
-- (instancetype)initWithType:(NSString *)aType properties:(NSDictionary *)aProperties
+- (instancetype)initWithProperties:(NSDictionary *)aProperties
 {
-    if (nil == aType)
+    if (nil == aProperties || ![[self class] isPropertiesValid:aProperties])
     {
-        PH_LOG(@"%s[ERROR]: Cannot create event object with nil type!", __PRETTY_FUNCTION__);
-        [self release];
-        return nil;
-    }
-    else if (![[self class] isPropertiesValid:aProperties])
-    {
+        PH_LOG(@"%s[ERROR] Cannot create event object with the given properties: %@",
+                    __PRETTY_FUNCTION__, aProperties);
+
         [self release];
         return nil;
     }
@@ -57,17 +53,8 @@ static NSString *const kPHEventDataKey = @"data";
     self = [super init];
     if (nil != self)
     {
-        NSMutableDictionary *theEventDictionary = [NSMutableDictionary new];
-        theEventDictionary[kPHEventTypeKey] = aType;
-        theEventDictionary[kPHEventTimestampKey] = @((NSInteger)[[NSDate date]
-                    timeIntervalSince1970]);
-
-        if (nil != aProperties)
-        {
-            theEventDictionary[kPHEventDataKey] = aProperties;
-        }
-
-        _eventDictionary = theEventDictionary;
+        _eventDictionary = [@{kPHEventTimestampKey : @((NSInteger)[[NSDate date]
+                    timeIntervalSince1970]), kPHEventPropertiesKey : aProperties} retain];
     }
     
     return self;
@@ -80,14 +67,9 @@ static NSString *const kPHEventDataKey = @"data";
     [super dealloc];
 }
 
-- (NSString *)type
-{
-    return self.eventDictionary[kPHEventTypeKey];
-}
-
 - (NSString *)properties
 {
-    return self.eventDictionary[kPHEventDataKey];
+    return self.eventDictionary[kPHEventPropertiesKey];
 }
 
 - (NSString *)JSONRepresentation

@@ -29,7 +29,6 @@
 static NSString *const kPHEventRequestTestToken  = @"EventRequestTestToken";
 static NSString *const kPHEventRequestTestSecret = @"EventRequestTestSecret";
 
-static NSString *const kPHTestEventType = @"testType";
 static NSString *const kPHTestEventPropertyKey1 = @"EventPropertyKey1";
 static NSString *const kPHTestEventPropertyKey2 = @"EventPropertyKey2";
 static NSString *const kPHTestEventPropertyKey3 = @"EventPropertyKey3";
@@ -51,7 +50,7 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
                 @"Event request should not be created since all request parameters are mandatory!");
 
     NSDictionary *theProperties = @{kPHTestEventPropertyKey1 : kPHTestEventPropertyValue1};
-    PHEvent *theTestEvent = [PHEvent eventWithType:kPHTestEventType properties:theProperties];
+    PHEvent *theTestEvent = [PHEvent eventWithProperties:theProperties];
     STAssertNotNil(theTestEvent, @"Cannot create event necessary for the test!");
 
     STAssertNil([PHEventRequest requestForApp:nil secret:nil event:theTestEvent], @"Event request "
@@ -74,7 +73,7 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
                 @"Event request should not be created since all request parameters are mandatory!");
 
     NSDictionary *theProperties = @{kPHTestEventPropertyKey1 : kPHTestEventPropertyValue1};
-    PHEvent *theTestEvent = [PHEvent eventWithType:kPHTestEventType properties:theProperties];
+    PHEvent *theTestEvent = [PHEvent eventWithProperties:theProperties];
     STAssertNotNil(theTestEvent, @"Cannot create event necessary for the test!");
 
     STAssertNil([[PHEventRequest alloc] initWithApp:nil secret:nil event:theTestEvent], @"Event request "
@@ -96,7 +95,7 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
         kPHTestEventPropertyKey2 : @[kPHTestEventPropertyValue2],
         kPHTestEventPropertyKey3 : @(NO),
     };
-    PHEvent *theTestEvent = [PHEvent eventWithType:kPHTestEventType properties:theProperties];
+    PHEvent *theTestEvent = [PHEvent eventWithProperties:theProperties];
     STAssertNotNil(theTestEvent, @"Cannot create event necessary for the test!");
 
     PHEventRequest *theTestRequest = [PHEventRequest requestForApp:kPHEventRequestTestToken secret:
@@ -114,30 +113,26 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
     NSDictionary *theQueryComponents = [theRequestURL queryComponents];
     STAssertNotNil(theQueryComponents, @"Request query should not be nil!");
 
-    NSString *theEventsJSON = theQueryComponents[@"events"];
+    NSString *theEventsJSON = theQueryComponents[@"data"];
     STAssertNotNil(theEventsJSON, @"Missed required parameters!");
 
     PH_SBJSONPARSER_CLASS *theJSONParser = [[PH_SBJSONPARSER_CLASS new] autorelease];
     NSError *theError = nil;
-    NSDictionary *theDecodedEvents = [theJSONParser objectWithString:theEventsJSON error:&theError];
+    NSArray *theDecodedEvents = [theJSONParser objectWithString:theEventsJSON error:&theError];
     
-    STAssertNotNil(theDecodedEvents, @"Cannot decode events JSON to dictionary representation!");
-    STAssertNotNil(theDecodedEvents[@"events"], @"Missed required element!");
-    STAssertTrue([theDecodedEvents[@"events"] count] > 0, @"Events dictionary should contain one "
-                "event!");
+    STAssertNotNil(theDecodedEvents, @"Cannot decode events JSON to array representation!");
+    STAssertTrue([theDecodedEvents count] > 0, @"Events array should contain one event!");
     
-    NSDictionary *theEventDictionary = theDecodedEvents[@"events"][0];
+    NSDictionary *theEventDictionary = theDecodedEvents[0];
     STAssertNotNil(theEventDictionary, @"Events dictionary should contain the event that was passed"
                 " to request initializer!");
-    STAssertEqualObjects(kPHTestEventType, theEventDictionary[@"type"], @"Event's type doesn't "
-                "match the one that was passed to request initializer!");
-    STAssertTrue(0 < [theEventDictionary[@"timestamp"] integerValue], @"Unexpected time stamp of "
-                "the event!");
-    STAssertEqualObjects(theProperties, theEventDictionary[@"data"], @"Event's properties don't "
+    STAssertTrue(0 < [theEventDictionary[@"ts"] integerValue], @"Unexpected timestamp of the "
+                "event!");
+    STAssertEqualObjects(theProperties, theEventDictionary[@"event"], @"Event's properties don't "
                 "match the ones that were passed to event initializer!");
 
     // Verify events signature
-    NSString *theEventsSignature = theQueryComponents[@"events_sig"];
+    NSString *theEventsSignature = theQueryComponents[@"data_sig"];
     STAssertNotNil(theEventsSignature, @"Missed events signature!");
 
     NSString *theExpectedSignature = [[PHAPIRequest class] v4SignatureWithMessage:theEventsJSON

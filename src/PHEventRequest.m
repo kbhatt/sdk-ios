@@ -25,8 +25,13 @@
 #import "PHEvent.h"
 #import "NSObject+QueryComponents.h"
 
-static NSString *const kPHRequestParameterEventsKey = @"events";
-static NSString *const kPHRequestParameterEventsSignatureKey = @"events_sig";
+static NSString *const kPHRequestParameterDataKey = @"data";
+static NSString *const kPHRequestParameterDataSignatureKey = @"data_sig";
+static NSString *const kPHRequestParameterEventTypeKey = @"type";
+static NSString *const kPHRequestParameterEventVersionKey = @"version";
+
+static NSString *const kPHRequestParameterEventTypeValue = @"event";
+static NSString *const kPHRequestParameterEventVersionValue = @"1";
 
 @interface PHEventRequest ()
 @property (nonatomic, retain, readonly) NSArray *events;
@@ -89,21 +94,24 @@ static NSString *const kPHRequestParameterEventsSignatureKey = @"events_sig";
         }
     }
 
-    NSString *theResultingJSON = [NSString stringWithFormat:@"{\"events\":[%@]}", [theEventsJSON
+    NSString *theResultingJSON = [NSString stringWithFormat:@"[%@]", [theEventsJSON
                 componentsJoinedByString:@","]];
     NSMutableDictionary *theParameters = [NSMutableDictionary dictionaryWithDictionary:
-                @{kPHRequestParameterEventsKey : theResultingJSON}];
+                @{kPHRequestParameterDataKey : theResultingJSON}];
     
     NSString *theEventsSignature = [[self class] v4SignatureWithMessage:theResultingJSON
                 signatureKey:self.secret];
     if (nil != theEventsSignature)
     {
-        theParameters[kPHRequestParameterEventsSignatureKey] = theEventsSignature;
+        theParameters[kPHRequestParameterDataSignatureKey] = theEventsSignature;
     }
     else
     {
         PH_LOG(@"[%s]ERROR: Cannot generate events signature!", __PRETTY_FUNCTION__);
     }
+    
+    theParameters[kPHRequestParameterEventTypeKey] = kPHRequestParameterEventTypeValue;
+    theParameters[kPHRequestParameterEventVersionKey] = kPHRequestParameterEventVersionValue;
     
     return theParameters;
 }
