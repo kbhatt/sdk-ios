@@ -25,7 +25,6 @@
  * @brief Adapted from http://stackoverflow.com/questions/3997976/parse-nsurl-query-property.
  * Code by BadPirate (http://blog.logichigh.com)
  **/
-//  TODO: Determine if this can be merged into PHStringUtil
 @interface NSString (QueryComponents)
 - (NSString *)stringByDecodingURLFormat;
 - (NSString *)stringByEncodingURLFormat;
