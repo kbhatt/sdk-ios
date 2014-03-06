@@ -67,7 +67,7 @@
 /**
  * Returns total unreported sessions
  **/
-- (int)getCountSessions;
+- (NSInteger)getCountSessions;
 
 /**
  * Returns current session duration, in seconds

@@ -30,7 +30,7 @@
 @implementation NSObject (hash)
 - (NSString *)hashString
 {
-    return [NSString stringWithFormat:@"%d", [self hash]];
+    return [NSString stringWithFormat:@"%lu", (unsigned long)[self hash]];
 }
 @end
 
@@ -135,8 +135,8 @@
 
     if (nil != product.productIdentifier && [purchase.productIdentifier isEqualToString:product.productIdentifier]) {
         // Ask the user to choose to purchase or not purchase an item
-        NSString    *message = [NSString stringWithFormat:@"Do you want to buy %d %@ for %@?",
-                                              purchase.quantity, product.localizedTitle, product.localizedPrice];
+        NSString *message = [NSString stringWithFormat:@"Do you want to buy %ld %@ for %@?",
+                    (long)purchase.quantity, product.localizedTitle, product.localizedPrice];
 
         UIAlertView *purchaseAlert = [[UIAlertView alloc] initWithTitle:@"In-Game Store"
                                                                 message:message

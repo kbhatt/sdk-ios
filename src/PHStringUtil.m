@@ -267,7 +267,7 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
     NSData     *data = [NSData dataWithBytes:cstr length:[input length]];
 
     uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    CC_SHA1(data.bytes, data.length, digest);
+    CC_SHA1(data.bytes, (unsigned int)data.length, digest);
 
     return [NSData dataWithBytes:digest length:CC_SHA1_DIGEST_LENGTH];
 }
@@ -277,8 +277,8 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
     NSUInteger     b64EncodedLength = (data.length * 8 + 5) / 6;
     NSMutableData *result = [NSMutableData dataWithLength:b64EncodedLength];
 
-    int resultLength = result.length;
-    int dataLength   = data.length;
+    NSInteger resultLength = result.length;
+    NSInteger dataLength   = data.length;
 
     if (data.bytes && dataLength && result.bytes && resultLength) {
         char *resultChars = (char *)result.bytes;
