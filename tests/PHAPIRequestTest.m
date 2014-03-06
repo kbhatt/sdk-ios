@@ -609,10 +609,10 @@ static NSString *const kPHTestSID2 = @"12256527677368061856";
     NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
 
-    // Check that after cleanup no ktsid is not included in the request parameters
-    STAssertNil(theSignedParameters[@"ktsid"], @"No ktsid parameter is expected after KT locations "
+    // Check that after cleanup sid is not included in the request parameters
+    STAssertNil(theSignedParameters[@"sid"], @"No sid parameter is expected after KT locations "
                 "cleanup!");
-    STAssertTrue(0 == [theRequestURL rangeOfString:@"ktsid"].length, @"No ktsid parameter is "
+    STAssertTrue(0 == [theRequestURL rangeOfString:@"sid"].length, @"No sid parameter is "
                 "expected after KT locations cleanup!");
 }
 
@@ -629,11 +629,11 @@ static NSString *const kPHTestSID2 = @"12256527677368061856";
     NSString *theRequestURL = [[self URLForRequest:theRequest] absoluteString];
     NSDictionary *theSignedParameters = [theRequest signedParameters];
 
-    // Check that after cleanup no ktsid is not included in the request parameters
-    STAssertNil(theSignedParameters[@"ktsid"], @"No ktsid parameter is expected until primary SID "
+    // Check that after cleanup sid is not included in the request parameters
+    STAssertNil(theSignedParameters[@"sid"], @"No sid parameter is expected until primary SID "
                 "is defined!");
-    STAssertTrue(0 == [theRequestURL rangeOfString:@"ktsid"].length, @"No ktsid parameter is "
-                "expected until primary SID is defined!");
+    STAssertTrue(0 == [theRequestURL rangeOfString:@"sid"].length, @"No sid parameter is expected "
+                "until primary SID is defined!");
 }
 
 - (void)testKTSIDParameterCase3
@@ -653,12 +653,11 @@ static NSString *const kPHTestSID2 = @"12256527677368061856";
     NSDictionary *theSignedParameters = [theRequest signedParameters];
 
     // Check that primary SID is included in the request parameters
-    STAssertEqualObjects(kPHTestSID1, theSignedParameters[@"ktsid"] , @"Missed ktsid parameter!");
-    STAssertTrue(0 < [theRequestURL rangeOfString:@"ktsid"].length, @"Missed ktsid parameter!");
+    STAssertEqualObjects(kPHTestSID1, theSignedParameters[@"sid"] , @"Missed sid parameter!");
+    STAssertTrue(0 < [theRequestURL rangeOfString:@"sid"].length, @"Missed sid parameter!");
     
     // Check that primary SID is included in the request signature
-    STAssertEqualObjects(kPHTestSID1, [PHAPIRequest identifiers][@"ktsid"], @"Missed ktsid "
-                "parameter!");
+    STAssertEqualObjects(kPHTestSID1, [PHAPIRequest identifiers][@"sid"], @"Missed sid parameter!");
 
     NSString *theExpectedSignature = [PHAPIRequest v4SignatureWithIdentifiers:[PHAPIRequest
                 identifiers] token:[theRequest signedParameters][@"token"] nonce:[theRequest

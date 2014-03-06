@@ -172,8 +172,8 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
                 " cleanup!");
     STAssertTrue(0 == [theRequestURL.absoluteString rangeOfString:@"ktsids"].length, @"");
 
-    // Make sure that ktsid parameter with is not included in the request parameters
-    STAssertNil(theSignedParameters[@"ktsid"], @"ktsid parameter is not expected after KL locations"
+    // Make sure that sid parameter with is not included in the request parameters
+    STAssertNil(theSignedParameters[@"sid"], @"sid parameter is not expected after KL locations"
                 " cleanup!");
 }
 
@@ -216,8 +216,8 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
                 NSUTF8StringEncoding] rangeOfString:theExpectedPair2].length == 0,
                 @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
 
-    // Make sure that ktsid parameter with is not included in the request parameters
-    STAssertNil(theSignedParameters[@"ktsid"], @"ktsid parameter is not expected after KL locations"
+    // Make sure that sid parameter with is not included in the request parameters
+    STAssertNil(theSignedParameters[@"sid"], @"sid parameter is not expected after KL locations"
                 " cleanup until it is set with -[PHKontagentDataAccessor "
                 "storePrimarySenderID:forAPIKey:]!");
     
@@ -244,8 +244,8 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
                 " cleanup!");
     STAssertTrue(0 == [theRequestURL.absoluteString rangeOfString:@"ktsids"].length, @"");
     
-    // Make sure that ktsid parameter with the primary SID is included in the request parameters
-    STAssertEqualObjects(kPHTestSID1, theSignedParameters[@"ktsid"], @"The SID specified in the "
+    // Make sure that sid parameter with the primary SID is included in the request parameters
+    STAssertEqualObjects(kPHTestSID1, theSignedParameters[@"sid"], @"The SID specified in the "
                 "request doesn't match the expected one!");
 
     // Cleanup API keys and SIDs in KT locations
@@ -292,8 +292,8 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
                 NSUTF8StringEncoding] rangeOfString:theExpectedPair2].length == 0,
                 @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair2);
 
-    // Make sure that ktsid parameter with is not included in the request parameters
-    STAssertNil(theSignedParameters[@"ktsid"], @"ktsid parameter is not expected after KL locations"
+    // Make sure that sid parameter with is not included in the request parameters
+    STAssertNil(theSignedParameters[@"sid"], @"sid parameter is not expected after KL locations"
                 " cleanup until it is set with -[PHKontagentDataAccessor "
                 "storePrimarySenderID:forAPIKey:]!");
     
@@ -348,8 +348,8 @@ static NSString *const kPHTestSecret = @"PUBLISHER_SECRET";
                 NSUTF8StringEncoding] rangeOfString:theExpectedPair3].length == 0,
                 @"The unexpected pair (%@) is found in the URL parameters", theExpectedPair3);
 
-    // Make sure that ktsid parameter with is not included in the request parameters
-    STAssertNil(theSignedParameters[@"ktsid"], @"ktsid parameter is not expected after KL locations"
+    // Make sure that sid parameter with is not included in the request parameters
+    STAssertNil(theSignedParameters[@"sid"], @"sid parameter is not expected after KL locations"
                 " cleanup until it is set with -[PHKontagentDataAccessor "
                 "storePrimarySenderID:forAPIKey:]!");
     
