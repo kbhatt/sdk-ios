@@ -32,8 +32,10 @@ static NSString *const kPHEventRequestTestSecret = @"EventRequestTestSecret";
 static NSString *const kPHTestEventPropertyKey1 = @"EventPropertyKey1";
 static NSString *const kPHTestEventPropertyKey2 = @"EventPropertyKey2";
 static NSString *const kPHTestEventPropertyKey3 = @"EventPropertyKey3";
+static NSString *const kPHTestEventPropertyKey4 = @"EventPropertyKey4";
 static NSString *const kPHTestEventPropertyValue1 = @"EventPropertyValue1";
 static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
+static NSString *const kPHTestEventPropertyValue3 = @"±!@#$%^&*(+_)(GVL S AJUCBAIU";
 
 @interface PHEventRequestTest : SenTestCase
 @end
@@ -94,6 +96,7 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
         kPHTestEventPropertyKey1 : kPHTestEventPropertyValue1,
         kPHTestEventPropertyKey2 : @[kPHTestEventPropertyValue2],
         kPHTestEventPropertyKey3 : @(NO),
+        kPHTestEventPropertyKey4 : kPHTestEventPropertyValue3
     };
     PHEvent *theTestEvent = [PHEvent eventWithProperties:theProperties];
     STAssertNotNil(theTestEvent, @"Cannot create event necessary for the test!");
