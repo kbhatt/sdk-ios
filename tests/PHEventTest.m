@@ -31,9 +31,11 @@ static NSString *const kPHTestEventPropertyKey5 = @"EventPropertyKey5";
 static NSString *const kPHTestEventPropertyKey6 = @"EventPropertyKey6";
 static NSString *const kPHTestEventPropertyKey7 = @"EventPropertyKey7";
 static NSString *const kPHTestEventPropertyKey8 = @"EventPropertyKey8";
+static NSString *const kPHTestEventPropertyKey9 = @"EventPropertyKey9";
 
 static NSString *const kPHTestEventPropertyValue1 = @"EventPropertyValue1";
 static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
+static NSString *const kPHTestEventPropertyValue3 = @"!@#$%^&*(+_)(GVLSAJUCBAIU";
 
 @interface PHEventTest : SenTestCase
 @end
@@ -90,6 +92,7 @@ static NSString *const kPHTestEventPropertyValue2 = @"EventPropertyValue2";
         kPHTestEventPropertyKey6 : [NSDecimalNumber numberWithFloat:theTestFloatValue],
         kPHTestEventPropertyKey7 : [NSNull null],
         kPHTestEventPropertyKey8 : @(theTestBoolValue),
+        kPHTestEventPropertyKey9 : kPHTestEventPropertyValue3
     };
 
     PHEvent *theTestEvent = [PHEvent eventWithProperties:theProperties];
