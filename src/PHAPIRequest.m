@@ -54,7 +54,7 @@ static NSString *const kPHRequestParameterOptOutStatusKey = @"opt_out";
 static NSString *const kPHRequestParameterConnectionKey = @"connection";
 static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
-static NSString *const kPHKontagentSenderIDKey = @"ktsid";
+static NSString *const kPHKontagentSenderIDKey = @"sid";
 
 static NSString *const kPHHTTPMethodPost = @"POST";
 static NSString *const kPHHTTPContentTypeURLEncoded = @"application/x-www-form-urlencoded";
