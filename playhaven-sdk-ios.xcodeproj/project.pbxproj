@@ -65,6 +65,32 @@
 		E122A1CB172A8889001F3A14 /* PHPushProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E122A1C7172A8889001F3A14 /* PHPushProvider.m */; };
 		E122A1CC172A8889001F3A14 /* PHPushProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E122A1C7172A8889001F3A14 /* PHPushProvider.m */; };
 		E122A1D6172ACA33001F3A14 /* PHPushProviderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E122A1D5172ACA33001F3A14 /* PHPushProviderTest.m */; };
+		E1284FFB18BE419900325902 /* PHEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF718BE419900325902 /* PHEvent.h */; };
+		E1284FFC18BE419900325902 /* PHEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF718BE419900325902 /* PHEvent.h */; };
+		E1284FFD18BE419900325902 /* PHEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF718BE419900325902 /* PHEvent.h */; };
+		E1284FFE18BE419900325902 /* PHEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF718BE419900325902 /* PHEvent.h */; };
+		E1284FFF18BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500018BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500118BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500218BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500318BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500418BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500518BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500618BE419900325902 /* PHEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FF818BE419900325902 /* PHEvent.m */; };
+		E128500718BE419900325902 /* PHEventRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF918BE419900325902 /* PHEventRequest.h */; };
+		E128500818BE419900325902 /* PHEventRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF918BE419900325902 /* PHEventRequest.h */; };
+		E128500918BE419900325902 /* PHEventRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF918BE419900325902 /* PHEventRequest.h */; };
+		E128500A18BE419900325902 /* PHEventRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E1284FF918BE419900325902 /* PHEventRequest.h */; };
+		E128500B18BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128500C18BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128500D18BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128500E18BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128500F18BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128501018BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128501118BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128501218BE419900325902 /* PHEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1284FFA18BE419900325902 /* PHEventRequest.m */; };
+		E128501418BE67A900325902 /* PHEventTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501318BE67A900325902 /* PHEventTest.m */; };
+		E128501618BF4DD700325902 /* PHEventRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E128501518BF4DD700325902 /* PHEventRequestTest.m */; };
 		E14C1C601806D5BA005997A1 /* PHStoreProductViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */; };
 		E1508EB417293F7A00DDE809 /* PHPushDeliveryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */; };
 		E1508EB717297F2A00DDE809 /* PHPushDeliveryRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E1508EB617297F2A00DDE809 /* PHPushDeliveryRequestTest.m */; };
@@ -592,6 +618,12 @@
 		E122A1C6172A8889001F3A14 /* PHPushProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushProvider.h; sourceTree = "<group>"; };
 		E122A1C7172A8889001F3A14 /* PHPushProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushProvider.m; sourceTree = "<group>"; };
 		E122A1D5172ACA33001F3A14 /* PHPushProviderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushProviderTest.m; sourceTree = "<group>"; };
+		E1284FF718BE419900325902 /* PHEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHEvent.h; sourceTree = "<group>"; };
+		E1284FF818BE419900325902 /* PHEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHEvent.m; sourceTree = "<group>"; };
+		E1284FF918BE419900325902 /* PHEventRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHEventRequest.h; sourceTree = "<group>"; };
+		E1284FFA18BE419900325902 /* PHEventRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHEventRequest.m; sourceTree = "<group>"; };
+		E128501318BE67A900325902 /* PHEventTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHEventTest.m; sourceTree = "<group>"; };
+		E128501518BF4DD700325902 /* PHEventRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHEventRequestTest.m; sourceTree = "<group>"; };
 		E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHStoreProductViewControllerTest.m; sourceTree = "<group>"; };
 		E1508EB217293F7900DDE809 /* PHPushDeliveryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHPushDeliveryRequest.h; sourceTree = "<group>"; };
 		E1508EB317293F7900DDE809 /* PHPushDeliveryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHPushDeliveryRequest.m; sourceTree = "<group>"; };
@@ -922,6 +954,17 @@
 			name = TimeInGame;
 			sourceTree = "<group>";
 		};
+		E1284FF618BE415800325902 /* CustomEvents */ = {
+			isa = PBXGroup;
+			children = (
+				E1284FF718BE419900325902 /* PHEvent.h */,
+				E1284FF818BE419900325902 /* PHEvent.m */,
+				E1284FF918BE419900325902 /* PHEventRequest.h */,
+				E1284FFA18BE419900325902 /* PHEventRequest.m */,
+			);
+			name = CustomEvents;
+			sourceTree = "<group>";
+		};
 		E15FADF2189C0FFC007AEFE6 /* Kontagent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1114,6 +1157,8 @@
 				E1B5975517FAFB4500270C4D /* PHStringUtilTest.m */,
 				E14C1C5F1806D5BA005997A1 /* PHStoreProductViewControllerTest.m */,
 				E15FAEBE189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m */,
+				E128501318BE67A900325902 /* PHEventTest.m */,
+				E128501518BF4DD700325902 /* PHEventRequestTest.m */,
 			);
 			name = "Unit Testing";
 			path = tests;
@@ -1165,6 +1210,7 @@
 				EA03810C13B2630200A31FF7 /* Metadata */,
 				EAB4427913454EB8000DA3E9 /* Content */,
 				EA523D951343EEA60057DEA5 /* Open */,
+				E1284FF618BE415800325902 /* CustomEvents */,
 			);
 			name = "Publisher SDK";
 			sourceTree = "<group>";
@@ -1303,6 +1349,7 @@
 				EA9AB66114A3B2ED00079704 /* PHNotificationView.h in Headers */,
 				EA9AB66214A3B2ED00079704 /* PHNotificationRenderer.h in Headers */,
 				EA9AB66314A3B2ED00079704 /* PHNotificationBadgeRenderer.h in Headers */,
+				E128500718BE419900325902 /* PHEventRequest.h in Headers */,
 				EA9AB66414A3B2ED00079704 /* PHPublisherSubContentRequest.h in Headers */,
 				E15FAEC1189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */,
 				EA9AB66514A3B2ED00079704 /* PHContent.h in Headers */,
@@ -1315,6 +1362,7 @@
 				EA019C8114C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				D108A83015A6553700082388 /* PHTimeInGame.h in Headers */,
 				62348136FA0059F5D4D3E98B /* PHConnectionManager.h in Headers */,
+				E1284FFB18BE419900325902 /* PHEvent.h in Headers */,
 				6234849FF3AC9AB2DFFDCE47 /* PHResourceCacher.h in Headers */,
 				62348D975DDF567698A38F43 /* PHError.h in Headers */,
 			);
@@ -1335,8 +1383,10 @@
 				EAB6A39C14EED62D00EAC692 /* PHStringUtil.h in Headers */,
 				EAB6A39D14EED62D00EAC692 /* PHConstants.h in Headers */,
 				EAB6A39E14EED62D00EAC692 /* PlayHavenSDK.h in Headers */,
+				E128500818BE419900325902 /* PHEventRequest.h in Headers */,
 				EAB6A39F14EED62D00EAC692 /* PHPublisherMetadataRequest.h in Headers */,
 				EAB6A3A014EED62D00EAC692 /* PHNotificationView.h in Headers */,
+				E1284FFC18BE419900325902 /* PHEvent.h in Headers */,
 				EAB6A3A114EED62D00EAC692 /* PHNotificationRenderer.h in Headers */,
 				EAB6A3A214EED62D00EAC692 /* PHNotificationBadgeRenderer.h in Headers */,
 				EAB6A3A314EED62D00EAC692 /* PHPublisherSubContentRequest.h in Headers */,
@@ -1371,6 +1421,7 @@
 				EAF168571534E2DE006B6993 /* PHNotificationView.h in Headers */,
 				EAF168581534E2DE006B6993 /* PHNotificationRenderer.h in Headers */,
 				EAF168591534E2DE006B6993 /* PHNotificationBadgeRenderer.h in Headers */,
+				E128500918BE419900325902 /* PHEventRequest.h in Headers */,
 				EAF1685A1534E2DE006B6993 /* PHPublisherSubContentRequest.h in Headers */,
 				E15FAEC3189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */,
 				EAF1685B1534E2DE006B6993 /* PHContent.h in Headers */,
@@ -1383,6 +1434,7 @@
 				EAF168621534E2DE006B6993 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				D108A83215A6553700082388 /* PHTimeInGame.h in Headers */,
 				6234870D44303641D962A738 /* PHConnectionManager.h in Headers */,
+				E1284FFD18BE419900325902 /* PHEvent.h in Headers */,
 				62348F0961311F5A24348127 /* PHResourceCacher.h in Headers */,
 				623486802624A724CEFE9022 /* PHError.h in Headers */,
 			);
@@ -1393,6 +1445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF168861534E34F006B6993 /* JSON.h in Headers */,
+				E1284FFE18BE419900325902 /* PHEvent.h in Headers */,
 				E15FAEC4189FC6FE007AEFE6 /* PHKontagentDataAccessor+Private.h in Headers */,
 				EAF168871534E34F006B6993 /* SBJsonBase.h in Headers */,
 				EAF168881534E34F006B6993 /* SBJsonParser.h in Headers */,
@@ -1419,6 +1472,7 @@
 				EAF1689D1534E34F006B6993 /* PHPublisherIAPTrackingRequest.h in Headers */,
 				D108A83315A6553700082388 /* PHTimeInGame.h in Headers */,
 				62348AF8A5D39A2868EA48EE /* PHError.h in Headers */,
+				E128500A18BE419900325902 /* PHEventRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1792,6 +1846,7 @@
 				EA019C8314C0FCE5008FBCB1 /* PHPublisherIAPTrackingRequest.m in Sources */,
 				EAFF5E7714F707A400E96C2C /* PublisherIAPTrackingViewController.m in Sources */,
 				EA4AC25F15019C230069D264 /* IAPHelper.m in Sources */,
+				E128500B18BE419900325902 /* PHEventRequest.m in Sources */,
 				EA5FA4771542120600F1517A /* PublisherCancelContentViewController.m in Sources */,
 				EA24FCAD1554510D0074FC13 /* PHNetworkUtil.m in Sources */,
 				D108A83515A6553700082388 /* PHTimeInGame.m in Sources */,
@@ -1804,6 +1859,7 @@
 				62348D3EEA9F789AFB6A664A /* NSData+Base64.m in Sources */,
 				E17A203D1718DC4600EF6C14 /* PushNotificationRegistrationViewController.m in Sources */,
 				E1C8F4EF171CABD900F64E12 /* PlayHavenAppIdentity.m in Sources */,
+				E1284FFF18BE419900325902 /* PHEvent.m in Sources */,
 				E1C8F4FA171CC94400F64E12 /* PHPushRequest.m in Sources */,
 				E1508EB417293F7A00DDE809 /* PHPushDeliveryRequest.m in Sources */,
 				E122A1C9172A8889001F3A14 /* PHPushProvider.m in Sources */,
@@ -1825,6 +1881,7 @@
 				EAE5598614F866CA0023BBEF /* PHPublisherIAPTrackingRequestTest.m in Sources */,
 				EA7CF59D156C365C0095572E /* PlayHavenTest.m in Sources */,
 				E15FAEC7189FE943007AEFE6 /* PHKontagentDataAccessor+UnitTesting.m in Sources */,
+				E128501618BF4DD700325902 /* PHEventRequestTest.m in Sources */,
 				D108A83E15A6B68600082388 /* PHTimeInGameTest.m in Sources */,
 				E1FADDFB180D85440095202B /* SenTestCase+PHAPIRequestSupport.m in Sources */,
 				EA98C12D16640E4500B6AA8C /* PHNetworkUtilTest.m in Sources */,
@@ -1836,6 +1893,7 @@
 				E15FAEBF189FC06E007AEFE6 /* PHKontagentDataAccessorTest.m in Sources */,
 				E122A1C8172A8889001F3A14 /* PHPushProvider.m in Sources */,
 				E1CEC62E18C0EE6900D4BE56 /* NSString+QueryComponentsTest.m in Sources */,
+				E128501418BE67A900325902 /* PHEventTest.m in Sources */,
 				62348E9579DDAD6E0F900501 /* PHError.m in Sources */,
 				E122A1D6172ACA33001F3A14 /* PHPushProviderTest.m in Sources */,
 			);
@@ -1859,6 +1917,7 @@
 				EA62D6681579925300B31E62 /* PHURLLoader.m in Sources */,
 				EA62D6691579925300B31E62 /* PHAPIRequest.m in Sources */,
 				EA62D66A1579925300B31E62 /* PHStringUtil.m in Sources */,
+				E128500018BE419900325902 /* PHEvent.m in Sources */,
 				EA62D66B1579925300B31E62 /* PHContent.m in Sources */,
 				EA62D66C1579925300B31E62 /* PHContentView.m in Sources */,
 				EA62D66D1579925300B31E62 /* PHPublisherContentRequest.m in Sources */,
@@ -1872,6 +1931,7 @@
 				EA62D6741579925300B31E62 /* PHNotificationRenderer.m in Sources */,
 				EA62D6751579925300B31E62 /* PHNotificationBadgeRenderer.m in Sources */,
 				EA62D6761579925300B31E62 /* PHReward.m in Sources */,
+				E128500C18BE419900325902 /* PHEventRequest.m in Sources */,
 				EA62D6771579925300B31E62 /* PHConstants.m in Sources */,
 				EA62D6781579925300B31E62 /* PHPublisherIAPTrackingRequest.m in Sources */,
 				EA62D6791579925300B31E62 /* PublisherIAPTrackingViewController.m in Sources */,
@@ -1917,6 +1977,7 @@
 				EA86C7CB14D9E75600CB1551 /* PHURLLoader.m in Sources */,
 				EA86C7CC14D9E75600CB1551 /* PHAPIRequest.m in Sources */,
 				EA86C7CD14D9E75600CB1551 /* PHStringUtil.m in Sources */,
+				E128500D18BE419900325902 /* PHEventRequest.m in Sources */,
 				EA86C7CE14D9E75600CB1551 /* PHContent.m in Sources */,
 				EA86C7CF14D9E75600CB1551 /* PHContentView.m in Sources */,
 				EA86C7D014D9E75600CB1551 /* PHPublisherContentRequest.m in Sources */,
@@ -1949,6 +2010,7 @@
 				E1C8F4FC171CC94400F64E12 /* PHPushRequest.m in Sources */,
 				E1508EBC172987D600DDE809 /* PHPushDeliveryRequest.m in Sources */,
 				E122A1CB172A8889001F3A14 /* PHPushProvider.m in Sources */,
+				E128500118BE419900325902 /* PHEvent.m in Sources */,
 				62348A973FA36C327E5245A9 /* PHError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1963,6 +2025,7 @@
 				D1BD481C14C0EDC500EE8A5A /* PHPurchase.m in Sources */,
 				EA9AB63114A3B0D500079704 /* NSObject+QueryComponents.m in Sources */,
 				EA9AB63314A3B0D500079704 /* UIDevice+HardwareString.m in Sources */,
+				E128500318BE419900325902 /* PHEvent.m in Sources */,
 				EA9AB63514A3B0D500079704 /* PHURLLoader.m in Sources */,
 				EA9AB63714A3B0D500079704 /* PHAPIRequest.m in Sources */,
 				E15FAEBA189FB72E007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
@@ -1974,6 +2037,7 @@
 				EA9AB64414A3B0D500079704 /* PHNotificationBadgeRenderer.m in Sources */,
 				EA9AB64614A3B0D500079704 /* PHPublisherSubContentRequest.m in Sources */,
 				EA9AB64814A3B0D500079704 /* PHContent.m in Sources */,
+				E128500F18BE419900325902 /* PHEventRequest.m in Sources */,
 				EA9AB64A14A3B0D500079704 /* PHContentView.m in Sources */,
 				EA9AB64C14A3B0D500079704 /* PHPublisherContentRequest.m in Sources */,
 				EA9AB65014A3B0D500079704 /* PHReward.m in Sources */,
@@ -1998,6 +2062,7 @@
 				EAB6A37F14EED62D00EAC692 /* SBJsonWriter.m in Sources */,
 				EAB6A38014EED62D00EAC692 /* NSObject+QueryComponents.m in Sources */,
 				EAB6A38114EED62D00EAC692 /* UIDevice+HardwareString.m in Sources */,
+				E128500418BE419900325902 /* PHEvent.m in Sources */,
 				EAB6A38214EED62D00EAC692 /* PHURLLoader.m in Sources */,
 				EAB6A38314EED62D00EAC692 /* PHAPIRequest.m in Sources */,
 				E15FAEBB189FB72F007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
@@ -2009,6 +2074,7 @@
 				EAB6A38914EED62D00EAC692 /* PHNotificationBadgeRenderer.m in Sources */,
 				EAB6A38A14EED62D00EAC692 /* PHPublisherSubContentRequest.m in Sources */,
 				EAB6A38B14EED62D00EAC692 /* PHContent.m in Sources */,
+				E128501018BE419900325902 /* PHEventRequest.m in Sources */,
 				EAB6A38C14EED62D00EAC692 /* PHContentView.m in Sources */,
 				EAB6A38D14EED62D00EAC692 /* PHPublisherContentRequest.m in Sources */,
 				EAB6A38E14EED62D00EAC692 /* PHReward.m in Sources */,
@@ -2033,6 +2099,7 @@
 				EAF168391534E2DE006B6993 /* PHPurchase.m in Sources */,
 				EAF1683A1534E2DE006B6993 /* NSObject+QueryComponents.m in Sources */,
 				EAF1683B1534E2DE006B6993 /* UIDevice+HardwareString.m in Sources */,
+				E128500518BE419900325902 /* PHEvent.m in Sources */,
 				EAF1683C1534E2DE006B6993 /* PHURLLoader.m in Sources */,
 				EAF1683D1534E2DE006B6993 /* PHAPIRequest.m in Sources */,
 				E15FAEBC189FB730007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
@@ -2044,6 +2111,7 @@
 				EAF168431534E2DE006B6993 /* PHNotificationBadgeRenderer.m in Sources */,
 				EAF168441534E2DE006B6993 /* PHPublisherSubContentRequest.m in Sources */,
 				EAF168451534E2DE006B6993 /* PHContent.m in Sources */,
+				E128501118BE419900325902 /* PHEventRequest.m in Sources */,
 				EAF168461534E2DE006B6993 /* PHContentView.m in Sources */,
 				EAF168471534E2DE006B6993 /* PHPublisherContentRequest.m in Sources */,
 				EAF168481534E2DE006B6993 /* PHReward.m in Sources */,
@@ -2072,9 +2140,11 @@
 				EAF168741534E34F006B6993 /* PHAPIRequest.m in Sources */,
 				EAF168751534E34F006B6993 /* PHStringUtil.m in Sources */,
 				EAF168761534E34F006B6993 /* PHConstants.m in Sources */,
+				E128500618BE419900325902 /* PHEvent.m in Sources */,
 				EAF168771534E34F006B6993 /* PHPublisherMetadataRequest.m in Sources */,
 				EAF168781534E34F006B6993 /* PHNotificationView.m in Sources */,
 				EAF168791534E34F006B6993 /* PHNotificationRenderer.m in Sources */,
+				E128501218BE419900325902 /* PHEventRequest.m in Sources */,
 				EAF1687A1534E34F006B6993 /* PHNotificationBadgeRenderer.m in Sources */,
 				EAF1687B1534E34F006B6993 /* PHPublisherSubContentRequest.m in Sources */,
 				EAF1687C1534E34F006B6993 /* PHContent.m in Sources */,
@@ -2103,6 +2173,7 @@
 				EAF168AC1534E59C006B6993 /* SBJsonBase.m in Sources */,
 				EAF168AD1534E59C006B6993 /* SBJsonParser.m in Sources */,
 				EAF168AE1534E59C006B6993 /* SBJsonWriter.m in Sources */,
+				E128500218BE419900325902 /* PHEvent.m in Sources */,
 				E15FAEB9189FB72D007AEFE6 /* PHKontagentDataAccessor.m in Sources */,
 				EAF168AF1534E59C006B6993 /* NSObject+QueryComponents.m in Sources */,
 				EAF168B01534E59C006B6993 /* UIDevice+HardwareString.m in Sources */,
@@ -2120,6 +2191,7 @@
 				EAF168BC1534E59C006B6993 /* PHNotificationView.m in Sources */,
 				EAF168BD1534E59C006B6993 /* PHNotificationRenderer.m in Sources */,
 				EAF168BE1534E59C006B6993 /* PHNotificationBadgeRenderer.m in Sources */,
+				E128500E18BE419900325902 /* PHEventRequest.m in Sources */,
 				EAF168BF1534E59C006B6993 /* PHReward.m in Sources */,
 				EAF168C01534E59C006B6993 /* PHConstants.m in Sources */,
 				EAF168C11534E59C006B6993 /* PHPublisherIAPTrackingRequest.m in Sources */,
