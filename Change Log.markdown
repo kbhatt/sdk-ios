@@ -3,8 +3,8 @@
 
 1.22.0
 ======
-* Added support for a unique device identifier that is also used by Kontagent SDK. The primary goal of the change is to associate Playhaven and Kontagent SDK.
-* Added a feature for game analytics providing ability to send custom events to Upsight servers.
+* Added a new unique identifier for analytics, which is compatible with the (formerly) Kontagent SDK.
+* Added the ability to send custom events for analytics.
 * Removed open-source implementation of on-disk cache known as SDURLCache, which reportedly caused crashes for some publishers.
 * Added ability to track when in-app store is launched by extending interface of PHStoreProductViewController class.
 * Fixed bugs including the ones reported by publishers.
