@@ -1,6 +1,16 @@
 # Change Log
 ============
 
+1.22.0
+======
+* Added a new unique identifier for analytics, which is compatible with the (formerly) Kontagent SDK.
+* Added the ability to send custom events for analytics.
+* Removed open-source implementation of on-disk cache known as SDURLCache, which reportedly caused crashes for some publishers.
+* Added ability to track when in-app store is launched by extending interface of PHStoreProductViewController class.
+* Fixed bugs including the ones reported by publishers.
+* Fixed project warnings.
+* Updated Example app providing diagnostic facilities and demonstrating the use of SDK.
+
 1.21.1
 ======
 * Fixed issue with application freeze on iOS 7 that happened for push notifications linked with URI.
@@ -11,7 +21,7 @@
 * Removed ODIN1 and GID identifiers.
 * Fixed new warnings reported by Xcode 5.
 * IDFV parameter is now sent on all requests.
-* Updated SDK requests to sent user opt-out flag to the server, which is used to fulfil COPPA and TRUSTe compliances.
+* Updated SDK requests to sent user opt-out flag to the server, which is used to fulfill COPPA and TRUSTe compliances.
 * Added support for URLs with custom schemas triggered from announcements.
 
 1.20.0
