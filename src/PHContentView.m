@@ -24,7 +24,7 @@
 #import "NSObject+QueryComponents.h"
 #import "JSON.h"
 #import "PHConstants.h"
-#import "PHStoreProductViewControllerDelegate.h"
+#import "PHStoreProductViewController.h"
 #import "PHConnectionManager.h"
 #import "PHResourceCacher.h"
 
@@ -481,7 +481,7 @@ static NSMutableSet *allContentViews = nil;
     } else {
         [PHResourceCacher pause];
 
-        PH_LOG(@"Loading template from network or cahce: %@", self.content.URL);
+        PH_LOG(@"Loading template from network or cache: %@", self.content.URL);
         [_webView loadRequest:request];
     }
 }
@@ -693,7 +693,7 @@ static NSMutableSet *allContentViews = nil;
     NSDictionary *queryComponents = [contextData valueForKey:@"queryComponents"];
     BOOL shouldUseInternal = [[queryComponents valueForKey:@"in_app_store_enabled"] boolValue] && ([SKStoreProductViewController class] != nil);
     if (shouldUseInternal) {
-        [[PHStoreProductViewControllerDelegate getDelegate] showProductId:[queryComponents valueForKey:@"application_id"]];
+        [[PHStoreProductViewController sharedInstance] showProductId:[queryComponents valueForKey:@"application_id"]];
     }
 #endif
 

@@ -28,8 +28,8 @@
 #import "IAPViewController.h"
 #import "IDViewController.h"
 #import "PushNotificationRegistrationViewController.h"
-#import "SDURLCache.h"
 #import "PlayHavenAppIdentity.h"
+#import "EventsViewController.h"
 
 static NSString *kPHClassNameKey = @"ClassName";
 static NSString *kPHControllerNameKey = @"ControllerName";
@@ -42,6 +42,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 - (void)saveTokenAndSecretToDefaults;
 @property (nonatomic, retain) UIButton *clearCacheButton;
 @property (nonatomic, readonly) NSArray *controllersInformation;
+@property (nonatomic, retain) PHPublisherContentRequest *delayedRequest;
 @end
 
 @implementation RootViewController
@@ -65,6 +66,9 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 
 - (void)dealloc
 {
+    [PHPushProvider sharedInstance].delegate = nil;
+
+    [_delayedRequest release];
     [_controllersInformation release];
     [tokenField release];
     [secretField release];
@@ -123,41 +127,26 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 
 - (void)updateCacheButton
 {
-    if ([[NSURLCache sharedURLCache] isKindOfClass:[PH_SDURLCACHE_CLASS class]]) {
-        NSUInteger currentCacheUsage =
-                           [[NSURLCache sharedURLCache] currentDiskUsage] +
-                           [[NSURLCache sharedURLCache] currentMemoryUsage];
+    NSUInteger currentCacheUsage =
+                       [[NSURLCache sharedURLCache] currentDiskUsage] +
+                       [[NSURLCache sharedURLCache] currentMemoryUsage];
 
-        if (currentCacheUsage) {
-            CGFloat f_size = [[NSNumber numberWithUnsignedInt:currentCacheUsage] floatValue] / 1024;
+    if (currentCacheUsage) {
+        CGFloat f_size = [[NSNumber numberWithUnsignedInteger:currentCacheUsage] floatValue] / 1024;
 
-            NSString *s_size;
+        NSString *s_size;
 
-            if (f_size < 1024) s_size = [NSString stringWithFormat:@"(%.2f Kb)", f_size];
-            else               s_size = [NSString stringWithFormat:@"(%.2f Mb)", f_size / 1024];
+        if (f_size < 1024) s_size = [NSString stringWithFormat:@"(%.2f Kb)", f_size];
+        else               s_size = [NSString stringWithFormat:@"(%.2f Mb)", f_size / 1024];
 
-            [clearCacheButton setTitle:[NSString stringWithFormat:@"Clear Cache %@", s_size]
-                              forState:UIControlStateNormal];
-            [clearCacheButton setEnabled:YES];
-        } else {
-            [clearCacheButton setEnabled:NO];
-        }
-
-        [clearCacheButton addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
+        [clearCacheButton setTitle:[NSString stringWithFormat:@"Clear Cache %@", s_size]
+                          forState:UIControlStateNormal];
+        [clearCacheButton setEnabled:YES];
     } else {
-        [clearCacheButton setTitle:@"Set Cache" forState:UIControlStateNormal];
-        [clearCacheButton addTarget:self action:@selector(setCache:) forControlEvents:UIControlEventTouchUpInside];
+        [clearCacheButton setEnabled:NO];
     }
-}
 
-- (void)setCache:(id)sender
-{
-    PH_SDURLCACHE_CLASS *urlCache = [[[PH_SDURLCACHE_CLASS alloc] initWithMemoryCapacity:PH_MAX_SIZE_MEMORY_CACHE
-                                                                            diskCapacity:PH_MAX_SIZE_FILESYSTEM_CACHE
-                                                                                diskPath:[PH_SDURLCACHE_CLASS defaultCachePath]] autorelease];
-    [NSURLCache setSharedURLCache:urlCache];
-
-    [self updateCacheButton];
+    [clearCacheButton addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)clearCache:(id)sender
@@ -171,6 +160,10 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
     [super viewDidLoad];
     self.title = @"PlayHaven";
 
+    NSDictionary *theAppInfo = [[NSBundle mainBundle] infoDictionary];
+    self.applicationVersion.text = [NSString stringWithFormat:@"App Version %@; SDK %@",
+                theAppInfo[(NSString *)kCFBundleVersionKey], PH_SDK_VERSION];
+
     UIBarButtonItem *toggleButton = [[UIBarButtonItem alloc] initWithTitle:@"Toggle"
                                                                      style:UIBarButtonItemStyleBordered
                                                                     target:self
@@ -179,6 +172,8 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
     [toggleButton release];
 
     ((UITableView *)self.view).tableFooterView = [self viewForTableFooter];
+
+    [PHPushProvider sharedInstance].delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -243,6 +238,11 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self navigateToControllerAtIndexPath:indexPath];
+}
+
+- (void)navigateToControllerAtIndexPath:(NSIndexPath *)indexPath
+{
     if ([self isTokenAndSecretFilledIn]) {
         [self saveTokenAndSecretToDefaults];
 
@@ -292,10 +292,7 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
                     kPHControllerDescriptionKey : @"/publisher/open/",
                     kPHAccessibilityLabelKey : @"open"},
 
-                    @{kPHClassNameKey : NSStringFromClass([PublisherContentViewController class]),
-                    kPHControllerNameKey : @"Content",
-                    kPHControllerDescriptionKey : @"/publisher/content/",
-                    kPHAccessibilityLabelKey : @"content"},
+                    [self contentCellDescription],
 
                     @{kPHClassNameKey : NSStringFromClass(
                     [PushNotificationRegistrationViewController class]),
@@ -303,8 +300,13 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
                     kPHControllerDescriptionKey : @"/publisher/push/"},
 
                     @{kPHClassNameKey : NSStringFromClass([PublisherIAPTrackingViewController class]),
-                     kPHControllerNameKey : @"IAP Tracking",
+                    kPHControllerNameKey : @"IAP Tracking",
                     kPHControllerDescriptionKey : @""},
+
+                    @{kPHClassNameKey : NSStringFromClass([EventsViewController class]),
+                    kPHControllerNameKey : @"Custom Events",
+                    kPHControllerDescriptionKey : @"/publisher/event/",
+                    kPHAccessibilityLabelKey : @"events"},
 
                     @{kPHClassNameKey : NSStringFromClass([PublisherCancelContentViewController class]),
                     kPHControllerNameKey : @"Cancelled Content",
@@ -329,4 +331,52 @@ static NSString *kPHAccessibilityLabelKey = @"AccessibilityLabel";
     return _controllersInformation;
 }
 
+- (NSDictionary *)contentCellDescription
+{
+    return @{kPHClassNameKey : NSStringFromClass([PublisherContentViewController class]),
+                kPHControllerNameKey : @"Content",
+                kPHControllerDescriptionKey : @"/publisher/content/",
+                kPHAccessibilityLabelKey : @"content"};
+}
+
+#pragma mark - PHPushProviderDelegate
+
+- (BOOL)pushProvider:(PHPushProvider *)aProvider
+            shouldSendRequest:(PHPublisherContentRequest *)aRequest
+{
+    if ([[self.navigationController topViewController]
+                        isMemberOfClass:[PublisherContentViewController class]])
+    {
+        [(PublisherContentViewController *)[self.navigationController topViewController]
+                        sendRequest:aRequest];
+    }
+    else
+    {
+        [self.navigationController popToViewController:self animated:NO];
+        self.navigationController.delegate = self;
+
+        self.delayedRequest = aRequest;
+
+        NSIndexPath *theContentCellIndexPath =
+                            [NSIndexPath indexPathForRow:[self.controllersInformation indexOfObject:[self contentCellDescription]]
+                                               inSection:0];
+        [self navigateToControllerAtIndexPath:theContentCellIndexPath];
+    }
+
+    return NO;
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)aNavigationController
+            didShowViewController:(UIViewController *)aViewController animated:(BOOL)anAnimated
+{
+    if ([aViewController isMemberOfClass:[PublisherContentViewController class]])
+    {
+        [(PublisherContentViewController *)aViewController sendRequest:self.delayedRequest];
+
+        self.delayedRequest = nil;
+        self.navigationController.delegate = nil;
+    }
+}
 @end

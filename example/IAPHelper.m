@@ -30,7 +30,7 @@
 @implementation NSObject (hash)
 - (NSString *)hashString
 {
-    return [NSString stringWithFormat:@"%d", [self hash]];
+    return [NSString stringWithFormat:@"%lu", (unsigned long)[self hash]];
 }
 @end
 
@@ -54,12 +54,15 @@
 }
 @end
 
-@interface IAPHelper (Private)
+@interface IAPHelper ()
+@property(nonatomic, readonly) NSMutableDictionary *requestedProducts;
+
 - (void)reportPurchase:(PHPurchase *)purchase withResolution:(PHPurchaseResolutionType)resolution receiptData:(NSData *)receiptData;
 - (void)reportPurchase:(PHPurchase *)purchase withError:(NSError *)error receiptData:(NSData *)receiptData;
 @end
 
 @implementation IAPHelper
+@synthesize requestedProducts = _requestedProducts;
 
 + (IAPHelper *)sharedIAPHelper
 {
@@ -74,6 +77,7 @@
 - (void)dealloc
 {
     // Should never be called, but just here for clarity really.
+    [_requestedProducts release];
     [_pendingPurchases release], _pendingPurchases = nil;
     [_pendingRequests release], _pendingRequests = nil;
     [super dealloc];
@@ -94,6 +98,14 @@
         _pendingRequests = [[NSMutableDictionary alloc] init];
     }
     return _pendingRequests;
+}
+
+- (NSMutableDictionary *)requestedProducts
+{
+    if (_requestedProducts == nil) {
+        _requestedProducts = [[NSMutableDictionary alloc] init];
+    }
+    return _requestedProducts;
 }
 
 - (void)startPurchase:(PHPurchase *)purchase
@@ -121,10 +133,10 @@
     NSArray    *products = response.products;
     SKProduct  *product  = [products count] == 1 ? [products objectAtIndex:0] : nil;
 
-    if ([purchase.productIdentifier isEqualToString:product.productIdentifier]) {
+    if (nil != product.productIdentifier && [purchase.productIdentifier isEqualToString:product.productIdentifier]) {
         // Ask the user to choose to purchase or not purchase an item
-        NSString    *message = [NSString stringWithFormat:@"Do you want to buy %d %@ for %@?",
-                                              purchase.quantity, product.localizedTitle, product.localizedPrice];
+        NSString *message = [NSString stringWithFormat:@"Do you want to buy %ld %@ for %@?",
+                    (long)purchase.quantity, product.localizedTitle, product.localizedPrice];
 
         UIAlertView *purchaseAlert = [[UIAlertView alloc] initWithTitle:@"In-Game Store"
                                                                 message:message
@@ -134,6 +146,7 @@
 
         [purchaseAlert show];
         [self.pendingPurchases setObject:purchase forKey:[purchaseAlert hashString]];
+        self.requestedProducts[purchase.productIdentifier] = product;
 
         [purchaseAlert release];
     } else {
@@ -156,11 +169,17 @@
         [self reportPurchase:purchase withResolution:PHPurchaseResolutionCancel receiptData:nil];
     } else if (buttonIndex == 1) {
         //start an app store request
-        SKPayment *payment = [SKPayment paymentWithProductIdentifier:purchase.productIdentifier];
+        SKPayment *payment = [SKPayment paymentWithProduct:
+                    self.requestedProducts[purchase.productIdentifier]];
         [[SKPaymentQueue defaultQueue] addPayment:payment];
         [self.pendingRequests setValue:purchase forKey:[payment hashString]];
     }
 
+    if (nil != purchase.productIdentifier)
+    {
+        [self.requestedProducts removeObjectForKey:purchase.productIdentifier];
+    }
+    
     // Either way, clean up the stored alert view
     [self.pendingPurchases removeObjectForKey:key];
 }

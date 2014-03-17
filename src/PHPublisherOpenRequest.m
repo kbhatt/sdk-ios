@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Copyright 2013 Medium Entertainment, Inc.
+ Copyright 2013-2014 Medium Entertainment, Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -21,12 +21,17 @@
 
 #import "PHPublisherOpenRequest.h"
 #import "PHConstants.h"
-#import "SDURLCache.h"
 #import "PHTimeInGame.h"
 #import "PHNetworkUtil.h"
 #import "PHResourceCacher.h"
+#import "PHAPIRequest+Private.h"
+#import "PHKontagentDataAccessor.h"
 
 static NSString *const kPHTimeZoneKey = @"tz";
+static NSString *const kPHKontagentSenderIDs = @"ktsids";
+
+static NSString *const kPHResponseKTAPIKey = @"ktapi";
+static NSString *const kPHResponseKTSIDKey = @"ktsid";
 
 @interface PHAPIRequest (Private)
 - (void)finish;
@@ -34,36 +39,42 @@ static NSString *const kPHTimeZoneKey = @"tz";
 @end
 
 @implementation PHPublisherOpenRequest
-//@synthesize customUDID = _customUDID;
-
-+ (void)initialize
-{
-    if (self == [PHPublisherOpenRequest class]) {
-        // Initializes pre-fetching and webview caching
-        PH_SDURLCACHE_CLASS *urlCache = [[PH_SDURLCACHE_CLASS alloc] initWithMemoryCapacity:PH_MAX_SIZE_MEMORY_CACHE
-                                                                               diskCapacity:PH_MAX_SIZE_FILESYSTEM_CACHE
-                                                                                   diskPath:[PH_SDURLCACHE_CLASS defaultCachePath]];
-        [NSURLCache setSharedURLCache:urlCache];
-        [urlCache release];
-    }
-}
 
 - (NSDictionary *)additionalParameters
 {
     NSMutableDictionary *additionalParameters = [NSMutableDictionary dictionary];
 
-    [additionalParameters setValue:[NSNumber numberWithInt:[[PHTimeInGame getInstance] getCountSessions]]
+    [additionalParameters setValue:[NSNumber numberWithInteger:[[PHTimeInGame getInstance] getCountSessions]]
                             forKey:@"scount"];
     [additionalParameters setValue:[NSNumber numberWithInt:(int)floor([[PHTimeInGame getInstance] getSumSessionDuration])]
                             forKey:@"ssum"];
     [additionalParameters setObject:[self timeZoneOffsetFromGMTAsString] forKey:kPHTimeZoneKey];
+    
+    NSString *theKontagentSenderID = [[PHKontagentDataAccessor sharedAccessor] primarySenderID];
 
+    // Send all API key and Sender ID pairs to the server if primary sender ID is not defined yet.
+    if (nil == theKontagentSenderID)
+    {
+        NSString *theAPIKeySIDs = [self parameterValueWithAPIKeySIDPairs:
+                    [[PHKontagentDataAccessor sharedAccessor] allAPIKeySenderIDPairs]];
+
+        if (nil != theAPIKeySIDs)
+        {
+            additionalParameters[kPHKontagentSenderIDs] = theAPIKeySIDs;
+        }
+    }
+    
     return  additionalParameters;
 }
 
 - (NSString *)urlPath
 {
     return PH_URL(/v3/publisher/open/);
+}
+
+- (PHRequestHTTPMethod)HTTPMethod
+{
+    return PHRequestHTTPPost;
 }
 
 #pragma mark - PHAPIRequest response delegate
@@ -87,6 +98,9 @@ static NSString *const kPHTimeZoneKey = @"tz";
     if (!!session) {
         [PHAPIRequest setSession:session];
     }
+    
+    [self storePrimarySenderID:responseData[kPHResponseKTSIDKey] forAPIKey:
+                responseData[kPHResponseKTAPIKey]];
 
     if ([self.delegate respondsToSelector:@selector(request:didSucceedWithResponse:)]) {
         [self.delegate performSelector:@selector(request:didSucceedWithResponse:) withObject:self withObject:responseData];
@@ -109,8 +123,47 @@ static NSString *const kPHTimeZoneKey = @"tz";
 
 - (NSString *)timeZoneOffsetFromGMTAsString
 {
-    return [NSString stringWithFormat:@"%d.%d", [[NSTimeZone systemTimeZone] secondsFromGMT] / 3600,
-                ([[NSTimeZone systemTimeZone] secondsFromGMT] % 3600) / 60];
+    return [NSString stringWithFormat:@"%ld.%ld", (long)([[NSTimeZone systemTimeZone] secondsFromGMT]
+                / 3600), (long)(([[NSTimeZone systemTimeZone] secondsFromGMT] % 3600) / 60)];
+}
+
+#pragma mark -
+
+- (NSString *)parameterValueWithAPIKeySIDPairs:(NSDictionary *)aDictionary
+{
+    if (0 == [aDictionary count])
+    {
+        return nil;
+    }
+    
+    NSMutableArray *theFlatPairs = [NSMutableArray arrayWithCapacity:[aDictionary count]];
+    
+    for (NSString *theKey in [aDictionary allKeys])
+    {
+        NSString *theAPIKeySIDEntry = [NSString stringWithFormat:@"{\"api\":\"%@\",\"sid\":\"%@\"}",
+                    theKey, aDictionary[theKey]];
+        [theFlatPairs addObject:theAPIKeySIDEntry];
+    }
+
+    return [NSString stringWithFormat:@"[%@]", [theFlatPairs componentsJoinedByString:@","]];
+}
+
+- (void)storePrimarySenderID:(NSString *)aSenderID forAPIKey:(NSString *)anAPIKey
+{
+    if (nil == aSenderID && nil == anAPIKey)
+    {
+        return;
+    }
+    
+    if ((0 == [aSenderID length] && 0 < [anAPIKey length]) ||
+                (0 < [aSenderID length] && 0 == [anAPIKey length]))
+    {
+        PH_LOG(@"ERROR: One of the parameters is incorrect (Sender ID: %@; KT API key: %@)!",
+                    aSenderID, anAPIKey);
+        return;
+    }
+    
+    [[PHKontagentDataAccessor sharedAccessor] storePrimarySenderID:aSenderID forAPIKey:anAPIKey];
 }
 
 @end

@@ -23,7 +23,9 @@
 #import "ExampleViewController.h"
 #import "PlayHavenSDK.h"
 
-@interface PublisherContentViewController : ExampleViewController <PHPublisherContentRequestDelegate> {
+@interface PublisherContentViewController : ExampleViewController
+            <PHPublisherContentRequestDelegate, PHStoreProductViewControllerDelegate>
+{
     PHNotificationView *_notificationView;
     UITextField        *_placementField;
 
@@ -33,4 +35,6 @@
 @property (nonatomic, retain) IBOutlet UISwitch    *showsOverlaySwitch;
 @property (nonatomic, retain) IBOutlet UISwitch    *animateSwitch;
 @property (nonatomic, retain) PHPublisherContentRequest *request;
+
+- (void)sendRequest:(PHPublisherContentRequest *)aRequest;
 @end

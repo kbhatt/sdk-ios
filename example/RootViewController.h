@@ -20,8 +20,11 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #import <UIKit/UIKit.h>
+#import "PlayHavenSDK.h"
 
-@interface RootViewController : UITableViewController {
+@interface RootViewController : UITableViewController <PHPushProviderDelegate,
+                                                       UINavigationControllerDelegate>
+{
     UITextField *tokenField;
     UITextField *secretField;
 }
@@ -29,6 +32,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *secretField;
 @property (retain, nonatomic) IBOutlet UISwitch    *optOutStatusSlider;
 @property (retain, nonatomic) IBOutlet UILabel     *serviceURLField;
+@property (retain, nonatomic) IBOutlet UILabel     *applicationVersion;
 
 - (void)touchedToggleStatusBar:(id)sender;
 - (IBAction)touchedOptOutStatusSlider:(id)sender;

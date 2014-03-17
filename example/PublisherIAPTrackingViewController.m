@@ -38,19 +38,19 @@
      */
     PHPublisherIAPTrackingRequest *request = [PHPublisherIAPTrackingRequest requestForApp:self.token
                                                                                    secret:self.secret];
-    request.delegate = self;
+    request.delegate    = self;
 
-    request.product  = ([self.productField.text isEqualToString:@""]) ?
-                                @"com.playhaven.example.candy" :
-                                self.productField.text;
-    request.quantity = ([self.quantityField.text isEqualToString:@""]) ?
-                                1 : [self.quantityField.text integerValue];
+    request.product     = (0 < [self.productField.text length]) ?
+                                    self.productField.text :
+                                    @"com.playhaven.example.candy";
+    request.quantity    = (0 < [self.quantityField.text length]) ?
+                                    [self.quantityField.text integerValue] : 1;
 
-    request.receiptData = ([self.receiptField.text isEqualToString:@""]) ?
-                                nil : [NSData decodeBase64WithString:self.receiptField.text];
+    request.receiptData = (0 < [self.receiptField.text length]) ?
+                                    [NSData decodeBase64WithString:self.receiptField.text] : nil;
 
-    request.resolution = (PHPurchaseResolutionType)[self.resolutionSegment selectedSegmentIndex];
-    request.error      = PHCreateError(PHIAPTrackingSimulatorErrorType);
+    request.resolution  = (PHPurchaseResolutionType)[self.resolutionSegment selectedSegmentIndex];
+    request.error       = PHCreateError(PHIAPTrackingSimulatorErrorType);
     [request send];
 
     [self.productField resignFirstResponder];

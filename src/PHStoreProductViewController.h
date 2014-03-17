@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 
- PHStoreProductViewControllerDelegate.h
+ PHStoreProductViewController.h
  playhaven-sdk-ios
 
  Created by Jesus Fernandez on 9/18/12.
@@ -23,8 +23,7 @@
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 
-@class SKStoreProductViewController;
-@protocol SKStoreProductViewControllerDelegate;
+@protocol PHStoreProductViewControllerDelegate;
 
 /**
  * @internal
@@ -33,14 +32,16 @@
  * application's UIWindow subviews, and uses it to display an
  * SKStoreProductViewController for a given iTunes product id.
  **/
-@interface PHStoreProductViewControllerDelegate : NSObject <SKStoreProductViewControllerDelegate> {
+@interface PHStoreProductViewController : NSObject <SKStoreProductViewControllerDelegate> {
     UIViewController *_visibleViewController;
 }
+
+@property (nonatomic, assign) id<PHStoreProductViewControllerDelegate> delegate;
 
 /**
  * Singleton accessor
  **/
-+ (PHStoreProductViewControllerDelegate *)getDelegate;
++ (id)sharedInstance;
 
 /**
  * Present an SKStoreProductViewController for the iTunes product with id \c productId
@@ -53,4 +54,34 @@
  **/
 - (BOOL)showProductId:(NSString *)productId;
 @end
+
+@protocol PHStoreProductViewControllerDelegate <NSObject>
+@optional
+/**
+ * Informs the delegate that in-app store is about to be shown. This call might be interpreted by
+ * the delegate as a signal to pause a game.
+ *
+ * @param aController
+ *  A controller sending the message.
+ *
+ * @param aProductID
+ *  The ID of the product that is to be presented in the store.
+ **/
+- (void)storeProductViewController:(PHStoreProductViewController *)aController
+            willPresentProductWithID:(NSString *)aProductID;
+
+/**
+ * Informs the delegate that in-app store is about to be shown. This call might be interpreted by
+ * the delegate as a signal to resume a game.
+ *
+ * @param aController
+ *  A controller sending the message.
+ *
+ * @param aProductID
+ *  The ID of the product that is presented in the store.
+ **/
+- (void)storeProductViewController:(PHStoreProductViewController *)aController
+            didDismissProductWithID:(NSString *)aProductID;
+@end
+
 #endif

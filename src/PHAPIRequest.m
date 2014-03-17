@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Copyright 2013 Medium Entertainment, Inc.
+ Copyright 2013-2014 Medium Entertainment, Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -30,27 +30,48 @@
 #import "PHNetworkUtil.h"
 #import "PHConstants.h"
 #import "PHAPIRequest+Private.h"
+#import "PHKontagentDataAccessor.h"
 
 #ifdef PH_USE_NETWORK_FIXTURES
 #import "WWURLConnection.h"
 #endif
 
-static NSString *sPlayHavenSession;
+typedef NS_ENUM(NSUInteger, PHRequestStatus)
+{
+    kPHRequestStatusInitialized = 0,
+    kPHRequestStatusInProgress,
+    kPHRequestStatusSucceeded,
+    kPHRequestStatusFailed
+};
+
+static NSString *sPlayHavenSession = nil;
+static NSString *sPlayHavenPluginIdentifier = nil;
+static NSString *sPlayHavenCustomUDID = nil;
+
 static NSString *const kSessionPasteboard = @"com.playhaven.session";
-static NSString *sPlayHavenPluginIdentifier;
-static NSString *sPlayHavenCustomUDID;
 static NSString *const kPHRequestParameterIDFVKey = @"idfv";
 static NSString *const kPHRequestParameterOptOutStatusKey = @"opt_out";
+static NSString *const kPHRequestParameterConnectionKey = @"connection";
 static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
-@interface PHAPIRequest (Private)
+static NSString *const kPHKontagentSenderIDKey = @"sid";
+
+static NSString *const kPHHTTPMethodPost = @"POST";
+static NSString *const kPHHTTPContentTypeURLEncoded = @"application/x-www-form-urlencoded";
+static NSString *const kPHHTTPHeaderContentType = @"Content-Type";
+
+@interface PHAPIRequest ()
+@property (nonatomic, assign) PHRequestStatus requestStatus;
+@property (nonatomic, retain, readwrite) NSDictionary *signedParameters;
+@property (nonatomic, retain, readwrite) NSURL *URL;
+@property (nonatomic, retain, readonly) NSDictionary *basicParameters;
+
 + (NSMutableSet *)allRequests;
 - (void)finish;
 - (void)afterConnectionDidFinishLoading;
 + (void)setSession:(NSString *)session;
 - (void)processRequestResponse:(NSDictionary *)responseData;
 
-- (void)didSucceedWithResponse:(NSDictionary *)responseData;
 - (void)didFailWithError:(NSError *)error;
 @end
 
@@ -65,6 +86,10 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 + (void)initialize
 {
     if  (self == [PHAPIRequest class]) {
+        // Tom DiZoglio: Added DNS resolution once before the first call to media and api2
+        // playhaven.com servers. Speeds up initial few calls, then after that stays the same. I
+        // think AT&T is caching DNS at that point.
+        
         [[PHNetworkUtil sharedInstance] checkDNSResolutionForURLPath:PH_BASE_URL];
         [[PHNetworkUtil sharedInstance] checkDNSResolutionForURLPath:PH_CONTENT_ADDRESS];
 #ifdef PH_USE_NETWORK_FIXTURES
@@ -331,107 +356,90 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
     return  self;
 }
 
-- (NSURL *)URL
+- (NSDictionary *)basicParameters
 {
-    if (_URL == nil) {
-        NSString *urlString = [NSString stringWithFormat:@"%@?%@",
-                               [self urlPath],
-                               [self signedParameterString]];
-        _URL = [[NSURL alloc] initWithString:urlString];
-    }
+    CGRect  screenBounds = [[UIScreen mainScreen] applicationFrame];
+    BOOL    isLandscape  = UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
+    CGFloat screenWidth  = (isLandscape) ? CGRectGetHeight(screenBounds) : CGRectGetWidth(screenBounds);
+    CGFloat screenHeight = (!isLandscape) ? CGRectGetHeight(screenBounds) : CGRectGetWidth(screenBounds);
+    CGFloat screenScale  = [[UIScreen mainScreen] scale];
 
-    return _URL;
-}
+    NSString *preferredLanguage = ([[NSLocale preferredLanguages] count] > 0) ?
+                                        [[NSLocale preferredLanguages] objectAtIndex:0] : nil;
 
-- (NSDictionary *)signedParameters
-{
-    if (_signedParameters == nil) {
-        CGRect  screenBounds = [[UIScreen mainScreen] applicationFrame];
-        BOOL    isLandscape  = UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
-        CGFloat screenWidth  = (isLandscape) ? CGRectGetHeight(screenBounds) : CGRectGetWidth(screenBounds);
-        CGFloat screenHeight = (!isLandscape) ? CGRectGetHeight(screenBounds) : CGRectGetWidth(screenBounds);
-        CGFloat screenScale  = [[UIScreen mainScreen] scale];
-
-        NSString *preferredLanguage = ([[NSLocale preferredLanguages] count] > 0) ?
-                                            [[NSLocale preferredLanguages] objectAtIndex:0] : nil;
-
-        NSDictionary *theIdentifiers = [[self class] identifiers];
-        NSMutableDictionary *combinedParams = [[NSMutableDictionary alloc] initWithDictionary:
-                    theIdentifiers];
+    NSDictionary *theIdentifiers = [[self class] identifiers];
+    NSMutableDictionary *combinedParams = [[[NSMutableDictionary alloc] initWithDictionary:
+                theIdentifiers] autorelease];
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 60000
 #if PH_USE_AD_SUPPORT == 1
-        if ([ASIdentifierManager class])
-        {
-            NSNumber *trackingEnabled = [NSNumber numberWithBool:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
-            [combinedParams setValue:trackingEnabled forKey:@"tracking"];
-        }
+    if ([ASIdentifierManager class])
+    {
+        NSNumber *trackingEnabled = [NSNumber numberWithBool:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
+        [combinedParams setValue:trackingEnabled forKey:@"tracking"];
+    }
 #endif
 #endif
 #endif
 
-        if (self.customUDID)
-        {
-            [combinedParams setValue:self.customUDID forKey:@"d_custom"];
-        }
-
-        // Adds plugin identifier
-        [combinedParams setValue:[PHAPIRequest pluginIdentifier] forKey:@"plugin"];
-
-        // This allows for unit testing of request values!
-        NSBundle *mainBundle = [NSBundle bundleForClass:[self class]];
-
-        NSString
-            *nonce         = [PHStringUtil uuid],
-            *appId         = [[mainBundle infoDictionary] objectForKey:@"CFBundleIdentifier"],
-            *appVersion    = [[mainBundle infoDictionary] objectForKey:@"CFBundleVersion"],
-            *hardware      = [[UIDevice currentDevice] hardware],
-            *os            = [NSString stringWithFormat:@"%@ %@",
-                                    [[UIDevice currentDevice] systemName],
-                                    [[UIDevice currentDevice] systemVersion]],
-            *languages     = preferredLanguage;
-
-        if (!appVersion) appVersion = @"NA";
-        
-        NSString *signature = [[self class] v4SignatureWithIdentifiers:theIdentifiers token:
-                    self.token nonce:nonce signatureKey:self.secret];
-        signature = nil != signature ? signature : @"";
-
-        NSNumber
-            *idiom      = [NSNumber numberWithInt:(int)UI_USER_INTERFACE_IDIOM()],
-            *connection = [NSNumber numberWithInt:PHNetworkStatus()],
-            *width      = [NSNumber numberWithFloat:screenWidth],
-            *height     = [NSNumber numberWithFloat:screenHeight],
-            *scale      = [NSNumber numberWithFloat:screenScale];
-        NSNumber *theOptOutStatus = @([PHAPIRequest optOutStatus]);
-
-        [combinedParams addEntriesFromDictionary:self.additionalParameters];
-
-        NSDictionary *signatureParams =
-             [NSDictionary dictionaryWithObjectsAndKeys:
-                                 self.token,     @"token",
-                                 signature,      @"sig4",
-                                 nonce,          @"nonce",
-                                 appId,          @"app",
-                                 hardware,       @"hardware",
-                                 os,             @"os",
-                                 idiom,          @"idiom",
-                                 appVersion,     @"app_version",
-                                 connection,     @"connection",
-                                 PH_SDK_VERSION, @"sdk-ios",
-                                 languages,      @"languages",
-                                 width,          @"width",
-                                 height,         @"height",
-                                 scale,          @"scale",
-                                 theOptOutStatus, kPHRequestParameterOptOutStatusKey,
-                                 nil];
-
-        [combinedParams addEntriesFromDictionary:signatureParams];
-        _signedParameters = combinedParams;
+    if (self.customUDID)
+    {
+        [combinedParams setValue:self.customUDID forKey:@"d_custom"];
     }
 
-    return _signedParameters;
+    // Adds plugin identifier
+    [combinedParams setValue:[PHAPIRequest pluginIdentifier] forKey:@"plugin"];
+
+    // This allows for unit testing of request values!
+    NSBundle *mainBundle = [NSBundle bundleForClass:[self class]];
+
+    NSString
+        *nonce         = [PHStringUtil uuid],
+        *appId         = [[mainBundle infoDictionary] objectForKey:@"CFBundleIdentifier"],
+        *appVersion    = [[mainBundle infoDictionary] objectForKey:@"CFBundleVersion"],
+        *hardware      = [[UIDevice currentDevice] hardware],
+        *os            = [NSString stringWithFormat:@"%@ %@",
+                                [[UIDevice currentDevice] systemName],
+                                [[UIDevice currentDevice] systemVersion]],
+        *languages     = preferredLanguage;
+
+    if (!appVersion) appVersion = @"NA";
+    
+    NSString *signature = [[self class] v4SignatureWithIdentifiers:theIdentifiers token:
+                self.token nonce:nonce signatureKey:self.secret];
+    signature = nil != signature ? signature : @"";
+
+    NSNumber
+        *idiom      = [NSNumber numberWithInt:(int)UI_USER_INTERFACE_IDIOM()],
+        *width      = [NSNumber numberWithFloat:screenWidth],
+        *height     = [NSNumber numberWithFloat:screenHeight],
+        *scale      = [NSNumber numberWithFloat:screenScale];
+    NSNumber *theOptOutStatus = @([PHAPIRequest optOutStatus]);
+
+    [combinedParams addEntriesFromDictionary:self.additionalParameters];
+
+    NSDictionary *signatureParams =
+         [NSDictionary dictionaryWithObjectsAndKeys:
+                             self.token,     @"token",
+                             signature,      @"sig4",
+                             nonce,          @"nonce",
+                             appId,          @"app",
+                             hardware,       @"hardware",
+                             os,             @"os",
+                             idiom,          @"idiom",
+                             appVersion,     @"app_version",
+                             PH_SDK_VERSION, @"sdk-ios",
+                             languages,      @"languages",
+                             width,          @"width",
+                             height,         @"height",
+                             scale,          @"scale",
+                             theOptOutStatus, kPHRequestParameterOptOutStatusKey,
+                             nil];
+
+    [combinedParams addEntriesFromDictionary:signatureParams];
+    
+    return combinedParams;
 }
 
 - (NSString *)signedParameterString
@@ -456,19 +464,50 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
 - (void)send
 {
-    if (!alreadySent)
+    if (kPHRequestStatusInProgress == self.requestStatus || kPHRequestStatusSucceeded ==
+                self.requestStatus)
     {
+        PH_DEBUG(@"Trying to re-send request with status = %lu", (unsigned long)self.requestStatus);
+        return;
+    }
+
+    self.requestStatus = kPHRequestStatusInProgress;
+    
+    [self constructRequestURLWithCompletionHandler:
+    ^(NSURL *inURL)
+    {
+        self.URL = inURL;
         PH_LOG(@"Sending request: %@", [self.URL absoluteString]);
 
-        NSURLRequest *request = [NSURLRequest requestWithURL:self.URL
-                                                 cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                             timeoutInterval:PH_REQUEST_TIMEOUT];
+        NSURLRequest *request = nil;
+        
+        if (PHRequestHTTPPost == self.HTTPMethod)
+        {
+            NSURL *theEndPointURL = [[self class] URLByStrippingQuery:self.URL];
+            NSMutableURLRequest *theMutableRequest = [NSMutableURLRequest requestWithURL:
+                        theEndPointURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                        timeoutInterval:PH_REQUEST_TIMEOUT];
+            NSData *theRequestData = [[self.URL query] dataUsingEncoding:NSUTF8StringEncoding
+                        allowLossyConversion:NO];
 
-        if ([PHConnectionManager createConnectionFromRequest:request forDelegate:self withContext:nil])
-            alreadySent = YES;
+            [theMutableRequest setHTTPMethod:kPHHTTPMethodPost];
+            [theMutableRequest setHTTPBody:theRequestData];
+            [theMutableRequest setValue:kPHHTTPContentTypeURLEncoded forHTTPHeaderField:
+                        kPHHTTPHeaderContentType];
+            request = theMutableRequest;
+        }
         else
+        {
+            request = [NSURLRequest requestWithURL:self.URL cachePolicy:
+                        NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:PH_REQUEST_TIMEOUT];
+        }
+
+        if (![PHConnectionManager createConnectionFromRequest:request forDelegate:self
+                    withContext:nil])
+        {
             [self didFailWithError:nil]; // TODO: Create error
-    }
+        }
+    }];
 }
 
 - (void)cancel
@@ -552,6 +591,7 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
             responseValue = nil;
         }
 
+        self.requestStatus = kPHRequestStatusSucceeded;
         [self didSucceedWithResponse:responseValue];
     }
 }
@@ -567,11 +607,43 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
 
 - (void)didFailWithError:(NSError *)error
 {
+    self.requestStatus = kPHRequestStatusFailed;
+    
     if ([self.delegate respondsToSelector:@selector(request:didFailWithError:)]) {
         [self.delegate performSelector:@selector(request:didFailWithError:) withObject:self withObject:error];
     }
 
     [self finish];
+}
+
+#pragma mark -
+
+- (PHRequestHTTPMethod)HTTPMethod
+{
+    return PHRequestHTTPGet;
+}
+
++ (NSURL *)URLByStrippingQuery:(NSURL *)anURL
+{
+    NSString *theQuery = [anURL query];
+
+    if (0 == [theQuery length])
+    {
+        return anURL;
+    }
+
+    NSRange theQueryRange = [[anURL absoluteString] rangeOfString:[NSString stringWithFormat:@"?%@",
+                theQuery]];
+    NSURL *theStrippedURL = nil;
+
+    if (0 < theQueryRange.length)
+    {
+        NSString *theStrippedString = [[anURL absoluteString] substringToIndex:
+                    theQueryRange.location];
+        theStrippedURL = [NSURL URLWithString:theStrippedString];
+    }
+
+    return theStrippedURL;
 }
 
 #pragma mark -
@@ -644,6 +716,14 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
     {
         theIdentifiers[@"session"] = theSession;
     }
+    
+    // Sender ID, if any, must be sent on each request and included in the request signature.
+    NSString *theKTSenderIDKey = [[PHKontagentDataAccessor sharedAccessor] primarySenderID];
+    
+    if (nil != theKTSenderIDKey)
+    {
+        theIdentifiers[kPHKontagentSenderIDKey] = theKTSenderIDKey;
+    }
 
     return theIdentifiers;
 }
@@ -699,6 +779,59 @@ static NSString *const kPHDefaultUserIsOptedOut = @"PHDefaultUserIsOptedOut";
     }
     
     return theBase64EncodedDigest;
+}
+
+#pragma mark -
+
+- (void)obtainRequestParametersWithCompletionHandler:(void (^)(NSDictionary *))aCompletionHandler
+{
+    [self obtainNetworkStatusWithCompletionHandler:
+    ^(int inNetworkStatus)
+    {
+        NSMutableDictionary *theRequestParameters = [NSMutableDictionary dictionaryWithDictionary:
+                    self.basicParameters];
+        theRequestParameters[kPHRequestParameterConnectionKey] = @(inNetworkStatus);
+        
+        if (nil != aCompletionHandler)
+        {
+            aCompletionHandler(theRequestParameters);
+        }
+    }];
+}
+
+- (void)obtainNetworkStatusWithCompletionHandler:(void (^)(int inNetworkStatus))aCompletionHandler
+{
+    // Network status is obtained on a background thread due to blocking nature of the underlying
+    // PHNetworkStatus() function.
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+    ^{
+        int theNetworkStatus = PHNetworkStatus();
+        
+        if (nil != aCompletionHandler)
+        {
+            dispatch_async(dispatch_get_main_queue(),
+            ^{
+                aCompletionHandler(theNetworkStatus);
+            });
+        }
+    });
+}
+
+- (void)constructRequestURLWithCompletionHandler:(void (^)(NSURL *inURL))aCompletionHandler
+{
+    [self obtainRequestParametersWithCompletionHandler:
+    ^(NSDictionary *inRequestParameters)
+    {
+        self.signedParameters = inRequestParameters;
+        NSString *theURLString = [NSString stringWithFormat:@"%@?%@", [self urlPath], [self
+                    signedParameterString]];
+        
+        if (nil != aCompletionHandler)
+        {
+            aCompletionHandler([NSURL URLWithString:theURLString]);
+        }
+    }];
 }
 
 @end

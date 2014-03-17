@@ -57,10 +57,19 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
+    NSString *hostname = [[NSURL URLWithString:urlPath] host];
+
+    if (nil == hostname)
+    {
+        PH_DEBUG(@"Cannot obtain host name from the path: %@", urlPath);
+
+        [pool release];
+        return;
+    }
+
     Boolean   result    = FALSE;
     CFHostRef hostRef   = NULL;
     NSArray  *addresses = NULL;
-    NSString *hostname  = [urlPath substringFromIndex:7];
 
     hostRef = CFHostCreateWithName(kCFAllocatorDefault, (CFStringRef)hostname);
     if (hostRef) {

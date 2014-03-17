@@ -29,12 +29,16 @@
     return result;
 }
 
-// TODO: This doesn't escape all characters!
 - (NSString *)stringByEncodingURLFormat
 {
-    NSString *result = [self stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    result = [result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    return result;
+    CFStringRef theEscapedString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                (CFStringRef)self, (CFStringRef)@" ", (CFStringRef)@"!'();:@&=+$,/?%#[]~",
+                kCFStringEncodingUTF8);
+
+    NSString *theResult = [NSString stringWithString:(NSString *)theEscapedString];
+    CFRelease(theEscapedString);
+    
+    return [theResult stringByReplacingOccurrencesOfString:@" " withString:@"+"];
 }
 
 - (NSMutableDictionary *)dictionaryFromQueryComponents

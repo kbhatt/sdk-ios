@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Copyright 2013 Medium Entertainment, Inc.
+ Copyright 2013-2014 Medium Entertainment, Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -219,6 +219,11 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 
 + (NSString *)stringByUrlEncodingString:(NSString *)input
 {
+    if (nil == input)
+    {
+        return nil;
+    }
+    
     CFStringRef value = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                 (CFStringRef) input,
                                                                 NULL,
@@ -238,12 +243,20 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
 
 + (NSString *)uuid
 {
-    CFUUIDRef   uuid    = CFUUIDCreate(kCFAllocatorDefault);
-    CFStringRef uuidRef = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    CFRelease(uuid);
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *result = nil;
 
-    NSString *result = [NSString stringWithString:(NSString *)uuidRef];
-    CFRelease(uuidRef);
+    if (NULL != uuid)
+    {
+        CFStringRef uuidRef = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+        CFRelease(uuid);
+
+        if (NULL != uuidRef)
+        {
+            result = [NSString stringWithString:(NSString *)uuidRef];
+            CFRelease(uuidRef);
+        }
+    }
 
     return [self b64DigestForString:result];
 }
@@ -254,7 +267,7 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
     NSData     *data = [NSData dataWithBytes:cstr length:[input length]];
 
     uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    CC_SHA1(data.bytes, data.length, digest);
+    CC_SHA1(data.bytes, (unsigned int)data.length, digest);
 
     return [NSData dataWithBytes:digest length:CC_SHA1_DIGEST_LENGTH];
 }
@@ -264,8 +277,8 @@ static int CompareEntityPairs(const void *voidCharacter, const void *voidEntityT
     NSUInteger     b64EncodedLength = (data.length * 8 + 5) / 6;
     NSMutableData *result = [NSMutableData dataWithLength:b64EncodedLength];
 
-    int resultLength = result.length;
-    int dataLength   = data.length;
+    NSInteger resultLength = result.length;
+    NSInteger dataLength   = data.length;
 
     if (data.bytes && dataLength && result.bytes && resultLength) {
         char *resultChars = (char *)result.bytes;
